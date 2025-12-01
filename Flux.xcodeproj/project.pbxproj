@@ -7,35 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
+		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
+		7F68C3D22EDD93C5005B29E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */; };
+		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
+		7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */; };
+		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
+		7F68C3D72EDD93C5005B29E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CC2EDD93C5005B29E6 /* Main.storyboard */; };
+		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7F68C3C82EDD93C5005B29E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7F68C3C92EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7F68C3CB2EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		7FC160F32EDB1601009B14F4 /* Exceptions for "Flux" folder in "Flux" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 7FC160E02EDB15FF009B14F4 /* Flux */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		7FC160E32EDB15FF009B14F4 /* Flux */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				7FC160F32EDB1601009B14F4 /* Exceptions for "Flux" folder in "Flux" target */,
-			);
-			path = Flux;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7FC160DE2EDB15FF009B14F4 /* Frameworks */ = {
@@ -51,12 +47,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
+			isa = PBXGroup;
+			children = (
+				7F68C3D82EDD93D0005B29E6 /* Features */,
+				7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */,
+				7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */,
+				7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */,
+				7F68C3C82EDD93C5005B29E6 /* Info.plist */,
+				7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */,
+				7F68C3CC2EDD93C5005B29E6 /* Main.storyboard */,
+				7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */,
+				7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */,
+			);
+			path = Flux;
+			sourceTree = "<group>";
+		};
+		7F68C3D82EDD93D0005B29E6 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				7F68C3D92EDD93EC005B29E6 /* Authentication */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		7F68C3D92EDD93EC005B29E6 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				7F68C3DC2EDD9426005B29E6 /* ViewModels */,
+				7F68C3DB2EDD9418005B29E6 /* Storyboards */,
+				7F68C3DA2EDD93FE005B29E6 /* ViewControllers */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		7F68C3DA2EDD93FE005B29E6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7F68C3DB2EDD9418005B29E6 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7F68C3DC2EDD9426005B29E6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		7FC160D82EDB15FF009B14F4 = {
 			isa = PBXGroup;
 			children = (
-				7FC160E32EDB15FF009B14F4 /* Flux */,
 				7FC160FC2EDB2AAF009B14F4 /* Frameworks */,
 				7FC160E22EDB15FF009B14F4 /* Products */,
+				7F68C3CF2EDD93C5005B29E6 /* Flux */,
 			);
 			sourceTree = "<group>";
 		};
@@ -89,9 +141,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				7FC160E32EDB15FF009B14F4 /* Flux */,
 			);
 			name = Flux;
 			packageProductDependencies = (
@@ -145,6 +194,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
+				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
+				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
+				7F68C3D72EDD93C5005B29E6 /* Main.storyboard in Resources */,
+				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,10 +209,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
+				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
+				7F68C3D22EDD93C5005B29E6 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F68C3C92EDD93C5005B29E6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7F68C3CC2EDD93C5005B29E6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F68C3CB2EDD93C5005B29E6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7FC160F52EDB1601009B14F4 /* Debug */ = {
