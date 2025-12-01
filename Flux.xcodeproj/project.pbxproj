@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		60D0CFFD2EDDD53700FDD53D /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60D0CFFC2EDDD53700FDD53D /* AdminTools.storyboard */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D22EDD93C5005B29E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		60D0CFFC2EDDD53700FDD53D /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -47,6 +49,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		60D0CFF82EDDD40400FDD53D /* AdminTools */ = {
+			isa = PBXGroup;
+			children = (
+				60D0CFFB2EDDD4B100FDD53D /* ViewControllers */,
+				60D0CFFA2EDDD4A200FDD53D /* Storyboards */,
+				60D0CFF92EDDD44200FDD53D /* ViewModels */,
+			);
+			path = AdminTools;
+			sourceTree = "<group>";
+		};
+		60D0CFF92EDDD44200FDD53D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		60D0CFFA2EDDD4A200FDD53D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				60D0CFFC2EDDD53700FDD53D /* AdminTools.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		60D0CFFB2EDDD4B100FDD53D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +100,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				60D0CFF82EDDD40400FDD53D /* AdminTools */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
 			);
 			path = Features;
@@ -198,6 +233,7 @@
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7F68C3D72EDD93C5005B29E6 /* Main.storyboard in Resources */,
+				60D0CFFD2EDDD53700FDD53D /* AdminTools.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
