@@ -18,6 +18,7 @@
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
+		D3406EA62EDDE156003E6D37 /* Dispute.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3406EA52EDDE156003E6D37 /* Dispute.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3406EA52EDDE156003E6D37 /* Dispute.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dispute.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				D3406EA12EDDDA6C003E6D37 /* DisputeCenter */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
 			);
 			path = Features;
@@ -125,6 +128,38 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3406EA12EDDDA6C003E6D37 /* DisputeCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D3406EA32EDDDA95003E6D37 /* Storyboards */,
+				D3406EA22EDDDA89003E6D37 /* ViewModel */,
+				D3406EA42EDDDAAA003E6D37 /* ViewControllers */,
+			);
+			path = DisputeCenter;
+			sourceTree = "<group>";
+		};
+		D3406EA22EDDDA89003E6D37 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		D3406EA32EDDDA95003E6D37 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D3406EA52EDDE156003E6D37 /* Dispute.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D3406EA42EDDDAAA003E6D37 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,6 +232,7 @@
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
+				D3406EA62EDDE156003E6D37 /* Dispute.storyboard in Resources */,
 				7F68C3D72EDD93C5005B29E6 /* Main.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
 			);
