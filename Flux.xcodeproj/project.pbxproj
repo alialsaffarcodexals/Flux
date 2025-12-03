@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A2834022EDDD754006CDDA5 /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A2834012EDDD754006CDDA5 /* BookingScreen.storyboard */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D22EDD93C5005B29E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */; };
@@ -19,9 +20,11 @@
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
 		D3406EA62EDDE156003E6D37 /* Dispute.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3406EA52EDDE156003E6D37 /* Dispute.storyboard */; };
+		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A2834012EDDD754006CDDA5 /* BookingScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreen.storyboard; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -33,6 +36,7 @@
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3406EA52EDDE156003E6D37 /* Dispute.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dispute.storyboard; sourceTree = "<group>"; };
+		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +53,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A2833FA2EDDD50F006CDDA5 /* BookingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				3A2834042EDDD7A8006CDDA5 /* ViewControllers */,
+				3A2834032EDDD791006CDDA5 /* ViewModels */,
+				3A2833FE2EDDD67E006CDDA5 /* Storyboards */,
+			);
+			path = BookingScreen;
+			sourceTree = "<group>";
+		};
+		3A2833FE2EDDD67E006CDDA5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3A2834012EDDD754006CDDA5 /* BookingScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3A2834032EDDD791006CDDA5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3A2834042EDDD7A8006CDDA5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +105,8 @@
 			isa = PBXGroup;
 			children = (
 				D3406EA12EDDDA6C003E6D37 /* DisputeCenter */,
+
+				ACDA75DE2EDDD53200665266 /* Requests-Seeker  */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
 			);
 			path = Features;
@@ -151,6 +189,27 @@
 			isa = PBXGroup;
 			children = (
 				D3406EA52EDDE156003E6D37 /* Dispute.storyboard */,
+		ACDA75DE2EDDD53200665266 /* Requests-Seeker  */ = {
+			isa = PBXGroup;
+			children = (
+				ACDA75E12EDDD5D400665266 /* ViewControllers  */,
+				ACDA75E02EDDD5BE00665266 /* Storyboards */,
+				ACDA75DF2EDDD5AB00665266 /* ViewModels */,
+			);
+			path = "Requests-Seeker ";
+			sourceTree = "<group>";
+		};
+		ACDA75DF2EDDD5AB00665266 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ACDA75E02EDDD5BE00665266 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -229,12 +288,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A2834022EDDD754006CDDA5 /* BookingScreen.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				D3406EA62EDDE156003E6D37 /* Dispute.storyboard in Resources */,
 				7F68C3D72EDD93C5005B29E6 /* Main.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
+				ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
