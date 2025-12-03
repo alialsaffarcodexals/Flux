@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
+		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D22EDD93C5005B29E6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */; };
@@ -18,9 +20,12 @@
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
+		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
+		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -31,6 +36,7 @@
 		7F68C3CE2EDD93C5005B29E6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +53,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		604B03062EE03F690062AE77 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				604B03052EE03F690062AE77 /* AdminTools.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		604B03072EE03F690062AE77 /* Admin-Tools */ = {
+			isa = PBXGroup;
+			children = (
+				604B03062EE03F690062AE77 /* Storyboards */,
+			);
+			path = "Admin-Tools";
+			sourceTree = "<group>";
+		};
+		604B03092EE03F690062AE77 /* Stroyboards */ = {
+			isa = PBXGroup;
+			children = (
+				604B03082EE03F690062AE77 /* BookingScreens.storyboard */,
+			);
+			path = Stroyboards;
+			sourceTree = "<group>";
+		};
+		604B030A2EE03F690062AE77 /* BookingScreens */ = {
+			isa = PBXGroup;
+			children = (
+				604B03092EE03F690062AE77 /* Stroyboards */,
+			);
+			path = BookingScreens;
+			sourceTree = "<group>";
+		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +104,10 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				ACDA75DE2EDDD53200665266 /* Requests-Seeker  */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
+				604B03072EE03F690062AE77 /* Admin-Tools */,
+				604B030A2EE03F690062AE77 /* BookingScreens */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -125,6 +166,38 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ACDA75DE2EDDD53200665266 /* Requests-Seeker  */ = {
+			isa = PBXGroup;
+			children = (
+				ACDA75E12EDDD5D400665266 /* ViewControllers  */,
+				ACDA75E02EDDD5BE00665266 /* Storyboards */,
+				ACDA75DF2EDDD5AB00665266 /* ViewModels */,
+			);
+			path = "Requests-Seeker ";
+			sourceTree = "<group>";
+		};
+		ACDA75DF2EDDD5AB00665266 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		ACDA75E02EDDD5BE00665266 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		ACDA75E12EDDD5D400665266 /* ViewControllers  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "ViewControllers ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,11 +267,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */,
+				604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7F68C3D72EDD93C5005B29E6 /* Main.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
+				ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
