@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,16 +16,74 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="HE2-mn-WuS">
+                                <rect key="frame" x="69.666666666666671" y="201.99999999999997" width="253.66666666666663" height="448.33333333333326"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="y7J-oz-8sr">
+                                        <rect key="frame" x="25" y="0.0" width="204" height="268"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Skills Exchage Community" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiB-HT-6vA">
+                                        <rect key="frame" x="7.6666666666666572" y="288" width="238.66666666666666" height="20.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAt-Bc-Cho">
+                                        <rect key="frame" x="81.999999999999986" y="328.33333333333337" width="90.000000000000014" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="0QL-xL-FLc"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="D3d-FL-Gal"/>
+                                            <constraint firstAttribute="width" constant="90" id="T9h-ii-sIZ"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Sing in">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" name="GreenButtons"/>
+                                            </backgroundConfiguration>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xN2-YU-n5q">
+                                        <rect key="frame" x="81.999999999999986" y="398.33333333333337" width="90.000000000000014" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="0SM-f1-Bis"/>
+                                            <constraint firstAttribute="height" constant="50" id="87r-7w-mkk"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Sing up">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" name="BlueButtons"/>
+                                            </backgroundConfiguration>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="AAt-Bc-Cho" firstAttribute="leading" secondItem="HE2-mn-WuS" secondAttribute="leading" constant="81.670000000000002" id="Jfw-gZ-gwv"/>
+                                    <constraint firstAttribute="trailing" secondItem="AAt-Bc-Cho" secondAttribute="trailing" constant="81.670000000000002" id="Qn4-u7-YEY"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HE2-mn-WuS" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="Coo-ty-QeU"/>
+                            <constraint firstItem="HE2-mn-WuS" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="x6s-ya-Lwe"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="58" y="-2"/>
+            <point key="canvasLocation" x="57.251908396946561" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
+        <image name="AppLogo" width="204" height="268"/>
+        <namedColor name="BlueButtons">
+            <color red="0.18823529411764706" green="0.6705882352941176" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="GreenButtons">
+            <color red="0.46274509803921571" green="0.74117647058823533" blue="0.27450980392156865" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
