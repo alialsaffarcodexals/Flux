@@ -58,6 +58,9 @@
                                                 <color key="backgroundColor" name="BlueButtons"/>
                                             </backgroundConfiguration>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="yIK-3V-o7q" kind="show" id="e1A-wM-AWg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -78,6 +81,69 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1910.6870229007632" y="-2.1126760563380285"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="KVb-7W-wAB">
+            <objects>
+                <viewController id="yIK-3V-o7q" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L6d-cC-PN5">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Rkx-NX-VAE">
+                                <rect key="frame" x="30" y="178" width="333" height="496"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="4A5-b3-GFs">
+                                        <rect key="frame" x="0.0" y="0.0" width="333" height="268"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join Flux" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkx-3Y-bsj">
+                                        <rect key="frame" x="0.0" y="298" width="333" height="48"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TSB-Ty-KmH">
+                                        <rect key="frame" x="0.0" y="376" width="333" height="120"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZQ-kR-ZYc">
+                                                <rect key="frame" x="0.0" y="0.0" width="333" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="lXV-gN-ymr"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Sing Up as a Servicer Seeker">
+                                                    <color key="baseBackgroundColor" name="BlueButtons"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3XQ-l2-8Fd">
+                                                <rect key="frame" x="0.0" y="65" width="333" height="55"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="55" id="Cg3-gh-40j"/>
+                                                </constraints>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Sing Up as a Serivce Provider">
+                                                    <color key="baseBackgroundColor" name="GreenButtons"/>
+                                                </buttonConfiguration>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="W6K-eL-C8q"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Rkx-NX-VAE" firstAttribute="centerY" secondItem="L6d-cC-PN5" secondAttribute="centerY" id="NJC-wK-e66"/>
+                            <constraint firstItem="W6K-eL-C8q" firstAttribute="trailing" secondItem="Rkx-NX-VAE" secondAttribute="trailing" constant="30" id="pJ8-Uz-cU6"/>
+                            <constraint firstItem="Rkx-NX-VAE" firstAttribute="leading" secondItem="W6K-eL-C8q" secondAttribute="leading" constant="30" id="rgc-hx-shX"/>
+                            <constraint firstItem="Rkx-NX-VAE" firstAttribute="centerX" secondItem="L6d-cC-PN5" secondAttribute="centerX" id="ywa-US-vgh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="DWX-kC-2rf"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hjb-za-D8a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1872.5190839694656" y="730.98591549295782"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="e3m-lY-OJK">
