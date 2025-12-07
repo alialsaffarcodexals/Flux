@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="yTO-lO-lxP">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
@@ -42,6 +42,9 @@
                                                 <color key="backgroundColor" name="GreenButtons"/>
                                             </backgroundConfiguration>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="aCw-HF-vxO" kind="show" id="aqy-g0-yLw"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xN2-YU-n5q">
                                         <rect key="frame" x="81.999999999999986" y="398.33333333333337" width="90.000000000000014" height="50"/>
@@ -70,10 +73,110 @@
                             <constraint firstItem="HE2-mn-WuS" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="x6s-ya-Lwe"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="NMK-Io-61Z"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="57.251908396946561" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="1910.6870229007632" y="-2.1126760563380285"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="e3m-lY-OJK">
+            <objects>
+                <viewController id="aCw-HF-vxO" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cbb-dP-pkP">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="69" translatesAutoresizingMaskIntoConstraints="NO" id="Tuk-rb-kMf">
+                                <rect key="frame" x="40" y="100" width="313" height="584"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Fwz-DN-KBq">
+                                        <rect key="frame" x="54.666666666666686" y="0.0" width="204" height="220"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="220" id="LUA-aX-WWN"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHH-H1-pmm">
+                                        <rect key="frame" x="20" y="289" width="273" height="110"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EX7-st-zzr">
+                                                <rect key="frame" x="0.0" y="0.0" width="273" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="nai-EB-NxL"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kc7-UK-Wln">
+                                                <rect key="frame" x="0.0" y="60" width="273" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="YCR-0U-CkO"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCY-du-ZKh">
+                                        <rect key="frame" x="83.000000000000014" y="468" width="147.33333333333337" height="7"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Forgot Passoword?" titleAlignment="trailing">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="14"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0pb-G1-Rx2">
+                                        <rect key="frame" x="119" y="544" width="75.333333333333314" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="wGb-Ub-18E"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Sing in">
+                                            <backgroundConfiguration key="background">
+                                                <color key="backgroundColor" name="GreenButtons"/>
+                                            </backgroundConfiguration>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MHH-H1-pmm" firstAttribute="leading" secondItem="Tuk-rb-kMf" secondAttribute="leading" constant="20" id="Vaj-Qo-jU4"/>
+                                    <constraint firstAttribute="trailing" secondItem="MHH-H1-pmm" secondAttribute="trailing" constant="20" id="xIo-k2-cRR"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="W8j-I7-WPh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Tuk-rb-kMf" firstAttribute="leading" secondItem="W8j-I7-WPh" secondAttribute="leading" constant="40" id="50W-Np-CgV"/>
+                            <constraint firstItem="W8j-I7-WPh" firstAttribute="bottom" secondItem="Tuk-rb-kMf" secondAttribute="bottom" constant="100" id="B7z-Pm-1uH"/>
+                            <constraint firstItem="Tuk-rb-kMf" firstAttribute="top" secondItem="cbb-dP-pkP" secondAttribute="top" constant="100" id="Ezs-vc-ggF"/>
+                            <constraint firstItem="W8j-I7-WPh" firstAttribute="trailing" secondItem="Tuk-rb-kMf" secondAttribute="trailing" constant="40" id="GaS-Nk-4wP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XXL-qp-Duh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="siZ-3I-h2x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2643.5114503816794" y="-2.1126760563380285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BND-QV-Js7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yTO-lO-lxP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oxU-ri-lJZ">
+                        <rect key="frame" x="0.0" y="118" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="eso-Vj-sDt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g0m-Kx-wgH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="983.96946564885491" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
@@ -86,6 +189,9 @@
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
