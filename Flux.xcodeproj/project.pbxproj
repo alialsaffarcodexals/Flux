@@ -86,6 +86,8 @@
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
 		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
+		D32E5D732EE708D600C5A30E /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D32E5D722EE708D600C5A30E /* DisputeCenter.storyboard */; };
+		D32E5D762EE7128F00C5A30E /* Dispute.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E5D752EE7128F00C5A30E /* Dispute.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -167,6 +169,8 @@
 		7FAB33962EE467CC008AC600 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
+		D32E5D722EE708D600C5A30E /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
+		D32E5D752EE7128F00C5A30E /* Dispute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dispute.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +235,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				D32E5D702EE7089F00C5A30E /* DisputeCenter */,
 				7FAB336F2EE4635C008AC600 /* Notifications */,
 				7FAB33612EE461B8008AC600 /* AdminDashboard */,
 				7FAB33572EE46095008AC600 /* SupportCenter */,
@@ -787,6 +792,31 @@
 			path = "ViewControllers ";
 			sourceTree = "<group>";
 		};
+		D32E5D702EE7089F00C5A30E /* DisputeCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D32E5D742EE7127300C5A30E /* ViewControllers */,
+				D32E5D712EE708B600C5A30E /* Storyboards */,
+			);
+			path = DisputeCenter;
+			sourceTree = "<group>";
+		};
+		D32E5D712EE708B600C5A30E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D32E5D722EE708D600C5A30E /* DisputeCenter.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D32E5D742EE7127300C5A30E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D32E5D752EE7128F00C5A30E /* Dispute.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -855,6 +885,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FAB330C2EE457B4008AC600 /* Portfolio.storyboard in Resources */,
+				D32E5D732EE708D600C5A30E /* DisputeCenter.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */,
 				604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */,
@@ -925,6 +956,7 @@
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
 				7FAB33832EE4666D008AC600 /* Review.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
+				D32E5D762EE7128F00C5A30E /* Dispute.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
 				7FAB32E22EE453A6008AC600 /* WelcomeViewController.swift in Sources */,
@@ -968,7 +1000,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UIMainStoryboardFile = DisputeCenter;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -995,7 +1027,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UIMainStoryboardFile = DisputeCenter;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
