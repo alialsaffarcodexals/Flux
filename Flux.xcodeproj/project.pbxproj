@@ -194,6 +194,8 @@
 		604B03072EE03F690062AE77 /* Admin-Tools */ = {
 			isa = PBXGroup;
 			children = (
+				60DA2B9B2EE7083300156F0A /* ViewControllers */,
+				60DA2B9A2EE7081B00156F0A /* ViewModels */,
 				604B03062EE03F690062AE77 /* Storyboards */,
 			);
 			path = "Admin-Tools";
@@ -213,6 +215,20 @@
 				604B03092EE03F690062AE77 /* Stroyboards */,
 			);
 			path = BookingScreens;
+			sourceTree = "<group>";
+		};
+		60DA2B9A2EE7081B00156F0A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		60DA2B9B2EE7083300156F0A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
@@ -968,7 +984,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UIMainStoryboardFile = AdminTools;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -995,7 +1011,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UIMainStoryboardFile = AdminTools;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
