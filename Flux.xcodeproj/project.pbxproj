@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
+		60615F3E2EEDAE02001DCB62 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60615F3D2EEDAE02001DCB62 /* AdminTools.storyboard */; };
+		60615F402EEDAE38001DCB62 /* AdminToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60615F3F2EEDAE38001DCB62 /* AdminToolsViewController.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
@@ -89,8 +90,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
+		60615F3D2EEDAE02001DCB62 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
+		60615F3F2EEDAE38001DCB62 /* AdminToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewController.swift; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -186,7 +188,7 @@
 		604B03062EE03F690062AE77 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				604B03052EE03F690062AE77 /* AdminTools.storyboard */,
+				60615F3D2EEDAE02001DCB62 /* AdminTools.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -227,6 +229,7 @@
 		60DA2B9B2EE7083300156F0A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				60615F3F2EEDAE38001DCB62 /* AdminToolsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -872,9 +875,9 @@
 			files = (
 				7FAB330C2EE457B4008AC600 /* Portfolio.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
-				604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */,
 				604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */,
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
+				60615F3E2EEDAE02001DCB62 /* AdminTools.storyboard in Resources */,
 				7FAB33442EE45E55008AC600 /* Chat.storyboard in Resources */,
 				7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
@@ -940,6 +943,7 @@
 				7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
 				7FAB33832EE4666D008AC600 /* Review.swift in Sources */,
+				60615F402EEDAE38001DCB62 /* AdminToolsViewController.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
