@@ -404,10 +404,10 @@
             </objects>
             <point key="canvasLocation" x="1872.5190839694656" y="1440.1408450704225"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Contoller-->
         <scene sceneID="e3m-lY-OJK">
             <objects>
-                <viewController id="aCw-HF-vxO" sceneMemberID="viewController">
+                <viewController id="aCw-HF-vxO" customClass="LoginViewContoller" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cbb-dP-pkP">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -465,6 +465,9 @@
                                                 <color key="backgroundColor" name="GreenButtons"/>
                                             </backgroundConfiguration>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="loginButtonTapped:" destination="aCw-HF-vxO" eventType="touchUpInside" id="NsE-Z6-otS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -483,6 +486,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="XXL-qp-Duh"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="EX7-st-zzr" id="SFA-cZ-8lX"/>
+                        <outlet property="loginButton" destination="0pb-G1-Rx2" id="dkA-JT-BE4"/>
+                        <outlet property="passwordTextField" destination="Kc7-UK-Wln" id="f4d-Av-MTG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="siZ-3I-h2x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

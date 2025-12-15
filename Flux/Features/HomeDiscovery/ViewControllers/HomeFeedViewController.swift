@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+
+import UIKit
+
+class HomeFeedViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("✅ HomeFeedViewController Loaded Successfully")
+    }
+}
