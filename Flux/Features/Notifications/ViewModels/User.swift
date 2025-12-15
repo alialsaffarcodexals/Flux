@@ -13,4 +13,5 @@ struct RegisterUserRequest {
     let email: String
     let password: String
     let role: String // Seeker or Provider
+    let phone: String
 }

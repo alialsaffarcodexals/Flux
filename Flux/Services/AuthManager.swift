@@ -11,13 +11,13 @@ class AuthManager {
     
     private init() {}
     
-    public func registerUser(with userRequest: RegisterUserRequest, completion: @escaping (Bool, Error?) -> Void) {
+    public func registerUser(with userRequest: RegisterUserRequest, imageURL: String?, completion: @escaping (Bool, Error?) -> Void) {
         
         let email = userRequest.email
         let password = userRequest.password
         let name = userRequest.name
-        let role = userRequest.role // "Provider" or "Seeker"
-        
+        let role = userRequest.role
+        let phone = userRequest.phone
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard let self = self else { return }
             
@@ -31,7 +31,7 @@ class AuthManager {
                 return
             }
             
-            self.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role) { success in
+            self.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: imageURL) { success in
                 if success {
                     completion(true, nil)
                 } else {
@@ -42,7 +42,6 @@ class AuthManager {
         }
     }
     
-    // --- 2. Login Function ---
     public func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         auth.signIn(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -53,17 +52,21 @@ class AuthManager {
         }
     }
     
-    // --- 3. Save User Data (Helper) ---
-    private func saveUserToFirestore(uid: String, name: String, email: String, role: String, completion: @escaping (Bool) -> Void) {
-        let userData: [String: Any] = [
+    private func saveUserToFirestore(uid: String, name: String, email: String, role: String, phone: String, profileImageURL: String?, completion: @escaping (Bool) -> Void) {
+        
+        var userData: [String: Any] = [
             "uid": uid,
             "name": name,
             "email": email,
+            "phone": phone,
             "role": role,
             "createdAt": Timestamp(date: Date())
         ]
         
-        // اسم الكولكشن في فيربيس سيكون "users"
+        if let imageURL = profileImageURL {
+            userData["profileImageURL"] = imageURL
+        }
+        
         db.collection("users").document(uid).setData(userData) { error in
             if let error = error {
                 print("Error saving user data: \(error)")
@@ -74,7 +77,6 @@ class AuthManager {
         }
     }
     
-    // --- 4. Sign Out ---
     public func signOut() throws {
         try auth.signOut()
     }

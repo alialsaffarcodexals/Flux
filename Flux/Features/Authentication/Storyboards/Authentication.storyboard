@@ -300,10 +300,10 @@
             </objects>
             <point key="canvasLocation" x="3466" y="-704"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="293-t6-HVs">
             <objects>
-                <viewController id="9qe-mq-9gq" sceneMemberID="viewController">
+                <viewController id="9qe-mq-9gq" customClass="SignUpViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" ambiguous="YES" id="Th5-lr-5cf">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -334,6 +334,9 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="edit"/>
+                                                <connections>
+                                                    <action selector="editImageButtonTapped:" destination="9qe-mq-9gq" eventType="touchUpInside" id="bSr-cq-zVP"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -380,6 +383,9 @@
                                                 <color key="backgroundColor" name="BlueButtons"/>
                                             </backgroundConfiguration>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="signUpButtonTapped:" destination="9qe-mq-9gq" eventType="touchUpInside" id="WUW-Og-xao"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -399,6 +405,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6to-yN-9fM"/>
+                    <connections>
+                        <outlet property="editImageButton" destination="vdN-A7-nO2" id="ekA-u6-poZ"/>
+                        <outlet property="emailTextField" destination="9Q9-pp-djF" id="leo-Z9-3fe"/>
+                        <outlet property="nameTextField" destination="UrS-s7-AkZ" id="5HF-Yz-OJF"/>
+                        <outlet property="passwordTextField" destination="fCC-YI-G1G" id="qTb-p9-005"/>
+                        <outlet property="phoneTextField" destination="DEV-bm-t9c" id="VJD-Iv-qAc"/>
+                        <outlet property="profileImageView" destination="ZVU-v2-y3c" id="EbD-xp-rpY"/>
+                        <outlet property="signUpButton" destination="VGg-7Q-XX6" id="Oeq-2N-nbU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rAZ-cm-TGv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
