@@ -34,32 +34,40 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        
-        let imageData = selectedImage?.jpegData(compressionQuality: 0.5)
-        
-        signUpButton.isEnabled = false
-        
-        viewModel.performSignUp(
-            name: nameTextField.text,
-            email: emailTextField.text,
-            password: passwordTextField.text,
-            phone: phoneTextField.text,
-            role: "Seeker",
-            profileImage: imageData
-        ) { [weak self] success, errorMessage in
-            
-            guard let self = self else { return }
-            
-            DispatchQueue.main.async {
-                self.signUpButton.isEnabled = true
+        print("🟢 1. Button Tapped")
                 
-                if success {
-                    self.navigateToHome()
-                } else {
-                    self.showAlert(title: "Sign Up Failed", message: errorMessage ?? "Unknown Error")
+                let imageData = selectedImage?.jpegData(compressionQuality: 0.5)
+                
+                signUpButton.isEnabled = false
+                print("🟢 2. Button Disabled, Calling ViewModel...")
+                
+                viewModel.performSignUp(
+                    name: nameTextField.text,
+                    email: emailTextField.text,
+                    password: passwordTextField.text,
+                    phone: phoneTextField.text,
+                    role: "Seeker",
+                    profileImage: imageData
+                ) { [weak self] success, errorMessage in
+                    
+                    print("🟢 3. ViewModel Returned. Success: \(success)")
+                    
+                    guard let self = self else { return }
+                    
+                    DispatchQueue.main.async {
+                        self.signUpButton.isEnabled = true
+                        print("🟢 4. Button Re-enabled")
+                        
+                        if success {
+                            print("🟢 5. Navigating to Home")
+                            self.navigateToHome()
+                        } else {
+                            print("🔴 6. Error Occurred: \(errorMessage ?? "N/A")")
+                            self.showAlert(title: "Sign Up Failed", message: errorMessage ?? "Unknown Error")
+                        }
+                    }
                 }
-            }
-        }
+        
     }
 }
 

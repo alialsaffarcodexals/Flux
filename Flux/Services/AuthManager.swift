@@ -11,13 +11,14 @@ class AuthManager {
     
     private init() {}
     
-    public func registerUser(with userRequest: RegisterUserRequest, imageURL: String?, completion: @escaping (Bool, Error?) -> Void) {
+    public func registerUser(with userRequest: RegisterUserRequest, image: Data?, completion: @escaping (Bool, Error?) -> Void) {
         
         let email = userRequest.email
         let password = userRequest.password
         let name = userRequest.name
         let role = userRequest.role
         let phone = userRequest.phone
+        
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard let self = self else { return }
             
@@ -31,24 +32,36 @@ class AuthManager {
                 return
             }
             
-            self.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: imageURL) { success in
-                if success {
-                    completion(true, nil)
-                } else {
-                    let error = NSError(domain: "FirestoreError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Account created but failed to save details."])
-                    completion(false, error)
+            if let imageData = image {
+                let fileName = "\(resultUser.uid)_profile.jpg"
+                
+                StorageManager.shared.uploadProfilePicture(with: imageData, fileName: fileName) { [weak self] result in
+                    switch result {
+                    case .success(let downloadURL):
+                        self?.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: downloadURL) { success in
+                            self?.handleFinalCompletion(success: success, completion: completion)
+                        }
+                    case .failure(let error):
+                        print("Warning: Image upload failed: \(error). Saving user without image.")
+                        self?.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: nil) { success in
+                            self?.handleFinalCompletion(success: success, completion: completion)
+                        }
+                    }
+                }
+            } else {
+                self.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: nil) { success in
+                    self.handleFinalCompletion(success: success, completion: completion)
                 }
             }
         }
     }
     
-    public func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-        auth.signIn(withEmail: email, password: password) { result, error in
-            if let error = error {
-                completion(false, error)
-                return
-            }
+    private func handleFinalCompletion(success: Bool, completion: @escaping (Bool, Error?) -> Void) {
+        if success {
             completion(true, nil)
+        } else {
+            let error = NSError(domain: "FirestoreError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Account created but failed to save details."])
+            completion(false, error)
         }
     }
     
@@ -74,6 +87,16 @@ class AuthManager {
             } else {
                 completion(true)
             }
+        }
+    }
+    
+    public func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+        auth.signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                completion(false, error)
+                return
+            }
+            completion(true, nil)
         }
     }
     

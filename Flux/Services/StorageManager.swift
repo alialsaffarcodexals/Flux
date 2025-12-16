@@ -1,38 +1,39 @@
-//
-//  StorageManager.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
-
 import Foundation
-import FirebaseStorage
 import UIKit
+import Cloudinary
 
 class StorageManager {
     
     static let shared = StorageManager()
-    private let storage = Storage.storage().reference()
     
-    private init() {}
+    private let cloudName = "dsleqotkq"
+    private let uploadPreset = "flux_uploads"
+    
+    private let cloudinary: CLDCloudinary
+    
+    private init() {
+        let config = CLDConfiguration(cloudName: cloudName, secure: true)
+        self.cloudinary = CLDCloudinary(configuration: config)
+    }
     
     public func uploadProfilePicture(with data: Data, fileName: String, completion: @escaping (Result<String, Error>) -> Void) {
         
-        let fileRef = storage.child("images/profile_pictures/\(fileName)")
+        let uploader = cloudinary.createUploader()
         
-        fileRef.putData(data, metadata: nil) { metadata, error in
-            guard error == nil else {
-                completion(.failure(error!))
+        uploader.upload(data: data, uploadPreset: uploadPreset, params: nil, progress: nil) { result, error in
+            
+            if let error = error {
+                print("❌ Cloudinary Upload Error: \(error.localizedDescription)")
+                completion(.failure(error))
                 return
             }
             
-            fileRef.downloadURL { url, error in
-                guard let url = url else {
-                    completion(.failure(error ?? NSError(domain: "FluxStorage", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to download URL"])))
-                    return
-                }
-                
-                completion(.success(url.absoluteString))
+            if let result = result, let url = result.secureUrl {
+                print("✅ Image Uploaded to Cloudinary: \(url)")
+                completion(.success(url))
+            } else {
+                let unknownError = NSError(domain: "CloudinaryError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Upload successful but URL is missing"])
+                completion(.failure(unknownError))
             }
         }
     }
