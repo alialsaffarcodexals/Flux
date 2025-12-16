@@ -82,6 +82,11 @@
 		7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33922EE4679D008AC600 /* Extenstion.swift */; };
 		7FAB33952EE467B5008AC600 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33942EE467B5008AC600 /* Constants.swift */; };
 		7FAB33972EE467CC008AC600 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33962EE467CC008AC600 /* Validator.swift */; };
+		7FAB339B2EF049FF008AC600 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7FAB339A2EF049FF008AC600 /* FirebaseStorage */; };
+		7FAB339E2EF17B5D008AC600 /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = 7FAB339D2EF17B5D008AC600 /* Cloudinary */; };
+		7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33A32EF189BC008AC600 /* SeekerProfile.storyboard */; };
+		7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */; };
+		7FAB33A82EF18A18008AC600 /* SeekerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */; };
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
@@ -165,6 +170,9 @@
 		7FAB33922EE4679D008AC600 /* Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extenstion.swift; path = Flux/Services/Extenstion.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33942EE467B5008AC600 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Flux/Services/Constants.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33962EE467CC008AC600 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		7FAB33A32EF189BC008AC600 /* SeekerProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeekerProfile.storyboard; sourceTree = "<group>"; };
+		7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewController.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewController.swift; sourceTree = SOURCE_ROOT; };
+		7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewModel.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -175,6 +183,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */,
+				7FAB339B2EF049FF008AC600 /* FirebaseStorage in Frameworks */,
+				7FAB339E2EF17B5D008AC600 /* Cloudinary in Frameworks */,
 				7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */,
 				7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */,
 			);
@@ -231,6 +241,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				7FAB339F2EF1893C008AC600 /* SeekerProfile */,
 				7FAB336F2EE4635C008AC600 /* Notifications */,
 				7FAB33612EE461B8008AC600 /* AdminDashboard */,
 				7FAB33572EE46095008AC600 /* SupportCenter */,
@@ -731,6 +742,40 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7FAB339F2EF1893C008AC600 /* SeekerProfile */ = {
+			isa = PBXGroup;
+			children = (
+				7FAB33A22EF1898E008AC600 /* ViewModels */,
+				7FAB33A12EF18979008AC600 /* ViewControllers */,
+				7FAB33A02EF18950008AC600 /* Storyboards */,
+			);
+			path = SeekerProfile;
+			sourceTree = "<group>";
+		};
+		7FAB33A02EF18950008AC600 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7FAB33A32EF189BC008AC600 /* SeekerProfile.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7FAB33A12EF18979008AC600 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7FAB33A22EF1898E008AC600 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		7FC160D82EDB15FF009B14F4 = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +852,8 @@
 				7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */,
 				7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */,
 				7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */,
+				7FAB339A2EF049FF008AC600 /* FirebaseStorage */,
+				7FAB339D2EF17B5D008AC600 /* Cloudinary */,
 			);
 			productName = Flux;
 			productReference = 7FC160E12EDB15FF009B14F4 /* Flux.app */;
@@ -838,6 +885,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7FC160FB2EDB27D5009B14F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				7FAB339C2EF17B5D008AC600 /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7FC160E22EDB15FF009B14F4 /* Products */;
@@ -861,6 +909,7 @@
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
 				7FAB33442EE45E55008AC600 /* Chat.storyboard in Resources */,
 				7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */,
+				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
@@ -926,8 +975,10 @@
 				7FAB33832EE4666D008AC600 /* Review.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
+				7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
 				7FAB32E22EE453A6008AC600 /* WelcomeViewController.swift in Sources */,
+				7FAB33A82EF18A18008AC600 /* SeekerProfileViewModel.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
@@ -1154,6 +1205,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7FAB339C2EF17B5D008AC600 /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cloudinary/cloudinary_ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.2.4;
+			};
+		};
 		7FC160FB2EDB27D5009B14F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1165,6 +1224,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7FAB339A2EF049FF008AC600 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FC160FB2EDB27D5009B14F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		7FAB339D2EF17B5D008AC600 /* Cloudinary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7FAB339C2EF17B5D008AC600 /* XCRemoteSwiftPackageReference "cloudinary_ios" */;
+			productName = Cloudinary;
+		};
 		7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7FC160FB2EDB27D5009B14F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
