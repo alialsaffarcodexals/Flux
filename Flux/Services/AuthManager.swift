@@ -8,6 +8,7 @@ class AuthManager {
     
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
+    // foundation helper
     
     private init() {}
     
@@ -80,7 +81,7 @@ class AuthManager {
             userData["profileImageURL"] = imageURL
         }
         
-        db.collection("users").document(uid).setData(userData) { error in
+        	db.collection("users").document(uid).setData(userData) { error in
             if let error = error {
                 print("Error saving user data: \(error)")
                 completion(false)

@@ -69,12 +69,6 @@
 		7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */; };
 		7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */; };
 		7FAB337B2EE465F2008AC600 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337A2EE465F2008AC600 /* User.swift */; };
-		7FAB337D2EE46616008AC600 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337C2EE46616008AC600 /* Service.swift */; };
-		7FAB337F2EE4662A008AC600 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337E2EE4662A008AC600 /* Booking.swift */; };
-		7FAB33812EE46651008AC600 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33802EE46651008AC600 /* Project.swift */; };
-		7FAB33832EE4666D008AC600 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33822EE4666D008AC600 /* Review.swift */; };
-		7FAB33852EE4668B008AC600 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33842EE4668B008AC600 /* Report.swift */; };
-		7FAB33872EE466A2008AC600 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33862EE466A2008AC600 /* Notification.swift */; };
 		7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33892EE46701008AC600 /* AuthManager.swift */; };
 		7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB338B2EE46728008AC600 /* FirestoreManager.swift */; };
 		7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB338D2EE46741008AC600 /* StorageManager.swift */; };
@@ -90,6 +84,9 @@
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
+		ACA244562EF6DC6B00DDCA77 /* DatabaseFoundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA244552EF6DC4700DDCA77 /* DatabaseFoundation.swift */; };
+		ACA244582EF6DC8500DDCA77 /* FoundationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA244572EF6DC8000DDCA77 /* FoundationHelper.swift */; };
+		ACA2445A2EF6DD8A00DDCA77 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA244592EF6DD8500DDCA77 /* Models.swift */; };
 		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -157,12 +154,6 @@
 		7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterViewController.swift; path = Flux/Features/Notifications/Storyboards/NotificationCenterViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		7FAB337A2EE465F2008AC600 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = Flux/Features/Notifications/ViewModels/User.swift; sourceTree = SOURCE_ROOT; };
-		7FAB337C2EE46616008AC600 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Flux/Features/Notifications/ViewModels/Service.swift; sourceTree = SOURCE_ROOT; };
-		7FAB337E2EE4662A008AC600 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Booking.swift; path = Flux/Features/Notifications/ViewModels/Booking.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33802EE46651008AC600 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Project.swift; path = Flux/Features/Notifications/ViewModels/Project.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33822EE4666D008AC600 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Review.swift; path = Flux/Features/Notifications/ViewModels/Review.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33842EE4668B008AC600 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Report.swift; path = Flux/Features/Notifications/ViewModels/Report.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33862EE466A2008AC600 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7FAB33892EE46701008AC600 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		7FAB338B2EE46728008AC600 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7FAB338D2EE46741008AC600 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -174,6 +165,9 @@
 		7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewController.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewModel.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACA244552EF6DC4700DDCA77 /* DatabaseFoundation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseFoundation.swift; sourceTree = "<group>"; };
+		ACA244572EF6DC8000DDCA77 /* FoundationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationHelper.swift; sourceTree = "<group>"; };
+		ACA244592EF6DD8500DDCA77 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -690,13 +684,8 @@
 		7FAB33792EE465C5008AC600 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ACA244592EF6DD8500DDCA77 /* Models.swift */,
 				7FAB337A2EE465F2008AC600 /* User.swift */,
-				7FAB337C2EE46616008AC600 /* Service.swift */,
-				7FAB337E2EE4662A008AC600 /* Booking.swift */,
-				7FAB33802EE46651008AC600 /* Project.swift */,
-				7FAB33822EE4666D008AC600 /* Review.swift */,
-				7FAB33842EE4668B008AC600 /* Report.swift */,
-				7FAB33862EE466A2008AC600 /* Notification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -725,6 +714,8 @@
 		7FAB33982EE4683E008AC600 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				ACA244572EF6DC8000DDCA77 /* FoundationHelper.swift */,
+				ACA244552EF6DC4700DDCA77 /* DatabaseFoundation.swift */,
 				7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */,
 				7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */,
 			);
@@ -932,7 +923,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
-				7FAB337F2EE4662A008AC600 /* Booking.swift in Sources */,
 				7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */,
 				7FAB32E62EE453EC008AC600 /* RoleSelectionViewContoller.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
@@ -941,19 +931,17 @@
 				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
 				7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
+				ACA244562EF6DC6B00DDCA77 /* DatabaseFoundation.swift in Sources */,
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
 				7FAB336A2EE462D4008AC600 /* UserManagementViewController.swift in Sources */,
 				7FAB334A2EE45EFA008AC600 /* ChatViewModel.swift in Sources */,
-				7FAB33812EE46651008AC600 /* Project.swift in Sources */,
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
+				ACA2445A2EF6DD8A00DDCA77 /* Models.swift in Sources */,
 				7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */,
 				7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */,
-				7FAB33852EE4668B008AC600 /* Report.swift in Sources */,
 				7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
-				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
-				7FAB337D2EE46616008AC600 /* Service.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
 				7FAB33222EE45A6D008AC600 /* HomeViewModel.swift in Sources */,
 				7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */,
@@ -972,8 +960,8 @@
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
 				7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
-				7FAB33832EE4666D008AC600 /* Review.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
+				ACA244582EF6DC8500DDCA77 /* FoundationHelper.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
