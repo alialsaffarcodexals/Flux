@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10A8BA402EF719AD00E08BC1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10A8BA3B2EF7194700E08BC1 /* HomeDiscovery */ = {
+			isa = PBXGroup;
+			children = (
+				10A8BA3E2EF7197600E08BC1 /* ViewModels */,
+				10A8BA3D2EF7196900E08BC1 /* ViewControllers */,
+				10A8BA3C2EF7195E00E08BC1 /* Storyboards */,
+			);
+			path = HomeDiscovery;
+			sourceTree = "<group>";
+		};
+		10A8BA3C2EF7195E00E08BC1 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		10A8BA3D2EF7196900E08BC1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		10A8BA3E2EF7197600E08BC1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		604B03062EE03F690062AE77 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +138,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				10A8BA3B2EF7194700E08BC1 /* HomeDiscovery */,
 				ACDA75DE2EDDD53200665266 /* Requests-Seeker  */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
 				604B03072EE03F690062AE77 /* Admin-Tools */,
@@ -288,6 +323,7 @@
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7F68C3D22EDD93C5005B29E6 /* ViewController.swift in Sources */,
+				10A8BA402EF719AD00E08BC1 /* HomeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
