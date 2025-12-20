@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10A89BAE2EF7223A00D3DD16 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */; };
+		10A89BB62EF7250100D3DD16 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A89BB52EF7250100D3DD16 /* Home.storyboard */; };
 		10A8BA402EF719AD00E08BC1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
+		10A89BB52EF7250100D3DD16 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
@@ -68,6 +72,7 @@
 		10A8BA3C2EF7195E00E08BC1 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				10A89BB52EF7250100D3DD16 /* Home.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -75,6 +80,7 @@
 		10A8BA3D2EF7196900E08BC1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -305,6 +311,7 @@
 				604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */,
 				604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
+				10A89BB62EF7250100D3DD16 /* Home.storyboard in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7F68C3D72EDD93C5005B29E6 /* Main.storyboard in Resources */,
@@ -324,6 +331,7 @@
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7F68C3D22EDD93C5005B29E6 /* ViewController.swift in Sources */,
 				10A8BA402EF719AD00E08BC1 /* HomeViewModel.swift in Sources */,
+				10A89BAE2EF7223A00D3DD16 /* HomeFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
