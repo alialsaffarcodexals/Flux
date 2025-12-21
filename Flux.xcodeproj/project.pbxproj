@@ -10,6 +10,12 @@
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		60615F3E2EEDAE02001DCB62 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60615F3D2EEDAE02001DCB62 /* AdminTools.storyboard */; };
 		60615F402EEDAE38001DCB62 /* AdminToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60615F3F2EEDAE38001DCB62 /* AdminToolsViewController.swift */; };
+		607295B52EF31B8A009F4801 /* CategoryManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607295B42EF31B8A009F4801 /* CategoryManagementViewController.swift */; };
+		607295B72EF31BC6009F4801 /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607295B62EF31BC6009F4801 /* ReportsViewController.swift */; };
+		607295B92EF31C05009F4801 /* UsersAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607295B82EF31C05009F4801 /* UsersAccountsViewController.swift */; };
+		607295BB2EF31C6F009F4801 /* SkillVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607295BA2EF31C6F009F4801 /* SkillVerificationViewController.swift */; };
+		607295BD2EF33BF5009F4801 /* SkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607295BC2EF33BF5009F4801 /* SkillViewController.swift */; };
+		607295BF2EF46325009F4801 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607295BE2EF46325009F4801 /* ReportViewController.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
@@ -93,6 +99,12 @@
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		60615F3D2EEDAE02001DCB62 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		60615F3F2EEDAE38001DCB62 /* AdminToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewController.swift; sourceTree = "<group>"; };
+		607295B42EF31B8A009F4801 /* CategoryManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementViewController.swift; sourceTree = "<group>"; };
+		607295B62EF31BC6009F4801 /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
+		607295B82EF31C05009F4801 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
+		607295BA2EF31C6F009F4801 /* SkillVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillVerificationViewController.swift; sourceTree = "<group>"; };
+		607295BC2EF33BF5009F4801 /* SkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillViewController.swift; sourceTree = "<group>"; };
+		607295BE2EF46325009F4801 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -230,6 +242,12 @@
 			isa = PBXGroup;
 			children = (
 				60615F3F2EEDAE38001DCB62 /* AdminToolsViewController.swift */,
+				607295BA2EF31C6F009F4801 /* SkillVerificationViewController.swift */,
+				607295B42EF31B8A009F4801 /* CategoryManagementViewController.swift */,
+				607295B62EF31BC6009F4801 /* ReportsViewController.swift */,
+				607295B82EF31C05009F4801 /* UsersAccountsViewController.swift */,
+				607295BC2EF33BF5009F4801 /* SkillViewController.swift */,
+				607295BE2EF46325009F4801 /* ReportViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -932,10 +950,13 @@
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
 				7FAB32E42EE453CD008AC600 /* LoginViewContoller.swift in Sources */,
 				7FAB337B2EE465F2008AC600 /* User.swift in Sources */,
+				607295B52EF31B8A009F4801 /* CategoryManagementViewController.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
+				607295B92EF31C05009F4801 /* UsersAccountsViewController.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
+				607295BB2EF31C6F009F4801 /* SkillVerificationViewController.swift in Sources */,
 				7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB33302EE45BFB008AC600 /* BookingViewModel.swift in Sources */,
@@ -948,11 +969,14 @@
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
 				7FAB32E22EE453A6008AC600 /* WelcomeViewController.swift in Sources */,
+				607295BD2EF33BF5009F4801 /* SkillViewController.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
+				607295BF2EF46325009F4801 /* ReportViewController.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */,
 				7FAB33952EE467B5008AC600 /* Constants.swift in Sources */,
+				607295B72EF31BC6009F4801 /* ReportsViewController.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
