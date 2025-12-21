@@ -1,8 +1,22 @@
-//
-//  LeaveReviewViewController.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: LeaveReviewViewController.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/MyRequests/ViewControllers/LeaveReviewViewController.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

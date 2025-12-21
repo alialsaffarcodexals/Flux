@@ -1,8 +1,22 @@
-//
-//  Project.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: Project.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/Notifications/ViewModels/Project.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

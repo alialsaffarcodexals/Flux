@@ -1,7 +1,21 @@
-//
-//  PortfolioViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: PortfolioViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/Portfolio/ViewModels/PortfolioViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

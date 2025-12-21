@@ -1,0 +1,27 @@
+import UIKit
+
+class RoleSelectionViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    // هذه الدالة تشتغل تلقائياً قبل الانتقال للصفحة التالية
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        // نتأكد أن الوجهة هي صفحة التسجيل (SingUpViewController)
+        // لاحظ: استخدمنا اسم ملفك SingUp وليس SignUp
+        
+        print("🔄 Preparing segue: \(segue.identifier ?? "No Identifier")")
+        if let signUpVC = segue.destination as? SignUpViewController {
+            
+            if segue.identifier == "goToSignUpSeeker" {
+                signUpVC.userRole = "Seeker" // نمرر الدور
+                print("Selected Role: Seeker")
+            } else if segue.identifier == "goToSignUpProvider" {
+                signUpVC.userRole = "Provider" // نمرر الدور
+                print("Selected Role: Provider")
+            }
+        }
+    }
+}

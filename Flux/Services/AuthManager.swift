@@ -1,7 +1,24 @@
+/*
+ File: AuthManager.swift
+ Purpose: class AuthManager, func registerUser, func handleFinalCompletion, func saveUserToFirestore, func signIn, func signOut
+ Location: Services/AuthManager.swift
+*/
+
+
+
+
+
+
+
+
+
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+
+
+/// Class AuthManager: Responsible for the lifecycle, state, and behavior related to AuthManager.
 class AuthManager {
     
     static let shared = AuthManager()
@@ -11,6 +28,11 @@ class AuthManager {
     
     private init() {}
     
+
+
+/// @Description: Performs the registerUser operation.
+/// @Input: with userRequest: RegisterUserRequest; image: Data?; completion: @escaping (Bool; Error?
+/// @Output: Void)
     public func registerUser(with userRequest: RegisterUserRequest, image: Data?, completion: @escaping (Bool, Error?) -> Void) {
         
         let email = userRequest.email
@@ -56,6 +78,11 @@ class AuthManager {
         }
     }
     
+
+
+/// @Description: Performs the handleFinalCompletion operation.
+/// @Input: success: Bool; completion: @escaping (Bool; Error?
+/// @Output: Void)
     private func handleFinalCompletion(success: Bool, completion: @escaping (Bool, Error?) -> Void) {
         if success {
             completion(true, nil)
@@ -65,6 +92,11 @@ class AuthManager {
         }
     }
     
+
+
+/// @Description: Performs the saveUserToFirestore operation.
+/// @Input: uid: String; name: String; email: String; role: String; phone: String; profileImageURL: String?; completion: @escaping (Bool
+/// @Output: Void)
     private func saveUserToFirestore(uid: String, name: String, email: String, role: String, phone: String, profileImageURL: String?, completion: @escaping (Bool) -> Void) {
         
         var userData: [String: Any] = [
@@ -90,6 +122,11 @@ class AuthManager {
         }
     }
     
+
+
+/// @Description: Performs the signIn operation.
+/// @Input: email: String; password: String; completion: @escaping (Bool; Error?
+/// @Output: Void)
     public func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         auth.signIn(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -100,6 +137,11 @@ class AuthManager {
         }
     }
     
+
+
+/// @Description: Performs the signOut operation.
+/// @Input: None
+/// @Output: Void
     public func signOut() throws {
         try auth.signOut()
     }

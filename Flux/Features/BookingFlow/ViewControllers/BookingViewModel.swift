@@ -1,8 +1,22 @@
-//
-//  BookingViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: BookingViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/BookingFlow/ViewControllers/BookingViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

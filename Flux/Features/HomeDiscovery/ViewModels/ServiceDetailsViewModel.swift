@@ -1,8 +1,22 @@
-//
-//  ServiceDetailsViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: ServiceDetailsViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/HomeDiscovery/ViewModels/ServiceDetailsViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation
