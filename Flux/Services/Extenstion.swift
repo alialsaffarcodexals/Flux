@@ -1,8 +1,22 @@
-//
-//  Extenstion.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: Extenstion.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Services/Extenstion.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

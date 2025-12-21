@@ -1,0 +1,55 @@
+import UIKit
+
+
+class SeekerProfileViewController: UIViewController {
+
+    // MARK: - IBOutlets
+    // تأكد من ربط هذه العناصر في الـ Storyboard
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel! // لعرض الموقع
+    
+    // 2. تعريف الـ ViewModel
+        var viewModel = SeekerProfileViewModel()
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            setupBindings() // تجهيز المراقبة
+            viewModel.fetchUserProfile() // طلب البيانات أول ما تفتح الصفحة
+            
+            // تعيين الموقع تلقائياً كما طلبت
+            locationLabel.text = "Bahrain 🇧🇭"
+        }
+
+        // 3. دالة الربط (Binding) - تراقب الـ ViewModel
+        func setupBindings() {
+            
+            // لما البيانات توصل بنجاح
+            viewModel.onUserDataUpdated = { [weak self] user in
+                DispatchQueue.main.async {
+                    self?.nameLabel.text = user.name
+                    self?.usernameLabel.text = "@\(user.username ?? "user")" // لو مافي يوزرنيم
+                    
+                    // للصورة، بنستخدم مكتبة أو كود تحميل بسيط (SDWebImage أفضل شيء لو عندك)
+                    // حالياً مثال بسيط:
+                    if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
+                        // هنا المفروض تستخدم دالة تحميل صورة، سأضع كود بسيط للتوضيح
+                        DispatchQueue.global().async {
+                            if let data = try? Data(contentsOf: url) {
+                                DispatchQueue.main.async {
+                                    self?.profileImageView.image = UIImage(data: data)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            viewModel.onError = { errorMessage in
+                print("Error fetching profile: \(errorMessage)")
+            }
+        }
+    }
+   

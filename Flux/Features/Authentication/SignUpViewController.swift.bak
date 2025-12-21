@@ -13,6 +13,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     
+    var userRole: String = "Seeker"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -46,7 +48,7 @@ class SignUpViewController: UIViewController {
                     email: emailTextField.text,
                     password: passwordTextField.text,
                     phone: phoneTextField.text,
-                    role: "Seeker",
+                    role: self.userRole,
                     profileImage: imageData
                 ) { [weak self] success, errorMessage in
                     
@@ -55,17 +57,17 @@ class SignUpViewController: UIViewController {
                     guard let self = self else { return }
                     
                     DispatchQueue.main.async {
-                        self.signUpButton.isEnabled = true
-                        print("🟢 4. Button Re-enabled")
-                        
-                        if success {
-                            print("🟢 5. Navigating to Home")
-                            self.navigateToHome()
-                        } else {
-                            print("🔴 6. Error Occurred: \(errorMessage ?? "N/A")")
-                            self.showAlert(title: "Sign Up Failed", message: errorMessage ?? "Unknown Error")
-                        }
-                    }
+                                // self.signUpButton.isEnabled = true
+                                
+                                if success {
+                                    print("✅ User Created Successfully as \(self.userRole)")
+                                    
+                                    AppNavigator.shared.navigateToRoleBasedHome(role: self.userRole)
+                                    
+                                } else {
+                                    self.showAlert(title: "Sign Up Failed", message: errorMessage ?? "Unknown Error")
+                                }
+                            }
                 }
         
     }
@@ -99,17 +101,8 @@ extension SignUpViewController {
         present(alert, animated: true)
     }
     
-    private func navigateToHome() {
-        let homeStoryboard = UIStoryboard(name: "Home", bundle: nil)
-        if let homeVC = homeStoryboard.instantiateViewController(withIdentifier: "HomeFeedViewController") as? HomeFeedViewController {
-            
-            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                  let window = windowScene.windows.first else {
-                return
-            }
-            
-            window.rootViewController = homeVC
-            UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromRight, animations: nil, completion: nil)
-        }
-    }
+    
+   
+    
+  
 }

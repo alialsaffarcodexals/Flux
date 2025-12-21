@@ -1,8 +1,22 @@
-//
-//  ManageSkillsViewController.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: ManageSkillsViewController.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/ProviderProfile/ViewContollers/ManageSkillsViewController.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

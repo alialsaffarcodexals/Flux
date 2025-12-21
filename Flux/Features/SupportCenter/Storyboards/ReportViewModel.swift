@@ -1,8 +1,22 @@
-//
-//  ReportViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: ReportViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/SupportCenter/Storyboards/ReportViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

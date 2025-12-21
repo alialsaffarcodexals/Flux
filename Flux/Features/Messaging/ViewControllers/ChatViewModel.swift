@@ -1,8 +1,22 @@
-//
-//  ChatViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: ChatViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/Messaging/ViewControllers/ChatViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

@@ -16,9 +16,9 @@
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
 		7FAB32E22EE453A6008AC600 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E12EE453A6008AC600 /* WelcomeViewController.swift */; };
-		7FAB32E42EE453CD008AC600 /* LoginViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E32EE453CD008AC600 /* LoginViewContoller.swift */; };
-		7FAB32E62EE453EC008AC600 /* RoleSelectionViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E52EE453EC008AC600 /* RoleSelectionViewContoller.swift */; };
-		7FAB32E82EE45418008AC600 /* SingUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E72EE45418008AC600 /* SingUpViewController.swift */; };
+		7FAB32E42EE453CD008AC600 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E32EE453CD008AC600 /* LoginViewController.swift */; };
+		7FAB32E62EE453EC008AC600 /* RoleSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E52EE453EC008AC600 /* RoleSelectionViewController.swift */; };
+		7FAB32E82EE45418008AC600 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E72EE45418008AC600 /* SignUpViewController.swift */; };
 		7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E92EE4543F008AC600 /* AuthViewModel.swift */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */; };
@@ -90,6 +90,8 @@
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
+		7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */; };
+		7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */; };
 		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -104,9 +106,9 @@
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FAB32E12EE453A6008AC600 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = Flux/Features/Authentication/WelcomeViewController.swift; sourceTree = SOURCE_ROOT; };
-		7FAB32E32EE453CD008AC600 /* LoginViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewContoller.swift; path = Flux/Features/Authentication/LoginViewContoller.swift; sourceTree = SOURCE_ROOT; };
-		7FAB32E52EE453EC008AC600 /* RoleSelectionViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoleSelectionViewContoller.swift; path = Flux/Features/Authentication/RoleSelectionViewContoller.swift; sourceTree = SOURCE_ROOT; };
-		7FAB32E72EE45418008AC600 /* SingUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingUpViewController.swift; path = Flux/Features/Authentication/SingUpViewController.swift; sourceTree = SOURCE_ROOT; };
+		7FAB32E32EE453CD008AC600 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Flux/Features/Authentication/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
+		7FAB32E52EE453EC008AC600 /* RoleSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoleSelectionViewController.swift; path = Flux/Features/Authentication/RoleSelectionViewController.swift; sourceTree = SOURCE_ROOT; };
+		7FAB32E72EE45418008AC600 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Flux/Features/Authentication/SignUpViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB32E92EE4543F008AC600 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthViewModel.swift; path = Flux/Features/Authentication/AuthViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,8 @@
 		7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewController.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewModel.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardCell.swift; sourceTree = "<group>"; };
+		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -275,9 +279,9 @@
 			isa = PBXGroup;
 			children = (
 				7FAB32E12EE453A6008AC600 /* WelcomeViewController.swift */,
-				7FAB32E32EE453CD008AC600 /* LoginViewContoller.swift */,
-				7FAB32E52EE453EC008AC600 /* RoleSelectionViewContoller.swift */,
-				7FAB32E72EE45418008AC600 /* SingUpViewController.swift */,
+				7FAB32E32EE453CD008AC600 /* LoginViewController.swift */,
+				7FAB32E52EE453EC008AC600 /* RoleSelectionViewController.swift */,
+				7FAB32E72EE45418008AC600 /* SignUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -708,6 +712,7 @@
 				7FAB338B2EE46728008AC600 /* FirestoreManager.swift */,
 				7FAB338D2EE46741008AC600 /* StorageManager.swift */,
 				7FAB338F2EE4675B008AC600 /* AdminService.swift */,
+				7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -764,6 +769,7 @@
 			isa = PBXGroup;
 			children = (
 				7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */,
+				7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -932,15 +938,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
+				7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */,
 				7FAB337F2EE4662A008AC600 /* Booking.swift in Sources */,
 				7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */,
-				7FAB32E62EE453EC008AC600 /* RoleSelectionViewContoller.swift in Sources */,
+				7FAB32E62EE453EC008AC600 /* RoleSelectionViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
-				7FAB32E82EE45418008AC600 /* SingUpViewController.swift in Sources */,
+				7FAB32E82EE45418008AC600 /* SignUpViewController.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
 				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
 				7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
+				7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */,
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
 				7FAB336A2EE462D4008AC600 /* UserManagementViewController.swift in Sources */,
 				7FAB334A2EE45EFA008AC600 /* ChatViewModel.swift in Sources */,
@@ -960,7 +968,7 @@
 				7FAB333A2EE45D30008AC600 /* LeaveReviewViewController.swift in Sources */,
 				7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */,
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
-				7FAB32E42EE453CD008AC600 /* LoginViewContoller.swift in Sources */,
+				7FAB32E42EE453CD008AC600 /* LoginViewController.swift in Sources */,
 				7FAB337B2EE465F2008AC600 /* User.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,

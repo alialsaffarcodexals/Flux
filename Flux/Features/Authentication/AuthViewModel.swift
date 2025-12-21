@@ -1,27 +1,75 @@
+/*
+ File: AuthViewModel.swift
+ Purpose: class AuthViewModel, func performLogin, func performSignUp, func getErrorMessage
+ Location: Features/Authentication/AuthViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
 import Foundation
 import FirebaseAuth
 
 
+
+
+/// Class AuthViewModel: Responsible for the lifecycle, state, and behavior related to AuthViewModel.
 class AuthViewModel {
     
-    func performLogin(email: String?, password: String?, completion: @escaping (Bool, String?) -> Void) {
+    
+
+    
+
+
+/// @Description: Performs the performLogin operation.
+/// @Input: email: String?; password: String?; completion: @escaping (Bool; String?; User?
+/// @Output: Void)
+    func performLogin(email: String?, password: String?, completion: @escaping (Bool, String?, User?) -> Void) {
         
         guard let email = email, !email.isEmpty,
               let password = password, !password.isEmpty else {
-            completion(false, "Please fill in all fields.")
+            completion(false, "Please fill in all fields.", nil)
             return
         }
 
+        
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success, error in
             if let error = error {
                 let friendlyMessage = self?.getErrorMessage(from: error) ?? "An unknown error occurred."
-                completion(false, friendlyMessage)
+                completion(false, friendlyMessage, nil)
             } else {
-                completion(true, nil)
+                
+                guard let uid = Auth.auth().currentUser?.uid else {
+                    completion(false, "User ID not found.", nil)
+                    return
+                }
+                
+                FirestoreManager.shared.getUser(uid: uid) { result in
+                    switch result {
+                    case .success(let user):
+                        
+                        completion(true, nil, user)
+                    case .failure(let error):
+                        print("Error fetching user data: \(error.localizedDescription)")
+                        
+                        
+                        completion(false, "Failed to retrieve user profile.", nil)
+                    }
+                }
             }
         }
     }
 
+
+
+/// @Description: Performs the performSignUp operation.
+/// @Input: name: String?; email: String?; password: String?; phone: String?; role: String; profileImage: Data?; completion: @escaping (Bool; String?
+/// @Output: Void)
     func performSignUp(name: String?, email: String?, password: String?, phone: String?, role: String, profileImage: Data?, completion: @escaping (Bool, String?) -> Void) {
 
         guard let name = name, !name.isEmpty,
@@ -44,6 +92,11 @@ class AuthViewModel {
         }
     }
     
+
+
+/// @Description: Performs the getErrorMessage operation.
+/// @Input: from error: Error
+/// @Output: String
     private func getErrorMessage(from error: Error) -> String {
         let nsError = error as NSError
                 

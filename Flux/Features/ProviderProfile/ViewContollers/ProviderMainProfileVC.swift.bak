@@ -1,0 +1,11 @@
+import UIKit
+
+class ProviderMainProfileVC: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // هذا مجرد إعداد مبدئي عشان الشاشة ما تكون سوداء
+        self.view.backgroundColor = .systemBackground
+        print("✅ Provider Profile Loaded")
+    }
+}
