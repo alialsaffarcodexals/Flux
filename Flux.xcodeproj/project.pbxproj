@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10CC97302EF84D1E0016AF48 /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CC972F2EF84D1E0016AF48 /* Favorites.storyboard */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
@@ -94,6 +95,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10CC972F2EF84D1E0016AF48 /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -562,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				7FAB334F2EE45F9E008AC600 /* History.storyboard */,
+				10CC972F2EF84D1E0016AF48 /* Favorites.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */,
 				7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */,
 				7FAB33502EE45F9E008AC600 /* History.storyboard in Resources */,
+				10CC97302EF84D1E0016AF48 /* Favorites.storyboard in Resources */,
 				7FAB33362EE45CA5008AC600 /* Requests.storyboard in Resources */,
 				7FAB32FE2EE4565D008AC600 /* ProviderProfile.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
