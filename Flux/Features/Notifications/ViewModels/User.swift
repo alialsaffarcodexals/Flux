@@ -1,62 +1,55 @@
-/*
- File: User.swift
- Purpose: struct User, struct RegisterUserRequest
- Location: Features/Notifications/ViewModels/User.swift
-*/
-
-
-
-
-
-
-
-
-
 import Foundation
+import FirebaseFirestore
 
-
-
-
-/// Struct User: Value type that models the User data and related helpers.
-struct User {
-    let uid: String
-    let name: String
-    let email: String
-    let role: String
-    
-    
-    let username: String?
-    let profileImageURL: String?
-    
-    
-    init?(dictionary: [String: Any]) {
-        
-        guard let name = dictionary["name"] as? String,
-              let email = dictionary["email"] as? String,
-              let role = dictionary["role"] as? String else {
-            return nil
-        }
-        
-        
-        self.uid = dictionary["uid"] as? String ?? ""
-        self.name = name
-        self.email = email
-        self.role = role
-        
-        
-        self.username = dictionary["username"] as? String
-        self.profileImageURL = dictionary["profileImageURL"] as? String
-    }
+enum UserRole: String, Codable {
+    case seeker = "Seeker"
+    case provider = "Provider"
+    case admin = "Admin"
 }
 
+enum ProfileMode: String, Codable {
+    case buyerMode = "Buyer Mode"
+    case sellerMode = "Seller Mode"
+}
 
-
-
-/// Struct RegisterUserRequest: Value type that models the RegisterUserRequest data and related helpers.
-struct RegisterUserRequest {
-    let name: String
-    let email: String
-    let password: String
-    let role: String 
-    let phone: String
+struct User: Identifiable, Codable {
+    @DocumentID var id: String?
+    
+    /// New user-related fields.
+    var firstName: String
+    var lastName: String
+    var username: String
+    var email: String
+    var phoneNumber: String
+    var profileImageURL: String?
+    var location: String?
+    
+    var role: UserRole
+    var joinedDate: Date
+    var activeProfileMode: ProfileMode?
+    
+    var interests: [String]?
+    var favoriteServiceIds: [String]?
+    
+    var businessName: String?
+    var bio: String?
+    var isVerified: Bool?
+    
+    /// Computed property for the full name (keeps compatibility with old code).
+    var name: String {
+        return "\(firstName) \(lastName)"
+    }
+    
+    /// Initializes a new User instance.
+    init(id: String? = nil, firstName: String, lastName: String, username: String, email: String, phoneNumber: String, role: UserRole = .seeker) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.username = username
+        self.email = email
+        self.phoneNumber = phoneNumber
+        self.role = role
+        self.joinedDate = Date()
+        self.activeProfileMode = .buyerMode
+    }
 }

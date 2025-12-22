@@ -1,45 +1,19 @@
-/*
- File: AuthManager.swift
- Purpose: class AuthManager, func registerUser, func handleFinalCompletion, func saveUserToFirestore, func signIn, func signOut
- Location: Services/AuthManager.swift
-*/
-
-
-
-
-
-
-
-
-
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-
-
-/// Class AuthManager: Responsible for the lifecycle, state, and behavior related to AuthManager.
 class AuthManager {
     
     static let shared = AuthManager()
     
+    // Define core variables (solution for Error 3, 4, 5).
     private let auth = Auth.auth()
     private let db = Firestore.firestore()
     
     private init() {}
     
-
-
-/// @Description: Performs the registerUser operation.
-/// @Input: with userRequest: RegisterUserRequest; image: Data?; completion: @escaping (Bool; Error?
-/// @Output: Void)
-    public func registerUser(with userRequest: RegisterUserRequest, image: Data?, completion: @escaping (Bool, Error?) -> Void) {
-        
-        let email = userRequest.email
-        let password = userRequest.password
-        let name = userRequest.name
-        let role = userRequest.role
-        let phone = userRequest.phone
+    // Update the method signature to accept first name, last name, and username.
+    public func registerUser(firstName: String, lastName: String, username: String, email: String, password: String, phone: String, image: Data?, completion: @escaping (Bool, Error?) -> Void) {
         
         auth.createUser(withEmail: email, password: password) { [weak self] result, error in
             guard let self = self else { return }
@@ -56,56 +30,43 @@ class AuthManager {
             
             if let imageData = image {
                 let fileName = "\(resultUser.uid)_profile.jpg"
-                
                 StorageManager.shared.uploadProfilePicture(with: imageData, fileName: fileName) { [weak self] result in
                     switch result {
                     case .success(let downloadURL):
-                        self?.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: downloadURL) { success in
+                        // Pass new user data for saving.
+                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: downloadURL) { success in
                             self?.handleFinalCompletion(success: success, completion: completion)
                         }
                     case .failure(let error):
-                        print("Warning: Image upload failed: \(error). Saving user without image.")
-                        self?.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: nil) { success in
+                        print("Warning image upload: \(error)")
+                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: nil) { success in
                             self?.handleFinalCompletion(success: success, completion: completion)
                         }
                     }
                 }
             } else {
-                self.saveUserToFirestore(uid: resultUser.uid, name: name, email: email, role: role, phone: phone, profileImageURL: nil) { success in
+                self.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: nil) { success in
                     self.handleFinalCompletion(success: success, completion: completion)
                 }
             }
         }
     }
-    
 
-
-/// @Description: Performs the handleFinalCompletion operation.
-/// @Input: success: Bool; completion: @escaping (Bool; Error?
-/// @Output: Void)
-    private func handleFinalCompletion(success: Bool, completion: @escaping (Bool, Error?) -> Void) {
-        if success {
-            completion(true, nil)
-        } else {
-            let error = NSError(domain: "FirestoreError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Account created but failed to save details."])
-            completion(false, error)
-        }
-    }
-    
-
-
-/// @Description: Performs the saveUserToFirestore operation.
-/// @Input: uid: String; name: String; email: String; role: String; phone: String; profileImageURL: String?; completion: @escaping (Bool
-/// @Output: Void)
-    private func saveUserToFirestore(uid: String, name: String, email: String, role: String, phone: String, profileImageURL: String?, completion: @escaping (Bool) -> Void) {
+    /// Internal save method.
+    private func saveUserToFirestore(uid: String, firstName: String, lastName: String, username: String, email: String, phone: String, profileImageURL: String?, completion: @escaping (Bool) -> Void) {
         
+        // Store new fields in the dictionary.
         var userData: [String: Any] = [
             "uid": uid,
-            "name": name,
+            "id": uid,
+            "firstName": firstName,
+            "lastName": lastName,
+            "username": username, // Store the username.
             "email": email,
-            "phone": phone,
-            "role": role,
-            "createdAt": Timestamp(date: Date())
+            "phoneNumber": phone,
+            "role": UserRole.seeker.rawValue,
+            "activeProfileMode": ProfileMode.buyerMode.rawValue,
+            "joinedDate": Timestamp(date: Date())
         ]
         
         if let imageURL = profileImageURL {
@@ -122,11 +83,20 @@ class AuthManager {
         }
     }
     
-
-
-/// @Description: Performs the signIn operation.
-/// @Input: email: String; password: String; completion: @escaping (Bool; Error?
-/// @Output: Void)
+    // MARK: - Helper Functions
+    
+    // Define the helper function (solution for Error 2).
+    private func handleFinalCompletion(success: Bool, completion: @escaping (Bool, Error?) -> Void) {
+        if success {
+            completion(true, nil)
+        } else {
+            let error = NSError(domain: "FirestoreError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Account created but failed to save details."])
+            completion(false, error)
+        }
+    }
+    
+    // MARK: - Sign In & Sign Out
+    
     public func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         auth.signIn(withEmail: email, password: password) { result, error in
             if let error = error {
@@ -137,11 +107,6 @@ class AuthManager {
         }
     }
     
-
-
-/// @Description: Performs the signOut operation.
-/// @Input: None
-/// @Output: Void
     public func signOut() throws {
         try auth.signOut()
     }
