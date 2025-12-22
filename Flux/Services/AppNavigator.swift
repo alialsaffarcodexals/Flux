@@ -13,15 +13,15 @@ class AppNavigator {
             
             switch user.role {
             case .seeker:
-                // المرحلة 2: الباحث دائماً يذهب لواجهة الشراء
+                // Phase 2: The seeker always navigates to the buying interface.
                 navigateToSeekerTabs()
                 
             case .provider:
-                // المرحلة 5: المزود يعتمد على آخر وضع (Mode) كان فيه
+                // Phase 5: The provider depends on the last mode they were in.
                 if let mode = user.activeProfileMode, mode == .sellerMode {
-                    navigateToProviderTabs() // واجهة البيع
+                    navigateToProviderTabs() // Selling interface
                 } else {
-                    navigateToSeekerTabs() // واجهة الشراء (Graphic Designer hiring a cleaner)
+                    navigateToSeekerTabs() // Buying interface (Graphic Designer hiring a cleaner)
                 }
                 
             case .admin:
@@ -32,10 +32,10 @@ class AppNavigator {
     
     // MARK: - 1. Seeker Navigation
     private func navigateToSeekerTabs() {
-        // ⚠️ ملاحظة: غير اسم "Home" إلى اسم الـ Storyboard الموجود فيه الـ TabBar الخاص بالباحث
+        // ⚠️ Note: Change "Home" to the name of the storyboard containing the seeker's TabBar.
         let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
         
-        // نبحث عن الـ Tab Bar Controller بواسطة الـ ID الذي وضعته
+        // Look for the Tab Bar Controller by the ID you set.
         if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "SeekerTabBarController") as? UITabBarController {
             setRoot(viewController: tabBarVC)
         } else {
@@ -45,7 +45,7 @@ class AppNavigator {
     
     // MARK: - 2. Provider Navigation
     private func navigateToProviderTabs() {
-        // ⚠️ ملاحظة: غير اسم "ProviderProfile" إلى اسم الـ Storyboard الموجود فيه الـ TabBar الخاص بالمزود
+        // ⚠️ Note: Change "ProviderProfile" to the name of the storyboard containing the provider's TabBar.
         let storyboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
         
         if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "ProviderTabBarController") as? UITabBarController {
@@ -65,7 +65,8 @@ class AppNavigator {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         
-        // حركة انتقال ناعمة
+        // Smooth transition animation.
         UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
 }
+

@@ -15,7 +15,7 @@ enum ProfileMode: String, Codable {
 struct User: Identifiable, Codable {
     @DocumentID var id: String?
     
-    // ✅ 1. الحقول الجديدة
+    /// New user-related fields.
     var firstName: String
     var lastName: String
     var username: String
@@ -35,12 +35,12 @@ struct User: Identifiable, Codable {
     var bio: String?
     var isVerified: Bool?
     
-    // ✅ 2. خاصية محسوبة لدمج الاسم (عشان الكود القديم ما يخرب)
+    /// Computed property for the full name (keeps compatibility with old code).
     var name: String {
         return "\(firstName) \(lastName)"
     }
     
-    // Initializer
+    /// Initializes a new User instance.
     init(id: String? = nil, firstName: String, lastName: String, username: String, email: String, phoneNumber: String, role: UserRole = .seeker) {
         self.id = id
         self.firstName = firstName

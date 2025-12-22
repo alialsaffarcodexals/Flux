@@ -1,9 +1,16 @@
 import Foundation
 import FirebaseAuth
 
+/// ViewModel responsible for handling authentication-related operations.
 class AuthViewModel {
     
     // MARK: - Login
+    
+    /// Performs login with given email and password.
+    /// - Parameters:
+    ///   - email: The user's email address.
+    ///   - password: The user's password.
+    ///   - completion: Completion handler with success flag, optional error message, and optional User object.
     func performLogin(email: String?, password: String?, completion: @escaping (Bool, String?, User?) -> Void) {
         
         guard let email = email, !email.isEmpty,
@@ -36,10 +43,22 @@ class AuthViewModel {
     }
 
     // MARK: - Sign Up (Updated)
-    // ✅ تم التحديث لاستقبال الاسم الأول، الأخير، واسم المستخدم
+    /// Updated to accept first name, last name, and username.
+    ///
+    /// Performs sign up with additional user details.
+    /// - Parameters:
+    ///   - firstName: The user's first name.
+    ///   - lastName: The user's last name.
+    ///   - username: The user's username.
+    ///   - email: The user's email address.
+    ///   - password: The user's password.
+    ///   - phone: The user's phone number.
+    ///   - role: The user's role.
+    ///   - profileImage: The user's profile image data.
+    ///   - completion: Completion handler with success flag, optional error message, and optional User object.
     func performSignUp(firstName: String?, lastName: String?, username: String?, email: String?, password: String?, phone: String?, role: String, profileImage: Data?, completion: @escaping (Bool, String?, User?) -> Void) {
 
-        // ✅ التحقق من جميع الحقول الجديدة
+        // Validate all new fields.
         guard let firstName = firstName, !firstName.isEmpty,
               let lastName = lastName, !lastName.isEmpty,
               let username = username, !username.isEmpty,
@@ -50,14 +69,14 @@ class AuthViewModel {
             return
         }
         
-        // ✅ استدعاء AuthManager بالبيانات الصحيحة (هنا كان سبب الخطأ)
+        // Call AuthManager with correct data (this was the cause of the previous error).
         AuthManager.shared.registerUser(firstName: firstName, lastName: lastName, username: username, email: email, password: password, phone: phone, image: profileImage) { [weak self] success, error in
             
             if let error = error {
                 let friendlyMessage = self?.getErrorMessage(from: error) ?? "Sign up failed."
                 completion(false, friendlyMessage, nil)
             } else {
-                // جلب بيانات المستخدم بعد النجاح
+                // Fetch user data after successful registration.
                 guard let uid = Auth.auth().currentUser?.uid else {
                     completion(false, "User created but ID missing.", nil)
                     return
@@ -77,6 +96,10 @@ class AuthViewModel {
     }
     
     // MARK: - Error Handling
+    
+    /// Returns a user-friendly error message based on the Firebase error.
+    /// - Parameter error: The error returned from Firebase.
+    /// - Returns: A string describing the error in a friendly manner.
     private func getErrorMessage(from error: Error) -> String {
         let nsError = error as NSError
         print("🔴 Firebase Error Code: \(nsError.code)")
