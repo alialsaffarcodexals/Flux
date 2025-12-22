@@ -35,20 +35,16 @@ class RoleSelectionViewController: UIViewController {
 /// @Input: for segue: UIStoryboardSegue; sender: Any?
 /// @Output: Void
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        
-        
-        print("🔄 Preparing segue: \(segue.identifier ?? "No Identifier")")
-        if let signUpVC = segue.destination as? SignUpViewController {
             
-            if segue.identifier == "goToSignUpSeeker" {
-                signUpVC.userRole = "Seeker" 
-                print("Selected Role: Seeker")
-            } else if segue.identifier == "goToSignUpProvider" {
-                signUpVC.userRole = "Provider" 
-                print("Selected Role: Provider")
+            // ✅ الحل: نستخدم 'is' للتحقق من النوع بدلاً من 'as?' التي تنشئ متغيراً
+            if segue.destination is SignUpViewController {
+                
+                if segue.identifier == "goToSignUpSeeker" {
+                    print("Selected Role: Seeker (Default)")
+                    
+                } else if segue.identifier == "goToSignUpProvider" {
+                    print("Selected Role: Provider (Will sign up as Seeker first)")
+                }
             }
         }
-    }
 }

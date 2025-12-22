@@ -24,13 +24,14 @@ class SignUpViewController: UIViewController {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
-    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var usernameTextField: UITextField!
     
-    var userRole: String = "Seeker"
     
 
 
@@ -64,38 +65,43 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
         print("🟢 1. Button Tapped")
-                
-                let imageData = selectedImage?.jpegData(compressionQuality: 0.5)
-                
-                signUpButton.isEnabled = false
-                print("🟢 2. Button Disabled, Calling ViewModel...")
-                
-                viewModel.performSignUp(
-                    name: nameTextField.text,
+                    
+            let imageData = selectedImage?.jpegData(compressionQuality: 0.5)
+                    
+            signUpButton.isEnabled = false
+            print("🟢 2. Button Disabled, Calling ViewModel...")
+                    
+            // لاحظ إضافة المتغير user في الـ closure
+        viewModel.performSignUp(
+                    firstName: firstNameTextField.text,
+                    lastName: lastNameTextField.text,
+                    username: usernameTextField.text, // إضافة اليوزر نيم
                     email: emailTextField.text,
                     password: passwordTextField.text,
                     phone: phoneTextField.text,
-                    role: self.userRole,
+                    role: "Seeker",
                     profileImage: imageData
-                ) { [weak self] success, errorMessage in
-                    
-                    print("🟢 3. ViewModel Returned. Success: \(success)")
-                    
-                    guard let self = self else { return }
-                    
-                    DispatchQueue.main.async {
-                                
-                                
-                                if success {
-                                    print("✅ User Created Successfully as \(self.userRole)")
-                                    
-                                    AppNavigator.shared.navigateToRoleBasedHome(role: self.userRole)
-                                    
-                                } else {
-                                    self.showAlert(title: "Sign Up Failed", message: errorMessage ?? "Unknown Error")
-                                }
-                            }
+                ) { [weak self] success, errorMessage, user in // 👈 هنا استقبلنا الـ user
+                
+                print("🟢 3. ViewModel Returned. Success: \(success)")
+                
+                guard let self = self else { return }
+                
+                DispatchQueue.main.async {
+                    self.signUpButton.isEnabled = true
+                            
+                    if success, let user = user { // 👈 نتأكد أن الـ user موجود
+                        print("✅ User Created Successfully: \(user.name)")
+                        
+                        // الآن المتغير user أصبح معرفاً ويمكن تمريره
+                        AppNavigator.shared.navigate(user: user)
+                        
+                    } else {
+                        self.showAlert(title: "Sign Up Failed", message: errorMessage ?? "Unknown Error")
+                    }
                 }
+            }
+                
         
     }
 }

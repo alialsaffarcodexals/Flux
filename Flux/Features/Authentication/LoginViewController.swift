@@ -50,8 +50,7 @@ class LoginViewContoller: UIViewController {
                     if success, let user = user {
                         
                         
-                        AppNavigator.shared.navigateToRoleBasedHome(role: user.role)
-                        
+                        AppNavigator.shared.navigate(user: user)
                         
                     } else {
                         self.showAlert(title: "Login Failed", message: errorMessage ?? "An unknown error occurred.")

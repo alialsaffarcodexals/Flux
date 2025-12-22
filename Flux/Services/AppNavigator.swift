@@ -7,19 +7,28 @@ class AppNavigator {
     private init() {}
     
     // MARK: - Main Router
-    func navigateToRoleBasedHome(role: String) {
-        // طباعة للتأكد من الرول
-        print("🧭 Navigating to Storyboard TabBar for role: \(role)")
-        
-        switch role {
-        case "Seeker":
-            navigateToSeekerTabs()
-        case "Provider":
-            navigateToProviderTabs()
-        default:
-            navigateToSeekerTabs()
+    // MARK: - Main Router Logic
+        func navigate(user: User) {
+            print("🧭 Navigating for user: \(user.name), Role: \(user.role.rawValue)")
+            
+            switch user.role {
+            case .seeker:
+                // المرحلة 2: الباحث دائماً يذهب لواجهة الشراء
+                navigateToSeekerTabs()
+                
+            case .provider:
+                // المرحلة 5: المزود يعتمد على آخر وضع (Mode) كان فيه
+                if let mode = user.activeProfileMode, mode == .sellerMode {
+                    navigateToProviderTabs() // واجهة البيع
+                } else {
+                    navigateToSeekerTabs() // واجهة الشراء (Graphic Designer hiring a cleaner)
+                }
+                
+            case .admin:
+                // navigateToAdmin()
+                navigateToSeekerTabs()
+            }
         }
-    }
     
     // MARK: - 1. Seeker Navigation
     private func navigateToSeekerTabs() {

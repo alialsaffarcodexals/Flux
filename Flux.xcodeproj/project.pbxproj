@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
+		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
+		7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
@@ -71,7 +73,7 @@
 		7FAB337B2EE465F2008AC600 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337A2EE465F2008AC600 /* User.swift */; };
 		7FAB337D2EE46616008AC600 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337C2EE46616008AC600 /* Service.swift */; };
 		7FAB337F2EE4662A008AC600 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337E2EE4662A008AC600 /* Booking.swift */; };
-		7FAB33812EE46651008AC600 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33802EE46651008AC600 /* Project.swift */; };
+		7FAB33812EE46651008AC600 /* PortfolioProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33802EE46651008AC600 /* PortfolioProject.swift */; };
 		7FAB33832EE4666D008AC600 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33822EE4666D008AC600 /* Review.swift */; };
 		7FAB33852EE4668B008AC600 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33842EE4668B008AC600 /* Report.swift */; };
 		7FAB33872EE466A2008AC600 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33862EE466A2008AC600 /* Notification.swift */; };
@@ -98,6 +100,8 @@
 /* Begin PBXFileReference section */
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
+		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
+		7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -161,7 +165,7 @@
 		7FAB337A2EE465F2008AC600 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = Flux/Features/Notifications/ViewModels/User.swift; sourceTree = SOURCE_ROOT; };
 		7FAB337C2EE46616008AC600 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Flux/Features/Notifications/ViewModels/Service.swift; sourceTree = SOURCE_ROOT; };
 		7FAB337E2EE4662A008AC600 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Booking.swift; path = Flux/Features/Notifications/ViewModels/Booking.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33802EE46651008AC600 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Project.swift; path = Flux/Features/Notifications/ViewModels/Project.swift; sourceTree = SOURCE_ROOT; };
+		7FAB33802EE46651008AC600 /* PortfolioProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PortfolioProject.swift; path = Flux/Features/Notifications/ViewModels/PortfolioProject.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33822EE4666D008AC600 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Review.swift; path = Flux/Features/Notifications/ViewModels/Review.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33842EE4668B008AC600 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Report.swift; path = Flux/Features/Notifications/ViewModels/Report.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33862EE466A2008AC600 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -694,10 +698,12 @@
 		7FAB33792EE465C5008AC600 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */,
+				7F6081192EF98CB300FA5639 /* Skill.swift */,
 				7FAB337A2EE465F2008AC600 /* User.swift */,
 				7FAB337C2EE46616008AC600 /* Service.swift */,
 				7FAB337E2EE4662A008AC600 /* Booking.swift */,
-				7FAB33802EE46651008AC600 /* Project.swift */,
+				7FAB33802EE46651008AC600 /* PortfolioProject.swift */,
 				7FAB33822EE4666D008AC600 /* Review.swift */,
 				7FAB33842EE4668B008AC600 /* Report.swift */,
 				7FAB33862EE466A2008AC600 /* Notification.swift */,
@@ -944,6 +950,7 @@
 				7FAB32E62EE453EC008AC600 /* RoleSelectionViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
 				7FAB32E82EE45418008AC600 /* SignUpViewController.swift in Sources */,
+				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
 				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
 				7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */,
@@ -952,12 +959,13 @@
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
 				7FAB336A2EE462D4008AC600 /* UserManagementViewController.swift in Sources */,
 				7FAB334A2EE45EFA008AC600 /* ChatViewModel.swift in Sources */,
-				7FAB33812EE46651008AC600 /* Project.swift in Sources */,
+				7FAB33812EE46651008AC600 /* PortfolioProject.swift in Sources */,
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
 				7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */,
 				7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */,
 				7FAB33852EE4668B008AC600 /* Report.swift in Sources */,
+				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
 				7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,

@@ -57,8 +57,7 @@ class SeekerProfileViewController: UIViewController {
             viewModel.onUserDataUpdated = { [weak self] user in
                 DispatchQueue.main.async {
                     self?.nameLabel.text = user.name
-                    self?.usernameLabel.text = "@\(user.username ?? "user")" 
-                    
+                    self?.usernameLabel.text = "@\(user.username)"
                     
                     
                     if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {

@@ -36,13 +36,15 @@ class FirestoreManager {
                 return
             }
             
-            
-            
-            if let data = snapshot?.data(),
-               let user = User(dictionary: data) { 
-                completion(.success(user))
-            } else {
-                
+            do {
+                // استخدام Codable لتحويل البيانات مباشرة إلى المودل الجديد
+                if let user = try snapshot?.data(as: User.self) {
+                    completion(.success(user))
+                } else {
+                    completion(.failure(NSError(domain: "Flux", code: -1, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                }
+            } catch {
+                completion(.failure(error))
             }
         }
     }
