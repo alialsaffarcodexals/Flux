@@ -10,7 +10,10 @@ class SeekerProfileViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var locationLabel: UILabel! 
+    @IBOutlet weak var locationLabel: UILabel!
+    
+    // Connect this Outlet to your "Service Provider Profile" button in Storyboard
+        @IBOutlet weak var providerProfileButton: UIButton!
     
     var viewModel = SeekerProfileViewModel()
 
@@ -23,6 +26,12 @@ class SeekerProfileViewController: UIViewController {
         
         // Set the location label text.
         locationLabel.text = "Bahrain 🇧🇭"
+    }
+    
+    
+    // Link this Action to your "Service Provider Profile" button in Storyboard
+    @IBAction func providerProfileTapped(_ sender: UIButton) {
+        viewModel.didTapServiceProviderProfile()
     }
 
     /// Sets up bindings between the view and the view model.
@@ -45,8 +54,21 @@ class SeekerProfileViewController: UIViewController {
             }
         }
         
+        
+        
+        viewModel.onNavigateToProviderSetup = { [weak self] in
+            let storyboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
+            if let introVC = storyboard.instantiateViewController(withIdentifier: "ProviderSetupViewController") as? ProviderIntroViewController {
+                introVC.hidesBottomBarWhenPushed = true // Hide tab bar during setup
+                self?.navigationController?.pushViewController(introVC, animated: true)
+            }
+        }
+        
+        
+        
         viewModel.onError = { errorMessage in
             print("Error fetching profile: \(errorMessage)")
         }
+        
     }
 }

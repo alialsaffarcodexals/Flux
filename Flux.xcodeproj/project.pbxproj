@@ -11,6 +11,15 @@
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
 		7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */; };
+		7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081222EF99E2C00FA5639 /* Report.swift */; };
+		7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081242EF99E2C00FA5639 /* Review.swift */; };
+		7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */; };
+		7F60812D2EF99E2C00FA5639 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081282EF99E2C00FA5639 /* User.swift */; };
+		7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811D2EF99E2C00FA5639 /* Booking.swift */; };
+		7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081262EF99E2C00FA5639 /* Service.swift */; };
+		7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081372EFAD01A00FA5639 /* ProviderIntroViewController.swift */; };
+		7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081392EFAD16100FA5639 /* ProviderSetupViewController.swift */; };
+		7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
@@ -70,12 +79,6 @@
 		7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33732EE464EC008AC600 /* Activity.storyboard */; };
 		7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */; };
 		7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */; };
-		7FAB337B2EE465F2008AC600 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337A2EE465F2008AC600 /* User.swift */; };
-		7FAB337D2EE46616008AC600 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337C2EE46616008AC600 /* Service.swift */; };
-		7FAB337F2EE4662A008AC600 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB337E2EE4662A008AC600 /* Booking.swift */; };
-		7FAB33812EE46651008AC600 /* PortfolioProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33802EE46651008AC600 /* PortfolioProject.swift */; };
-		7FAB33832EE4666D008AC600 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33822EE4666D008AC600 /* Review.swift */; };
-		7FAB33852EE4668B008AC600 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33842EE4668B008AC600 /* Report.swift */; };
 		7FAB33872EE466A2008AC600 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33862EE466A2008AC600 /* Notification.swift */; };
 		7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33892EE46701008AC600 /* AuthManager.swift */; };
 		7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB338B2EE46728008AC600 /* FirestoreManager.swift */; };
@@ -102,6 +105,15 @@
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
+		7F60811D2EF99E2C00FA5639 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
+		7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioProject.swift; sourceTree = "<group>"; };
+		7F6081222EF99E2C00FA5639 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		7F6081242EF99E2C00FA5639 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		7F6081262EF99E2C00FA5639 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		7F6081282EF99E2C00FA5639 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7F6081372EFAD01A00FA5639 /* ProviderIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIntroViewController.swift; sourceTree = "<group>"; };
+		7F6081392EFAD16100FA5639 /* ProviderSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSetupViewController.swift; sourceTree = "<group>"; };
+		7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSetupViewModel.swift; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -162,12 +174,6 @@
 		7FAB33732EE464EC008AC600 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
 		7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterViewController.swift; path = Flux/Features/Notifications/Storyboards/NotificationCenterViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
-		7FAB337A2EE465F2008AC600 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = User.swift; path = Flux/Features/Notifications/ViewModels/User.swift; sourceTree = SOURCE_ROOT; };
-		7FAB337C2EE46616008AC600 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Flux/Features/Notifications/ViewModels/Service.swift; sourceTree = SOURCE_ROOT; };
-		7FAB337E2EE4662A008AC600 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Booking.swift; path = Flux/Features/Notifications/ViewModels/Booking.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33802EE46651008AC600 /* PortfolioProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PortfolioProject.swift; path = Flux/Features/Notifications/ViewModels/PortfolioProject.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33822EE4666D008AC600 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Review.swift; path = Flux/Features/Notifications/ViewModels/Review.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33842EE4668B008AC600 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Report.swift; path = Flux/Features/Notifications/ViewModels/Report.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33862EE466A2008AC600 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7FAB33892EE46701008AC600 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		7FAB338B2EE46728008AC600 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
@@ -363,6 +369,8 @@
 		7FAB32FB2EE4561B008AC600 /* ViewContollers */ = {
 			isa = PBXGroup;
 			children = (
+				7F6081392EFAD16100FA5639 /* ProviderSetupViewController.swift */,
+				7F6081372EFAD01A00FA5639 /* ProviderIntroViewController.swift */,
 				7FAB32FF2EE456AD008AC600 /* ProviderMainProfileVC.swift */,
 				7FAB33012EE456D4008AC600 /* ManageSkillsViewController.swift */,
 				7FAB33032EE456FC008AC600 /* AddSkillViewController.swift */,
@@ -373,6 +381,7 @@
 		7FAB32FC2EE45630008AC600 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */,
 				7FAB33052EE45720008AC600 /* ProviderProfileViewModel.swift */,
 			);
 			path = ViewModels;
@@ -698,14 +707,14 @@
 		7FAB33792EE465C5008AC600 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F60811D2EF99E2C00FA5639 /* Booking.swift */,
+				7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */,
+				7F6081222EF99E2C00FA5639 /* Report.swift */,
+				7F6081242EF99E2C00FA5639 /* Review.swift */,
+				7F6081262EF99E2C00FA5639 /* Service.swift */,
+				7F6081282EF99E2C00FA5639 /* User.swift */,
 				7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */,
 				7F6081192EF98CB300FA5639 /* Skill.swift */,
-				7FAB337A2EE465F2008AC600 /* User.swift */,
-				7FAB337C2EE46616008AC600 /* Service.swift */,
-				7FAB337E2EE4662A008AC600 /* Booking.swift */,
-				7FAB33802EE46651008AC600 /* PortfolioProject.swift */,
-				7FAB33822EE4666D008AC600 /* Review.swift */,
-				7FAB33842EE4668B008AC600 /* Report.swift */,
 				7FAB33862EE466A2008AC600 /* Notification.swift */,
 			);
 			path = Models;
@@ -945,7 +954,6 @@
 			files = (
 				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
 				7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */,
-				7FAB337F2EE4662A008AC600 /* Booking.swift in Sources */,
 				7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */,
 				7FAB32E62EE453EC008AC600 /* RoleSelectionViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
@@ -959,17 +967,14 @@
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
 				7FAB336A2EE462D4008AC600 /* UserManagementViewController.swift in Sources */,
 				7FAB334A2EE45EFA008AC600 /* ChatViewModel.swift in Sources */,
-				7FAB33812EE46651008AC600 /* PortfolioProject.swift in Sources */,
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
 				7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */,
 				7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */,
-				7FAB33852EE4668B008AC600 /* Report.swift in Sources */,
 				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
 				7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
-				7FAB337D2EE46616008AC600 /* Service.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
 				7FAB33222EE45A6D008AC600 /* HomeViewModel.swift in Sources */,
 				7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */,
@@ -977,18 +982,24 @@
 				7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */,
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
 				7FAB32E42EE453CD008AC600 /* LoginViewController.swift in Sources */,
-				7FAB337B2EE465F2008AC600 /* User.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
+				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
 				7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB33302EE45BFB008AC600 /* BookingViewModel.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
+				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
+				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
+				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
+				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
+				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
+				7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */,
+				7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */,
 				7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
-				7FAB33832EE4666D008AC600 /* Review.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */,
@@ -999,6 +1010,7 @@
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */,
+				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
 				7FAB33952EE467B5008AC600 /* Constants.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,

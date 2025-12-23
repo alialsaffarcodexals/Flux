@@ -110,4 +110,6 @@ class AuthManager {
     public func signOut() throws {
         try auth.signOut()
     }
+
+    
 }
