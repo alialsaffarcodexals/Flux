@@ -1,8 +1,22 @@
-//
-//  AdminViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: AdminViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/AdminDashboard/ViewControllers/AdminViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

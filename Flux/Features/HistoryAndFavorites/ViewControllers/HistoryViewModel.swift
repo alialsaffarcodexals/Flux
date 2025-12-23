@@ -1,8 +1,22 @@
-//
-//  HistoryViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: HistoryViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/HistoryAndFavorites/ViewControllers/HistoryViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation
