@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10A89BAE2EF7223A00D3DD16 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */; };
-		10A89BB62EF7250100D3DD16 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A89BB52EF7250100D3DD16 /* Home.storyboard */; };
-		10A8BA402EF719AD00E08BC1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
 		7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */; };
@@ -113,9 +110,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
-		10A89BB52EF7250100D3DD16 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
@@ -231,40 +225,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		10A8BA3B2EF7194700E08BC1 /* HomeDiscovery */ = {
-			isa = PBXGroup;
-			children = (
-				10A8BA3E2EF7197600E08BC1 /* ViewModels */,
-				10A8BA3D2EF7196900E08BC1 /* ViewControllers */,
-				10A8BA3C2EF7195E00E08BC1 /* Storyboards */,
-			);
-			path = HomeDiscovery;
-			sourceTree = "<group>";
-		};
-		10A8BA3C2EF7195E00E08BC1 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				10A89BB52EF7250100D3DD16 /* Home.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		10A8BA3D2EF7196900E08BC1 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		10A8BA3E2EF7197600E08BC1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		604B03062EE03F690062AE77 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -1015,7 +975,6 @@
 				7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */,
 				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
-				10A89BB62EF7250100D3DD16 /* Home.storyboard in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */,
@@ -1140,7 +1099,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1167,7 +1126,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
