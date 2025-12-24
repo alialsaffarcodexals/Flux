@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6038E0002EFC521A00DC1EF2 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFA2EFC521A00DC1EF2 /* ReportViewController.swift */; };
+		6038E0012EFC521A00DC1EF2 /* UsersAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFD2EFC521A00DC1EF2 /* UsersAccountsViewController.swift */; };
+		6038E0022EFC521A00DC1EF2 /* CategoryManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF82EFC521A00DC1EF2 /* CategoryManagementViewController.swift */; };
+		6038E0032EFC521A00DC1EF2 /* SkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFC2EFC521A00DC1EF2 /* SkillViewController.swift */; };
+		6038E0042EFC521A00DC1EF2 /* AdminToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF72EFC521A00DC1EF2 /* AdminToolsViewController.swift */; };
+		6038E0052EFC521A00DC1EF2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF62EFC521A00DC1EF2 /* AccountViewController.swift */; };
+		6038E0062EFC521A00DC1EF2 /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF92EFC521A00DC1EF2 /* ReportsViewController.swift */; };
+		6038E0072EFC521A00DC1EF2 /* SkillVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFB2EFC521A00DC1EF2 /* SkillVerificationViewController.swift */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
@@ -98,6 +106,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6038DFF62EFC521A00DC1EF2 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		6038DFF72EFC521A00DC1EF2 /* AdminToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewController.swift; sourceTree = "<group>"; };
+		6038DFF82EFC521A00DC1EF2 /* CategoryManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementViewController.swift; sourceTree = "<group>"; };
+		6038DFF92EFC521A00DC1EF2 /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
+		6038DFFA2EFC521A00DC1EF2 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		6038DFFB2EFC521A00DC1EF2 /* SkillVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillVerificationViewController.swift; sourceTree = "<group>"; };
+		6038DFFC2EFC521A00DC1EF2 /* SkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillViewController.swift; sourceTree = "<group>"; };
+		6038DFFD2EFC521A00DC1EF2 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
@@ -201,6 +217,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6038DFFE2EFC521A00DC1EF2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6038DFF62EFC521A00DC1EF2 /* AccountViewController.swift */,
+				6038DFF72EFC521A00DC1EF2 /* AdminToolsViewController.swift */,
+				6038DFF82EFC521A00DC1EF2 /* CategoryManagementViewController.swift */,
+				6038DFF92EFC521A00DC1EF2 /* ReportsViewController.swift */,
+				6038DFFA2EFC521A00DC1EF2 /* ReportViewController.swift */,
+				6038DFFB2EFC521A00DC1EF2 /* SkillVerificationViewController.swift */,
+				6038DFFC2EFC521A00DC1EF2 /* SkillViewController.swift */,
+				6038DFFD2EFC521A00DC1EF2 /* UsersAccountsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6038DFFF2EFC521A00DC1EF2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		604B03062EE03F690062AE77 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +250,8 @@
 		604B03072EE03F690062AE77 /* Admin-Tools */ = {
 			isa = PBXGroup;
 			children = (
+				6038DFFE2EFC521A00DC1EF2 /* ViewControllers */,
+				6038DFFF2EFC521A00DC1EF2 /* ViewModels */,
 				604B03062EE03F690062AE77 /* Storyboards */,
 			);
 			path = "Admin-Tools";
@@ -1002,6 +1042,14 @@
 				7FAB33952EE467B5008AC600 /* Constants.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
+				6038E0002EFC521A00DC1EF2 /* ReportViewController.swift in Sources */,
+				6038E0012EFC521A00DC1EF2 /* UsersAccountsViewController.swift in Sources */,
+				6038E0022EFC521A00DC1EF2 /* CategoryManagementViewController.swift in Sources */,
+				6038E0032EFC521A00DC1EF2 /* SkillViewController.swift in Sources */,
+				6038E0042EFC521A00DC1EF2 /* AdminToolsViewController.swift in Sources */,
+				6038E0052EFC521A00DC1EF2 /* AccountViewController.swift in Sources */,
+				6038E0062EFC521A00DC1EF2 /* ReportsViewController.swift in Sources */,
+				6038E0072EFC521A00DC1EF2 /* SkillVerificationViewController.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
 				7FAB33972EE467CC008AC600 /* Validator.swift in Sources */,
 				7FAB331C2EE459B4008AC600 /* HomeFeedViewController.swift in Sources */,
