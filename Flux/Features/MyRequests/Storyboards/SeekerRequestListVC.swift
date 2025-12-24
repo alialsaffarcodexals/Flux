@@ -1,8 +1,22 @@
-//
-//  SeekerRequestListVC.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: SeekerRequestListVC.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/MyRequests/Storyboards/SeekerRequestListVC.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

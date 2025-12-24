@@ -1,8 +1,22 @@
-//
-//  Validator.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: Validator.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Utilities/Validator.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

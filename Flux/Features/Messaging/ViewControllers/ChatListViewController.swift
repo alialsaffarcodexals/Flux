@@ -1,8 +1,22 @@
-//
-//  ChatListViewController.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: ChatListViewController.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/Messaging/ViewControllers/ChatListViewController.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation

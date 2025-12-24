@@ -1,9 +1,23 @@
-//
-//  RequestBookingViewController.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: RequestBookingViewController.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/BookingFlow/Storyboards/RequestBookingViewController.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation
 import UIKit
