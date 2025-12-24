@@ -21,8 +21,6 @@
 
 
 import UIKit
-import FirebaseAuth
-
 
 
 /// Class LoginViewContoller: Responsible for the lifecycle, state, and behavior related to LoginViewContoller.

@@ -3,55 +3,87 @@ import UIKit
 class AppNavigator {
     
     static let shared = AppNavigator()
-    
     private init() {}
     
-    // MARK: - Main Router
-    // MARK: - Main Router Logic
-        func navigate(user: User) {
-            print("🧭 Navigating for user: \(user.name), Role: \(user.role.rawValue)")
-            
-            switch user.role {
-            case .seeker:
-                // Phase 2: The seeker always navigates to the buying interface.
-                navigateToSeekerTabs()
-                
-            case .provider:
-                // Phase 5: The provider depends on the last mode they were in.
-                if let mode = user.activeProfileMode, mode == .sellerMode {
-                    navigateToProviderTabs() // Selling interface
+    // MARK: - Navigation Entry Point
+    func navigate(user: User) {
+                if user.role == .admin {
+                    // Route to Admin Flow
+                    loadAdminInterface()
                 } else {
-                    navigateToSeekerTabs() // Buying interface (Graphic Designer hiring a cleaner)
+                    // Route to Standard App (Seeker/Provider)
+                    loadMainTabBar(for: user)
                 }
-                
-            case .admin:
-                // navigateToAdmin()
-                navigateToSeekerTabs()
-            }
-        }
-    
-    // MARK: - 1. Seeker Navigation
-    private func navigateToSeekerTabs() {
-        // ⚠️ Note: Change "Home" to the name of the storyboard containing the seeker's TabBar.
-        let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
-        
-        // Look for the Tab Bar Controller by the ID you set.
-        if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "SeekerTabBarController") as? UITabBarController {
-            setRoot(viewController: tabBarVC)
-        } else {
-            print("🔴 Error: Could not find 'SeekerTabBarController' in Storyboard.")
-        }
     }
     
-    // MARK: - 2. Provider Navigation
-    private func navigateToProviderTabs() {
-        // ⚠️ Note: Change "ProviderProfile" to the name of the storyboard containing the provider's TabBar.
-        let storyboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
+    // MARK: - Admin Navigation
+        private func loadAdminInterface() {
+            let storyboard = UIStoryboard(name: "AdminTools", bundle: nil) // Must match file name "AdminTools.storyboard"
+            
+            // Use the Storyboard ID we set in Step 3
+            guard let adminNav = storyboard.instantiateViewController(withIdentifier: "AdminNavigationController") as? UINavigationController else {
+                print("🔴 Error: Could not find 'AdminNavigationController' in AdminTools.storyboard")
+                return
+            }
+            
+            setRoot(viewController: adminNav)
+        }
+    
+    private func loadMainTabBar(for user: User) {
+        // 1. Load the Global Tab Bar (currently living in SeekerProfile.storyboard)
+        let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
         
-        if let tabBarVC = storyboard.instantiateViewController(withIdentifier: "ProviderTabBarController") as? UITabBarController {
-            setRoot(viewController: tabBarVC)
+        guard let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "SeekerTabBarController") as? UITabBarController else {
+            print("🔴 Error: Could not find 'SeekerTabBarController'.")
+            return
+        }
+        
+        // 2. Configure the Profile Tab (Index 3) based on User Role/Mode
+        var shouldSelectProfileTab = false
+        
+        if let viewControllers = mainTabBarController.viewControllers, viewControllers.count > 3 {
+            
+            // The 4th tab (Index 3) is the Profile Navigation Controller
+            if let profileNav = viewControllers[3] as? UINavigationController {
+                // This function now returns 'true' if we are in Provider Mode
+                shouldSelectProfileTab = configureProfileTab(navigationController: profileNav, user: user)
+            }
+        }
+        
+        // 3. FIX: If in Seller Mode, explicitly select the Profile Tab (Index 3)
+        if shouldSelectProfileTab {
+            mainTabBarController.selectedIndex = 3
+        }
+        
+        // 4. Set as Root
+        setRoot(viewController: mainTabBarController)
+    }
+    
+    // MARK: - Profile Switching Logic
+    /// Configures the profile tab and returns TRUE if the app should default to this tab (Provider Mode).
+    private func configureProfileTab(navigationController: UINavigationController, user: User) -> Bool {
+        
+        // Check if user is in Seller Mode
+        if user.role == .provider && user.activeProfileMode == .sellerMode {
+            print("👤 Configuring Profile Tab: Provider Mode")
+            
+            // Load the Provider Profile VC from its specific storyboard
+            let providerStoryboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
+            if let providerVC = providerStoryboard.instantiateViewController(withIdentifier: "ProviderMainProfileVC") as? UIViewController {
+                // REPLACE the stack with the Provider Profile
+                navigationController.setViewControllers([providerVC], animated: false)
+            }
+            return true // YES, select this tab
+            
         } else {
-            print("🔴 Error: Could not find 'ProviderTabBarController' in Storyboard.")
+            print("👤 Configuring Profile Tab: Seeker Mode")
+            
+            // Ensure Seeker VC is loaded (Standard behavior)
+            let seekerStoryboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
+            if let seekerVC = seekerStoryboard.instantiateViewController(withIdentifier: "SeekerProfileViewController") as? UIViewController {
+                navigationController.setViewControllers([seekerVC], animated: false)
+            }
+            return false // NO, stay on Home tab
         }
     }
     
@@ -65,8 +97,6 @@ class AppNavigator {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         
-        // Smooth transition animation.
-        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
 }
-

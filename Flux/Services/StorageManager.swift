@@ -23,8 +23,8 @@ class StorageManager {
     
     static let shared = StorageManager()
     
-    private let cloudName = "dsleqotkq"
-    private let uploadPreset = "flux_uploads"
+    private let cloudName = "dwdxijm9c"
+    private let uploadPreset = "flux–uploads_v2"
     
     private let cloudinary: CLDCloudinary
     

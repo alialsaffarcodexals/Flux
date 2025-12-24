@@ -7,24 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6038E0002EFC521A00DC1EF2 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFA2EFC521A00DC1EF2 /* ReportViewController.swift */; };
-		6038E0012EFC521A00DC1EF2 /* UsersAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFD2EFC521A00DC1EF2 /* UsersAccountsViewController.swift */; };
-		6038E0022EFC521A00DC1EF2 /* CategoryManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF82EFC521A00DC1EF2 /* CategoryManagementViewController.swift */; };
-		6038E0032EFC521A00DC1EF2 /* SkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFC2EFC521A00DC1EF2 /* SkillViewController.swift */; };
-		6038E0042EFC521A00DC1EF2 /* AdminToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF72EFC521A00DC1EF2 /* AdminToolsViewController.swift */; };
-		6038E0052EFC521A00DC1EF2 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF62EFC521A00DC1EF2 /* AccountViewController.swift */; };
-		6038E0062EFC521A00DC1EF2 /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFF92EFC521A00DC1EF2 /* ReportsViewController.swift */; };
-		6038E0072EFC521A00DC1EF2 /* SkillVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038DFFB2EFC521A00DC1EF2 /* SkillVerificationViewController.swift */; };
-		6038E00E2EFC5C6200DC1EF2 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038E00A2EFC5C6200DC1EF2 /* Report.swift */; };
-		6038E00F2EFC5C6200DC1EF2 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038E00C2EFC5C6200DC1EF2 /* Service.swift */; };
-		6038E0102EFC5C6200DC1EF2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038E00D2EFC5C6200DC1EF2 /* User.swift */; };
-		6038E0112EFC5C6200DC1EF2 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038E0082EFC5C6200DC1EF2 /* Booking.swift */; };
-		6038E0122EFC5C6200DC1EF2 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038E00B2EFC5C6200DC1EF2 /* Review.swift */; };
-		6038E0132EFC5C6200DC1EF2 /* PortfolioProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6038E0092EFC5C6200DC1EF2 /* PortfolioProject.swift */; };
-		6038E0152EFC5C8000DC1EF2 /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6038E0142EFC5C8000DC1EF2 /* BookingScreen.storyboard */; };
+		10A89BAE2EF7223A00D3DD16 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */; };
+		10A89BB62EF7250100D3DD16 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10A89BB52EF7250100D3DD16 /* Home.storyboard */; };
+		10A8BA402EF719AD00E08BC1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
 		7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */; };
+		7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081222EF99E2C00FA5639 /* Report.swift */; };
+		7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081242EF99E2C00FA5639 /* Review.swift */; };
+		7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */; };
+		7F60812D2EF99E2C00FA5639 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081282EF99E2C00FA5639 /* User.swift */; };
+		7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811D2EF99E2C00FA5639 /* Booking.swift */; };
+		7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081262EF99E2C00FA5639 /* Service.swift */; };
+		7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081372EFAD01A00FA5639 /* ProviderIntroViewController.swift */; };
+		7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081392EFAD16100FA5639 /* ProviderSetupViewController.swift */; };
+		7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */; };
+		7F60813E2EFBED3F00FA5639 /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F60813D2EFBED3F00FA5639 /* BookingScreen.storyboard */; };
+		7F60814A2EFBFD4B00FA5639 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081412EFBFD4B00FA5639 /* AccountViewController.swift */; };
+		7F60814B2EFBFD4B00FA5639 /* SkillVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081462EFBFD4B00FA5639 /* SkillVerificationViewController.swift */; };
+		7F60814C2EFBFD4B00FA5639 /* UsersAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081482EFBFD4B00FA5639 /* UsersAccountsViewController.swift */; };
+		7F60814D2EFBFD4B00FA5639 /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081442EFBFD4B00FA5639 /* ReportsViewController.swift */; };
+		7F60814E2EFBFD4B00FA5639 /* SkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081472EFBFD4B00FA5639 /* SkillViewController.swift */; };
+		7F60814F2EFBFD4B00FA5639 /* AdminToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081422EFBFD4B00FA5639 /* AdminToolsViewController.swift */; };
+		7F6081502EFBFD4B00FA5639 /* CategoryManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081432EFBFD4B00FA5639 /* CategoryManagementViewController.swift */; };
+		7F6081512EFBFD4B00FA5639 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081452EFBFD4B00FA5639 /* ReportViewController.swift */; };
+		7F6081532EFBFD7100FA5639 /* AdminToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081522EFBFD6D00FA5639 /* AdminToolsViewModel.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
@@ -106,24 +113,31 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6038DFF62EFC521A00DC1EF2 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
-		6038DFF72EFC521A00DC1EF2 /* AdminToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewController.swift; sourceTree = "<group>"; };
-		6038DFF82EFC521A00DC1EF2 /* CategoryManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementViewController.swift; sourceTree = "<group>"; };
-		6038DFF92EFC521A00DC1EF2 /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
-		6038DFFA2EFC521A00DC1EF2 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
-		6038DFFB2EFC521A00DC1EF2 /* SkillVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillVerificationViewController.swift; sourceTree = "<group>"; };
-		6038DFFC2EFC521A00DC1EF2 /* SkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillViewController.swift; sourceTree = "<group>"; };
-		6038DFFD2EFC521A00DC1EF2 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
-		6038E0082EFC5C6200DC1EF2 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
-		6038E0092EFC5C6200DC1EF2 /* PortfolioProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioProject.swift; sourceTree = "<group>"; };
-		6038E00A2EFC5C6200DC1EF2 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
-		6038E00B2EFC5C6200DC1EF2 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
-		6038E00C2EFC5C6200DC1EF2 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
-		6038E00D2EFC5C6200DC1EF2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		6038E0142EFC5C8000DC1EF2 /* BookingScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = BookingScreen.storyboard; path = Flux/Features/BookingScreens/Storyboard/BookingScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
+		10A89BB52EF7250100D3DD16 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
+		7F60811D2EF99E2C00FA5639 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
+		7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioProject.swift; sourceTree = "<group>"; };
+		7F6081222EF99E2C00FA5639 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		7F6081242EF99E2C00FA5639 /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
+		7F6081262EF99E2C00FA5639 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		7F6081282EF99E2C00FA5639 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7F6081372EFAD01A00FA5639 /* ProviderIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderIntroViewController.swift; sourceTree = "<group>"; };
+		7F6081392EFAD16100FA5639 /* ProviderSetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSetupViewController.swift; sourceTree = "<group>"; };
+		7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSetupViewModel.swift; sourceTree = "<group>"; };
+		7F60813D2EFBED3F00FA5639 /* BookingScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = BookingScreen.storyboard; path = Flux/Features/BookingScreens/Storyboard/BookingScreen.storyboard; sourceTree = SOURCE_ROOT; };
+		7F6081412EFBFD4B00FA5639 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		7F6081422EFBFD4B00FA5639 /* AdminToolsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewController.swift; sourceTree = "<group>"; };
+		7F6081432EFBFD4B00FA5639 /* CategoryManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementViewController.swift; sourceTree = "<group>"; };
+		7F6081442EFBFD4B00FA5639 /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
+		7F6081452EFBFD4B00FA5639 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
+		7F6081462EFBFD4B00FA5639 /* SkillVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillVerificationViewController.swift; sourceTree = "<group>"; };
+		7F6081472EFBFD4B00FA5639 /* SkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillViewController.swift; sourceTree = "<group>"; };
+		7F6081482EFBFD4B00FA5639 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
+		7F6081522EFBFD6D00FA5639 /* AdminToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewModel.swift; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -217,24 +231,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6038DFFE2EFC521A00DC1EF2 /* ViewControllers */ = {
+		10A8BA3B2EF7194700E08BC1 /* HomeDiscovery */ = {
 			isa = PBXGroup;
 			children = (
-				6038DFF62EFC521A00DC1EF2 /* AccountViewController.swift */,
-				6038DFF72EFC521A00DC1EF2 /* AdminToolsViewController.swift */,
-				6038DFF82EFC521A00DC1EF2 /* CategoryManagementViewController.swift */,
-				6038DFF92EFC521A00DC1EF2 /* ReportsViewController.swift */,
-				6038DFFA2EFC521A00DC1EF2 /* ReportViewController.swift */,
-				6038DFFB2EFC521A00DC1EF2 /* SkillVerificationViewController.swift */,
-				6038DFFC2EFC521A00DC1EF2 /* SkillViewController.swift */,
-				6038DFFD2EFC521A00DC1EF2 /* UsersAccountsViewController.swift */,
+				10A8BA3E2EF7197600E08BC1 /* ViewModels */,
+				10A8BA3D2EF7196900E08BC1 /* ViewControllers */,
+				10A8BA3C2EF7195E00E08BC1 /* Storyboards */,
+			);
+			path = HomeDiscovery;
+			sourceTree = "<group>";
+		};
+		10A8BA3C2EF7195E00E08BC1 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				10A89BB52EF7250100D3DD16 /* Home.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		10A8BA3D2EF7196900E08BC1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				10A89BAD2EF7223A00D3DD16 /* HomeFeedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		6038DFFF2EFC521A00DC1EF2 /* ViewModels */ = {
+		10A8BA3E2EF7197600E08BC1 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				10A8BA3F2EF719AD00E08BC1 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -250,8 +276,8 @@
 		604B03072EE03F690062AE77 /* Admin-Tools */ = {
 			isa = PBXGroup;
 			children = (
-				6038DFFE2EFC521A00DC1EF2 /* ViewControllers */,
-				6038DFFF2EFC521A00DC1EF2 /* ViewModels */,
+				7F6081492EFBFD4B00FA5639 /* ViewControllers */,
+				7F60813F2EFBFCC400FA5639 /* ViewModels */,
 				604B03062EE03F690062AE77 /* Storyboards */,
 			);
 			path = "Admin-Tools";
@@ -260,7 +286,7 @@
 		604B03092EE03F690062AE77 /* Stroyboards */ = {
 			isa = PBXGroup;
 			children = (
-				6038E0142EFC5C8000DC1EF2 /* BookingScreen.storyboard */,
+				7F60813D2EFBED3F00FA5639 /* BookingScreen.storyboard */,
 			);
 			path = Stroyboards;
 			sourceTree = "<group>";
@@ -271,6 +297,29 @@
 				604B03092EE03F690062AE77 /* Stroyboards */,
 			);
 			path = BookingScreens;
+			sourceTree = "<group>";
+		};
+		7F60813F2EFBFCC400FA5639 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F6081522EFBFD6D00FA5639 /* AdminToolsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F6081492EFBFD4B00FA5639 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F6081412EFBFD4B00FA5639 /* AccountViewController.swift */,
+				7F6081422EFBFD4B00FA5639 /* AdminToolsViewController.swift */,
+				7F6081432EFBFD4B00FA5639 /* CategoryManagementViewController.swift */,
+				7F6081442EFBFD4B00FA5639 /* ReportsViewController.swift */,
+				7F6081452EFBFD4B00FA5639 /* ReportViewController.swift */,
+				7F6081462EFBFD4B00FA5639 /* SkillVerificationViewController.swift */,
+				7F6081472EFBFD4B00FA5639 /* SkillViewController.swift */,
+				7F6081482EFBFD4B00FA5639 /* UsersAccountsViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
@@ -403,6 +452,8 @@
 		7FAB32FB2EE4561B008AC600 /* ViewContollers */ = {
 			isa = PBXGroup;
 			children = (
+				7F6081392EFAD16100FA5639 /* ProviderSetupViewController.swift */,
+				7F6081372EFAD01A00FA5639 /* ProviderIntroViewController.swift */,
 				7FAB32FF2EE456AD008AC600 /* ProviderMainProfileVC.swift */,
 				7FAB33012EE456D4008AC600 /* ManageSkillsViewController.swift */,
 				7FAB33032EE456FC008AC600 /* AddSkillViewController.swift */,
@@ -413,6 +464,7 @@
 		7FAB32FC2EE45630008AC600 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */,
 				7FAB33052EE45720008AC600 /* ProviderProfileViewModel.swift */,
 			);
 			path = ViewModels;
@@ -738,12 +790,12 @@
 		7FAB33792EE465C5008AC600 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6038E0082EFC5C6200DC1EF2 /* Booking.swift */,
-				6038E0092EFC5C6200DC1EF2 /* PortfolioProject.swift */,
-				6038E00A2EFC5C6200DC1EF2 /* Report.swift */,
-				6038E00B2EFC5C6200DC1EF2 /* Review.swift */,
-				6038E00C2EFC5C6200DC1EF2 /* Service.swift */,
-				6038E00D2EFC5C6200DC1EF2 /* User.swift */,
+				7F60811D2EF99E2C00FA5639 /* Booking.swift */,
+				7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */,
+				7F6081222EF99E2C00FA5639 /* Report.swift */,
+				7F6081242EF99E2C00FA5639 /* Review.swift */,
+				7F6081262EF99E2C00FA5639 /* Service.swift */,
+				7F6081282EF99E2C00FA5639 /* User.swift */,
 				7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */,
 				7F6081192EF98CB300FA5639 /* Skill.swift */,
 				7FAB33862EE466A2008AC600 /* Notification.swift */,
@@ -957,11 +1009,13 @@
 				7FAB330C2EE457B4008AC600 /* Portfolio.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */,
+				7F60813E2EFBED3F00FA5639 /* BookingScreen.storyboard in Resources */,
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
 				7FAB33442EE45E55008AC600 /* Chat.storyboard in Resources */,
 				7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */,
 				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
+				10A89BB62EF7250100D3DD16 /* Home.storyboard in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */,
@@ -998,12 +1052,6 @@
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
 				7FAB336A2EE462D4008AC600 /* UserManagementViewController.swift in Sources */,
 				7FAB334A2EE45EFA008AC600 /* ChatViewModel.swift in Sources */,
-				6038E00E2EFC5C6200DC1EF2 /* Report.swift in Sources */,
-				6038E00F2EFC5C6200DC1EF2 /* Service.swift in Sources */,
-				6038E0102EFC5C6200DC1EF2 /* User.swift in Sources */,
-				6038E0112EFC5C6200DC1EF2 /* Booking.swift in Sources */,
-				6038E0122EFC5C6200DC1EF2 /* Review.swift in Sources */,
-				6038E0132EFC5C6200DC1EF2 /* PortfolioProject.swift in Sources */,
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
 				7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */,
@@ -1021,24 +1069,42 @@
 				7FAB32E42EE453CD008AC600 /* LoginViewController.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
+				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
 				7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB33302EE45BFB008AC600 /* BookingViewModel.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
+				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
+				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
+				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
+				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
+				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
+				7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */,
+				7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */,
 				7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
+				7F60814A2EFBFD4B00FA5639 /* AccountViewController.swift in Sources */,
+				7F60814B2EFBFD4B00FA5639 /* SkillVerificationViewController.swift in Sources */,
+				7F60814C2EFBFD4B00FA5639 /* UsersAccountsViewController.swift in Sources */,
+				7F60814D2EFBFD4B00FA5639 /* ReportsViewController.swift in Sources */,
+				7F60814E2EFBFD4B00FA5639 /* SkillViewController.swift in Sources */,
+				7F60814F2EFBFD4B00FA5639 /* AdminToolsViewController.swift in Sources */,
+				7F6081502EFBFD4B00FA5639 /* CategoryManagementViewController.swift in Sources */,
+				7F6081512EFBFD4B00FA5639 /* ReportViewController.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
 				7FAB32E22EE453A6008AC600 /* WelcomeViewController.swift in Sources */,
 				7FAB33A82EF18A18008AC600 /* SeekerProfileViewModel.swift in Sources */,
+				7F6081532EFBFD7100FA5639 /* AdminToolsViewModel.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */,
+				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
 				7FAB33952EE467B5008AC600 /* Constants.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,

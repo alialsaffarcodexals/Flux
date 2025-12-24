@@ -15,9 +15,18 @@ class AdminToolsViewController: UIViewController {
     @IBOutlet weak var bookingPending: UILabel!
     @IBOutlet weak var bookingApproved: UILabel!
 
+    var viewModel: AdminToolsViewModel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDashboard()
+
+        // Initialize ViewModel if not injected (simplifies storyboard entry)
+        if viewModel == nil {
+            viewModel = AdminToolsViewModel()
+        }
+        
+        setupUI()
     }
 
     // MARK: - Setup
@@ -54,5 +63,11 @@ class AdminToolsViewController: UIViewController {
         bookingRejected.text = "\(rejected)"
         bookingPending.text  = "\(pending)"
         bookingApproved.text = "\(approved)"
+    }
+    
+    private func setupUI() {
+        self.title = viewModel.title
+        view.backgroundColor = .systemBackground
+        print("🔧 Admin Dashboard Loaded")
     }
 }
