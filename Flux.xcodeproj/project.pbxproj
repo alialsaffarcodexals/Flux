@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A079C122EF8DA29006E5D84 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2A5632EF8D082004DEBEE /* TimeCell.swift */; };
+		3A38C72F2EFB9FF00064F1E7 /* ServicesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A38C72E2EFB9FF00064F1E7 /* ServicesTableVC.swift */; };
+		3AA2A55D2EF72263004DEBEE /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2A5572EF72263004DEBEE /* UIView+Extensions.swift */; };
+		3AA2A55E2EF72263004DEBEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2A55A2EF72263004DEBEE /* ViewController.swift */; };
+		3AA2A55F2EF72263004DEBEE /* TimecellCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA2A5592EF72263004DEBEE /* TimecellCollectionViewController.swift */; };
+		3AA2A5602EF72263004DEBEE /* BookingScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA2A5562EF72263004DEBEE /* BookingScreen.storyboard */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
-		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
@@ -89,8 +94,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A38C72E2EFB9FF00064F1E7 /* ServicesTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTableVC.swift; sourceTree = "<group>"; };
+		3AA2A5562EF72263004DEBEE /* BookingScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreen.storyboard; sourceTree = "<group>"; };
+		3AA2A5572EF72263004DEBEE /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		3AA2A5592EF72263004DEBEE /* TimecellCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimecellCollectionViewController.swift; sourceTree = "<group>"; };
+		3AA2A55A2EF72263004DEBEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3AA2A5632EF8D082004DEBEE /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
-		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -183,6 +193,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3AA2A5582EF72263004DEBEE /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				3AA2A5562EF72263004DEBEE /* BookingScreen.storyboard */,
+				3AA2A5572EF72263004DEBEE /* UIView+Extensions.swift */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		3AA2A55B2EF72263004DEBEE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3AA2A5592EF72263004DEBEE /* TimecellCollectionViewController.swift */,
+				3AA2A55A2EF72263004DEBEE /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3AA2A55C2EF72263004DEBEE /* BookingScreens */ = {
+			isa = PBXGroup;
+			children = (
+				3AA2A5582EF72263004DEBEE /* Storyboard */,
+				3AA2A55B2EF72263004DEBEE /* ViewControllers */,
+			);
+			path = BookingScreens;
+			sourceTree = "<group>";
+		};
 		604B03062EE03F690062AE77 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,22 +234,6 @@
 				604B03062EE03F690062AE77 /* Storyboards */,
 			);
 			path = "Admin-Tools";
-			sourceTree = "<group>";
-		};
-		604B03092EE03F690062AE77 /* Stroyboards */ = {
-			isa = PBXGroup;
-			children = (
-				604B03082EE03F690062AE77 /* BookingScreens.storyboard */,
-			);
-			path = Stroyboards;
-			sourceTree = "<group>";
-		};
-		604B030A2EE03F690062AE77 /* BookingScreens */ = {
-			isa = PBXGroup;
-			children = (
-				604B03092EE03F690062AE77 /* Stroyboards */,
-			);
-			path = BookingScreens;
 			sourceTree = "<group>";
 		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
@@ -245,7 +266,7 @@
 				ACDA75DE2EDDD53200665266 /* Requests-Seeker  */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
 				604B03072EE03F690062AE77 /* Admin-Tools */,
-				604B030A2EE03F690062AE77 /* BookingScreens */,
+				3AA2A55C2EF72263004DEBEE /* BookingScreens */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -454,6 +475,8 @@
 			children = (
 				7FAB332B2EE45B8B008AC600 /* RequestBookingViewController.swift */,
 				7FAB332D2EE45BCF008AC600 /* BookingConfirmationVC.swift */,
+				3AA2A5632EF8D082004DEBEE /* TimeCell.swift */,
+				3A38C72E2EFB9FF00064F1E7 /* ServicesTableVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -857,10 +880,10 @@
 				7FAB330C2EE457B4008AC600 /* Portfolio.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */,
-				604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */,
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
 				7FAB33442EE45E55008AC600 /* Chat.storyboard in Resources */,
 				7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */,
+				3AA2A5602EF72263004DEBEE /* BookingScreen.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
@@ -896,6 +919,7 @@
 				7FAB336A2EE462D4008AC600 /* UserManagementViewController.swift in Sources */,
 				7FAB334A2EE45EFA008AC600 /* ChatViewModel.swift in Sources */,
 				7FAB33812EE46651008AC600 /* Project.swift in Sources */,
+				3A079C122EF8DA29006E5D84 /* TimeCell.swift in Sources */,
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
 				7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */,
@@ -913,11 +937,15 @@
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
 				7FAB32E42EE453CD008AC600 /* LoginViewContoller.swift in Sources */,
 				7FAB337B2EE465F2008AC600 /* User.swift in Sources */,
+				3A38C72F2EFB9FF00064F1E7 /* ServicesTableVC.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
 				7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */,
+				3AA2A55D2EF72263004DEBEE /* UIView+Extensions.swift in Sources */,
+				3AA2A55E2EF72263004DEBEE /* ViewController.swift in Sources */,
+				3AA2A55F2EF72263004DEBEE /* TimecellCollectionViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB33302EE45BFB008AC600 /* BookingViewModel.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
