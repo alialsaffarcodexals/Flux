@@ -1,29 +1,23 @@
-//
-//  AdminToolsViewController.swift
-//  Flux
-//
-//  Created by Ali Alkhozaae on 13/12/2025.
-//
-
 import UIKit
 
 class AdminToolsViewController: UIViewController {
 
+    var viewModel: AdminToolsViewModel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Initialize ViewModel if not injected (simplifies storyboard entry)
+        if viewModel == nil {
+            viewModel = AdminToolsViewModel()
+        }
+        
+        setupUI()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupUI() {
+        self.title = viewModel.title
+        view.backgroundColor = .systemBackground
+        print("🔧 Admin Dashboard Loaded")
     }
-    */
-
 }

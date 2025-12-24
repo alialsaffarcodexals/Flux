@@ -7,9 +7,27 @@ class AppNavigator {
     
     // MARK: - Navigation Entry Point
     func navigate(user: User) {
-        // We always load the SAME Main Tab Bar (Source of Truth)
-        loadMainTabBar(for: user)
+                if user.role == .admin {
+                    // Route to Admin Flow
+                    loadAdminInterface()
+                } else {
+                    // Route to Standard App (Seeker/Provider)
+                    loadMainTabBar(for: user)
+                }
     }
+    
+    // MARK: - Admin Navigation
+        private func loadAdminInterface() {
+            let storyboard = UIStoryboard(name: "AdminTools", bundle: nil) // Must match file name "AdminTools.storyboard"
+            
+            // Use the Storyboard ID we set in Step 3
+            guard let adminNav = storyboard.instantiateViewController(withIdentifier: "AdminNavigationController") as? UINavigationController else {
+                print("🔴 Error: Could not find 'AdminNavigationController' in AdminTools.storyboard")
+                return
+            }
+            
+            setRoot(viewController: adminNav)
+        }
     
     private func loadMainTabBar(for user: User) {
         // 1. Load the Global Tab Bar (currently living in SeekerProfile.storyboard)
