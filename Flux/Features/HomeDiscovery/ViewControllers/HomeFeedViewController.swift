@@ -1,43 +1,41 @@
-import UIKit
-import Combine
+/*
+ File: HomeFeedViewController.swift
+ Purpose: class HomeFeedViewController, func viewDidLoad
+ Location: Features/HomeDiscovery/ViewControllers/HomeFeedViewController.swift
+*/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import Foundation
+
+
+import UIKit
+
+
+
+/// Class HomeFeedViewController: Responsible for the lifecycle, state, and behavior related to HomeFeedViewController.
 class HomeFeedViewController: UIViewController {
-    
-    // MARK: - Properties
-    private let viewModel = HomeViewModel()
-    private var cancellables = Set<AnyCancellable>()
-    
-    // MARK: - Lifecycle
+
+
+
+/// @Description: Performs the viewDidLoad operation.
+/// @Input: None
+/// @Output: Void
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Discover Services"
-        bindViewModel()
-        viewModel.fetchServices()
-        viewModel.fetchRecommendations()
-    }
-    
-    // MARK: - Bind ViewModel to UI
-    private func bindViewModel() {
-        viewModel.$allServices
-            .receive(on: DispatchQueue.main)
-            .sink { services in
-                print("✅ Loaded \(services.count) services")
-            }
-            .store(in: &cancellables)
-        
-        viewModel.$errorMessage
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] error in
-                if let error = error {
-                    self?.showAlert(message: error)
-                }
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        print("✅ HomeFeedViewController Loaded Successfully")
     }
 }
