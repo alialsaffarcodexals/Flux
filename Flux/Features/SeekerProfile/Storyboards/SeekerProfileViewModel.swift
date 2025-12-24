@@ -1,52 +1,66 @@
-/*
- File: SeekerProfileViewModel.swift
- Purpose: class SeekerProfileViewModel, func fetchUserProfile
- Location: Features/SeekerProfile/Storyboards/SeekerProfileViewModel.swift
-*/
-
-
-
-
-
-
-
-
-
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-
-
-/// Class SeekerProfileViewModel: Responsible for the lifecycle, state, and behavior related to SeekerProfileViewModel.
 class SeekerProfileViewModel {
     
-    
-    
+    // Bindings
     var onUserDataUpdated: ((User) -> Void)?
     var onError: ((String) -> Void)?
+    var onNavigateToProviderSetup: (() -> Void)? // Trigger for new providers
     
+    private var currentUser: User?
 
-
-/// @Description: Performs the fetchUserProfile operation.
-/// @Input: None
-/// @Output: Void
     func fetchUserProfile() {
-        
-        guard let uid = Auth.auth().currentUser?.uid else {
-            self.onError?("No user logged in")
-            return
-        }
-        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         
         FirestoreManager.shared.getUser(uid: uid) { [weak self] result in
             switch result {
             case .success(let user):
-                
+                self?.currentUser = user
                 self?.onUserDataUpdated?(user)
-                
             case .failure(let error):
                 self?.onError?(error.localizedDescription)
+            }
+        }
+    }
+    
+    // MARK: - Switch Logic
+    func didTapServiceProviderProfile() {
+        guard let user = currentUser else { return }
+        
+        // 1. If user is ONLY a Seeker, they need to Upgrade (Go to Intro/Setup)
+        if user.role == .seeker {
+            self.onNavigateToProviderSetup?()
+        }
+        // 2. If user is ALREADY a Provider/Admin, just switch modes
+        else {
+            switchProfileMode(to: .sellerMode)
+        }
+    }
+    
+    private func switchProfileMode(to mode: ProfileMode) {
+        guard let uid = currentUser?.id else { return }
+        
+        let db = Firestore.firestore()
+        db.collection("users").document(uid).updateData([
+            "activeProfileMode": mode.rawValue
+        ]) { [weak self] error in
+            if let error = error {
+                self?.onError?(error.localizedDescription)
+            } else {
+                // Fetch fresh user data to ensure AppNavigator has the latest state
+                FirestoreManager.shared.getUser(uid: uid) { result in
+                    switch result {
+                    case .success(let updatedUser):
+                        // 🚀 Centralized Navigation handles the screen switch
+                        DispatchQueue.main.async {
+                            AppNavigator.shared.navigate(user: updatedUser)
+                        }
+                    case .failure:
+                        self?.onError?("Failed to switch modes.")
+                    }
+                }
             }
         }
     }
