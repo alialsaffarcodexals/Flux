@@ -97,11 +97,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="uNt-Ly-maz"/>
-                    <connections>
-                        <outlet property="reasonLabel" destination="T0K-Y7-lpc" id="um4-h1-Q7c"/>
-                        <outlet property="reasonsTableView" destination="UAd-Bh-oNn" id="cLm-HD-eAL"/>
-                        <outlet property="uploadPictureButton" destination="SdL-UT-nji" id="DFK-5b-uXh"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
