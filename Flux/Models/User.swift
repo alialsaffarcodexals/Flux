@@ -29,8 +29,11 @@ struct User: Identifiable, Codable {
 
     var interests: [String]?
 
-    // ✅ UPDATED: store favorite PROVIDER ids (not service ids)
-    var favoriteProviderIds: [String]?
+    /// ✅ Favorite PROVIDERS (Provider user IDs)
+        var favoriteProviderIds: [String]?
+
+    /// ✅ Favorite SERVICES (Service IDs)
+    var favoriteServiceIds: [String]?
 
     var businessName: String?
     var bio: String?
