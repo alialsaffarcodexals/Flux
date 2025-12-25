@@ -1,8 +1,22 @@
-//
-//  HomeViewModel.swift
-//  Flux
-//
-//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
-//
+/*
+ File: HomeViewModel.swift
+ Purpose: Swift declarations for the Flux app.
+ Location: Features/HomeDiscovery/ViewControllers/HomeViewModel.swift
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import Foundation
