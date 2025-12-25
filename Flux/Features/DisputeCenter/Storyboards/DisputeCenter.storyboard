@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XHn-Fm-QIK">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
@@ -80,6 +80,9 @@
                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Send Report"/>
+                                <connections>
+                                    <segue destination="gkn-lP-Yvc" kind="show" id="JUq-gB-CJG"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your report will be sent to an Admin for further evaluation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="9RY-Zw-zIY">
                                 <rect key="frame" x="31" y="654" width="331" height="21"/>
@@ -93,6 +96,7 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="uNt-Ly-maz"/>
                     <connections>
                         <outlet property="reasonLabel" destination="T0K-Y7-lpc" id="um4-h1-Q7c"/>
                         <outlet property="reasonsTableView" destination="UAd-Bh-oNn" id="cLm-HD-eAL"/>
@@ -101,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="45.038167938931295" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="971.7557251908396" y="-2.1126760563380285"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="eln-lY-MAl">
@@ -114,6 +118,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Report was successfully sent " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEN-b4-T7T">
                                 <rect key="frame" x="64" y="416" width="265" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -128,10 +133,29 @@
                         <viewLayoutGuide key="safeArea" id="0Es-9G-j4s"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ANL-SB-lA6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vjG-Kn-gQi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028" y="-2"/>
+            <point key="canvasLocation" x="1953.4351145038167" y="-2.1126760563380285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="XFy-ga-xrF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XHn-Fm-QIK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="odq-6A-4fu">
+                        <rect key="frame" x="0.0" y="118" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="KAB-ev-Kxh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DBZ-9l-kkw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="45.038167938931295" y="-2.1126760563380285"/>
         </scene>
     </scenes>
     <resources>
