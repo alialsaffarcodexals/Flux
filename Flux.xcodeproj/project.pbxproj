@@ -29,17 +29,17 @@
 		7F6081502EFBFD4B00FA5639 /* CategoryManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081432EFBFD4B00FA5639 /* CategoryManagementViewController.swift */; };
 		7F6081512EFBFD4B00FA5639 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081452EFBFD4B00FA5639 /* ReportViewController.swift */; };
 		7F6081532EFBFD7100FA5639 /* AdminToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081522EFBFD6D00FA5639 /* AdminToolsViewModel.swift */; };
+		7F6081562EFCE2F200FA5639 /* ProviderAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081552EFCE2EE00FA5639 /* ProviderAvailability.swift */; };
+		7F6081582EFCE57700FA5639 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081572EFCE57700FA5639 /* AuthViewModel.swift */; };
+		7F60815E2EFCE59B00FA5639 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60815B2EFCE59B00FA5639 /* SignUpViewController.swift */; };
+		7F60815F2EFCE59B00FA5639 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60815C2EFCE59B00FA5639 /* WelcomeViewController.swift */; };
+		7F6081602EFCE59B00FA5639 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081592EFCE59B00FA5639 /* LoginViewController.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
 		7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */; };
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
-		7FAB32E22EE453A6008AC600 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E12EE453A6008AC600 /* WelcomeViewController.swift */; };
-		7FAB32E42EE453CD008AC600 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E32EE453CD008AC600 /* LoginViewController.swift */; };
-		7FAB32E62EE453EC008AC600 /* RoleSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E52EE453EC008AC600 /* RoleSelectionViewController.swift */; };
-		7FAB32E82EE45418008AC600 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E72EE45418008AC600 /* SignUpViewController.swift */; };
-		7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32E92EE4543F008AC600 /* AuthViewModel.swift */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */; };
 		7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */; };
@@ -132,6 +132,11 @@
 		7F6081472EFBFD4B00FA5639 /* SkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillViewController.swift; sourceTree = "<group>"; };
 		7F6081482EFBFD4B00FA5639 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
 		7F6081522EFBFD6D00FA5639 /* AdminToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewModel.swift; sourceTree = "<group>"; };
+		7F6081552EFCE2EE00FA5639 /* ProviderAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvailability.swift; sourceTree = "<group>"; };
+		7F6081572EFCE57700FA5639 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		7F6081592EFCE59B00FA5639 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7F60815B2EFCE59B00FA5639 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		7F60815C2EFCE59B00FA5639 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -139,11 +144,6 @@
 		7F68C3C92EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
-		7FAB32E12EE453A6008AC600 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WelcomeViewController.swift; path = Flux/Features/Authentication/WelcomeViewController.swift; sourceTree = SOURCE_ROOT; };
-		7FAB32E32EE453CD008AC600 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Flux/Features/Authentication/LoginViewController.swift; sourceTree = SOURCE_ROOT; };
-		7FAB32E52EE453EC008AC600 /* RoleSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RoleSelectionViewController.swift; path = Flux/Features/Authentication/RoleSelectionViewController.swift; sourceTree = SOURCE_ROOT; };
-		7FAB32E72EE45418008AC600 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SignUpViewController.swift; path = Flux/Features/Authentication/SignUpViewController.swift; sourceTree = SOURCE_ROOT; };
-		7FAB32E92EE4543F008AC600 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthViewModel.swift; path = Flux/Features/Authentication/AuthViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainViewController.swift; sourceTree = "<group>"; };
 		7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
@@ -331,10 +331,9 @@
 		7F68C3DA2EDD93FE005B29E6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB32E12EE453A6008AC600 /* WelcomeViewController.swift */,
-				7FAB32E32EE453CD008AC600 /* LoginViewController.swift */,
-				7FAB32E52EE453EC008AC600 /* RoleSelectionViewController.swift */,
-				7FAB32E72EE45418008AC600 /* SignUpViewController.swift */,
+				7F6081592EFCE59B00FA5639 /* LoginViewController.swift */,
+				7F60815B2EFCE59B00FA5639 /* SignUpViewController.swift */,
+				7F60815C2EFCE59B00FA5639 /* WelcomeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -350,7 +349,7 @@
 		7F68C3DC2EDD9426005B29E6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB32E92EE4543F008AC600 /* AuthViewModel.swift */,
+				7F6081572EFCE57700FA5639 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -750,6 +749,7 @@
 		7FAB33792EE465C5008AC600 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F6081552EFCE2EE00FA5639 /* ProviderAvailability.swift */,
 				7F60811D2EF99E2C00FA5639 /* Booking.swift */,
 				7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */,
 				7F6081222EF99E2C00FA5639 /* Report.swift */,
@@ -998,11 +998,12 @@
 				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
 				7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */,
 				7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */,
-				7FAB32E62EE453EC008AC600 /* RoleSelectionViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
-				7FAB32E82EE45418008AC600 /* SignUpViewController.swift in Sources */,
 				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
+				7F60815E2EFCE59B00FA5639 /* SignUpViewController.swift in Sources */,
+				7F60815F2EFCE59B00FA5639 /* WelcomeViewController.swift in Sources */,
+				7F6081602EFCE59B00FA5639 /* LoginViewController.swift in Sources */,
 				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
 				7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
@@ -1024,7 +1025,6 @@
 				7FAB333A2EE45D30008AC600 /* LeaveReviewViewController.swift in Sources */,
 				7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */,
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
-				7FAB32E42EE453CD008AC600 /* LoginViewController.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
 				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
@@ -1054,15 +1054,15 @@
 				7F6081512EFBFD4B00FA5639 /* ReportViewController.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */,
-				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
-				7FAB32E22EE453A6008AC600 /* WelcomeViewController.swift in Sources */,
 				7FAB33A82EF18A18008AC600 /* SeekerProfileViewModel.swift in Sources */,
 				7F6081532EFBFD7100FA5639 /* AdminToolsViewModel.swift in Sources */,
+				7F6081562EFCE2F200FA5639 /* ProviderAvailability.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */,
 				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
+				7F6081582EFCE57700FA5639 /* AuthViewModel.swift in Sources */,
 				7FAB33952EE467B5008AC600 /* Constants.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
