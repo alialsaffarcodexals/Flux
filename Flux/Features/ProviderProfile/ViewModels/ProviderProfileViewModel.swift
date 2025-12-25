@@ -13,8 +13,7 @@ class ProviderProfileViewModel {
     func fetchUserProfile() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        // Re-use your existing FirestoreManager logic
-        FirestoreManager.shared.getUser(uid: uid) { [weak self] result in
+        UserRepository.shared.getUser(uid: uid) { [weak self] result in
             switch result {
             case .success(let user):
                 self?.onUserDataUpdated?(user)
@@ -38,7 +37,7 @@ class ProviderProfileViewModel {
                 return
             }
             
-            FirestoreManager.shared.getUser(uid: uid) { result in
+            UserRepository.shared.getUser(uid: uid) { result in
                 switch result {
                 case .success(let updatedUser):
                     self?.onSwitchToBuyer?(updatedUser)

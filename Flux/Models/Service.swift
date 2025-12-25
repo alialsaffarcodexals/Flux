@@ -20,5 +20,7 @@ struct Service: Identifiable, Codable {
     var rating: Double?
     var reviewCount: Int?
 
+    var isActive: Bool           // ✅ NEW
     var createdAt: Date
+    var updatedAt: Date?         // ✅ NEW (optional)
 }

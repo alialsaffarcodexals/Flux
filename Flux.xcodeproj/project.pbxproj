@@ -21,6 +21,17 @@
 		3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B1942EFC8ADA00BE4A01 /* SkillVerificationViewController.swift */; };
 		3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B18D2EFC8ADA00BE4A01 /* AdminTools.storyboard */; };
 		3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */; };
+		7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */; };
+		7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0A2EFDDC56001135C2 /* PortfolioRepository.swift */; };
+		7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0B2EFDDC56001135C2 /* ReportRepository.swift */; };
+		7F5A0D122EFDDC56001135C2 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0C2EFDDC56001135C2 /* ReviewRepository.swift */; };
+		7F5A0D132EFDDC56001135C2 /* ServiceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0D2EFDDC56001135C2 /* ServiceRepository.swift */; };
+		7F5A0D142EFDDC56001135C2 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0F2EFDDC56001135C2 /* UserRepository.swift */; };
+		7F5A0D152EFDDC56001135C2 /* SkillRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0E2EFDDC56001135C2 /* SkillRepository.swift */; };
+		7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D082EFDDC56001135C2 /* AvailabilityRepository.swift */; };
+		7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D092EFDDC56001135C2 /* BookingRepository.swift */; };
+		7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */; };
+		7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D182EFDDC9E001135C2 /* Constants.swift */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
 		7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */; };
 		7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081222EF99E2C00FA5639 /* Report.swift */; };
@@ -92,8 +103,6 @@
 		7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB338B2EE46728008AC600 /* FirestoreManager.swift */; };
 		7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB338D2EE46741008AC600 /* StorageManager.swift */; };
 		7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB338F2EE4675B008AC600 /* AdminService.swift */; };
-		7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33922EE4679D008AC600 /* Extenstion.swift */; };
-		7FAB33952EE467B5008AC600 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33942EE467B5008AC600 /* Constants.swift */; };
 		7FAB33972EE467CC008AC600 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33962EE467CC008AC600 /* Validator.swift */; };
 		7FAB339B2EF049FF008AC600 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7FAB339A2EF049FF008AC600 /* FirebaseStorage */; };
 		7FAB339E2EF17B5D008AC600 /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = 7FAB339D2EF17B5D008AC600 /* Cloudinary */; };
@@ -123,6 +132,17 @@
 		3AE4B1962EFC8ADA00BE4A01 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
 		3AE4B1982EFC8ADA00BE4A01 /* AdminToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewModel.swift; sourceTree = "<group>"; };
 		3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
+		7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityBlock.swift; sourceTree = "<group>"; };
+		7F5A0D082EFDDC56001135C2 /* AvailabilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityRepository.swift; sourceTree = "<group>"; };
+		7F5A0D092EFDDC56001135C2 /* BookingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRepository.swift; sourceTree = "<group>"; };
+		7F5A0D0A2EFDDC56001135C2 /* PortfolioRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioRepository.swift; sourceTree = "<group>"; };
+		7F5A0D0B2EFDDC56001135C2 /* ReportRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRepository.swift; sourceTree = "<group>"; };
+		7F5A0D0C2EFDDC56001135C2 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
+		7F5A0D0D2EFDDC56001135C2 /* ServiceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceRepository.swift; sourceTree = "<group>"; };
+		7F5A0D0E2EFDDC56001135C2 /* SkillRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillRepository.swift; sourceTree = "<group>"; };
+		7F5A0D0F2EFDDC56001135C2 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		7F5A0D182EFDDC9E001135C2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstion.swift; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
 		7F60811D2EF99E2C00FA5639 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
@@ -195,8 +215,6 @@
 		7FAB338B2EE46728008AC600 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
 		7FAB338D2EE46741008AC600 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		7FAB338F2EE4675B008AC600 /* AdminService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminService.swift; sourceTree = "<group>"; };
-		7FAB33922EE4679D008AC600 /* Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extenstion.swift; path = Flux/Services/Extenstion.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33942EE467B5008AC600 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Flux/Services/Constants.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33962EE467CC008AC600 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		7FAB33A32EF189BC008AC600 /* SeekerProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeekerProfile.storyboard; sourceTree = "<group>"; };
 		7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewController.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -262,6 +280,47 @@
 				3AE4B1992EFC8ADA00BE4A01 /* ViewModels */,
 			);
 			path = "Admin-Tools";
+			sourceTree = "<group>";
+		};
+		7F5A0D1D2EFDDF4A001135C2 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7FAB33892EE46701008AC600 /* AuthManager.swift */,
+				7FAB338B2EE46728008AC600 /* FirestoreManager.swift */,
+				7FAB338D2EE46741008AC600 /* StorageManager.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		7F5A0D1E2EFDDF56001135C2 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				7F5A0D082EFDDC56001135C2 /* AvailabilityRepository.swift */,
+				7F5A0D092EFDDC56001135C2 /* BookingRepository.swift */,
+				7F5A0D0A2EFDDC56001135C2 /* PortfolioRepository.swift */,
+				7F5A0D0B2EFDDC56001135C2 /* ReportRepository.swift */,
+				7F5A0D0C2EFDDC56001135C2 /* ReviewRepository.swift */,
+				7F5A0D0D2EFDDC56001135C2 /* ServiceRepository.swift */,
+				7F5A0D0E2EFDDC56001135C2 /* SkillRepository.swift */,
+				7F5A0D0F2EFDDC56001135C2 /* UserRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		7F5A0D1F2EFDDF78001135C2 /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				7FAB338F2EE4675B008AC600 /* AdminService.swift */,
+			);
+			path = Admin;
+			sourceTree = "<group>";
+		};
+		7F5A0D202EFDDF8E001135C2 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
@@ -730,6 +789,7 @@
 		7FAB33792EE465C5008AC600 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */,
 				7F60811D2EF99E2C00FA5639 /* Booking.swift */,
 				7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */,
 				7F6081222EF99E2C00FA5639 /* Report.swift */,
@@ -747,11 +807,10 @@
 		7FAB33882EE466D4008AC600 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB33892EE46701008AC600 /* AuthManager.swift */,
-				7FAB338B2EE46728008AC600 /* FirestoreManager.swift */,
-				7FAB338D2EE46741008AC600 /* StorageManager.swift */,
-				7FAB338F2EE4675B008AC600 /* AdminService.swift */,
-				7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */,
+				7F5A0D202EFDDF8E001135C2 /* Navigation */,
+				7F5A0D1F2EFDDF78001135C2 /* Admin */,
+				7F5A0D1E2EFDDF56001135C2 /* Repositories */,
+				7F5A0D1D2EFDDF4A001135C2 /* Core */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -759,9 +818,9 @@
 		7FAB33912EE46770008AC600 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB33922EE4679D008AC600 /* Extenstion.swift */,
-				7FAB33942EE467B5008AC600 /* Constants.swift */,
 				7FAB33962EE467CC008AC600 /* Validator.swift */,
+				7F5A0D182EFDDC9E001135C2 /* Constants.swift */,
+				7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -990,6 +1049,8 @@
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
 				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
+				7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */,
+				7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */,
 				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
 				7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
@@ -1018,17 +1079,25 @@
 				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
+				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
+				7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */,
+				7F5A0D122EFDDC56001135C2 /* ReviewRepository.swift in Sources */,
+				7F5A0D132EFDDC56001135C2 /* ServiceRepository.swift in Sources */,
+				7F5A0D142EFDDC56001135C2 /* UserRepository.swift in Sources */,
+				7F5A0D152EFDDC56001135C2 /* SkillRepository.swift in Sources */,
+				7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */,
+				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
 				7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
 				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
 				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
 				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
+				7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */,
 				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
 				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
 				7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */,
 				7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */,
-				7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
@@ -1043,7 +1112,6 @@
 				7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */,
 				3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */,
 				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
-				7FAB33952EE467B5008AC600 /* Constants.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
