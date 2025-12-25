@@ -14,8 +14,7 @@ enum ProfileMode: String, Codable {
 
 struct User: Identifiable, Codable {
     @DocumentID var id: String?
-    
-    /// New user-related fields.
+
     var firstName: String
     var lastName: String
     var username: String
@@ -23,25 +22,31 @@ struct User: Identifiable, Codable {
     var phoneNumber: String
     var profileImageURL: String?
     var location: String?
-    
+
     var role: UserRole
     var joinedDate: Date
     var activeProfileMode: ProfileMode?
-    
+
     var interests: [String]?
-    var favoriteServiceIds: [String]?
-    
+
+    // ✅ UPDATED: store favorite PROVIDER ids (not service ids)
+    var favoriteProviderIds: [String]?
+
     var businessName: String?
     var bio: String?
     var isVerified: Bool?
-    
-    /// Computed property for the full name (keeps compatibility with old code).
-    var name: String {
-        return "\(firstName) \(lastName)"
-    }
-    
-    /// Initializes a new User instance.
-    init(id: String? = nil, firstName: String, lastName: String, username: String, email: String, phoneNumber: String, role: UserRole = .seeker) {
+
+    var name: String { "\(firstName) \(lastName)" }
+
+    init(
+        id: String? = nil,
+        firstName: String,
+        lastName: String,
+        username: String,
+        email: String,
+        phoneNumber: String,
+        role: UserRole = .seeker
+    ) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName

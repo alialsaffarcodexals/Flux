@@ -42,7 +42,13 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="140" id="Tgj-Si-oIn"/>
                                                                     <constraint firstAttribute="width" constant="140" id="ZlC-is-Brt"/>
+                                                                    <constraint firstAttribute="width" secondItem="5Sx-Sw-f11" secondAttribute="height" multiplier="1:1" id="t3a-xz-M98"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="70"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ym2-6K-0Dg">
                                                                 <rect key="frame" x="152" y="0.0" width="209" height="119.33333333333333"/>
@@ -291,8 +297,8 @@
                                                                             </constraints>
                                                                         </collectionViewCellContentView>
                                                                         <constraints>
-                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="top" secondItem="ECr-nL-zgo" secondAttribute="topMargin" constant="-8" id="JgZ-2f-WHc"/>
-                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="leading" secondItem="ECr-nL-zgo" secondAttribute="leadingMargin" constant="-8" id="ztu-rD-TzM"/>
+                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="top" secondItem="ECr-nL-zgo" secondAttribute="topMargin" constant="-8" id="01c-A5-SnO"/>
+                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="leading" secondItem="ECr-nL-zgo" secondAttribute="leadingMargin" constant="-8" id="wA9-3o-bAU"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="actionButton" destination="Snd-vW-mpY" id="FXX-t1-utI"/>
