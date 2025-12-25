@@ -42,6 +42,7 @@
 		7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */; };
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
+		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */; };
 		7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */; };
@@ -145,6 +146,7 @@
 		7F68C3C92EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainViewController.swift; sourceTree = "<group>"; };
 		7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				7FA993E32EFD403E00CE5748 /* DisputeCenter */,
 				7FAB339F2EF1893C008AC600 /* SeekerProfile */,
 				7FAB336F2EE4635C008AC600 /* Notifications */,
 				7FAB33612EE461B8008AC600 /* AdminDashboard */,
@@ -332,6 +335,38 @@
 				7F60816D2EFCF0BD00FA5639 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7FA993E32EFD403E00CE5748 /* DisputeCenter */ = {
+			isa = PBXGroup;
+			children = (
+				7FA993E62EFD408900CE5748 /* Storyboards */,
+				7FA993E52EFD408000CE5748 /* ViewModels */,
+				7FA993E42EFD406E00CE5748 /* ViewControllers */,
+			);
+			path = DisputeCenter;
+			sourceTree = "<group>";
+		};
+		7FA993E42EFD406E00CE5748 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7FA993E52EFD408000CE5748 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7FA993E62EFD408900CE5748 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		7FAB32EB2EE4545B008AC600 /* AccountSettings */ = {
@@ -948,6 +983,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FAB330C2EE457B4008AC600 /* Portfolio.storyboard in Resources */,
+				7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */,
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
