@@ -35,6 +35,12 @@
 		7F5A0D222EFEB0F1001135C2 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D212EFEB0ED001135C2 /* Conversation.swift */; };
 		7F5A0D242EFEB141001135C2 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D232EFEB13E001135C2 /* ChatMessage.swift */; };
 		7F5A0D262EFEB49A001135C2 /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D252EFEB49A001135C2 /* ChatRepository.swift */; };
+		7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D272EFEE471001135C2 /* ProviderSkillsListViewController.swift */; };
+		7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D282EFEE471001135C2 /* SkillDetailsViewController.swift */; };
+		7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */; };
+		7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */; };
+		7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */; };
+		7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
 		7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */; };
 		7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081222EF99E2C00FA5639 /* Report.swift */; };
@@ -151,6 +157,12 @@
 		7F5A0D212EFEB0ED001135C2 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		7F5A0D232EFEB13E001135C2 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		7F5A0D252EFEB49A001135C2 /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
+		7F5A0D272EFEE471001135C2 /* ProviderSkillsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSkillsListViewController.swift; sourceTree = "<group>"; };
+		7F5A0D282EFEE471001135C2 /* SkillDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailsViewController.swift; sourceTree = "<group>"; };
+		7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSkillViewModel.swift; sourceTree = "<group>"; };
+		7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileViewModel.swift; sourceTree = "<group>"; };
+		7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSkillsListViewModel.swift; sourceTree = "<group>"; };
+		7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailsViewModel.swift; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
 		7F60811D2EF99E2C00FA5639 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
@@ -500,6 +512,8 @@
 				7FAB32FF2EE456AD008AC600 /* ProviderMainProfileVC.swift */,
 				7FAB33012EE456D4008AC600 /* ManageSkillsViewController.swift */,
 				7FAB33032EE456FC008AC600 /* AddSkillViewController.swift */,
+				7F5A0D272EFEE471001135C2 /* ProviderSkillsListViewController.swift */,
+				7F5A0D282EFEE471001135C2 /* SkillDetailsViewController.swift */,
 			);
 			path = ViewContollers;
 			sourceTree = "<group>";
@@ -509,6 +523,10 @@
 			children = (
 				7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */,
 				7FAB33052EE45720008AC600 /* ProviderProfileViewModel.swift */,
+				7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */,
+				7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */,
+				7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */,
+				7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1084,6 +1102,10 @@
 			files = (
 				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
 				7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */,
+				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
+				7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */,
+				7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */,
+				7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */,
 				7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */,
 				3AE4B19B2EFC8ADA00BE4A01 /* SkillViewController.swift in Sources */,
 				3AE4B19C2EFC8ADA00BE4A01 /* AccountViewController.swift in Sources */,
@@ -1150,6 +1172,8 @@
 				7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */,
 				7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
+				7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */,
+				7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */,
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
 				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,

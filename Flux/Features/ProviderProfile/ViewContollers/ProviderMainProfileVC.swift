@@ -1,6 +1,7 @@
 // File: Flux/Features/ProviderProfile/ViewContollers/ProviderMainProfileVC.swift
 
 import UIKit
+import FirebaseAuth
 
 class ProviderMainProfileVC: UIViewController {
 
@@ -9,15 +10,22 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var bioLabel: UILabel!         // Displays Bio
     @IBOutlet weak var locationLabel: UILabel!    // Displays Location
     @IBOutlet weak var profileImageView: UIImageView! // Shared Profile Image
+    @IBOutlet weak var skillsTagContainer: UIStackView?
     
     // Properties
     private var viewModel = ProviderProfileViewModel()
+    private var skills: [Skill] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
         // Fetch fresh data on load
         viewModel.fetchUserProfile()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshSkills()
     }
     
     func setupBindings() {
@@ -42,6 +50,13 @@ class ProviderMainProfileVC: UIViewController {
                         }
                     }
                 }
+            }
+        }
+
+        viewModel.onSkillsUpdated = { [weak self] skills in
+            DispatchQueue.main.async {
+                self?.skills = skills
+                self?.updateSkillTags()
             }
         }
 
@@ -71,6 +86,43 @@ class ProviderMainProfileVC: UIViewController {
             viewControllers.removeAll { $0 === self }
             viewControllers.append(seekerVC)
             nav.setViewControllers(viewControllers, animated: true)
+        }
+    }
+
+    private func refreshSkills() {
+        guard let providerId = Auth.auth().currentUser?.uid else { return }
+        viewModel.fetchSkills(providerId: providerId)
+    }
+
+    private func updateSkillTags() {
+        guard let container = skillsTagContainer else { return }
+
+        container.arrangedSubviews.forEach { view in
+            container.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+
+        let names = skills.map { $0.name }
+        let buttonsPerRow = 2
+        var index = 0
+
+        while index < names.count {
+            let rowStack = UIStackView()
+            rowStack.axis = .horizontal
+            rowStack.spacing = 8
+            rowStack.alignment = .center
+
+            for _ in 0..<buttonsPerRow {
+                guard index < names.count else { break }
+                let button = UIButton(type: .system)
+                button.configuration = .tinted()
+                button.configuration?.cornerStyle = .capsule
+                button.setTitle(names[index], for: .normal)
+                rowStack.addArrangedSubview(button)
+                index += 1
+            }
+
+            container.addArrangedSubview(rowStack)
         }
     }
 }
