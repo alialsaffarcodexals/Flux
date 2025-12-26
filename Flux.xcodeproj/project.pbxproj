@@ -32,6 +32,9 @@
 		7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D092EFDDC56001135C2 /* BookingRepository.swift */; };
 		7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */; };
 		7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D182EFDDC9E001135C2 /* Constants.swift */; };
+		7F5A0D222EFEB0F1001135C2 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D212EFEB0ED001135C2 /* Conversation.swift */; };
+		7F5A0D242EFEB141001135C2 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D232EFEB13E001135C2 /* ChatMessage.swift */; };
+		7F5A0D262EFEB49A001135C2 /* ChatRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D252EFEB49A001135C2 /* ChatRepository.swift */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
 		7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */; };
 		7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081222EF99E2C00FA5639 /* Report.swift */; };
@@ -143,6 +146,9 @@
 		7F5A0D0F2EFDDC56001135C2 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		7F5A0D182EFDDC9E001135C2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extenstion.swift; sourceTree = "<group>"; };
+		7F5A0D212EFEB0ED001135C2 /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		7F5A0D232EFEB13E001135C2 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		7F5A0D252EFEB49A001135C2 /* ChatRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRepository.swift; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
 		7F60811B2EF98CF700FA5639 /* ServiceCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCategory.swift; sourceTree = "<group>"; };
 		7F60811D2EF99E2C00FA5639 /* Booking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Booking.swift; sourceTree = "<group>"; };
@@ -303,6 +309,7 @@
 				7F5A0D0D2EFDDC56001135C2 /* ServiceRepository.swift */,
 				7F5A0D0E2EFDDC56001135C2 /* SkillRepository.swift */,
 				7F5A0D0F2EFDDC56001135C2 /* UserRepository.swift */,
+				7F5A0D252EFEB49A001135C2 /* ChatRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -789,6 +796,8 @@
 		7FAB33792EE465C5008AC600 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7F5A0D232EFEB13E001135C2 /* ChatMessage.swift */,
+				7F5A0D212EFEB0ED001135C2 /* Conversation.swift */,
 				7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */,
 				7F60811D2EF99E2C00FA5639 /* Booking.swift */,
 				7F6081202EF99E2C00FA5639 /* PortfolioProject.swift */,
@@ -1082,6 +1091,7 @@
 				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
 				7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */,
 				7F5A0D122EFDDC56001135C2 /* ReviewRepository.swift in Sources */,
+				7F5A0D222EFEB0F1001135C2 /* Conversation.swift in Sources */,
 				7F5A0D132EFDDC56001135C2 /* ServiceRepository.swift in Sources */,
 				7F5A0D142EFDDC56001135C2 /* UserRepository.swift in Sources */,
 				7F5A0D152EFDDC56001135C2 /* SkillRepository.swift in Sources */,
@@ -1096,6 +1106,7 @@
 				7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */,
 				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
 				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
+				7F5A0D262EFEB49A001135C2 /* ChatRepository.swift in Sources */,
 				7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */,
 				7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
@@ -1111,6 +1122,7 @@
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */,
 				3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */,
+				7F5A0D242EFEB141001135C2 /* ChatMessage.swift in Sources */,
 				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
