@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		10CC97302EF84D1E0016AF48 /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10CC972F2EF84D1E0016AF48 /* Favorites.storyboard */; };
+		10CD61E82EFEEEF0003C5F8E /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10CD61E72EFEEEF0003C5F8E /* HistoryViewModel.swift */; };
 		604B030B2EE03F690062AE77 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03052EE03F690062AE77 /* AdminTools.storyboard */; };
 		604B030C2EE03F690062AE77 /* BookingScreens.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 604B03082EE03F690062AE77 /* BookingScreens.storyboard */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
@@ -57,7 +58,6 @@
 		7FAB33502EE45F9E008AC600 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB334F2EE45F9E008AC600 /* History.storyboard */; };
 		7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */; };
 		7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */; };
-		7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33552EE46047008AC600 /* HistoryViewModel.swift */; };
 		7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB335B2EE46130008AC600 /* Dispute.storyboard */; };
 		7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB335D2EE46159008AC600 /* ReportUserViewController.swift */; };
 		7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB335F2EE46177008AC600 /* ReportViewModel.swift */; };
@@ -96,6 +96,7 @@
 
 /* Begin PBXFileReference section */
 		10CC972F2EF84D1E0016AF48 /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
+		10CD61E72EFEEEF0003C5F8E /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewModel.swift; sourceTree = "<group>"; };
 		604B03052EE03F690062AE77 /* AdminTools.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AdminTools.storyboard; sourceTree = "<group>"; };
 		604B03082EE03F690062AE77 /* BookingScreens.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BookingScreens.storyboard; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		7FAB334F2EE45F9E008AC600 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
 		7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHistoryViewController.swift; sourceTree = "<group>"; };
 		7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		7FAB33552EE46047008AC600 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryViewModel.swift; path = Flux/Features/HistoryAndFavorites/ViewControllers/HistoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB335B2EE46130008AC600 /* Dispute.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dispute.storyboard; sourceTree = "<group>"; };
 		7FAB335D2EE46159008AC600 /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReportUserViewController.swift; path = Flux/Features/SupportCenter/Storyboards/ReportUserViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB335F2EE46177008AC600 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReportViewModel.swift; path = Flux/Features/SupportCenter/Storyboards/ReportViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -581,7 +581,7 @@
 		7FAB334E2EE45F6A008AC600 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB33552EE46047008AC600 /* HistoryViewModel.swift */,
+				10CD61E72EFEEEF0003C5F8E /* HistoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -977,7 +977,6 @@
 				7FAB33932EE4679D008AC600 /* Extenstion.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
 				7FAB33832EE4666D008AC600 /* Review.swift in Sources */,
-				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32EA2EE4543F008AC600 /* AuthViewModel.swift in Sources */,
@@ -991,6 +990,7 @@
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
+				10CD61E82EFEEEF0003C5F8E /* HistoryViewModel.swift in Sources */,
 				7FAB33972EE467CC008AC600 /* Validator.swift in Sources */,
 				7FAB331C2EE459B4008AC600 /* HomeFeedViewController.swift in Sources */,
 				7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */,
