@@ -9,11 +9,18 @@ enum SkillStatus: String, Codable {
     case rejected = "Rejected"
 }
 
+enum SkillLevel: String, Codable {
+    case beginner = "Beginner"
+    case intermediate = "Intermediate"
+    case expert = "Expert"
+}
+
 struct Skill: Identifiable, Codable {
     @DocumentID var id: String?
     var providerId: String
 
     var name: String
+    var level: SkillLevel?
     var description: String?
 
     var proofImageURL: String?

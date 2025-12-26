@@ -75,6 +75,13 @@ final class SkillRepository {
         }
     }
 
+    func fetchSkills(
+        for providerId: String,
+        completion: @escaping (Result<[Skill], Error>) -> Void
+    ) {
+        fetchSkills(providerId: providerId, status: nil, completion: completion)
+    }
+
     func updateSkill(
         _ skill: Skill,
         completion: @escaping (Result<Void, Error>) -> Void
@@ -108,5 +115,12 @@ final class SkillRepository {
             }
             completion(.success(()))
         }
+    }
+
+    func deleteSkill(
+        skillId: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        deleteSkill(id: skillId, completion: completion)
     }
 }
