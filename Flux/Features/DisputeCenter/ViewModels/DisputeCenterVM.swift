@@ -1,11 +1,6 @@
-//
-//  DisputeCenterVM.swift
-//  Flux
-//
-//  Created by Mohammed on 27/12/2025.
-//
-
 import Foundation
+import UIKit
+import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
@@ -25,6 +20,10 @@ final class DisputeCenterVM: ObservableObject {
     var onSendEnabledChanged: ((Bool) -> Void)?
     var onImagePicked: ((UIImage?) -> Void)?
     var onReportSubmitted: ((Error?) -> Void)?
+    
+    // MARK: - Dependencies (MVVM)
+    private let reportRepo = ReportRepository.shared
+    private let storageRepo = StorageManager.shared   // uploads images
     
     // MARK: - Intents
     func loadInitialData() {
@@ -65,12 +64,12 @@ final class DisputeCenterVM: ObservableObject {
             return
         }
         
-        // 1.  upload image (if any)  →  2.  save report
+        // 1.  upload image (if any)  →  2.  create report via Repo
+        // 1.  upload image (if any)  →  2.  create report via Repo
         if let image = selectedImage,
            let jpegData = image.jpegData(compressionQuality: 0.8) {
             
-            let storageRef = Storage.storage().reference()
-                .child("reportEvidence/\(UUID().uuidString).jpg")
+            let storageRef = Storage.storage().reference().child("reportEvidence/\(UUID().uuidString).jpg")
             
             storageRef.putData(jpegData, metadata: nil) { [weak self] _, error in
                 if let error = error {
@@ -79,50 +78,40 @@ final class DisputeCenterVM: ObservableObject {
                 }
                 // get download URL
                 storageRef.downloadURL { url, error in
-                    let imageURL = url?.absoluteString
-                    self?.saveReportToFirestore(description: desc,
-                                              reasonIdx: rsIdx,
-                                              evidenceURL: imageURL,
-                                              reporterID: "user_101",
-                                              reportedID: "user_202")
+                    if let url = url {
+                        self?.createReportInRepo(description: desc,
+                                               reasonIdx: rsIdx,
+                                               evidenceURL: url.absoluteString)
+                    } else if let error = error {
+                        self?.onReportSubmitted?(error)
+                    }
                 }
             }
         } else {
-            // no image – save immediately
-            saveReportToFirestore(description: desc,
-                                reasonIdx: rsIdx,
-                                evidenceURL: nil,
-                                reporterID: "user_101",
-                                reportedID: "user_202")
+            // no image – create report immediately
+            createReportInRepo(description: desc, reasonIdx: rsIdx, evidenceURL: nil)
         }
     }
-    
     // MARK: - Private
-    private func saveReportToFirestore(description: String,
-                                     reasonIdx: Int,
-                                     evidenceURL: String?,
-                                     reporterID: String,
-                                     reportedID: String) {
-        let report = Report(
+    private func createReportInRepo(description: String, reasonIdx: Int, evidenceURL: String?) {
+        // fetch real reporter & reported IDs from Firestore
+        let reporterID   = Auth.auth().currentUser?.uid ?? "anonymous"   // logged-in user
+        let reportedID   = recipients[selectedRecipientIndex?.row ?? 0]  // recipient you picked
+        
+        ReportRepository.shared.createReport(
             reporterId: reporterID,
             reportedUserId: reportedID,
             reason: reasons[reasonIdx],
             description: description,
             evidenceImageURL: evidenceURL,
-            status: "Open",
-            timestamp: Date()
-        )
-        
-        let reportRef = Firestore.firestore()
-                                 .collection("reports")
-                                 .document()   // auto-ID
-        
-        do {
-            try reportRef.setData(from: report) { [weak self] error in
+            status: "Open"
+        ) { [weak self] result in
+            switch result {
+            case .success:
+                self?.onReportSubmitted?(nil)
+            case .failure(let error):
                 self?.onReportSubmitted?(error)
             }
-        } catch {
-            onReportSubmitted?(error)
         }
     }
     

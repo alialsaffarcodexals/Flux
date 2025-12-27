@@ -5,8 +5,11 @@
 */
 
 import UIKit
+import PhotosUI
 
-class DisputeCenterVC: UIViewController {
+class DisputeCenterVC: UIViewController,
+                       UIImagePickerControllerDelegate,
+                       UINavigationControllerDelegate {
 
     // MARK: - Outlets
     @IBOutlet weak var recipientTableView: UITableView!
@@ -14,7 +17,7 @@ class DisputeCenterVC: UIViewController {
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var uploadPictureButton: UIButton!
     @IBOutlet weak var sendReportButton: UIButton!
-    
+   
 
     // MARK: - Data
     private let recipients: [String] = []
@@ -22,6 +25,9 @@ class DisputeCenterVC: UIViewController {
     private var selectedRecipientIndex: IndexPath?
     private var selectedReasonIndex: IndexPath?
 
+    
+    private let viewModel = DisputeCenterVM()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableViews()
@@ -49,11 +55,16 @@ class DisputeCenterVC: UIViewController {
 
     // MARK: - Actions
     @IBAction func uploadPictureTapped(_ sender: UIButton) {
-        // TODO: Hook up image picker.
+        let picker = UIImagePickerController()
+           picker.sourceType = .photoLibrary
+           picker.delegate = self
+           present(picker, animated: true)
     }
 
     @IBAction func sendReportTapped(_ sender: UIButton) {
-        // TODO: Submit report.
+        viewModel.submitReport(description: descriptionTextField.text,
+                               recipientIndex: recipientTableView.indexPathForSelectedRow,
+                               reasonIndex:   reasonsTableView.indexPathForSelectedRow)
     }
 
     @IBAction func descriptionChanged(_ sender: UITextField) {
@@ -91,5 +102,14 @@ extension DisputeCenterVC: UITableViewDataSource, UITableViewDelegate {
         }
         tableView.reloadData()
         updateSendReportAvailability()
+    }
+    // MARK: - UIImagePickerControllerDelegate
+    func imagePickerController(_ picker: UIImagePickerController,
+                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        if let image = info[.originalImage] as? UIImage {
+            // TODO: pass to ViewModel
+            // viewModel.userPickedImage(image)
+        }
     }
 }
