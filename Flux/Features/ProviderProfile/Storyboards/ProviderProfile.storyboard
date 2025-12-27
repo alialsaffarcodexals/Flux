@@ -40,9 +40,15 @@
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UCd-fD-8MC">
                                                                 <rect key="frame" x="0.0" y="0.6666666666666714" width="140" height="138.66666666666669"/>
                                                                 <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="UCd-fD-8MC" secondAttribute="height" multiplier="1:1" id="BOp-eB-M1c"/>
                                                                     <constraint firstAttribute="width" constant="140" id="GSE-JM-9E8"/>
                                                                     <constraint firstAttribute="height" constant="140" id="e3u-Gi-WBx"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="70"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="3TY-pZ-lJD">
                                                                 <rect key="frame" x="152" y="0.0" width="209" height="209.66666666666666"/>
@@ -420,6 +426,12 @@
                             <color key="tintColor" systemColor="labelColor"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="bioLabel" destination="6mC-g8-h3w" id="Sr3-YQ-MVN"/>
+                        <outlet property="locationLabel" destination="Mda-hT-rSO" id="H9F-3X-GuH"/>
+                        <outlet property="nameLabel" destination="e8z-eh-Ziw" id="BT5-DV-7cQ"/>
+                        <outlet property="profileImageView" destination="UCd-fD-8MC" id="yve-Je-tJ7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -428,7 +440,7 @@
         <!--My skills-->
         <scene sceneID="QnB-IC-cMi">
             <objects>
-                <viewController id="UQI-mZ-SgS" sceneMemberID="viewController">
+                <viewController id="UQI-mZ-SgS" customClass="ProviderSkillsListViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UH6-hS-O4C">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -489,6 +501,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="s6Z-sE-PDx" id="D18-gR-8jo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QuE-9K-NoF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -669,12 +684,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xta-iF-bqZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944" y="1004"/>
+            <point key="canvasLocation" x="298" y="1430"/>
         </scene>
         <!--Skill Details-->
         <scene sceneID="9bP-l6-lZF">
             <objects>
-                <viewController id="Q6y-tx-fpl" sceneMemberID="viewController">
+                <viewController id="Q6y-tx-fpl" customClass="SkillDetailsViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zzG-fc-SQ9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -797,6 +812,9 @@
                                                                 <color key="tintColor" name="Red"/>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="filled" title="Delete this Skill" cornerStyle="dynamic"/>
+                                                                <connections>
+                                                                    <action selector="deleteTapped:" destination="Q6y-tx-fpl" eventType="touchUpInside" id="RlC-br-r6R"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -844,6 +862,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Skill Details" id="Uhv-Oi-zL8"/>
+                    <connections>
+                        <outlet property="deleteButton" destination="c9t-CN-U7r" id="PTF-Ut-oqq"/>
+                        <outlet property="descriptionLabel" destination="Pcl-IL-Eu1" id="a1C-Sf-Jrf"/>
+                        <outlet property="levelButton" destination="V93-Sc-WUV" id="4w6-jS-iIG"/>
+                        <outlet property="nameLabel" destination="ihJ-zm-xGx" id="ZBi-DT-7th"/>
+                        <outlet property="proofButton" destination="cJN-Jr-RVz" id="QTZ-1U-6nW"/>
+                        <outlet property="statusContainerView" destination="Yak-7d-3BA" id="ac5-hL-XhY"/>
+                        <outlet property="statusLabel" destination="zt3-k7-CCC" id="j68-dU-1VW"/>
+                        <outlet property="statusMessageLabel" destination="6X2-Rj-gJr" id="B7u-rt-t3S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53v-FO-JUD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -852,7 +880,7 @@
         <!--New Skill-->
         <scene sceneID="Omp-9B-crv">
             <objects>
-                <viewController id="Syk-iM-6xL" sceneMemberID="viewController">
+                <viewController id="Syk-iM-6xL" customClass="AddSkillViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UeA-IZ-0ss">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -861,10 +889,10 @@
                                 <rect key="frame" x="0.0" y="162" width="393" height="622"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J2f-sd-ABu" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="551.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="572"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="q1q-RM-uqd">
-                                                <rect key="frame" x="20" y="20" width="353" height="526.66666666666663"/>
+                                                <rect key="frame" x="20" y="20" width="353" height="547"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skill Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cM3-Ta-TBw">
                                                         <rect key="frame" x="0.0" y="0.0" width="353" height="20.333333333333332"/>
@@ -933,9 +961,12 @@
                                                         <color key="tintColor" name="DarkGreen"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="Upload Proof"/>
+                                                        <connections>
+                                                            <action selector="uploadProofTapped:" destination="Syk-iM-6xL" eventType="touchUpInside" id="4o1-LF-MDU"/>
+                                                        </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your skill will be reviewed by an admin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ImY-e2-YtW">
-                                                        <rect key="frame" x="0.0" y="506.33333333333331" width="353" height="20.333333333333314"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plase upload a certifcate image as proof for your skill" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ImY-e2-YtW">
+                                                        <rect key="frame" x="0.0" y="506.33333333333343" width="353" height="40.666666666666686"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -973,8 +1004,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Skill" id="s6B-M0-S2E">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="2fW-RZ-X3l"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save &amp; Submit" id="2fW-RZ-X3l">
+                            <connections>
+                                <action selector="saveTapped:" destination="Syk-iM-6xL" id="0R1-Bm-xGp"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="descriptionTextView" destination="0zL-tG-qwM" id="3s1-We-Ced"/>
+                        <outlet property="levelSegmentedControl" destination="Afl-6n-NvN" id="vJz-Fx-s9r"/>
+                        <outlet property="nameTextField" destination="Pq3-Q4-6DQ" id="kz9-Cm-1xt"/>
+                        <outlet property="uploadProofButton" destination="ncQ-HU-iWH" id="wfJ-vM-ZrV"/>
+                        <outlet property="uploadProofStatusLabel" destination="ImY-e2-YtW" id="pwT-Xg-TlO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q71-Kg-fIo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -988,7 +1030,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="90" translatesAutoresizingMaskIntoConstraints="NO" id="cch-uS-MRu">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="cch-uS-MRu">
                                 <rect key="frame" x="20" y="262" width="353" height="441"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hv1-km-Kc3">
@@ -1009,7 +1051,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hSP-Ug-63r">
-                                        <rect key="frame" x="0.0" y="154.33333333333331" width="353" height="146.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="104.33333333333333" width="353" height="142.33333333333337"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Short Bio ( Describe your service )" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtB-ak-geP">
                                                 <rect key="frame" x="0.0" y="0.0" width="353" height="20.333333333333332"/>
@@ -1018,7 +1060,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7N1-Jd-MRf">
-                                                <rect key="frame" x="0.0" y="30.333333333333364" width="353" height="116.33333333333331"/>
+                                                <rect key="frame" x="0.0" y="30.333333333333371" width="353" height="112"/>
                                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1029,6 +1071,23 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ir9-gy-955">
+                                        <rect key="frame" x="0.0" y="286.66666666666663" width="353" height="64.333333333333314"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXQ-1d-Itv">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="20.333333333333332"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lG-FR-hpt">
+                                                <rect key="frame" x="0.0" y="30.333333333333371" width="353" height="34"/>
+                                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjv-wT-doi">
@@ -1059,6 +1118,7 @@
                     <connections>
                         <outlet property="bioTextView" destination="7N1-Jd-MRf" id="gw8-hv-3Fe"/>
                         <outlet property="businessNameTextField" destination="NDV-qG-CVD" id="rQP-l1-Lsz"/>
+                        <outlet property="locationTextField" destination="0lG-FR-hpt" id="gBI-aJ-fR0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EsG-7E-Ypg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1189,19 +1249,19 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
