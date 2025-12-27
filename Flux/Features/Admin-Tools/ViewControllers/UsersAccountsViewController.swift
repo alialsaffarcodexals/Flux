@@ -4,24 +4,30 @@ class UsersAccountsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    struct User {
-        let name: String
-        let username: String
-    }
-
-    private let users: [User] = [
-        User(name: "Haitham Rashdan", username: "@haitham79"),
-        User(name: "Ali Mohammed", username: "@ali_dev"),
-        User(name: "Sara Ahmed", username: "@sara_a"),
-        User(name: "John Smith", username: "@john_smith")
-    ]
+    private let viewModel = AdminToolsViewModel()
+    private var users: [User] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
+
+        fetchUsers()
+    }
+
+    private func fetchUsers() {
+        viewModel.fetchUsers() { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self?.users = data
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    print("❌ Fetch users error:", error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
@@ -44,7 +50,7 @@ extension UsersAccountsViewController: UITableViewDataSource {
         let user = users[indexPath.row]
 
         cell.textLabel?.text = user.name
-        cell.detailTextLabel?.text = user.username
+        cell.detailTextLabel?.text = "@\(user.username)"
 
         cell.textLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         cell.detailTextLabel?.font = .systemFont(ofSize: 13)
@@ -64,10 +70,27 @@ extension UsersAccountsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        // Let the prototype cell's segue (defined in storyboard) run automatically.
+        // Avoid changing selection here so `prepare(for:sender:)` can derive the indexPath from the sender cell.
+        // Deselect after a short delay so the transition is smooth.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
 
-        let selectedUser = users[indexPath.row]
-        print("Selected user:", selectedUser)
-        // later: push User Account details screen
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? AccountViewController {
+            if let userSender = sender as? User {
+                dest.userID = userSender.id
+            } else if let cell = sender as? UITableViewCell,
+                      let indexPath = tableView.indexPath(for: cell) {
+                let selectedUser = users[indexPath.row]
+                dest.userID = selectedUser.id
+            } else if let indexPath = tableView.indexPathForSelectedRow {
+                let selectedUser = users[indexPath.row]
+                dest.userID = selectedUser.id
+            }
+            dest.viewModel = viewModel
+        }
     }
 }

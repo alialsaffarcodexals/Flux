@@ -991,71 +991,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zR-kZ-lz1">
-                                        <rect key="frame" x="32" y="96" width="49" height="20.333333333333329"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suspend Or Ban Reason" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zR-kZ-lz1">
+                                        <rect key="frame" x="32" y="96" width="184.33333333333334" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="cci-Xc-UNU">
-                                        <rect key="frame" x="16" y="132.33333333333331" width="370" height="150"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKk-WE-gR1">
-                                                <rect key="frame" x="0.0" y="0.0" width="370" height="46.666666666666664"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="chevron.right" catalog="system" imagePlacement="trailing" title="Reports">
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n4o-U4-TIh">
-                                                <rect key="frame" x="0.0" y="46.666666666666686" width="370" height="1"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="MBj-0F-AcK"/>
-                                                </constraints>
-                                            </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewY-9d-IkC">
-                                                <rect key="frame" x="0.0" y="47.666666666666686" width="370" height="54.666666666666657"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="chevron.right" catalog="system" imagePlacement="trailing" title="Warnings">
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFE-Zc-9ju">
-                                                <rect key="frame" x="0.0" y="102.33333333333337" width="370" height="1"/>
-                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="qdB-C4-9RN"/>
-                                                </constraints>
-                                            </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLF-OL-D37">
-                                                <rect key="frame" x="0.0" y="103.33333333333337" width="370" height="46.666666666666657"/>
-                                                <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="chevron.right" catalog="system" imagePlacement="trailing" title="Activity">
-                                                    <color key="baseForegroundColor" systemColor="labelColor"/>
-                                                </buttonConfiguration>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="TLF-OL-D37" secondAttribute="bottom" id="0n2-GY-rwU"/>
-                                            <constraint firstItem="n4o-U4-TIh" firstAttribute="top" secondItem="NKk-WE-gR1" secondAttribute="bottom" id="9tR-KN-sXa"/>
-                                            <constraint firstAttribute="bottom" secondItem="zFE-Zc-9ju" secondAttribute="bottom" constant="46.670000000000002" id="PaP-oI-cRV"/>
-                                            <constraint firstItem="TLF-OL-D37" firstAttribute="top" secondItem="zFE-Zc-9ju" secondAttribute="bottom" id="Tbh-Eh-ccL"/>
-                                            <constraint firstItem="zFE-Zc-9ju" firstAttribute="top" secondItem="ewY-9d-IkC" secondAttribute="bottom" id="VBr-dL-1Ca"/>
-                                            <constraint firstItem="NKk-WE-gR1" firstAttribute="top" secondItem="cci-Xc-UNU" secondAttribute="top" id="Yg8-L8-gr9"/>
-                                            <constraint firstAttribute="bottom" secondItem="n4o-U4-TIh" secondAttribute="bottom" constant="102.33" id="bBa-cx-u5o"/>
-                                            <constraint firstAttribute="height" constant="150" id="eJT-Mm-t7j"/>
-                                            <constraint firstItem="zFE-Zc-9ju" firstAttribute="top" secondItem="cci-Xc-UNU" secondAttribute="top" constant="102.33" id="iDY-YT-eRK"/>
-                                            <constraint firstItem="ewY-9d-IkC" firstAttribute="top" secondItem="n4o-U4-TIh" secondAttribute="bottom" id="sih-d6-eVo"/>
-                                            <constraint firstItem="n4o-U4-TIh" firstAttribute="top" secondItem="cci-Xc-UNU" secondAttribute="top" constant="46.670000000000002" id="z5d-5d-Kwq"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Cgl-hB-r6c">
                                         <rect key="frame" x="16" y="298.33333333333331" width="370" height="100"/>
                                         <subviews>
@@ -1097,20 +1038,31 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </stackView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ko7-cO-wmk">
+                                        <rect key="frame" x="16" y="132.33333333333331" width="370" height="150"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="Ik6-FJ-ZfU"/>
+                                        </constraints>
+                                        <string key="text">Received multiple scam messages today offering fake rewards. User is trying to phish account details. Please investigate and ban</string>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="8XO-FY-IN6" firstAttribute="top" secondItem="obN-XN-Jcb" secondAttribute="top" constant="16" id="06r-cx-HoS"/>
-                                    <constraint firstItem="cci-Xc-UNU" firstAttribute="top" secondItem="5zR-kZ-lz1" secondAttribute="bottom" constant="16" id="Ex3-Bf-bxS"/>
+                                    <constraint firstAttribute="trailing" secondItem="ko7-cO-wmk" secondAttribute="trailing" constant="16" id="6Wh-WZ-4zj"/>
+                                    <constraint firstItem="ko7-cO-wmk" firstAttribute="leading" secondItem="obN-XN-Jcb" secondAttribute="leading" constant="16" id="Fvq-d1-HSI"/>
                                     <constraint firstItem="5zR-kZ-lz1" firstAttribute="top" secondItem="8XO-FY-IN6" secondAttribute="bottom" constant="16" id="HXP-7W-Fdg"/>
+                                    <constraint firstItem="Cgl-hB-r6c" firstAttribute="top" secondItem="ko7-cO-wmk" secondAttribute="bottom" constant="16" id="RXN-mG-7du"/>
                                     <constraint firstItem="5zR-kZ-lz1" firstAttribute="leading" secondItem="obN-XN-Jcb" secondAttribute="leading" constant="32" id="Vcx-aw-5zK"/>
                                     <constraint firstAttribute="trailing" secondItem="8XO-FY-IN6" secondAttribute="trailing" constant="16" id="bHo-cn-KjK"/>
                                     <constraint firstItem="Cgl-hB-r6c" firstAttribute="leading" secondItem="obN-XN-Jcb" secondAttribute="leading" constant="16" id="ckA-dw-S0D"/>
-                                    <constraint firstItem="Cgl-hB-r6c" firstAttribute="top" secondItem="cci-Xc-UNU" secondAttribute="bottom" constant="16" id="j8c-Lu-3BG"/>
-                                    <constraint firstAttribute="trailing" secondItem="cci-Xc-UNU" secondAttribute="trailing" constant="16" id="uaE-CU-QkZ"/>
+                                    <constraint firstItem="ko7-cO-wmk" firstAttribute="top" secondItem="5zR-kZ-lz1" secondAttribute="bottom" constant="16" id="d02-he-yED"/>
                                     <constraint firstItem="8XO-FY-IN6" firstAttribute="leading" secondItem="obN-XN-Jcb" secondAttribute="leading" constant="16" id="wAY-2g-gRW"/>
                                     <constraint firstAttribute="trailing" secondItem="Cgl-hB-r6c" secondAttribute="trailing" constant="16" id="wgx-5y-MXg"/>
-                                    <constraint firstItem="cci-Xc-UNU" firstAttribute="leading" secondItem="obN-XN-Jcb" secondAttribute="leading" constant="16" id="zHo-jl-AR1"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1128,17 +1080,18 @@
                     <navigationItem key="navigationItem" id="4lG-Gy-oTP"/>
                     <connections>
                         <outlet property="nameLabel" destination="1CR-Nc-VPt" id="00t-W6-hMT"/>
+                        <outlet property="suspendOrBanReason" destination="ko7-cO-wmk" id="5Ql-c2-1zW"/>
                         <outlet property="usernameLabel" destination="9w8-RH-acc" id="iwZ-sF-DUU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R4O-ZE-uIk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1909" y="1512"/>
+            <point key="canvasLocation" x="1908.9552238805968" y="1511.6704805491991"/>
         </scene>
         <!--Skill View Controller-->
         <scene sceneID="zIc-Cb-XJ2">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="ckZ-nG-VIG" customClass="SkillViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="ckZ-nG-VIG" customClass="SkillViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController" storyboardIdentifier="SkillViewController">
                     <view key="view" contentMode="scaleToFill" id="K4d-Yg-uDq">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1387,7 +1340,7 @@
         <!--Report View Controller-->
         <scene sceneID="4x1-Mz-W7a">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="u7A-eY-fSj" customClass="ReportViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="u7A-eY-fSj" customClass="ReportViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController" storyboardIdentifier="ReportViewController">
                     <view key="view" contentMode="scaleToFill" id="Q24-i7-Km0">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1689,22 +1642,22 @@ and ban</string>
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="placeholderTextColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -5,20 +5,8 @@ class ReportsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
 
-    struct Report {
-        let subject: String
-        let username: String
-        let isReviewed: Bool
-    }
-
-    private let allReports: [Report] = [
-        Report(subject: "Spamming Activity", username: "@suefgwi", isReviewed: false),
-        Report(subject: "Fake Profile", username: "@john123", isReviewed: false),
-        Report(subject: "Inappropriate Content", username: "@ali_dev", isReviewed: true),
-        Report(subject: "Harassment", username: "@user99", isReviewed: true)
-    ]
-
-    private var filteredReports: [Report] = []
+    private let viewModel = AdminToolsViewModel()
+    private var reports: [Report] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,19 +16,28 @@ class ReportsViewController: UIViewController {
         tableView.tableFooterView = UIView()
 
         segmentControl.selectedSegmentIndex = 0
-        applyFilter()
+        fetchReports()
     }
 
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        applyFilter()
+        fetchReports()
     }
 
-    private func applyFilter() {
-        let showReviewed = segmentControl.selectedSegmentIndex == 1
-        filteredReports = allReports.filter {
-            $0.isReviewed == showReviewed
+    private func fetchReports() {
+        // segments: 0 -> Open, 1 -> Resolved
+        let statusFilter = segmentControl.selectedSegmentIndex == 0 ? "Open" : "Resolved"
+
+        viewModel.fetchReports(filterStatus: statusFilter) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self?.reports = data
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    print("❌ Fetch reports error:", error.localizedDescription)
+                }
+            }
         }
-        tableView.reloadData()
     }
 }
 
@@ -49,7 +46,7 @@ extension ReportsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView,
                    numberOfRowsInSection section: Int) -> Int {
-        filteredReports.count
+        reports.count
     }
 
     func tableView(_ tableView: UITableView,
@@ -60,10 +57,10 @@ extension ReportsViewController: UITableViewDataSource {
             for: indexPath
         )
 
-        let report = filteredReports[indexPath.row]
+        let report = reports[indexPath.row]
 
-        cell.textLabel?.text = "Subject: \(report.subject)"
-        cell.detailTextLabel?.text = report.username
+        cell.textLabel?.text = "Reason: \(report.reason)"
+        cell.detailTextLabel?.text = "Reporter: \(report.reporterId)"
 
         cell.textLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         cell.detailTextLabel?.font = .systemFont(ofSize: 13)
@@ -79,6 +76,14 @@ extension ReportsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        print("Selected:", filteredReports[indexPath.row])
+
+        let selected = reports[indexPath.row]
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "ReportViewController") as? ReportViewController {
+            vc.reportID = selected.id
+            vc.viewModel = viewModel
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("Selected report:", selected)
+        }
     }
 }

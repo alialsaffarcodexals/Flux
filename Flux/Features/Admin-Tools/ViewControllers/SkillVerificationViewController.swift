@@ -4,21 +4,13 @@ class SkillVerificationViewController: UIViewController {
 
     @IBOutlet weak var SkillsTable: UITableView!
 
-    // MARK: - Data Model
-    struct SkillItem {
-        let title: String
-        let submittedBy: String
-    }
-
-    private var skills: [SkillItem] = [
-        SkillItem(title: "Advance Plumbing", submittedBy: "Ali Mohammed"),
-        SkillItem(title: "Carpentry", submittedBy: "John Cena"),
-        SkillItem(title: "Electrical Wiring", submittedBy: "Jaffer Abdullah")
-    ]
+    private var skills: [Skill] = []
+    private let viewModel = AdminToolsViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
+        fetchSkills()
     }
 
     // MARK: - Setup
@@ -26,6 +18,21 @@ class SkillVerificationViewController: UIViewController {
         SkillsTable.dataSource = self
         SkillsTable.delegate = self
         SkillsTable.tableFooterView = UIView() // removes empty rows
+    }
+
+    private func fetchSkills() {
+        // Fetch only pending skills for verification
+        viewModel.fetchSkills(filterStatus: .pending) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self?.skills = data
+                    self?.SkillsTable.reloadData()
+                case .failure(let error):
+                    print("❌ Fetch skills error:", error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
@@ -47,10 +54,11 @@ extension SkillVerificationViewController: UITableViewDataSource {
 
         let skill = skills[indexPath.row]
 
-        cell.textLabel?.text = skill.title
+        cell.textLabel?.text = skill.name
         cell.textLabel?.font = .systemFont(ofSize: 16, weight: .medium)
 
-        cell.detailTextLabel?.text = "Submitted by: \(skill.submittedBy)"
+        // providerId is available; we can show id until we fetch user details in detail view
+        cell.detailTextLabel?.text = "Provider: \(skill.providerId)"
         cell.detailTextLabel?.font = .systemFont(ofSize: 13)
         cell.detailTextLabel?.textColor = .secondaryLabel
 
@@ -70,9 +78,14 @@ extension SkillVerificationViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let selectedSkill = skills[indexPath.row]
-        print("Selected skill:", selectedSkill.title)
 
-        // Later:
-        // push SkillDetailsViewController
+        // attempt to push the skill detail view controller from storyboard
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "SkillViewController") as? SkillViewController {
+            vc.skillID = selectedSkill.id
+            vc.viewModel = viewModel
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("Selected skill:", selectedSkill.name)
+        }
     }
 }

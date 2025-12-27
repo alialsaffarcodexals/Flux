@@ -19,13 +19,12 @@ class AdminToolsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupDashboard()
-
         // Initialize ViewModel if not injected (simplifies storyboard entry)
         if viewModel == nil {
             viewModel = AdminToolsViewModel()
         }
-        
+
+        setupDashboard()
         setupUI()
     }
 
@@ -41,28 +40,62 @@ class AdminToolsViewController: UIViewController {
     // (Replace these later with API calls)
 
     private func loadServiceProviders() {
-        let totalProviders = 754
-        serviceProviders.text = "\(totalProviders)"
+        serviceProviders.text = "..."
+        viewModel.fetchServiceProvidersCount { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let count):
+                    self?.serviceProviders.text = "\(count)"
+                case .failure(let error):
+                    self?.serviceProviders.text = "—"
+                    print("❌ Fetch providers error:", error.localizedDescription)
+                }
+            }
+        }
     }
 
     private func loadSkillsStats() {
-        let rejected = 50
-        let pending  = 24
-        let approved = 500
+        skillsRejected.text = "..."
+        skillsPending.text = "..."
+        skillsApproved.text = "..."
 
-        skillsRejected.text = "\(rejected)"
-        skillsPending.text  = "\(pending)"
-        skillsApproved.text = "\(approved)"
+        viewModel.fetchSkillsStats { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let stats):
+                    self?.skillsRejected.text = "\(stats.rejected)"
+                    self?.skillsPending.text = "\(stats.pending)"
+                    self?.skillsApproved.text = "\(stats.approved)"
+                case .failure(let error):
+                    self?.skillsRejected.text = "—"
+                    self?.skillsPending.text = "—"
+                    self?.skillsApproved.text = "—"
+                    print("❌ Fetch skills error:", error.localizedDescription)
+                }
+            }
+        }
     }
 
     private func loadBookingStats() {
-        let rejected = 500
-        let pending  = 804
-        let approved = 5040
+        bookingRejected.text = "..."
+        bookingPending.text = "..."
+        bookingApproved.text = "..."
 
-        bookingRejected.text = "\(rejected)"
-        bookingPending.text  = "\(pending)"
-        bookingApproved.text = "\(approved)"
+        viewModel.fetchBookingStats { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let stats):
+                    self?.bookingRejected.text = "\(stats.rejected)"
+                    self?.bookingPending.text = "\(stats.pending)"
+                    self?.bookingApproved.text = "\(stats.approved)"
+                case .failure(let error):
+                    self?.bookingRejected.text = "—"
+                    self?.bookingPending.text = "—"
+                    self?.bookingApproved.text = "—"
+                    print("❌ Fetch bookings error:", error.localizedDescription)
+                }
+            }
+        }
     }
     
     private func setupUI() {
