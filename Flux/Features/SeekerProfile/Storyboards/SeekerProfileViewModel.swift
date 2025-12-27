@@ -14,7 +14,7 @@ class SeekerProfileViewModel {
     func fetchUserProfile() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        FirestoreManager.shared.getUser(uid: uid) { [weak self] result in
+        UserRepository.shared.getUser(uid: uid) { [weak self] result in
             switch result {
             case .success(let user):
                 self?.currentUser = user
@@ -50,7 +50,7 @@ class SeekerProfileViewModel {
                 self?.onError?(error.localizedDescription)
             } else {
                 // Fetch fresh user data to ensure AppNavigator has the latest state
-                FirestoreManager.shared.getUser(uid: uid) { result in
+                UserRepository.shared.getUser(uid: uid) { result in
                     switch result {
                     case .success(let updatedUser):
                         // 🚀 Centralized Navigation handles the screen switch

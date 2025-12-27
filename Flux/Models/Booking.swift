@@ -4,12 +4,12 @@ import FirebaseFirestore
 // MARK: - Booking
 
 enum BookingStatus: String, Codable {
-    case requested = "Requested"     // Provider tab: Request | Seeker tab: Pending
-    case accepted  = "Accepted"      // Provider: Accepted
-    case inProgress = "InProgress"   // Seeker: In progress (work started)
-    case completed = "Completed"     // Both: Completed
-    case rejected  = "Rejected"      // Provider: Dropped/Rejected
-    case canceled  = "Canceled"      // Optional: seeker cancels / system cancels
+    case requested = "Requested"     // Seeker Pending / Provider Request
+    case accepted  = "Accepted"      // Provider Accepted
+    case inProgress = "InProgress"   // Seeker In progress (optional but recommended)
+    case completed = "Completed"
+    case rejected  = "Rejected"      // Provider Dropped/Rejected
+    case canceled  = "Canceled"      // optional
 }
 
 

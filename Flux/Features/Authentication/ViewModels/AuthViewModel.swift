@@ -29,7 +29,7 @@ class AuthViewModel {
                     return
                 }
                 
-                FirestoreManager.shared.getUser(uid: uid) { result in
+                UserRepository.shared.getUser(uid: uid) { result in
                     switch result {
                     case .success(let user):
                         completion(true, nil, user)
@@ -82,7 +82,7 @@ class AuthViewModel {
                     return
                 }
                 
-                FirestoreManager.shared.getUser(uid: uid) { result in
+                UserRepository.shared.getUser(uid: uid) { result in
                     switch result {
                     case .success(let user):
                         completion(true, nil, user)

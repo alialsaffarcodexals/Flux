@@ -8,13 +8,13 @@ class ProviderProfileViewModel {
     var onError: ((String) -> Void)?
     var onSwitchToBuyer: ((User) -> Void)?
     var onUserDataUpdated: ((User) -> Void)? // New Binding
+    var onSkillsUpdated: (([Skill]) -> Void)?
     
     // MARK: - Fetch Data
     func fetchUserProfile() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        // Re-use your existing FirestoreManager logic
-        FirestoreManager.shared.getUser(uid: uid) { [weak self] result in
+        UserRepository.shared.getUser(uid: uid) { [weak self] result in
             switch result {
             case .success(let user):
                 self?.onUserDataUpdated?(user)
@@ -38,13 +38,24 @@ class ProviderProfileViewModel {
                 return
             }
             
-            FirestoreManager.shared.getUser(uid: uid) { result in
+            UserRepository.shared.getUser(uid: uid) { result in
                 switch result {
                 case .success(let updatedUser):
                     self?.onSwitchToBuyer?(updatedUser)
                 case .failure(let error):
                     self?.onError?("Failed to switch modes: \(error.localizedDescription)")
                 }
+            }
+        }
+    }
+
+    func fetchSkills(providerId: String) {
+        SkillRepository.shared.fetchSkills(for: providerId) { [weak self] result in
+            switch result {
+            case .success(let skills):
+                self?.onSkillsUpdated?(skills)
+            case .failure(let error):
+                self?.onError?(error.localizedDescription)
             }
         }
     }
