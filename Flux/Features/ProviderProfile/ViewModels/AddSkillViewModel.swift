@@ -26,6 +26,10 @@ final class AddSkillViewModel {
             onError?("Please enter a skill name.")
             return
         }
+        if trimmedName.count > 10 {
+            onError?("Skill name must be 10 characters or less")
+            return
+        }
 
         guard !proofImageURL.isEmpty else {
             onError?("Please upload a proof image.")
