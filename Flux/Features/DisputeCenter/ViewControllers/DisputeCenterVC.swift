@@ -14,7 +14,7 @@ class DisputeCenterVC: UIViewController {
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var uploadPictureButton: UIButton!
     @IBOutlet weak var sendReportButton: UIButton!
-    @IBOutlet weak var infoLabel: UILabel!
+    
 
     // MARK: - Data
     private let recipients: [String] = []
