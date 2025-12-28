@@ -107,9 +107,9 @@ extension DisputeCenterVC: UITableViewDataSource, UITableViewDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
                              didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-        if let image = info[.originalImage] as? UIImage {
+        if info[.originalImage] is UIImage {   
             // TODO: pass to ViewModel
-            // viewModel.userPickedImage(image)
+            // viewModel.userPickedImage(info[.originalImage] as? UIImage)
         }
     }
 }

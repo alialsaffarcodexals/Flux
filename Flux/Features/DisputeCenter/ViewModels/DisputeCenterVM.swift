@@ -7,7 +7,7 @@ import FirebaseStorage
 final class DisputeCenterVM: ObservableObject {
     
     // MARK: - Output
-    private(set) var recipients: [String] = ["User A", "User B", "Admin"]   // TODO: fetch real list
+    private(set) var recipients: [String] = []   // will hold UID strings
     private(set) var reasons: [String]  = ["Inappropriate content", "Spam", "Harassment", "Scam / fraud", "Other"]
     
     private(set) var selectedRecipientIndex: IndexPath?
@@ -27,7 +27,19 @@ final class DisputeCenterVM: ObservableObject {
     
     // MARK: - Intents
     func loadInitialData() {
-        onRecipientsChanged?()   // triggers reload with dummy list
+        // fetch only **Provider** role users (people who can be reported)
+        Firestore.firestore()
+            .collection("users")
+            .whereField("role", isEqualTo: "Provider")
+            .getDocuments { [weak self] snap, error in
+                if let error = error {
+                    self?.onReportSubmitted?(error)   // surface fetch error
+                    return
+                }
+                // map every doc → its **document ID** (the UID)
+                self?.recipients = snap?.documents.compactMap { $0.documentID } ?? []
+                self?.onRecipientsChanged?()
+            }
     }
     
     func selectRecipient(at indexPath: IndexPath) {
@@ -64,7 +76,6 @@ final class DisputeCenterVM: ObservableObject {
             return
         }
         
-        // 1.  upload image (if any)  →  2.  create report via Repo
         // 1.  upload image (if any)  →  2.  create report via Repo
         if let image = selectedImage,
            let jpegData = image.jpegData(compressionQuality: 0.8) {
