@@ -69,20 +69,22 @@ class AppNavigator {
             
             // Load the Provider Profile VC from its specific storyboard
             let providerStoryboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
-            if let providerVC = providerStoryboard.instantiateViewController(withIdentifier: "ProviderMainProfileVC") as? UIViewController {
-                // REPLACE the stack with the Provider Profile
-                navigationController.setViewControllers([providerVC], animated: false)
-            }
-            return true // YES, select this tab
-            
+            let providerVC = providerStoryboard.instantiateViewController(
+                withIdentifier: "ProviderMainProfileVC"
+            ) as! ProviderMainProfileVC
+            navigationController.setViewControllers([providerVC], animated: false)
+                return true
         } else {
             print("👤 Configuring Profile Tab: Seeker Mode")
             
             // Ensure Seeker VC is loaded (Standard behavior)
             let seekerStoryboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
-            if let seekerVC = seekerStoryboard.instantiateViewController(withIdentifier: "SeekerProfileViewController") as? UIViewController {
-                navigationController.setViewControllers([seekerVC], animated: false)
-            }
+            let seekerVC = seekerStoryboard.instantiateViewController(
+                withIdentifier: "SeekerProfileViewController"
+            ) as! SeekerProfileViewController
+            navigationController.setViewControllers([seekerVC], animated: false)
+
+            
             return false // NO, stay on Home tab
         }
     }

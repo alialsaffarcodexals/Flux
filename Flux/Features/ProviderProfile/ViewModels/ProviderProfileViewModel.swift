@@ -6,14 +6,28 @@ class ProviderProfileViewModel {
     
     // MARK: - Bindings
     var onError: ((String) -> Void)?
-    // New binding to notify the VC when the switch is done
     var onSwitchToBuyer: ((User) -> Void)?
+    var onUserDataUpdated: ((User) -> Void)? // New Binding
+    var onSkillsUpdated: (([Skill]) -> Void)?
+    
+    // MARK: - Fetch Data
+    func fetchUserProfile() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        UserRepository.shared.getUser(uid: uid) { [weak self] result in
+            switch result {
+            case .success(let user):
+                self?.onUserDataUpdated?(user)
+            case .failure(let error):
+                self?.onError?(error.localizedDescription)
+            }
+        }
+    }
     
     // MARK: - Actions
     func didTapServiceSeekerProfile() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        // 1. Switch back to Buyer Mode in Firestore
         let db = Firestore.firestore()
         db.collection("users").document(uid).updateData([
             "activeProfileMode": ProfileMode.buyerMode.rawValue
@@ -24,16 +38,24 @@ class ProviderProfileViewModel {
                 return
             }
             
-            // 2. Fetch fresh user data to ensure the UI has the latest state
-            FirestoreManager.shared.getUser(uid: uid) { result in
+            UserRepository.shared.getUser(uid: uid) { result in
                 switch result {
                 case .success(let updatedUser):
-                    // 3. Notify the View Controller to swap the screen
                     self?.onSwitchToBuyer?(updatedUser)
-                    
                 case .failure(let error):
                     self?.onError?("Failed to switch modes: \(error.localizedDescription)")
                 }
+            }
+        }
+    }
+
+    func fetchSkills(providerId: String) {
+        SkillRepository.shared.fetchSkills(for: providerId) { [weak self] result in
+            switch result {
+            case .success(let skills):
+                self?.onSkillsUpdated?(skills)
+            case .failure(let error):
+                self?.onError?(error.localizedDescription)
             }
         }
     }

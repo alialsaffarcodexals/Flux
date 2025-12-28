@@ -53,6 +53,7 @@ class AuthManager {
     }
 
     /// Internal save method.
+
     private func saveUserToFirestore(uid: String, firstName: String, lastName: String, username: String, email: String, phone: String, profileImageURL: String?, completion: @escaping (Bool) -> Void) {
         
         // Store new fields in the dictionary.
@@ -61,11 +62,12 @@ class AuthManager {
             "id": uid,
             "firstName": firstName,
             "lastName": lastName,
-            "username": username, // Store the username.
+            "username": username,
             "email": email,
             "phoneNumber": phone,
             "role": UserRole.seeker.rawValue,
             "activeProfileMode": ProfileMode.buyerMode.rawValue,
+            "location": "Bahrain", // 📍 Default location for all new users
             "joinedDate": Timestamp(date: Date())
         ]
         
