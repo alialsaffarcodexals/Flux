@@ -80,9 +80,6 @@
 		7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB330F2EE45835008AC600 /* AddProjectViewController.swift */; };
 		7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33112EE45865008AC600 /* PortfolioViewModel.swift */; };
 		7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33192EE45994008AC600 /* Home.storyboard */; };
-		7FAB331C2EE459B4008AC600 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB331B2EE459B4008AC600 /* HomeFeedViewController.swift */; };
-		7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB331D2EE45A16008AC600 /* FilterModalViewController.swift */; };
-		7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB331F2EE45A49008AC600 /* ServiceDetailsViewController.swift */; };
 		7FAB33222EE45A6D008AC600 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33212EE45A6D008AC600 /* HomeViewModel.swift */; };
 		7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33232EE45A98008AC600 /* ServiceDetailsViewModel.swift */; };
 		7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33292EE45B55008AC600 /* Booking.storyboard */; };
@@ -204,9 +201,6 @@
 		7FAB330F2EE45835008AC600 /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		7FAB33112EE45865008AC600 /* PortfolioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewModel.swift; sourceTree = "<group>"; };
 		7FAB33192EE45994008AC600 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		7FAB331B2EE459B4008AC600 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
-		7FAB331D2EE45A16008AC600 /* FilterModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModalViewController.swift; sourceTree = "<group>"; };
-		7FAB331F2EE45A49008AC600 /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		7FAB33212EE45A6D008AC600 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = Flux/Features/HomeDiscovery/ViewControllers/HomeViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33232EE45A98008AC600 /* ServiceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewModel.swift; sourceTree = "<group>"; };
 		7FAB33292EE45B55008AC600 /* Booking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Booking.storyboard; sourceTree = "<group>"; };
@@ -590,9 +584,10 @@
 		7FAB33152EE45922008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB331B2EE459B4008AC600 /* HomeFeedViewController.swift */,
-				7FAB331D2EE45A16008AC600 /* FilterModalViewController.swift */,
-				7FAB331F2EE45A49008AC600 /* ServiceDetailsViewController.swift */,
+				10BBBC6D2EFC706300D1DC7C /* UIViewController.swift */,
+				10BBBC6F2EFC70A700D1DC7C /* HomeFeedViewController.swift */,
+				10BBBC712EFC817800D1DC7C /* ServiceCell.swift */,
+				10BBBC722EFC817800D1DC7C /* ServiceCell.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1195,7 +1190,6 @@
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
 				7FAB33972EE467CC008AC600 /* Validator.swift in Sources */,
-				7FAB331C2EE459B4008AC600 /* HomeFeedViewController.swift in Sources */,
 				7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */,
 				7FAB33482EE45ED9008AC600 /* ChatRoomViewController.swift in Sources */,
 			);
