@@ -16,7 +16,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ///   - connectionOptions: Additional options for configuration.
     /// - Returns: Void
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        let window = UIWindow(windowScene: windowScene)
+        let mainTabBar = MainTabBarController()
+        
+        // TODO: Persist and retrieve the last active role. Defaulting to .seeker for now.
+        // let lastRole = UserDefaults.standard.string(forKey: "lastActiveRole") == "Provider" ? UserRole.provider : UserRole.seeker
+        // mainTabBar.setupTabs(for: lastRole) 
+        // Note: setupTabs is called in viewDidLoad of MainTabBarController with default .seeker. 
+        // If customization is needed before view load, access mainTabBar properties here.
+
+        window.rootViewController = mainTabBar
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
     /// Handles the sceneDidDisconnect lifecycle event.

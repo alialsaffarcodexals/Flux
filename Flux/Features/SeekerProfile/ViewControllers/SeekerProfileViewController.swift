@@ -24,7 +24,12 @@ class SeekerProfileViewController: UIViewController {
     }
     
     @IBAction func providerProfileTapped(_ sender: UIButton) {
-        viewModel.didTapServiceProviderProfile()
+        //viewModel.didTapServiceProviderProfile()
+        
+        // Switch to Provider Mode
+        if let tabBarController = self.tabBarController as? MainTabBarController {
+            tabBarController.switchRole(to: .provider)
+        }
     }
 
     func setupBindings() {

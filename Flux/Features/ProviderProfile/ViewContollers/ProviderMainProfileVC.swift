@@ -102,28 +102,23 @@ class ProviderMainProfileVC: UIViewController {
             print("Error: \(error)")
         }
         
-        viewModel.onSwitchToBuyer = { [weak self] updatedUser in
-            DispatchQueue.main.async {
-                self?.performSwitchToSeekerProfile()
-            }
-        }
+//        viewModel.onSwitchToBuyer = { [weak self] updatedUser in
+//            DispatchQueue.main.async {
+//                self?.navigateToSeekerProfile()
+//            }
+//        }
     }
     
     // MARK: - Actions
     @IBAction func seekerProfileTapped(_ sender: UIButton) {
-        viewModel.didTapServiceSeekerProfile()
+        // viewModel.didTapServiceSeekerProfile()
+        navigateToSeekerProfile()
     }
     
     // MARK: - Navigation Logic
-    private func performSwitchToSeekerProfile() {
-        let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
-        guard let seekerVC = storyboard.instantiateViewController(withIdentifier: "SeekerProfileViewController") as? SeekerProfileViewController else { return }
-        
-        if let nav = self.navigationController {
-            var viewControllers = nav.viewControllers
-            viewControllers.removeAll { $0 === self }
-            viewControllers.append(seekerVC)
-            nav.setViewControllers(viewControllers, animated: true)
+    private func navigateToSeekerProfile() {
+        if let tabBarController = self.tabBarController as? MainTabBarController {
+             tabBarController.switchRole(to: .seeker)
         }
     }
     
