@@ -27,6 +27,16 @@
                                 <rect key="frame" x="116" y="118" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sMz-MM-tHO">
+                                        <rect key="frame" x="0.0" y="50" width="240" height="47.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sMz-MM-tHO" id="op4-lA-3eE">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="47.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foB-Gz-aVe">
@@ -103,8 +113,8 @@
                     <navigationItem key="navigationItem" id="uNt-Ly-maz"/>
                     <connections>
                         <outlet property="descriptionTextField" destination="1vH-i7-5LC" id="cbr-Zu-LBz"/>
-                        <outlet property="reasonsTableView" destination="UAd-Bh-oNn" id="iuV-a4-Err"/>
-                        <outlet property="recipientTableView" destination="sug-ja-Sgk" id="ybF-57-Nuy"/>
+                        <outlet property="reasonsTableView" destination="UAd-Bh-oNn" id="cTZ-SW-hh3"/>
+                        <outlet property="recipientTableView" destination="sug-ja-Sgk" id="pix-02-AAR"/>
                         <outlet property="sendReportButton" destination="18i-SL-LS1" id="tJ8-l6-oXD"/>
                         <outlet property="uploadPictureButton" destination="SdL-UT-nji" id="tGA-Ni-dYz"/>
                     </connections>
@@ -169,7 +179,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

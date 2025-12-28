@@ -4,15 +4,16 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 
-final class DisputeCenterVM: ObservableObject {
+final class DisputeCenterVM {
     
     // MARK: - Output
     private(set) var recipients: [String] = []   // will hold UID strings
-    private(set) var reasons: [String]  = ["Inappropriate content", "Spam", "Harassment", "Scam / fraud", "Other"]
+    private(set) var reasons: [String] = ["Inappropriate content", "Spam", "Harassment", "Scam / fraud", "Other"]
     
-    private(set) var selectedRecipientIndex: IndexPath?
-    private(set) var selectedReasonIndex: IndexPath?
-    private(set) var selectedImage: UIImage?
+    private var selectedRecipientIndex: Int?
+    private var selectedReasonIndex: Int?
+    private var selectedImage: UIImage?
+    private var currentDescription: String = ""
     
     // MARK: - Callbacks
     var onRecipientsChanged: (() -> Void)?
@@ -23,38 +24,38 @@ final class DisputeCenterVM: ObservableObject {
     
     // MARK: - Dependencies (MVVM)
     private let reportRepo = ReportRepository.shared
-    private let storageRepo = StorageManager.shared   // uploads images
     
-    // MARK: - Intents
+    // MARK: - Public Methods
     func loadInitialData() {
-        // fetch only **Provider** role users (people who can be reported)
+        // Load Provider UIDs (people who can be reported)
         Firestore.firestore()
             .collection("users")
             .whereField("role", isEqualTo: "Provider")
             .getDocuments { [weak self] snap, error in
                 if let error = error {
-                    self?.onReportSubmitted?(error)   // surface fetch error
+                    self?.onReportSubmitted?(error)
                     return
                 }
-                // map every doc → its **document ID** (the UID)
                 self?.recipients = snap?.documents.compactMap { $0.documentID } ?? []
+                print("🔥 Provider count = \(self?.recipients.count ?? 0)")
                 self?.onRecipientsChanged?()
             }
     }
     
-    func selectRecipient(at indexPath: IndexPath) {
-        selectedRecipientIndex = indexPath
+    func selectRecipient(at index: Int) {
+        selectedRecipientIndex = index
         onRecipientsChanged?()
         validateSubmit()
     }
     
-    func selectReason(at indexPath: IndexPath) {
-        selectedReasonIndex = indexPath
+    func selectReason(at index: Int) {
+        selectedReasonIndex = index
         onReasonsChanged?()
         validateSubmit()
     }
     
     func updateDescription(_ text: String?) {
+        currentDescription = text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         validateSubmit()
     }
     
@@ -64,19 +65,19 @@ final class DisputeCenterVM: ObservableObject {
         validateSubmit()
     }
     
-    func submitReport(description: String?, recipientIndex: IndexPath?, reasonIndex: IndexPath?) {
-        // basic validation
-        guard let rIdx = recipientIndex?.row,
-              let rsIdx = reasonIndex?.row,
+    func submitReport(description: String?) {
+        // Validate inputs
+        guard let rIdx = selectedRecipientIndex,
+              let rsIdx = selectedReasonIndex,
               recipients.indices.contains(rIdx),
               reasons.indices.contains(rsIdx),
               let desc = description?.trimmingCharacters(in: .whitespacesAndNewlines),
               !desc.isEmpty else {
-            onReportSubmitted?(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Please complete all fields"]))
+            onReportSubmitted?(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Please complete all required fields"]))
             return
         }
         
-        // 1.  upload image (if any)  →  2.  create report via Repo
+        // Upload image if present, then create report
         if let image = selectedImage,
            let jpegData = image.jpegData(compressionQuality: 0.8) {
             
@@ -87,7 +88,7 @@ final class DisputeCenterVM: ObservableObject {
                     self?.onReportSubmitted?(error)
                     return
                 }
-                // get download URL
+                // Get download URL
                 storageRef.downloadURL { url, error in
                     if let url = url {
                         self?.createReportInRepo(description: desc,
@@ -99,17 +100,32 @@ final class DisputeCenterVM: ObservableObject {
                 }
             }
         } else {
-            // no image – create report immediately
+            // No image - create report immediately
             createReportInRepo(description: desc, reasonIdx: rsIdx, evidenceURL: nil)
         }
     }
-    // MARK: - Private
+    
+    // MARK: - Helper Methods
+    func isRecipientSelected(at index: Int) -> Bool {
+        return selectedRecipientIndex == index
+    }
+    
+    func isReasonSelected(at index: Int) -> Bool {
+        return selectedReasonIndex == index
+    }
+    
+    // MARK: - Private Methods
     private func createReportInRepo(description: String, reasonIdx: Int, evidenceURL: String?) {
-        // fetch real reporter & reported IDs from Firestore
-        let reporterID   = Auth.auth().currentUser?.uid ?? "anonymous"   // logged-in user
-        let reportedID   = recipients[selectedRecipientIndex?.row ?? 0]  // recipient you picked
+        guard let reporterID = Auth.auth().currentUser?.uid,
+              let recipientIndex = selectedRecipientIndex,
+              recipients.indices.contains(recipientIndex) else {
+            onReportSubmitted?(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid user or recipient"]))
+            return
+        }
         
-        ReportRepository.shared.createReport(
+        let reportedID = recipients[recipientIndex]
+        
+        reportRepo.createReport(
             reporterId: reporterID,
             reportedUserId: reportedID,
             reason: reasons[reasonIdx],
@@ -127,7 +143,12 @@ final class DisputeCenterVM: ObservableObject {
     }
     
     private func validateSubmit() {
-        let canSend = (selectedRecipientIndex != nil) && (selectedReasonIndex != nil) && (selectedImage != nil)
+        // Description is required, image is optional
+        let hasValidRecipient = selectedRecipientIndex != nil
+        let hasValidReason = selectedReasonIndex != nil
+        let hasDescription = !currentDescription.isEmpty
+        
+        let canSend = hasValidRecipient && hasValidReason && hasDescription
         onSendEnabledChanged?(canSend)
     }
 }

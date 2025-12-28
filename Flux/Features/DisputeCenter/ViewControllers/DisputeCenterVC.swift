@@ -18,20 +18,15 @@ class DisputeCenterVC: UIViewController,
     @IBOutlet weak var uploadPictureButton: UIButton!
     @IBOutlet weak var sendReportButton: UIButton!
    
-
-    // MARK: - Data
-    private let recipients: [String] = []
-    private let reasons: [String] = []
-    private var selectedRecipientIndex: IndexPath?
-    private var selectedReasonIndex: IndexPath?
-
-    
+    // MARK: - ViewModel
     private let viewModel = DisputeCenterVM()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableViews()
         setupInitialState()
+        bindViewModel()
+        viewModel.loadInitialData()
     }
 
     private func setupTableViews() {
@@ -46,70 +41,112 @@ class DisputeCenterVC: UIViewController,
 
     private func setupInitialState() {
         sendReportButton.isEnabled = false
+        uploadPictureButton.setTitle("Upload Picture", for: .normal)
+    }
+    
+    private func bindViewModel() {
+        // Bind to ViewModel callbacks
+        viewModel.onRecipientsChanged = { [weak self] in
+            DispatchQueue.main.async {
+                self?.recipientTableView.reloadData()
+            }
+        }
+        
+        viewModel.onReasonsChanged = { [weak self] in
+            DispatchQueue.main.async {
+                self?.reasonsTableView.reloadData()
+            }
+        }
+        
+        viewModel.onSendEnabledChanged = { [weak self] isEnabled in
+            DispatchQueue.main.async {
+                self?.sendReportButton.isEnabled = isEnabled
+            }
+        }
+        
+        viewModel.onImagePicked = { [weak self] image in
+            DispatchQueue.main.async {
+                let title = image != nil ? "Picture Selected ✓" : "Upload Picture"
+                self?.uploadPictureButton.setTitle(title, for: .normal)
+            }
+        }
+        
+        viewModel.onReportSubmitted = { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    self?.showAlert(title: "Error", message: error.localizedDescription)
+                } else {
+                    self?.showAlert(title: "Success", message: "Report submitted successfully") {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                }
+            }
+        }
     }
 
-    private func updateSendReportAvailability() {
-        let hasDescription = !(descriptionTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true)
-        sendReportButton.isEnabled = selectedRecipientIndex != nil && selectedReasonIndex != nil && hasDescription
+    private func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            completion?()
+        })
+        present(alert, animated: true)
     }
 
     // MARK: - Actions
     @IBAction func uploadPictureTapped(_ sender: UIButton) {
         let picker = UIImagePickerController()
-           picker.sourceType = .photoLibrary
-           picker.delegate = self
-           present(picker, animated: true)
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        present(picker, animated: true)
     }
 
     @IBAction func sendReportTapped(_ sender: UIButton) {
-        viewModel.submitReport(description: descriptionTextField.text,
-                               recipientIndex: recipientTableView.indexPathForSelectedRow,
-                               reasonIndex:   reasonsTableView.indexPathForSelectedRow)
+        viewModel.submitReport(description: descriptionTextField.text)
     }
 
     @IBAction func descriptionChanged(_ sender: UITextField) {
-        updateSendReportAvailability()
+        viewModel.updateDescription(sender.text)
     }
 }
 
 extension DisputeCenterVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView === recipientTableView {
-            return recipients.count
+            return viewModel.recipients.count
         }
-        return reasons.count
+        return viewModel.reasons.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView === recipientTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RecipientCell", for: indexPath)
-            cell.textLabel?.text = recipients[indexPath.row]
-            cell.accessoryType = (indexPath == selectedRecipientIndex) ? .checkmark : .none
+            cell.textLabel?.text = viewModel.recipients[indexPath.row]
+            cell.accessoryType = viewModel.isRecipientSelected(at: indexPath.row) ? .checkmark : .none
             return cell
         }
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReasonCell", for: indexPath)
-        cell.textLabel?.text = reasons[indexPath.row]
-        cell.accessoryType = (indexPath == selectedReasonIndex) ? .checkmark : .none
+        cell.textLabel?.text = viewModel.reasons[indexPath.row]
+        cell.accessoryType = viewModel.isReasonSelected(at: indexPath.row) ? .checkmark : .none
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         if tableView === recipientTableView {
-            selectedRecipientIndex = indexPath
+            viewModel.selectRecipient(at: indexPath.row)
         } else {
-            selectedReasonIndex = indexPath
+            viewModel.selectReason(at: indexPath.row)
         }
-        tableView.reloadData()
-        updateSendReportAvailability()
     }
+    
     // MARK: - UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController,
                              didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-        if info[.originalImage] is UIImage {   
-            // TODO: pass to ViewModel
-            // viewModel.userPickedImage(info[.originalImage] as? UIImage)
+        if let image = info[.originalImage] as? UIImage {
+            viewModel.userPickedImage(image)
         }
     }
 }
