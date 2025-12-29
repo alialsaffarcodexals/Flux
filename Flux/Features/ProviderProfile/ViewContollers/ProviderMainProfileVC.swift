@@ -115,6 +115,20 @@ class ProviderMainProfileVC: UIViewController {
         navigateToSeekerProfile()
     }
     
+    @IBAction func settingsTapped(_ sender: Any) {
+        print("⚙️ Settings Tapped in Provider Profile")
+        
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        
+        guard let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else {
+            print("🔴 Error: Could not find 'SettingsViewController' in Settings.storyboard")
+            return
+        }
+        
+        // Push onto existing navigation stack (preserves Back button)
+        navigationController?.pushViewController(settingsVC, animated: true)
+    }
+    
     // MARK: - Navigation Logic
     private func navigateToSeekerProfile() {
         if let tabBarController = self.tabBarController as? MainTabBarController {
