@@ -102,6 +102,16 @@ class ProviderMainProfileVC: UIViewController {
             print("Error: \(error)")
         }
         
+        viewModel.onLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showLoadingIndicator()
+                } else {
+                    self?.hideLoadingIndicator()
+                }
+            }
+        }
+        
 //        viewModel.onSwitchToBuyer = { [weak self] updatedUser in
 //            DispatchQueue.main.async {
 //                self?.navigateToSeekerProfile()

@@ -79,5 +79,15 @@ class SeekerProfileViewController: UIViewController {
         viewModel.onError = { errorMessage in
             print("Error fetching profile: \(errorMessage)")
         }
+        
+        viewModel.onLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showLoadingIndicator()
+                } else {
+                    self?.hideLoadingIndicator()
+                }
+            }
+        }
     }
 }

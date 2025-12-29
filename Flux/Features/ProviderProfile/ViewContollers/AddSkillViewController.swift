@@ -49,6 +49,16 @@ final class AddSkillViewController: UIViewController {
         viewModel.onError = { [weak self] message in
             self?.showAlert(message: message)
         }
+        
+        viewModel.onLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showLoadingIndicator()
+                } else {
+                    self?.hideLoadingIndicator()
+                }
+            }
+        }
     }
 
     @IBAction private func uploadProofTapped(_ sender: UIButton) {
