@@ -30,63 +30,39 @@ class AppNavigator {
         }
     
     private func loadMainTabBar(for user: User) {
-        // 1. Load the Global Tab Bar (currently living in SeekerProfile.storyboard)
-        let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
+        print("🔄 Switching to MainTabBarController for user: \(user.firstName) (\(user.role.rawValue))")
         
-        guard let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "SeekerTabBarController") as? UITabBarController else {
-            print("🔴 Error: Could not find 'SeekerTabBarController'.")
-            return
-        }
+        // 1. Instantiate MainTabBarController programmatically
+        let mainTabBarController = MainTabBarController()
         
-        // 2. Configure the Profile Tab (Index 3) based on User Role/Mode
-        var shouldSelectProfileTab = false
+        // 2. Configure Tabs based on User Role
+        mainTabBarController.setupTabs(for: user.role)
         
-        if let viewControllers = mainTabBarController.viewControllers, viewControllers.count > 3 {
-            
-            // The 4th tab (Index 3) is the Profile Navigation Controller
-            if let profileNav = viewControllers[3] as? UINavigationController {
-                // This function now returns 'true' if we are in Provider Mode
-                shouldSelectProfileTab = configureProfileTab(navigationController: profileNav, user: user)
-            }
-        }
+        // 3. Handle Active Profile Mode / Initial Tab Selection
+        // If the user was in Seller Mode (Provider), we might want to switch them to that context.
+        // MainTabBarController.setupTabs(for: user.role) already sets up the correct tabs.
+        // If we want to strictly follow "activeProfileMode should still work normally", 
+        // we ensure the tabs are correct (which they are by passing user.role).
         
-        // 3. FIX: If in Seller Mode, explicitly select the Profile Tab (Index 3)
-        if shouldSelectProfileTab {
-            mainTabBarController.selectedIndex = 3
-        }
+        // Optional: If you want to force them to the profile tab or specific tab based on state:
+        // if user.role == .provider && user.activeProfileMode == .sellerMode {
+        //      mainTabBarController.selectedIndex = 4 // Index of Profile in Provider mode
+        // }
+        // For now, defaulting to Home (Index 0) is standard for a fresh login/launch transition.
         
         // 4. Set as Root
         setRoot(viewController: mainTabBarController)
     }
     
-    // MARK: - Profile Switching Logic
-    /// Configures the profile tab and returns TRUE if the app should default to this tab (Provider Mode).
-    private func configureProfileTab(navigationController: UINavigationController, user: User) -> Bool {
-        
-        // Check if user is in Seller Mode
-        if user.role == .provider && user.activeProfileMode == .sellerMode {
-            print("👤 Configuring Profile Tab: Provider Mode")
-            
-            // Load the Provider Profile VC from its specific storyboard
-            let providerStoryboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
-            let providerVC = providerStoryboard.instantiateViewController(
-                withIdentifier: "ProviderMainProfileVC"
-            ) as! ProviderMainProfileVC
-            navigationController.setViewControllers([providerVC], animated: false)
-                return true
-        } else {
-            print("👤 Configuring Profile Tab: Seeker Mode")
-            
-            // Ensure Seeker VC is loaded (Standard behavior)
-            let seekerStoryboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
-            let seekerVC = seekerStoryboard.instantiateViewController(
-                withIdentifier: "SeekerProfileViewController"
-            ) as! SeekerProfileViewController
-            navigationController.setViewControllers([seekerVC], animated: false)
-
-            
-            return false // NO, stay on Home tab
+    // MARK: - Auth Navigation
+    
+    func navigateToAuth() {
+        print("🔙 Navigating to Authentication Flow")
+        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
+        guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
+            return
         }
+        setRoot(viewController: authNav)
     }
     
     // MARK: - Helper: Change Root

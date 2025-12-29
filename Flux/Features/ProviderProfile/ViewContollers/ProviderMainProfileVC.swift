@@ -102,6 +102,16 @@ class ProviderMainProfileVC: UIViewController {
             print("Error: \(error)")
         }
         
+        viewModel.onLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showLoadingIndicator()
+                } else {
+                    self?.hideLoadingIndicator()
+                }
+            }
+        }
+        
 //        viewModel.onSwitchToBuyer = { [weak self] updatedUser in
 //            DispatchQueue.main.async {
 //                self?.navigateToSeekerProfile()
@@ -113,6 +123,20 @@ class ProviderMainProfileVC: UIViewController {
     @IBAction func seekerProfileTapped(_ sender: UIButton) {
         // viewModel.didTapServiceSeekerProfile()
         navigateToSeekerProfile()
+    }
+    
+    @IBAction func settingsTapped(_ sender: Any) {
+        print("⚙️ Settings Tapped in Provider Profile")
+        
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        
+        guard let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else {
+            print("🔴 Error: Could not find 'SettingsViewController' in Settings.storyboard")
+            return
+        }
+        
+        // Push onto existing navigation stack (preserves Back button)
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     // MARK: - Navigation Logic

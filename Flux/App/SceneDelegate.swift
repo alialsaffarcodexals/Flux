@@ -18,16 +18,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        let window = UIWindow(windowScene: windowScene)
-        let mainTabBar = MainTabBarController()
+        // Required Behavior: Always start at Authentication flow
+        print("🚀 App Launched. Setting Root VC to Authentication Navigation Controller.")
         
-        // TODO: Persist and retrieve the last active role. Defaulting to .seeker for now.
-        // let lastRole = UserDefaults.standard.string(forKey: "lastActiveRole") == "Provider" ? UserRole.provider : UserRole.seeker
-        // mainTabBar.setupTabs(for: lastRole) 
-        // Note: setupTabs is called in viewDidLoad of MainTabBarController with default .seeker. 
-        // If customization is needed before view load, access mainTabBar properties here.
+        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
+        
+        // "AuthenticationNC" is the initial Navigation Controller in Authentication.storyboard
+        guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
+            print("🔴 Error: Could not find 'AuthenticationNC' (Auth Nav) in Authentication.storyboard")
+            return
+        }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
 
-        window.rootViewController = mainTabBar
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = authNav
         self.window = window
         window.makeKeyAndVisible()
     }

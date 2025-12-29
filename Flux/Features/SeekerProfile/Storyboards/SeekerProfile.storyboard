@@ -459,6 +459,9 @@
                     <navigationItem key="navigationItem" id="obh-S9-DJ1">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="UJq-T8-r6q">
                             <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="settingsTapped:" destination="1Nr-3a-wwB" id="dcY-Gs-LAY"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

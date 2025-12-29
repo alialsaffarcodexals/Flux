@@ -419,6 +419,9 @@
                     <navigationItem key="navigationItem" id="Img-fl-jTs">
                         <barButtonItem key="rightBarButtonItem" image="gear" catalog="system" id="sHl-no-O2s">
                             <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="settingsTapped:" destination="Y6W-OH-hqX" id="jgw-ob-nCE"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

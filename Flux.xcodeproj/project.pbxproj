@@ -62,10 +62,11 @@
 		7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */; };
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
+		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FA993EA2EFDA20C00CE5748 /* DisputeCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
-		7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */; };
+		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
 		7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */; };
 		7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */; };
 		7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F72EE455C1008AC600 /* SettingsViewModel.swift */; };
@@ -191,10 +192,11 @@
 		7F68C3C92EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVC.swift; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainViewController.swift; sourceTree = "<group>"; };
+		7FAB32F02EE45500008AC600 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
 		7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneViewController.swift; sourceTree = "<group>"; };
 		7FAB32F72EE455C1008AC600 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -486,7 +488,7 @@
 		7FAB32EF2EE454D2008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */,
+				7FAB32F02EE45500008AC600 /* SettingsViewController.swift */,
 				7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */,
 				7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */,
 			);
@@ -898,6 +900,7 @@
 				7FAB33962EE467CC008AC600 /* Validator.swift */,
 				7F5A0D182EFDDC9E001135C2 /* Constants.swift */,
 				7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */,
+				7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1217,7 +1220,8 @@
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
 				7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */,
-				7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */,
+				7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */,
+				7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */,
 				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
 				7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
