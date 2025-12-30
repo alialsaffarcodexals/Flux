@@ -25,7 +25,7 @@ class StorageManager {
     
     private let cloudName = "dwdxijm9c"
     private let uploadPreset = "flux–uploads_v2"
-
+    
     private let profileFolder = "profiles"
     private let serviceFolder = "services"
     private let skillFolder = "skills"
@@ -37,15 +37,15 @@ class StorageManager {
         self.cloudinary = CLDCloudinary(configuration: config)
     }
     
-
-
-/// @Description: Performs the uploadProfilePicture operation.
-/// @Input: with data: Data; fileName: String; completion: @escaping (Result<String; Error>
-/// @Output: Void)
+    
+    
+    /// @Description: Performs the uploadProfilePicture operation.
+    /// @Input: with data: Data; fileName: String; completion: @escaping (Result<String; Error>
+    /// @Output: Void)
     public func uploadProfilePicture(with data: Data, fileName: String, completion: @escaping (Result<String, Error>) -> Void) {
         uploadImageData(data, folder: profileFolder, publicId: fileName, completion: completion)
     }
-
+    
     public func uploadServiceCoverImage(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         uploadImage(
             image,
@@ -54,7 +54,7 @@ class StorageManager {
             completion: completion
         )
     }
-
+    
     public func uploadSkillProofImage(image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
         uploadImage(
             image,
@@ -63,7 +63,7 @@ class StorageManager {
             completion: completion
         )
     }
-
+    
     private func uploadImage(
         _ image: UIImage,
         folder: String,
@@ -79,11 +79,11 @@ class StorageManager {
             completion(.failure(error))
             return
         }
-
+        
         let publicId = "\(publicIdPrefix)_\(UUID().uuidString)"
         uploadImageData(data, folder: folder, publicId: publicId, completion: completion)
     }
-
+    
     private func uploadImageData(
         _ data: Data,
         folder: String,
