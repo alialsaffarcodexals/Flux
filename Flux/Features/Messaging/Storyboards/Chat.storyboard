@@ -286,7 +286,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Op5-dd-wEy">
             <objects>
-                <navigationController storyboardIdentifier="ChatNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AOa-ry-Kio" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ChatNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AOa-ry-Kio" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="53V-qY-k3r">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
