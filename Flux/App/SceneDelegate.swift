@@ -3,37 +3,85 @@
 /// Location: App/SceneDelegate.swift
 
 import UIKit
+import FirebaseAuth
 
-/// Class SceneDelegate: Responsible for the lifecycle, state, and behavior related to SceneDelegate.
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    /// Handles the scene connection lifecycle.
-    /// - Parameters:
-    ///   - scene: The scene to connect.
-    ///   - session: The session being connected.
-    ///   - connectionOptions: Additional options for configuration.
-    /// - Returns: Void
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
-        // Required Behavior: Always start at Authentication flow
-        print("🚀 App Launched. Setting Root VC to Authentication Navigation Controller.")
+        window = UIWindow(windowScene: windowScene)
         
-        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-        
-        // "AuthenticationNC" is the initial Navigation Controller in Authentication.storyboard
-        guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
-            print("🔴 Error: Could not find 'AuthenticationNC' (Auth Nav) in Authentication.storyboard")
-            return
+        // 1. Check if authenticated
+        if let authUser = Auth.auth().currentUser {
+            
+            // 2. Use the Repository to get the User Model
+            UserRepository.shared.getUser(uid: authUser.uid) { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let user):
+                    // 3. Determine where to go based on Role & Mode
+                    self.navigateBasedOnRole(user: user)
+                    
+                case .failure(let error):
+                    print("Error fetching user profile: \(error.localizedDescription)")
+                    // If we can't get the user profile, fallback to login
+                    self.navigateToLogin()
+                }
+            }
+        } else {
+            // Not logged in
+            navigateToLogin()
         }
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        window?.makeKeyAndVisible()
+    }
 
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = authNav
-        self.window = window
-        window.makeKeyAndVisible()
+    // MARK: - Navigation Logic
+    
+    func navigateBasedOnRole(user: User) {
+        let storyboardID: String
+        
+        switch user.role {
+        case .admin:
+            storyboardID = "AdminNavigationController"
+            
+        case .seeker, .provider:
+            storyboardID = "HomeNav"
+            
+
+//            // Check which mode they were last in
+//            if let mode = user.activeProfileMode, mode == .sellerMode {
+//                storyboardID = "ProviderHomeVC" // ID for the Dashboard showing incoming jobs
+//            } else {
+//                // If .buyerMode (or nil), they act like a seeker
+//                storyboardID = "SeekerHomeVC"
+//            }
+        }
+        
+        launchViewController(withID: storyboardID)
+    }
+    
+    func launchViewController(withID id: String) {
+        // Ensure this runs on the Main Thread because we are updating UI
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: id)
+            self.window?.rootViewController = vc
+        }
+    }
+    
+    func navigateToLogin() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            // Assuming the initial VC in storyboard is the Login screen
+            if let loginVC = storyboard.instantiateInitialViewController() {
+                self.window?.rootViewController = loginVC
+            }
+        }
     }
 
     /// Handles the sceneDidDisconnect lifecycle event.
