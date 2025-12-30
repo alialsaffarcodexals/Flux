@@ -78,6 +78,8 @@
 		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
 		7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */; };
 		7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */; };
+		7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */; };
+		7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
@@ -112,7 +114,6 @@
 		7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB336B2EE46308008AC600 /* CategoryManagerViewController.swift */; };
 		7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB336D2EE4633E008AC600 /* AdminViewModel.swift */; };
 		7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33732EE464EC008AC600 /* Activity.storyboard */; };
-		7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */; };
 		7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */; };
 		7FAB33872EE466A2008AC600 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33862EE466A2008AC600 /* Notification.swift */; };
 		7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33892EE46701008AC600 /* AuthManager.swift */; };
@@ -217,6 +218,8 @@
 		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneViewModel.swift; sourceTree = "<group>"; };
 		7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
+		7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNotificationViewController.swift; sourceTree = "<group>"; };
 		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVC.swift; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -252,7 +255,6 @@
 		7FAB336B2EE46308008AC600 /* CategoryManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagerViewController.swift; sourceTree = "<group>"; };
 		7FAB336D2EE4633E008AC600 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdminViewModel.swift; path = Flux/Features/AdminDashboard/ViewControllers/AdminViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33732EE464EC008AC600 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
-		7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterViewController.swift; path = Flux/Features/Notifications/Storyboards/NotificationCenterViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		7FAB33862EE466A2008AC600 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7FAB33892EE46701008AC600 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -877,7 +879,8 @@
 		7FAB33712EE4646F008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */,
+				7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */,
+				7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1195,7 +1198,6 @@
 				7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */,
 				7FAB33362EE45CA5008AC600 /* Requests.storyboard in Resources */,
 				7FAB32FE2EE4565D008AC600 /* ProviderProfile.storyboard in Resources */,
-				6038E0152EFC5C8000DC1EF2 /* BookingScreen.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
 				7FAB33662EE46270008AC600 /* Admin.storyboard in Resources */,
 				3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */,
@@ -1210,13 +1212,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
 				7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */,
 				7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */,
 				7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */,
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
 				10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */,
 				10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */,
+				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
+				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
 				10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */,
 				10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */,
 				7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */,
@@ -1312,14 +1315,6 @@
 				7FB368892F01D28A005AEB44 /* ProviderManagementViewController.swift in Sources */,
 				7FB3688A2F01D28A005AEB44 /* ProviderManagementViewModel.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
-				6038E0002EFC521A00DC1EF2 /* ReportViewController.swift in Sources */,
-				6038E0012EFC521A00DC1EF2 /* UsersAccountsViewController.swift in Sources */,
-				6038E0022EFC521A00DC1EF2 /* CategoryManagementViewController.swift in Sources */,
-				6038E0032EFC521A00DC1EF2 /* SkillViewController.swift in Sources */,
-				6038E0042EFC521A00DC1EF2 /* AdminToolsViewController.swift in Sources */,
-				6038E0052EFC521A00DC1EF2 /* AccountViewController.swift in Sources */,
-				6038E0062EFC521A00DC1EF2 /* ReportsViewController.swift in Sources */,
-				6038E0072EFC521A00DC1EF2 /* SkillVerificationViewController.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
 				7FAB33972EE467CC008AC600 /* Validator.swift in Sources */,
 				7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */,
