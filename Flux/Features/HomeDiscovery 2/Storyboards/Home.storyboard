@@ -290,7 +290,7 @@
         <!--Navigation Controller-->
         <scene sceneID="18C-bb-XIH">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oQO-k4-buO" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="HomeNav" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oQO-k4-buO" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BAL-0X-VkS">
                         <rect key="frame" x="0.0" y="118" width="393" height="44"/>
