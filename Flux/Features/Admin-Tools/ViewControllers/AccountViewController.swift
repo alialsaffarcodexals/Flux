@@ -16,10 +16,30 @@ class AccountViewController: UIViewController {
         super.viewDidLoad()
         loadUser()
         suspendOrBanReason?.delegate = self
+        setupAdminButtons()
         // Initialize placeholder if empty
         if let tv = suspendOrBanReason, tv.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             tv.text = reasonPlaceholder
             tv.textColor = .secondaryLabel
+        }
+    }
+
+    // Try to find the Suspend/Ban buttons in the view hierarchy and wire them
+    private func setupAdminButtons() {
+        func findButton(withTitle title: String, in view: UIView) -> UIButton? {
+            if let btn = view as? UIButton, btn.currentTitle == title { return btn }
+            for sub in view.subviews {
+                if let found = findButton(withTitle: title, in: sub) { return found }
+            }
+            return nil
+        }
+
+        if let suspendBtn = findButton(withTitle: "Suspend", in: self.view) {
+            suspendBtn.addTarget(self, action: #selector(suspendTapped(_:)), for: .touchUpInside)
+        }
+
+        if let banBtn = findButton(withTitle: "Ban", in: self.view) {
+            banBtn.addTarget(self, action: #selector(banTapped(_:)), for: .touchUpInside)
         }
     }
 
@@ -111,35 +131,35 @@ class AccountViewController: UIViewController {
         }
     }
 
-    // MARK: - Navigation Actions
-    @IBAction func reportsTapped(_ sender: UIButton) {
-        print("Reports tapped")
-        // navigate to user's reports
-    }
-
-    @IBAction func warningsTapped(_ sender: UIButton) {
-        print("Warnings tapped")
-        // navigate to user's warnings
-    }
-
-    @IBAction func activityTapped(_ sender: UIButton) {
-        print("Activity tapped")
-        // navigate to user activity
-    }
-
     // MARK: - Admin Actions
     @IBAction func suspendTapped(_ sender: UIButton) {
+        // Require a reason before allowing suspend
+        guard let reason = currentReason() else {
+            showAlert(title: "Reason required", message: "Please enter a reason before suspending the user.")
+            return
+        }
+
         showConfirmation(
             title: "Suspend User",
-            message: "Are you sure you want to suspend this user?"
+            message: "Are you sure you want to suspend this user?\n\nReason:\n\(reason)"
         ) {
             guard let id = self.user?.id else { return }
-            self.viewModel?.updateUserFlags(userID: id, isSuspended: true) { error in
+            sender.isEnabled = false
+            let spinner = UIActivityIndicatorView(style: .medium)
+            spinner.startAnimating()
+            sender.setTitle("Suspending...", for: .normal)
+
+            self.viewModel?.updateUserFlags(userID: id, isSuspended: true) { [weak self] error in
                 DispatchQueue.main.async {
+                    spinner.stopAnimating()
+                    sender.isEnabled = true
+                    sender.setTitle("Suspend", for: .normal)
                     if let error = error {
                         print("❌ Suspend user error:", error.localizedDescription)
+                        self?.showAlert(title: "Error", message: "Failed to suspend user.")
                     } else {
                         print("User suspended")
+                        self?.showAlert(title: "Success", message: "User suspended.")
                     }
                 }
             }
@@ -147,21 +167,49 @@ class AccountViewController: UIViewController {
     }
 
     @IBAction func banTapped(_ sender: UIButton) {
+        // Require a reason before allowing ban
+        guard let reason = currentReason() else {
+            showAlert(title: "Reason required", message: "Please enter a reason before banning the user.")
+            return
+        }
+
         showConfirmation(
             title: "Ban User",
-            message: "This action is permanent. Continue?"
+            message: "This action is permanent. Continue?\n\nReason:\n\(reason)"
         ) {
             guard let id = self.user?.id else { return }
-            self.viewModel?.updateUserFlags(userID: id, isBanned: true) { error in
+            sender.isEnabled = false
+            sender.setTitle("Banning...", for: .normal)
+
+            self.viewModel?.updateUserFlags(userID: id, isBanned: true) { [weak self] error in
                 DispatchQueue.main.async {
+                    sender.isEnabled = true
+                    sender.setTitle("Ban", for: .normal)
                     if let error = error {
                         print("❌ Ban user error:", error.localizedDescription)
+                        self?.showAlert(title: "Error", message: "Failed to ban user.")
                     } else {
                         print("User banned")
+                        self?.showAlert(title: "Success", message: "User banned.")
                     }
                 }
             }
         }
+    }
+
+    // Return trimmed reason text if it's provided and not the placeholder
+    private func currentReason() -> String? {
+        guard let tv = suspendOrBanReason else { return nil }
+        let text = tv.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty { return nil }
+        if text == reasonPlaceholder { return nil }
+        return text
+    }
+
+    private func showAlert(title: String, message: String) {
+        let a = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        a.addAction(UIAlertAction(title: "OK", style: .default))
+        present(a, animated: true)
     }
 
     // MARK: - Alert Helper

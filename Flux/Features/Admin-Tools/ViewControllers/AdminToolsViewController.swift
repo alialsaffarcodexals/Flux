@@ -17,6 +17,11 @@ class AdminToolsViewController: UIViewController {
 
     var viewModel: AdminToolsViewModel!
 
+    // Prefetch caches to be passed to destination VCs
+    private var reportsCache: [Report]?
+    private var usersCache: [User]?
+    private var skillsCache: [Skill]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Initialize ViewModel if not injected (simplifies storyboard entry)
@@ -26,6 +31,12 @@ class AdminToolsViewController: UIViewController {
 
         setupDashboard()
         setupUI()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Refresh dashboard counts when returning to this screen
+        setupDashboard()
     }
 
     // MARK: - Setup
@@ -40,14 +51,14 @@ class AdminToolsViewController: UIViewController {
     // (Replace these later with API calls)
 
     private func loadServiceProviders() {
-        serviceProviders.text = "..."
+        serviceProviders?.text = "..."
         viewModel.fetchServiceProvidersCount { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let count):
-                    self?.serviceProviders.text = "\(count)"
+                    self?.serviceProviders?.text = "\(count)"
                 case .failure(let error):
-                    self?.serviceProviders.text = "—"
+                    self?.serviceProviders?.text = "—"
                     print("❌ Fetch providers error:", error.localizedDescription)
                 }
             }
@@ -55,21 +66,21 @@ class AdminToolsViewController: UIViewController {
     }
 
     private func loadSkillsStats() {
-        skillsRejected.text = "..."
-        skillsPending.text = "..."
-        skillsApproved.text = "..."
+        skillsRejected?.text = "..."
+        skillsPending?.text = "..."
+        skillsApproved?.text = "..."
 
         viewModel.fetchSkillsStats { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let stats):
-                    self?.skillsRejected.text = "\(stats.rejected)"
-                    self?.skillsPending.text = "\(stats.pending)"
-                    self?.skillsApproved.text = "\(stats.approved)"
+                    self?.skillsRejected?.text = "\(stats.rejected)"
+                    self?.skillsPending?.text = "\(stats.pending)"
+                    self?.skillsApproved?.text = "\(stats.approved)"
                 case .failure(let error):
-                    self?.skillsRejected.text = "—"
-                    self?.skillsPending.text = "—"
-                    self?.skillsApproved.text = "—"
+                    self?.skillsRejected?.text = "—"
+                    self?.skillsPending?.text = "—"
+                    self?.skillsApproved?.text = "—"
                     print("❌ Fetch skills error:", error.localizedDescription)
                 }
             }
@@ -77,21 +88,21 @@ class AdminToolsViewController: UIViewController {
     }
 
     private func loadBookingStats() {
-        bookingRejected.text = "..."
-        bookingPending.text = "..."
-        bookingApproved.text = "..."
+        bookingRejected?.text = "..."
+        bookingPending?.text = "..."
+        bookingApproved?.text = "..."
 
         viewModel.fetchBookingStats { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let stats):
-                    self?.bookingRejected.text = "\(stats.rejected)"
-                    self?.bookingPending.text = "\(stats.pending)"
-                    self?.bookingApproved.text = "\(stats.approved)"
+                    self?.bookingRejected?.text = "\(stats.rejected)"
+                    self?.bookingPending?.text = "\(stats.pending)"
+                    self?.bookingApproved?.text = "\(stats.approved)"
                 case .failure(let error):
-                    self?.bookingRejected.text = "—"
-                    self?.bookingPending.text = "—"
-                    self?.bookingApproved.text = "—"
+                    self?.bookingRejected?.text = "—"
+                    self?.bookingPending?.text = "—"
+                    self?.bookingApproved?.text = "—"
                     print("❌ Fetch bookings error:", error.localizedDescription)
                 }
             }
@@ -102,5 +113,112 @@ class AdminToolsViewController: UIViewController {
         self.title = viewModel.title
         view.backgroundColor = .systemBackground
         print("🔧 Admin Dashboard Loaded")
+    }
+
+    // Intercept show segues to prefetch data before presenting screens.
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        // Known segue ids from storyboard that lead to Reports, Users, Skills
+        // - Reports: GOg-At-580
+        // - Users: 6i7-Bk-UbU
+        // - Skills (verification): nL5-vr-SZk
+        if identifier == "GOg-At-580" {
+            if reportsCache != nil { return true }
+            // fetch reports then perform segue
+            let spinner = UIActivityIndicatorView(style: .large)
+            spinner.center = view.center
+            spinner.startAnimating()
+            view.addSubview(spinner)
+
+            viewModel.fetchReports(filterStatus: nil) { [weak self] result in
+                DispatchQueue.main.async {
+                    spinner.removeFromSuperview()
+                    switch result {
+                    case .success(let data):
+                        self?.reportsCache = data
+                        self?.performSegue(withIdentifier: identifier, sender: sender)
+                    case .failure(let error):
+                        print("❌ Prefetch reports error:", error.localizedDescription)
+                    }
+                }
+            }
+
+            return false
+        }
+
+        if identifier == "6i7-Bk-UbU" {
+            if usersCache != nil { return true }
+            let spinner = UIActivityIndicatorView(style: .large)
+            spinner.center = view.center
+            spinner.startAnimating()
+            view.addSubview(spinner)
+
+            viewModel.fetchUsers() { [weak self] result in
+                DispatchQueue.main.async {
+                    spinner.removeFromSuperview()
+                    switch result {
+                    case .success(let data):
+                        self?.usersCache = data
+                        self?.performSegue(withIdentifier: identifier, sender: sender)
+                    case .failure(let error):
+                        print("❌ Prefetch users error:", error.localizedDescription)
+                    }
+                }
+            }
+
+            return false
+        }
+
+        if identifier == "nL5-vr-SZk" {
+            if skillsCache != nil { return true }
+            let spinner = UIActivityIndicatorView(style: .large)
+            spinner.center = view.center
+            spinner.startAnimating()
+            view.addSubview(spinner)
+
+            viewModel.fetchSkills(filterStatus: nil) { [weak self] result in
+                DispatchQueue.main.async {
+                    spinner.removeFromSuperview()
+                    switch result {
+                    case .success(let data):
+                        self?.skillsCache = data
+                        self?.performSegue(withIdentifier: identifier, sender: sender)
+                    case .failure(let error):
+                        print("❌ Prefetch skills error:", error.localizedDescription)
+                    }
+                }
+            }
+
+            return false
+        }
+
+        return true
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+
+        if let reportsVC = segue.destination as? ReportsViewController {
+            reportsVC.viewModel = viewModel
+            if let cache = reportsCache {
+                reportsVC.initialReports = cache
+                reportsCache = nil
+            }
+        }
+
+        if let usersVC = segue.destination as? UsersAccountsViewController {
+            usersVC.viewModel = viewModel
+            if let cache = usersCache {
+                usersVC.initialUsers = cache
+                usersCache = nil
+            }
+        }
+
+        if let skillsVC = segue.destination as? SkillVerificationViewController {
+            skillsVC.viewModel = viewModel
+            if let cache = skillsCache {
+                skillsVC.initialSkills = cache
+                skillsCache = nil
+            }
+        }
     }
 }

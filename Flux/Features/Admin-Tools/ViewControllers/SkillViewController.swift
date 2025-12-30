@@ -69,14 +69,35 @@ class SkillViewController: UIViewController {
 
     @IBAction func approveTapped(_ sender: UIButton) {
         guard let skill = skill else { return }
+        guard let id = skill.id, !id.isEmpty else {
+            let a = UIAlertController(title: "Error", message: "Skill ID missing", preferredStyle: .alert)
+            a.addAction(UIAlertAction(title: "OK", style: .default))
+            present(a, animated: true)
+            return
+        }
         approveButton.isEnabled = false
-        viewModel?.updateSkillStatus(skillID: skill.id ?? "", status: .approved) { [weak self] error in
+        let loading = UIAlertController(title: nil, message: "Approving…", preferredStyle: .alert)
+        present(loading, animated: true)
+        viewModel?.updateSkillStatus(skillID: id, status: .approved) { [weak self] error in
             DispatchQueue.main.async {
-                self?.approveButton.isEnabled = true
-                if let error = error {
-                    print("❌ Approve error:", error.localizedDescription)
-                } else {
-                    self?.skillLevel.text = SkillStatus.approved.rawValue
+                loading.dismiss(animated: true) {
+                    self?.approveButton.isEnabled = true
+                    if let error = error {
+                        let a = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                        a.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(a, animated: true)
+                    } else {
+                        self?.skillLevel.text = SkillStatus.approved.rawValue
+                        let a = UIAlertController(title: "Success", message: "Skill approved.", preferredStyle: .alert)
+                        a.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                            if let nav = self?.navigationController {
+                                nav.popViewController(animated: true)
+                            } else {
+                                self?.dismiss(animated: true, completion: nil)
+                            }
+                        })
+                        self?.present(a, animated: true)
+                    }
                 }
             }
         }
@@ -90,12 +111,34 @@ class SkillViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Reject", style: .destructive) { [weak self] _ in
             let feedback = alert.textFields?.first?.text
-            self?.viewModel?.updateSkillStatus(skillID: skill.id ?? "", status: .rejected, adminFeedback: feedback) { error in
+            guard let id = skill.id, !id.isEmpty else {
+                let a = UIAlertController(title: "Error", message: "Skill ID missing", preferredStyle: .alert)
+                a.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(a, animated: true)
+                return
+            }
+
+            let loading = UIAlertController(title: nil, message: "Rejecting…", preferredStyle: .alert)
+            self?.present(loading, animated: true)
+            self?.viewModel?.updateSkillStatus(skillID: id, status: .rejected, adminFeedback: feedback) { error in
                 DispatchQueue.main.async {
-                    if let error = error {
-                        print("❌ Reject error:", error.localizedDescription)
-                    } else {
-                        self?.skillLevel.text = SkillStatus.rejected.rawValue
+                    loading.dismiss(animated: true) {
+                        if let error = error {
+                            let a = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            a.addAction(UIAlertAction(title: "OK", style: .default))
+                            self?.present(a, animated: true)
+                        } else {
+                            self?.skillLevel.text = SkillStatus.rejected.rawValue
+                            let a = UIAlertController(title: "Success", message: "Skill rejected.", preferredStyle: .alert)
+                            a.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                                if let nav = self?.navigationController {
+                                    nav.popViewController(animated: true)
+                                } else {
+                                    self?.dismiss(animated: true, completion: nil)
+                                }
+                            })
+                            self?.present(a, animated: true)
+                        }
                     }
                 }
             }

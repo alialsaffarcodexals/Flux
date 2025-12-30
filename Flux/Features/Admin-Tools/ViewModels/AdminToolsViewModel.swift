@@ -357,16 +357,44 @@ class AdminToolsViewModel {
             }
 
             let docs = snapshot?.documents ?? []
+            print("ℹ️ fetchReports: raw document count = \(docs.count)")
             let reports: [Report] = docs.compactMap { doc in
                 let data = doc.data()
                 let id = doc.documentID
-                guard let reporterId = data["reporterId"] as? String,
-                      let reportedUserId = data["reportedUserId"] as? String,
-                      let reason = data["reason"] as? String,
-                      let description = data["description"] as? String,
-                      let status = data["status"] as? String,
-                      let timestamp = data["timestamp"] as? Timestamp
-                else { return nil }
+
+                func stringForKeys(_ keys: [String]) -> String? {
+                    for k in keys {
+                        if let v = data[k] as? String, !v.isEmpty { return v }
+                    }
+                    return nil
+                }
+
+                guard let reporterId = stringForKeys(["reporterId", "reporterID", "reporter"]),
+                      let reportedUserId = stringForKeys(["reportedUserId", "reportedUserID", "reportedId", "reported_user_id"]) 
+                else {
+                    print("⚠️ fetchReports: skipping doc id=\(id) because reporter/reported id missing")
+                    return nil
+                }
+
+                guard let reason = stringForKeys(["reason", "type", "title"]), !reason.isEmpty else {
+                    print("⚠️ fetchReports: skipping doc id=\(id) because reason is missing")
+                    return nil
+                }
+
+                let description = stringForKeys(["description", "details", "body"]) ?? ""
+                let status = stringForKeys(["status", "state"]) ?? "Open"
+
+                var tsDate: Date = Date()
+                if let ts = data["timestamp"] as? Timestamp {
+                    tsDate = ts.dateValue()
+                } else if let num = data["timestamp"] as? Double {
+                    tsDate = Date(timeIntervalSince1970: num)
+                } else if let num = data["timestamp"] as? Int {
+                    tsDate = Date(timeIntervalSince1970: TimeInterval(num))
+                } else if let s = data["timestamp"] as? String {
+                    let fmt = ISO8601DateFormatter()
+                    if let d = fmt.date(from: s) { tsDate = d }
+                }
 
                 let evidenceImageURL = data["evidenceImageURL"] as? String
 
@@ -377,7 +405,7 @@ class AdminToolsViewModel {
                               description: description,
                               evidenceImageURL: evidenceImageURL,
                               status: status,
-                              timestamp: timestamp.dateValue())
+                              timestamp: tsDate)
             }
 
             completion(.success(reports))
@@ -386,6 +414,7 @@ class AdminToolsViewModel {
 
     // MARK: - Fetch Reports for a specific reported user
     func fetchReportsForUser(reportedUserID: String, completion: @escaping (Result<[Report], Error>) -> Void) {
+        // Use tolerant parsing similar to fetchReports
         db.collection("reports")
             .whereField("reportedUserId", isEqualTo: reportedUserID)
             .order(by: "timestamp", descending: true)
@@ -399,13 +428,39 @@ class AdminToolsViewModel {
                 let reports: [Report] = docs.compactMap { doc in
                     let data = doc.data()
                     let id = doc.documentID
-                    guard let reporterId = data["reporterId"] as? String,
-                          let reportedUserId = data["reportedUserId"] as? String,
-                          let reason = data["reason"] as? String,
-                          let description = data["description"] as? String,
-                          let status = data["status"] as? String,
-                          let timestamp = data["timestamp"] as? Timestamp
-                    else { return nil }
+
+                    func stringForKeys(_ keys: [String]) -> String? {
+                        for k in keys {
+                            if let v = data[k] as? String, !v.isEmpty { return v }
+                        }
+                        return nil
+                    }
+
+                    guard let reporterId = stringForKeys(["reporterId", "reporterID", "reporter"]),
+                          let reportedUserId = stringForKeys(["reportedUserId", "reportedUserID", "reportedId", "reported_user_id"]) 
+                    else {
+                        print("⚠️ fetchReports: skipping doc id=\(id) because reporter/reported id missing")
+                        return nil
+                    }
+
+                    guard let reason = stringForKeys(["reason", "type", "title"]), !reason.isEmpty else {
+                        print("⚠️ fetchReports: skipping doc id=\(id) because reason is missing")
+                        return nil
+                    }
+                    let description = stringForKeys(["description", "details", "body"]) ?? ""
+                    let status = stringForKeys(["status", "state"]) ?? "Open"
+
+                    var tsDate: Date = Date()
+                    if let ts = data["timestamp"] as? Timestamp {
+                        tsDate = ts.dateValue()
+                    } else if let num = data["timestamp"] as? Double {
+                        tsDate = Date(timeIntervalSince1970: num)
+                    } else if let num = data["timestamp"] as? Int {
+                        tsDate = Date(timeIntervalSince1970: TimeInterval(num))
+                    } else if let s = data["timestamp"] as? String {
+                        let fmt = ISO8601DateFormatter()
+                        if let d = fmt.date(from: s) { tsDate = d }
+                    }
 
                     let evidenceImageURL = data["evidenceImageURL"] as? String
 
@@ -416,7 +471,7 @@ class AdminToolsViewModel {
                                   description: description,
                                   evidenceImageURL: evidenceImageURL,
                                   status: status,
-                                  timestamp: timestamp.dateValue())
+                                  timestamp: tsDate)
                 }
 
                 completion(.success(reports))
@@ -436,15 +491,33 @@ class AdminToolsViewModel {
                 return
             }
 
-            guard let reporterId = data["reporterId"] as? String,
-                  let reportedUserId = data["reportedUserId"] as? String,
-                  let reason = data["reason"] as? String,
-                  let description = data["description"] as? String,
-                  let status = data["status"] as? String,
-                  let timestamp = data["timestamp"] as? Timestamp
-            else {
+            func stringForKeys(_ keys: [String]) -> String? {
+                for k in keys {
+                    if let v = data[k] as? String, !v.isEmpty { return v }
+                }
+                return nil
+            }
+
+            guard let reporterId = stringForKeys(["reporterId", "reporterID", "reporter"]),
+                  let reportedUserId = stringForKeys(["reportedUserId", "reportedUserID", "reportedId", "reported_user_id"]) else {
                 completion(.failure(NSError(domain: "AdminToolsViewModel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Malformed report data"])))
                 return
+            }
+
+            let reason = stringForKeys(["reason", "type", "title"]) ?? ""
+            let description = stringForKeys(["description", "details", "body"]) ?? ""
+            let status = stringForKeys(["status", "state"]) ?? "Open"
+
+            var tsDate: Date = Date()
+            if let ts = data["timestamp"] as? Timestamp {
+                tsDate = ts.dateValue()
+            } else if let num = data["timestamp"] as? Double {
+                tsDate = Date(timeIntervalSince1970: num)
+            } else if let num = data["timestamp"] as? Int {
+                tsDate = Date(timeIntervalSince1970: TimeInterval(num))
+            } else if let s = data["timestamp"] as? String {
+                let fmt = ISO8601DateFormatter()
+                if let d = fmt.date(from: s) { tsDate = d }
             }
 
             let evidenceImageURL = data["evidenceImageURL"] as? String
@@ -456,7 +529,7 @@ class AdminToolsViewModel {
                                 description: description,
                                 evidenceImageURL: evidenceImageURL,
                                 status: status,
-                                timestamp: timestamp.dateValue())
+                                timestamp: tsDate)
 
             completion(.success(report))
         }
@@ -465,6 +538,21 @@ class AdminToolsViewModel {
     // MARK: - Update Report Status
     func updateReportStatus(reportID: String, status: String, completion: ((Error?) -> Void)? = nil) {
         db.collection("reports").document(reportID).updateData(["status": status]) { error in
+            completion?(error)
+        }
+    }
+
+    // MARK: - Update Report Fields
+    func updateReport(reportID: String, reason: String? = nil, description: String? = nil, evidenceImageURL: String? = nil, status: String? = nil, completion: ((Error?) -> Void)? = nil) {
+        var data: [String: Any] = [:]
+        if let r = reason { data["reason"] = r }
+        if let d = description { data["description"] = d }
+        if let e = evidenceImageURL { data["evidenceImageURL"] = e }
+        if let s = status { data["status"] = s }
+
+        guard !data.isEmpty else { completion?(nil); return }
+
+        db.collection("reports").document(reportID).updateData(data) { error in
             completion?(error)
         }
     }

@@ -4,33 +4,68 @@ class ReportsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
-
-    private let viewModel = AdminToolsViewModel()
-    private var reports: [Report] = []
+    @IBOutlet weak var SearchBar: UISearchBar!
+    
+    var viewModel: AdminToolsViewModel? = AdminToolsViewModel()
+    
+    private var allReports: [Report] = []   // original
+    private var reports: [Report] = []      // filtered
+    // Optional preloaded reports (set by previous VC to avoid loading after presentation)
+    var initialReports: [Report]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard tableView != nil else {
+            print("⚠️ ReportsViewController: tableView outlet is not connected.")
+            return
+        }
 
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
 
-        segmentControl.selectedSegmentIndex = 0
-        fetchReports()
+        // Make SearchBar access safe in case the outlet isn't connected
+        SearchBar?.delegate = self
+        if let sb = SearchBar {
+            sb.placeholder = "Search reports"
+            sb.autocapitalizationType = .none
+        }
+
+        // Make segment control access safe; hide if present
+        segmentControl?.setTitle("New", forSegmentAt: 0)
+        segmentControl?.setTitle("Reviewed", forSegmentAt: 1)
+        if let sc = segmentControl {
+            sc.selectedSegmentIndex = 0
+            sc.isHidden = true
+        }
+
+        // Use preloaded data if provided to avoid fetching after presentation
+        if let prefetched = initialReports {
+            allReports = prefetched
+            reports = prefetched
+            tableView.reloadData()
+        } else {
+            fetchReports()
+        }
     }
 
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        fetchReports()
+        // Keep IBAction as no-op; avoid force-unwrapping SearchBar
+        SearchBar?.text = ""
+        SearchBar?.resignFirstResponder()
     }
-
     private func fetchReports() {
-        // segments: 0 -> Open, 1 -> Resolved
-        let statusFilter = segmentControl.selectedSegmentIndex == 0 ? "Open" : "Resolved"
+        guard let vm = viewModel else {
+            print("⚠️ ReportsViewController: viewModel is nil, cannot fetch reports")
+            return
+        }
 
-        viewModel.fetchReports(filterStatus: statusFilter) { [weak self] result in
+        vm.fetchReports(filterStatus: nil) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
+                    self?.allReports = data
                     self?.reports = data
                     self?.tableView.reloadData()
                 case .failure(let error):
@@ -39,9 +74,26 @@ class ReportsViewController: UIViewController {
             }
         }
     }
+    private func updateDisplayedReports() {
+        // Always show all reports; apply search filter only
+        let query = SearchBar?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+        if query.isEmpty {
+            reports = allReports
+        } else {
+            let q = query.lowercased()
+            reports = allReports.filter {
+                let reason = ($0.reason ?? "").lowercased()
+                let reporter = ($0.reporterId ?? "").lowercased()
+                return reason.contains(q) || reporter.contains(q)
+            }
+        }
+
+        tableView.reloadData()
+    }
 }
 
-// MARK: - TableView DataSource
+// MARK: - UITableViewDataSource
 extension ReportsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView,
@@ -58,32 +110,118 @@ extension ReportsViewController: UITableViewDataSource {
         )
 
         let report = reports[indexPath.row]
-
         cell.textLabel?.text = "Reason: \(report.reason)"
-        cell.detailTextLabel?.text = "Reporter: \(report.reporterId)"
+
+        let statusRaw = report.status
+        let statusLower = statusRaw.lowercased()
+        let statusText: String
+        let statusColor: UIColor
+        switch statusLower {
+        case "open":
+            statusText = "Open"
+            statusColor = .systemOrange
+        case "reviewed":
+            statusText = "Reviewed"
+            statusColor = .systemGreen
+        case "resolved":
+            statusText = "Resolved"
+            statusColor = .secondaryLabel
+        default:
+            statusText = statusRaw
+            statusColor = .secondaryLabel
+        }
+
+        // Build attributed detail text: reporter (neutral) + colored status
+        let reporterDisplay = report.reporterId
+        let baseText = "Reporter: \(reporterDisplay) • Status: \(statusText)"
+        let baseAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.secondaryLabel, .font: UIFont.systemFont(ofSize: 13)]
+        let statusAttrs: [NSAttributedString.Key: Any] = [.foregroundColor: statusColor, .font: UIFont.systemFont(ofSize: 13)]
+        let attr = NSMutableAttributedString(string: baseText, attributes: baseAttrs)
+        if let range = baseText.range(of: "Status: \(statusText)") {
+            let nsRange = NSRange(range, in: baseText)
+            attr.addAttributes(statusAttrs, range: nsRange)
+        }
+        cell.detailTextLabel?.attributedText = attr
 
         cell.textLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         cell.detailTextLabel?.font = .systemFont(ofSize: 13)
-        cell.detailTextLabel?.textColor = .secondaryLabel
+
+        // Replace reporter id with readable username when available
+        if let vm = viewModel {
+            vm.fetchUser(userID: report.reporterId) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let user):
+                        if let current = tableView.cellForRow(at: indexPath) {
+                            let reporter = "@\(user.username)"
+                            let updated = "Reporter: \(reporter) • Status: \(statusText)"
+                            let updatedAttr = NSMutableAttributedString(string: updated, attributes: baseAttrs)
+                            if let r = updated.range(of: "Status: \(statusText)") {
+                                let nsR = NSRange(r, in: updated)
+                                updatedAttr.addAttributes(statusAttrs, range: nsR)
+                            }
+                            current.detailTextLabel?.attributedText = updatedAttr
+                        }
+                    case .failure:
+                        break
+                    }
+                }
+            }
+        }
+
+        // Allow selection when report is Open or Reviewed
+        if statusLower == "open" || statusLower == "reviewed" {
+            cell.accessoryType = .disclosureIndicator
+            cell.selectionStyle = .default
+            cell.isUserInteractionEnabled = true
+        } else {
+            cell.accessoryType = .none
+            cell.selectionStyle = .none
+            cell.isUserInteractionEnabled = false
+        }
 
         return cell
     }
 }
 
-// MARK: - TableView Delegate
+// MARK: - UITableViewDelegate
 extension ReportsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView,
                    didSelectRowAt indexPath: IndexPath) {
+
         tableView.deselectRow(at: indexPath, animated: true)
 
         let selected = reports[indexPath.row]
+        let statusLower = selected.status.lowercased()
+        guard statusLower == "open" || statusLower == "reviewed" else { return }
+
         if let vc = storyboard?.instantiateViewController(withIdentifier: "ReportViewController") as? ReportViewController {
             vc.reportID = selected.id
             vc.viewModel = viewModel
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            print("Selected report:", selected)
+            if let nav = navigationController {
+                nav.pushViewController(vc, animated: true)
+            } else {
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+            }
         }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension ReportsViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar,
+                   textDidChange searchText: String) {
+
+        // Let the shared update method handle filtering by segment + query
+        updateDisplayedReports()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        updateDisplayedReports()
     }
 }
