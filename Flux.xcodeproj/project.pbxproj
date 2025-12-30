@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10BD0DBC2F041A26009FC85D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BD0DB92F041A26009FC85D /* Home.storyboard */; };
+		10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB42F041A26009FC85D /* ServiceDetailsViewModel.swift */; };
+		10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB32F041A26009FC85D /* HomeViewModel.swift */; };
+		10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */; };
+		10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB62F041A26009FC85D /* HomeFeedViewController.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -64,7 +69,6 @@
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
-		7FA993EA2EFDA20C00CE5748 /* DisputeCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
 		7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */; };
@@ -79,9 +83,6 @@
 		7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB330D2EE45829008AC600 /* PortfolioListViewController.swift */; };
 		7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB330F2EE45835008AC600 /* AddProjectViewController.swift */; };
 		7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33112EE45865008AC600 /* PortfolioViewModel.swift */; };
-		7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33192EE45994008AC600 /* Home.storyboard */; };
-		7FAB33222EE45A6D008AC600 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33212EE45A6D008AC600 /* HomeViewModel.swift */; };
-		7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33232EE45A98008AC600 /* ServiceDetailsViewModel.swift */; };
 		7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33292EE45B55008AC600 /* Booking.storyboard */; };
 		7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB332B2EE45B8B008AC600 /* RequestBookingViewController.swift */; };
 		7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB332D2EE45BCF008AC600 /* BookingConfirmationVC.swift */; };
@@ -135,6 +136,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10BD0DB32F041A26009FC85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "Flux/Features/HomeDiscovery 2/ViewControllers/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
+		10BD0DB42F041A26009FC85D /* ServiceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewModel.swift; sourceTree = "<group>"; };
+		10BD0DB62F041A26009FC85D /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
+		10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailsViewController.swift; sourceTree = "<group>"; };
+		10BD0DB92F041A26009FC85D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		10D2EDFA2F0039110030B2B9 /* DisputeCenterVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVM.swift; sourceTree = "<group>"; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -209,9 +215,6 @@
 		7FAB330D2EE45829008AC600 /* PortfolioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioListViewController.swift; sourceTree = "<group>"; };
 		7FAB330F2EE45835008AC600 /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		7FAB33112EE45865008AC600 /* PortfolioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewModel.swift; sourceTree = "<group>"; };
-		7FAB33192EE45994008AC600 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		7FAB33212EE45A6D008AC600 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = Flux/Features/HomeDiscovery/ViewControllers/HomeViewModel.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33232EE45A98008AC600 /* ServiceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewModel.swift; sourceTree = "<group>"; };
 		7FAB33292EE45B55008AC600 /* Booking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Booking.storyboard; sourceTree = "<group>"; };
 		7FAB332B2EE45B8B008AC600 /* RequestBookingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RequestBookingViewController.swift; path = Flux/Features/BookingFlow/Storyboards/RequestBookingViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB332D2EE45BCF008AC600 /* BookingConfirmationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingConfirmationVC.swift; sourceTree = "<group>"; };
@@ -276,6 +279,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		10BD0DB52F041A26009FC85D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				10BD0DB32F041A26009FC85D /* HomeViewModel.swift */,
+				10BD0DB42F041A26009FC85D /* ServiceDetailsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		10BD0DB82F041A26009FC85D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				10BD0DB62F041A26009FC85D /* HomeFeedViewController.swift */,
+				10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		10BD0DBA2F041A26009FC85D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				10BD0DB92F041A26009FC85D /* Home.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		10BD0DBB2F041A26009FC85D /* HomeDiscovery 2 */ = {
+			isa = PBXGroup;
+			children = (
+				10BD0DB52F041A26009FC85D /* ViewModels */,
+				10BD0DB82F041A26009FC85D /* ViewControllers */,
+				10BD0DBA2F041A26009FC85D /* Storyboards */,
+			);
+			path = "HomeDiscovery 2";
+			sourceTree = "<group>";
+		};
 		3AE4B18E2EFC8ADA00BE4A01 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,7 +424,6 @@
 				7FAB333F2EE45DD9008AC600 /* Messaging */,
 				7FAB33312EE45C32008AC600 /* MyRequests */,
 				7FAB33252EE45AC0008AC600 /* BookingFlow */,
-				7FAB33132EE458E0008AC600 /* HomeDiscovery */,
 				7FAB33072EE45742008AC600 /* Portfolio */,
 				7FAB32F92EE455ED008AC600 /* ProviderProfile */,
 				7FAB32EB2EE4545B008AC600 /* AccountSettings */,
@@ -394,6 +432,7 @@
 				3AE4B19A2EFC8ADA00BE4A01 /* Admin-Tools */,
 				7FB368882F01D28A005AEB44 /* ProviderManagement */,
 				7FB3688F2F01D2B9005AEB44 /* ProviderRequests */,
+				10BD0DBB2F041A26009FC85D /* HomeDiscovery 2 */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -579,40 +618,6 @@
 			isa = PBXGroup;
 			children = (
 				7FAB33112EE45865008AC600 /* PortfolioViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		7FAB33132EE458E0008AC600 /* HomeDiscovery */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB33162EE45937008AC600 /* ViewModels */,
-				7FAB33152EE45922008AC600 /* ViewControllers */,
-				7FAB33142EE458FE008AC600 /* Storyboards */,
-			);
-			path = HomeDiscovery;
-			sourceTree = "<group>";
-		};
-		7FAB33142EE458FE008AC600 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB33192EE45994008AC600 /* Home.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		7FAB33152EE45922008AC600 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7FAB33162EE45937008AC600 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB33212EE45A6D008AC600 /* HomeViewModel.swift */,
-				7FAB33232EE45A98008AC600 /* ServiceDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1156,12 +1161,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FAB330C2EE457B4008AC600 /* Portfolio.storyboard in Resources */,
+				10BD0DBC2F041A26009FC85D /* Home.storyboard in Resources */,
 				7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */,
 				7FB368962F01D4EF005AEB44 /* ProviderManagement.storyboard in Resources */,
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
-				7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */,
 				7FB3689C2F01D699005AEB44 /* ProviderRequests.storyboard in Resources */,
 				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
@@ -1192,6 +1197,10 @@
 				7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */,
 				7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */,
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
+				10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */,
+				10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */,
+				10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */,
+				10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */,
 				7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */,
 				7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */,
 				7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */,
@@ -1212,7 +1221,6 @@
 				7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */,
 				7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */,
 				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
-				7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
 				7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */,
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
@@ -1227,11 +1235,11 @@
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
-				7FAB33222EE45A6D008AC600 /* HomeViewModel.swift in Sources */,
 				7FB3687F2F0196D4005AEB44 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */,
 				7FAB333A2EE45D30008AC600 /* LeaveReviewViewController.swift in Sources */,
 				7F60816E2EFCF0BD00FA5639 /* AuthViewModel.swift in Sources */,
+				10D2EDFF2F0067560030B2B9 /* DisputeCenterVC.swift in Sources */,
 				7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */,
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
@@ -1240,7 +1248,6 @@
 				7F6081642EFCF01800FA5639 /* ProviderAvailability.swift in Sources */,
 				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
-				7FA993EA2EFDA20C00CE5748 /* DisputeCenterVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
 				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
 				7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */,
@@ -1309,11 +1316,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TSFFT3TQVQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UILaunchStoryboardName = Home.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1336,11 +1344,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TSFFT3TQVQ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
+				INFOPLIST_KEY_UILaunchStoryboardName = Home.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = Home;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
