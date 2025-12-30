@@ -9,6 +9,8 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!        // Displays Business Name
     @IBOutlet weak var bioLabel: UILabel!         // Displays Bio
     @IBOutlet weak var locationLabel: UILabel!    // Displays Location
+    @IBOutlet weak var phoneLabel: UILabel!
+    
     @IBOutlet weak var profileImageView: UIImageView! // Shared Profile Image
     @IBOutlet weak var skillsTagContainer: UIStackView?
     @IBOutlet weak var skillsRowOneStackView: UIStackView?
@@ -78,6 +80,8 @@ class ProviderMainProfileVC: UIViewController {
                 // 📍 Show Location (Shared Source)
                 self?.locationLabel.text = user.location
                 
+                // Safety: Optional chain phoneLabel in case it's not connected
+                self?.phoneLabel?.text = user.phoneNumber ?? "Not set"
                 // 🖼️ Load Shared Profile Image
                 if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
                     DispatchQueue.global().async {

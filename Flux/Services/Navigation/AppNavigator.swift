@@ -65,6 +65,12 @@ class AppNavigator {
         setRoot(viewController: authNav)
     }
     
+    /// Public method to switch to Authentication flow (Logout/Reset).
+    func switchToAuthentication() {
+        // Reuse the existing logic which already handles Storyboard instantiation and Root switching safely.
+        navigateToAuth()
+    }
+    
     // MARK: - Helper: Change Root
     private func setRoot(viewController: UIViewController) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,

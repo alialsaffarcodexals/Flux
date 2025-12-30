@@ -74,6 +74,10 @@
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
+		7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */; };
+		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
+		7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */; };
+		7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
@@ -209,6 +213,10 @@
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
+		7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVC.swift; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -575,6 +583,7 @@
 				7FAB32F02EE45500008AC600 /* SettingsViewController.swift */,
 				7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */,
 				7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */,
+				7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -583,6 +592,9 @@
 			isa = PBXGroup;
 			children = (
 				7FAB32F72EE455C1008AC600 /* SettingsViewModel.swift */,
+				7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */,
+				7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */,
+				7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1266,6 +1278,9 @@
 				7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */,
 				7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */,
 				AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */,
+				7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */,
+				7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */,
+				7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */,
 				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
@@ -1285,6 +1300,7 @@
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,
 				7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */,
+				7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
