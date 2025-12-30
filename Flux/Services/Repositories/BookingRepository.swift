@@ -149,7 +149,7 @@ final class BookingRepository {
             updates["completedAt"] = now
         case .rejected:
             updates["rejectedAt"] = now
-        case .requested, .canceled:
+        case .requested, .canceled, .pending:
             break
         }
 
