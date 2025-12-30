@@ -24,7 +24,26 @@ class SeekerProfileViewController: UIViewController {
     }
     
     @IBAction func providerProfileTapped(_ sender: UIButton) {
-        viewModel.didTapServiceProviderProfile()
+        //viewModel.didTapServiceProviderProfile()
+        
+        // Switch to Provider Mode
+        if let tabBarController = self.tabBarController as? MainTabBarController {
+            tabBarController.switchRole(to: .provider)
+        }
+    }
+    
+    @IBAction func settingsTapped(_ sender: Any) {
+        print("⚙️ Settings Tapped in Seeker Profile")
+        
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        
+        guard let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else {
+            print("🔴 Error: Could not find 'SettingsViewController' in Settings.storyboard")
+            return
+        }
+        
+        // Push onto existing navigation stack (preserves Back button)
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
 
     func setupBindings() {
@@ -59,6 +78,16 @@ class SeekerProfileViewController: UIViewController {
         
         viewModel.onError = { errorMessage in
             print("Error fetching profile: \(errorMessage)")
+        }
+        
+        viewModel.onLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showLoadingIndicator()
+                } else {
+                    self?.hideLoadingIndicator()
+                }
+            }
         }
     }
 }

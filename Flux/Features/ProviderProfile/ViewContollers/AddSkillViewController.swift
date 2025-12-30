@@ -49,6 +49,16 @@ final class AddSkillViewController: UIViewController {
         viewModel.onError = { [weak self] message in
             self?.showAlert(message: message)
         }
+        
+        viewModel.onLoading = { [weak self] isLoading in
+            DispatchQueue.main.async {
+                if isLoading {
+                    self?.showLoadingIndicator()
+                } else {
+                    self?.hideLoadingIndicator()
+                }
+            }
+        }
     }
 
     @IBAction private func uploadProofTapped(_ sender: UIButton) {
@@ -75,10 +85,17 @@ final class AddSkillViewController: UIViewController {
         guard let providerId = Auth.auth().currentUser?.uid else { return }
 
         let name = nameTextField?.text ?? ""
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         let description = descriptionTextView?.text
 
-        guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+        // Validation: Skill name must be between 4 and 25 characters
+        guard !trimmedName.isEmpty else {
             showAlert(message: "Please enter a skill name.")
+            return
+        }
+
+        if trimmedName.count < 4 || trimmedName.count > 10 {
+            showAlert(message: "Skill name must be between 4 and 10 characters")
             return
         }
 
@@ -99,7 +116,7 @@ final class AddSkillViewController: UIViewController {
 
         viewModel.saveSkill(
             providerId: providerId,
-            name: name,
+            name: trimmedName,
             level: level,
             description: description,
             proofImageURL: proofURL

@@ -4,6 +4,11 @@ import FirebaseAuth
 /// ViewModel responsible for handling authentication-related operations.
 class AuthViewModel {
     
+    // MARK: - Properties
+    
+    /// Callback to notify view controllers of loading state changes.
+    var onLoading: ((Bool) -> Void)?
+
     // MARK: - Login
     
     /// Performs login with given email and password.
@@ -19,7 +24,13 @@ class AuthViewModel {
             return
         }
 
+        self.onLoading?(true)
+        
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success, error in
+            
+            // Ensure loading is hidden on return
+            defer { self?.onLoading?(false) }
+            
             if let error = error {
                 let friendlyMessage = self?.getErrorMessage(from: error) ?? "An unknown error occurred."
                 completion(false, friendlyMessage, nil)
@@ -69,8 +80,13 @@ class AuthViewModel {
             return
         }
         
+        self.onLoading?(true)
+        
         // Call AuthManager with correct data (this was the cause of the previous error).
         AuthManager.shared.registerUser(firstName: firstName, lastName: lastName, username: username, email: email, password: password, phone: phone, image: profileImage) { [weak self] success, error in
+            
+            // Ensure loading is hidden on return
+            defer { self?.onLoading?(false) }
             
             if let error = error {
                 let friendlyMessage = self?.getErrorMessage(from: error) ?? "Sign up failed."

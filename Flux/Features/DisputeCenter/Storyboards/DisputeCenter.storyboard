@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Report View Controller-->
+        <!--Dispute CenterVC-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" customClass="ReportViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="DisputeCenterVC" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,6 +27,16 @@
                                 <rect key="frame" x="116" y="118" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sMz-MM-tHO">
+                                        <rect key="frame" x="0.0" y="50" width="240" height="47.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sMz-MM-tHO" id="op4-lA-3eE">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="47.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foB-Gz-aVe">
@@ -66,12 +76,12 @@
                                 <sections/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdL-UT-nji">
-                                <rect key="frame" x="128" y="535" width="137" height="39"/>
+                                <rect key="frame" x="88" y="535" width="216" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Upload Picture"/>
                                 <connections>
-                                    <action selector="uploadPictureTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MPb-Up-61P"/>
+                                    <action selector="uploadPictureTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Ua6-gh-RHc"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18i-SL-LS1">
@@ -81,7 +91,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Send Report"/>
                                 <connections>
-                                    <segue destination="gkn-lP-Yvc" kind="show" id="JUq-gB-CJG"/>
+                                    <action selector="sendReportTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="cXV-eT-3V0"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your report will be sent to an Admin for further evaluation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" translatesAutoresizingMaskIntoConstraints="NO" id="9RY-Zw-zIY">
@@ -97,6 +107,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="uNt-Ly-maz"/>
+                    <connections>
+                        <outlet property="descriptionTextField" destination="1vH-i7-5LC" id="cbr-Zu-LBz"/>
+                        <outlet property="reasonsTableView" destination="UAd-Bh-oNn" id="cTZ-SW-hh3"/>
+                        <outlet property="recipientTableView" destination="sug-ja-Sgk" id="pix-02-AAR"/>
+                        <outlet property="sendReportButton" destination="18i-SL-LS1" id="tJ8-l6-oXD"/>
+                        <outlet property="uploadPictureButton" destination="SdL-UT-nji" id="tGA-Ni-dYz"/>
+                        <segue destination="gkn-lP-Yvc" kind="show" identifier="showReportSuccess" id="1C2-SP-uJF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -158,7 +176,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

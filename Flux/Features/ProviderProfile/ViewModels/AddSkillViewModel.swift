@@ -4,12 +4,15 @@ import UIKit
 final class AddSkillViewModel {
     var onSaveSuccess: (() -> Void)?
     var onError: ((String) -> Void)?
+    var onLoading: ((Bool) -> Void)?
 
     func uploadProofImage(
         _ image: UIImage,
         completion: @escaping (Result<String, Error>) -> Void
     ) {
-        StorageManager.shared.uploadSkillProofImage(image: image) { result in
+        onLoading?(true)
+        StorageManager.shared.uploadSkillProofImage(image: image) { [weak self] result in
+            self?.onLoading?(false)
             completion(result)
         }
     }
@@ -24,6 +27,10 @@ final class AddSkillViewModel {
         let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedName.isEmpty else {
             onError?("Please enter a skill name.")
+            return
+        }
+        if trimmedName.count > 10 {
+            onError?("Skill name must be 10 characters or less")
             return
         }
 
@@ -59,7 +66,9 @@ final class AddSkillViewModel {
             adminFeedback: nil
         )
 
+        onLoading?(true)
         SkillRepository.shared.createSkill(skill) { [weak self] result in
+            self?.onLoading?(false)
             switch result {
             case .success:
                 self?.onSaveSuccess?()
