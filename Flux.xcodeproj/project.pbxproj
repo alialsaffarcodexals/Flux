@@ -7,11 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102592892F043B5E003F6C5F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102592872F043B5E003F6C5F /* Favorites.storyboard */; };
+		1025928A2F043B5E003F6C5F /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102592862F043B5E003F6C5F /* History.storyboard */; };
 		10BD0DBC2F041A26009FC85D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BD0DB92F041A26009FC85D /* Home.storyboard */; };
 		10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB42F041A26009FC85D /* ServiceDetailsViewModel.swift */; };
 		10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB32F041A26009FC85D /* HomeViewModel.swift */; };
 		10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */; };
 		10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB62F041A26009FC85D /* HomeFeedViewController.swift */; };
+		10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207D92F044C2700834613 /* HistoryVC.swift */; };
+		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
+		10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DD2F044E7900834613 /* HistoryVM.swift */; };
+		10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DF2F044E8A00834613 /* FavoritesVM.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -97,10 +103,6 @@
 		7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB333D2EE45DA3008AC600 /* RequestListViewModel.swift */; };
 		7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33452EE45EB1008AC600 /* ChatListViewController.swift */; };
 		7FAB33482EE45ED9008AC600 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33472EE45ED9008AC600 /* ChatRoomViewController.swift */; };
-		7FAB33502EE45F9E008AC600 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB334F2EE45F9E008AC600 /* History.storyboard */; };
-		7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */; };
-		7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */; };
-		7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33552EE46047008AC600 /* HistoryViewModel.swift */; };
 		7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB335B2EE46130008AC600 /* Dispute.storyboard */; };
 		7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB335D2EE46159008AC600 /* ReportUserViewController.swift */; };
 		7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB335F2EE46177008AC600 /* ReportViewModel.swift */; };
@@ -136,16 +138,24 @@
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
 		7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */; };
 		7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */; };
+		AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */; };
+		AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D52F04460B003B7C7D /* RequestTableCell.swift */; };
 		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		102592862F043B5E003F6C5F /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		102592872F043B5E003F6C5F /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		10BD0DB32F041A26009FC85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "Flux/Features/HomeDiscovery 2/ViewControllers/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		10BD0DB42F041A26009FC85D /* ServiceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewModel.swift; sourceTree = "<group>"; };
 		10BD0DB62F041A26009FC85D /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
 		10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailsViewController.swift; sourceTree = "<group>"; };
 		10BD0DB92F041A26009FC85D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		10D2EDFA2F0039110030B2B9 /* DisputeCenterVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVM.swift; sourceTree = "<group>"; };
+		10F207D92F044C2700834613 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		10F207DD2F044E7900834613 /* HistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/HistoryVM.swift"; sourceTree = SOURCE_ROOT; };
+		10F207DF2F044E8A00834613 /* FavoritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/FavoritesVM.swift"; sourceTree = SOURCE_ROOT; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
@@ -233,10 +243,6 @@
 		7FAB333D2EE45DA3008AC600 /* RequestListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListViewModel.swift; sourceTree = "<group>"; };
 		7FAB33452EE45EB1008AC600 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		7FAB33472EE45ED9008AC600 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
-		7FAB334F2EE45F9E008AC600 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
-		7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHistoryViewController.swift; sourceTree = "<group>"; };
-		7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		7FAB33552EE46047008AC600 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryViewModel.swift; path = Flux/Features/HistoryAndFavorites/ViewControllers/HistoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB335B2EE46130008AC600 /* Dispute.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dispute.storyboard; sourceTree = "<group>"; };
 		7FAB335D2EE46159008AC600 /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReportUserViewController.swift; path = Flux/Features/SupportCenter/Storyboards/ReportUserViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB335F2EE46177008AC600 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReportViewModel.swift; path = Flux/Features/SupportCenter/Storyboards/ReportViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -268,6 +274,8 @@
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardCell.swift; sourceTree = "<group>"; };
 		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
+		AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsViewController.swift; sourceTree = "<group>"; };
+		AC9616D52F04460B003B7C7D /* RequestTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableCell.swift; sourceTree = "<group>"; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,6 +295,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1025927E2F0439BC003F6C5F /* History&Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				102592802F0439DE003F6C5F /* ViewControllers */,
+				1025927F2F0439CF003F6C5F /* ViewModels */,
+				102592882F043B5E003F6C5F /* Storyboards */,
+			);
+			path = "History&Favorites";
+			sourceTree = "<group>";
+		};
+		1025927F2F0439CF003F6C5F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				10F207DD2F044E7900834613 /* HistoryVM.swift */,
+				10F207DF2F044E8A00834613 /* FavoritesVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		102592802F0439DE003F6C5F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				10F207D92F044C2700834613 /* HistoryVC.swift */,
+				10F207DB2F044C3800834613 /* FavoritesVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		102592882F043B5E003F6C5F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				102592862F043B5E003F6C5F /* History.storyboard */,
+				102592872F043B5E003F6C5F /* Favorites.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		10BD0DB52F041A26009FC85D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,12 +468,12 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				1025927E2F0439BC003F6C5F /* History&Favorites */,
 				7FA993E32EFD403E00CE5748 /* DisputeCenter */,
 				7FAB339F2EF1893C008AC600 /* SeekerProfile */,
 				7FAB336F2EE4635C008AC600 /* Notifications */,
 				7FAB33612EE461B8008AC600 /* AdminDashboard */,
 				7FAB33572EE46095008AC600 /* SupportCenter */,
-				7FAB334B2EE45F20008AC600 /* HistoryAndFavorites */,
 				7FAB333F2EE45DD9008AC600 /* Messaging */,
 				7FAB33312EE45C32008AC600 /* MyRequests */,
 				7FAB33252EE45AC0008AC600 /* BookingFlow */,
@@ -741,41 +786,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		7FAB334B2EE45F20008AC600 /* HistoryAndFavorites */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB334E2EE45F6A008AC600 /* ViewModels */,
-				7FAB334D2EE45F56008AC600 /* ViewControllers */,
-				7FAB334C2EE45F3F008AC600 /* Storyboards */,
-			);
-			path = HistoryAndFavorites;
-			sourceTree = "<group>";
-		};
-		7FAB334C2EE45F3F008AC600 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB334F2EE45F9E008AC600 /* History.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		7FAB334D2EE45F56008AC600 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */,
-				7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7FAB334E2EE45F6A008AC600 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB33552EE46047008AC600 /* HistoryViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		7FAB33572EE46095008AC600 /* SupportCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,36 +1080,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AC9616CE2F04446B003B7C7D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		ACDA75DE2EDDD53200665266 /* Requests-Seeker  */ = {
 			isa = PBXGroup;
 			children = (
-				ACDA75E12EDDD5D400665266 /* ViewControllers  */,
+				AC9616CE2F04446B003B7C7D /* ViewControllers */,
 				ACDA75E02EDDD5BE00665266 /* Storyboards */,
-				ACDA75DF2EDDD5AB00665266 /* ViewModels */,
 			);
 			path = "Requests-Seeker ";
-			sourceTree = "<group>";
-		};
-		ACDA75DF2EDDD5AB00665266 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		ACDA75E02EDDD5BE00665266 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */,
+				AC9616D52F04460B003B7C7D /* RequestTableCell.swift */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		ACDA75E12EDDD5D400665266 /* ViewControllers  */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "ViewControllers ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1183,13 +1187,15 @@
 				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
+				102592892F043B5E003F6C5F /* Favorites.storyboard in Resources */,
+				1025928A2F043B5E003F6C5F /* History.storyboard in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */,
 				7FB368932F01D36C005AEB44 /* Main.storyboard in Resources */,
 				7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */,
-				7FAB33502EE45F9E008AC600 /* History.storyboard in Resources */,
 				7FAB33362EE45CA5008AC600 /* Requests.storyboard in Resources */,
 				7FAB32FE2EE4565D008AC600 /* ProviderProfile.storyboard in Resources */,
+				6038E0152EFC5C8000DC1EF2 /* BookingScreen.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
 				7FAB33662EE46270008AC600 /* Admin.storyboard in Resources */,
 				3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */,
@@ -1224,15 +1230,17 @@
 				3AE4B19F2EFC8ADA00BE4A01 /* AdminToolsViewModel.swift in Sources */,
 				3AE4B1A02EFC8ADA00BE4A01 /* ReportViewController.swift in Sources */,
 				3AE4B1A12EFC8ADA00BE4A01 /* UsersAccountsViewController.swift in Sources */,
+				10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */,
 				3AE4B1A22EFC8ADA00BE4A01 /* AdminToolsViewController.swift in Sources */,
+				10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */,
 				7FB368812F0196EC005AEB44 /* SeekerProfileViewModel.swift in Sources */,
 				3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
 				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
 				7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */,
+				10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */,
 				7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */,
-				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
 				7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */,
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
@@ -1243,7 +1251,6 @@
 				7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */,
 				7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */,
 				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
-				7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
@@ -1258,6 +1265,7 @@
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
 				7F6081642EFCF01800FA5639 /* ProviderAvailability.swift in Sources */,
 				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
+				AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
 				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
@@ -1269,6 +1277,7 @@
 				7F5A0D152EFDDC56001135C2 /* SkillRepository.swift in Sources */,
 				7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */,
 				7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */,
+				AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */,
 				7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */,
 				7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */,
 				7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */,
@@ -1279,6 +1288,7 @@
 				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
 				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
 				7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */,
+				10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */,
 				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
 				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
 				7F5A0D262EFEB49A001135C2 /* ChatRepository.swift in Sources */,
@@ -1288,7 +1298,6 @@
 				7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */,
 				7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */,
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
-				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,
 				7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */,
 				7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */,
@@ -1303,6 +1312,14 @@
 				7FB368892F01D28A005AEB44 /* ProviderManagementViewController.swift in Sources */,
 				7FB3688A2F01D28A005AEB44 /* ProviderManagementViewModel.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
+				6038E0002EFC521A00DC1EF2 /* ReportViewController.swift in Sources */,
+				6038E0012EFC521A00DC1EF2 /* UsersAccountsViewController.swift in Sources */,
+				6038E0022EFC521A00DC1EF2 /* CategoryManagementViewController.swift in Sources */,
+				6038E0032EFC521A00DC1EF2 /* SkillViewController.swift in Sources */,
+				6038E0042EFC521A00DC1EF2 /* AdminToolsViewController.swift in Sources */,
+				6038E0052EFC521A00DC1EF2 /* AccountViewController.swift in Sources */,
+				6038E0062EFC521A00DC1EF2 /* ReportsViewController.swift in Sources */,
+				6038E0072EFC521A00DC1EF2 /* SkillVerificationViewController.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
 				7FAB33972EE467CC008AC600 /* Validator.swift in Sources */,
 				7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */,
