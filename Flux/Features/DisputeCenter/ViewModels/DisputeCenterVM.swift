@@ -82,12 +82,7 @@ final class DisputeCenterVM {
         print("🔥 recipients count: \(recipients.count)")
         print("🔥 description: \(String(describing: description))")
         
-        // Get current user
-        guard let reporterID = Auth.auth().currentUser?.uid else {
-            print("🔥 No current user")
-            onReportSubmitted?(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "You must be logged in to submit a report"]))
-            return
-        }
+        let reporterID = Auth.auth().currentUser?.uid ?? ""
         print("🔥 Reporter ID: \(reporterID)")
         
         // Validate recipient selection
