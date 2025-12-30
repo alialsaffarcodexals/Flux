@@ -8,13 +8,20 @@ class SeekerProfileViewModel {
     var onUserDataUpdated: ((User) -> Void)?
     var onError: ((String) -> Void)?
     var onNavigateToProviderSetup: (() -> Void)? // Trigger for new providers
+    var onLoading: ((Bool) -> Void)?
     
     private var currentUser: User?
 
     func fetchUserProfile() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        FirestoreManager.shared.getUser(uid: uid) { [weak self] result in
+        onLoading?(true)
+        
+        UserRepository.shared.getUser(uid: uid) { [weak self] result in
+            
+            // Ensure loading is hidden
+            defer { self?.onLoading?(false) }
+            
             switch result {
             case .success(let user):
                 self?.currentUser = user
@@ -42,15 +49,21 @@ class SeekerProfileViewModel {
     private func switchProfileMode(to mode: ProfileMode) {
         guard let uid = currentUser?.id else { return }
         
+        onLoading?(true)
+        
         let db = Firestore.firestore()
         db.collection("users").document(uid).updateData([
             "activeProfileMode": mode.rawValue
         ]) { [weak self] error in
+            
+             // Ensure loading is hidden (unless we navigate immediately, but safe to hide)
+             defer { self?.onLoading?(false) }
+             
             if let error = error {
                 self?.onError?(error.localizedDescription)
             } else {
                 // Fetch fresh user data to ensure AppNavigator has the latest state
-                FirestoreManager.shared.getUser(uid: uid) { result in
+                UserRepository.shared.getUser(uid: uid) { result in
                     switch result {
                     case .success(let updatedUser):
                         // 🚀 Centralized Navigation handles the screen switch
