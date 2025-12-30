@@ -132,6 +132,8 @@
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
 		7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */; };
 		7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */; };
+		AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */; };
+		AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D52F04460B003B7C7D /* RequestTableCell.swift */; };
 		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -260,6 +262,8 @@
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardCell.swift; sourceTree = "<group>"; };
 		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
+		AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsViewController.swift; sourceTree = "<group>"; };
+		AC9616D52F04460B003B7C7D /* RequestTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableCell.swift; sourceTree = "<group>"; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1058,36 +1062,30 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AC9616CE2F04446B003B7C7D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
 		ACDA75DE2EDDD53200665266 /* Requests-Seeker  */ = {
 			isa = PBXGroup;
 			children = (
-				ACDA75E12EDDD5D400665266 /* ViewControllers  */,
+				AC9616CE2F04446B003B7C7D /* ViewControllers */,
 				ACDA75E02EDDD5BE00665266 /* Storyboards */,
-				ACDA75DF2EDDD5AB00665266 /* ViewModels */,
 			);
 			path = "Requests-Seeker ";
-			sourceTree = "<group>";
-		};
-		ACDA75DF2EDDD5AB00665266 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		ACDA75E02EDDD5BE00665266 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */,
+				AC9616D52F04460B003B7C7D /* RequestTableCell.swift */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		ACDA75E12EDDD5D400665266 /* ViewControllers  */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "ViewControllers ";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1246,6 +1244,7 @@
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
 				7F6081642EFCF01800FA5639 /* ProviderAvailability.swift in Sources */,
 				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
+				AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
 				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
@@ -1257,6 +1256,7 @@
 				7F5A0D152EFDDC56001135C2 /* SkillRepository.swift in Sources */,
 				7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */,
 				7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */,
+				AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */,
 				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
