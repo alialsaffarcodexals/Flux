@@ -71,8 +71,8 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SoS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zS-0N-niV">
-                                                                        <rect key="frame" x="0.0" y="99" width="30.666666666666668" height="20.333333333333329"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="33432214" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zS-0N-niV">
+                                                                        <rect key="frame" x="0.0" y="99" width="79" height="20.333333333333329"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -245,7 +245,7 @@
                                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ServiceCell" id="ECr-nL-zgo" customClass="ServiceCardCell" customModule="Flux" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="24.666666666666668" width="128" height="128"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY1-7U-qpn">
+                                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XY1-7U-qpn">
                                                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snd-vW-mpY">
@@ -296,6 +296,10 @@
                                                                                 <constraint firstAttribute="trailing" secondItem="STs-nJ-hsL" secondAttribute="trailing" id="zeV-gv-q7R"/>
                                                                             </constraints>
                                                                         </collectionViewCellContentView>
+                                                                        <constraints>
+                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="leading" secondItem="ECr-nL-zgo" secondAttribute="leadingMargin" constant="-8" id="5D9-du-N08"/>
+                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="top" secondItem="ECr-nL-zgo" secondAttribute="topMargin" constant="-8" id="ZL6-OB-1l2"/>
+                                                                        </constraints>
                                                                         <connections>
                                                                             <outlet property="actionButton" destination="Snd-vW-mpY" id="FXX-t1-utI"/>
                                                                             <outlet property="mainImageView" destination="STs-nJ-hsL" id="fG4-wQ-FPJ"/>
@@ -463,6 +467,7 @@
                     <connections>
                         <outlet property="locationLabel" destination="fuF-cQ-7mG" id="1fN-Mf-tc5"/>
                         <outlet property="nameLabel" destination="EAa-39-xkC" id="QWx-Ix-Rkw"/>
+                        <outlet property="phoneLabel" destination="4zS-0N-niV" id="D0j-iE-L52"/>
                         <outlet property="profileImageView" destination="5Sx-Sw-f11" id="jDE-r2-Xkt"/>
                         <outlet property="providerProfileButton" destination="3FC-kF-Ugz" id="9LT-UK-K5i"/>
                         <outlet property="usernameLabel" destination="pvc-8B-7S4" id="qkr-WR-IoW"/>

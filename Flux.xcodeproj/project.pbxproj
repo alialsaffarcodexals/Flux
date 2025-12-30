@@ -7,11 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		102592892F043B5E003F6C5F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102592872F043B5E003F6C5F /* Favorites.storyboard */; };
+		1025928A2F043B5E003F6C5F /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102592862F043B5E003F6C5F /* History.storyboard */; };
 		10BD0DBC2F041A26009FC85D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BD0DB92F041A26009FC85D /* Home.storyboard */; };
 		10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB42F041A26009FC85D /* ServiceDetailsViewModel.swift */; };
 		10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB32F041A26009FC85D /* HomeViewModel.swift */; };
 		10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */; };
 		10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10BD0DB62F041A26009FC85D /* HomeFeedViewController.swift */; };
+		10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207D92F044C2700834613 /* HistoryVC.swift */; };
+		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
+		10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DD2F044E7900834613 /* HistoryVM.swift */; };
+		10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DF2F044E8A00834613 /* FavoritesVM.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -68,6 +74,12 @@
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
+		7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */; };
+		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
+		7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */; };
+		7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */; };
+		7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */; };
+		7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
@@ -93,10 +105,6 @@
 		7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB333D2EE45DA3008AC600 /* RequestListViewModel.swift */; };
 		7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33452EE45EB1008AC600 /* ChatListViewController.swift */; };
 		7FAB33482EE45ED9008AC600 /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33472EE45ED9008AC600 /* ChatRoomViewController.swift */; };
-		7FAB33502EE45F9E008AC600 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB334F2EE45F9E008AC600 /* History.storyboard */; };
-		7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */; };
-		7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */; };
-		7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33552EE46047008AC600 /* HistoryViewModel.swift */; };
 		7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB335B2EE46130008AC600 /* Dispute.storyboard */; };
 		7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB335D2EE46159008AC600 /* ReportUserViewController.swift */; };
 		7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB335F2EE46177008AC600 /* ReportViewModel.swift */; };
@@ -106,7 +114,6 @@
 		7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB336B2EE46308008AC600 /* CategoryManagerViewController.swift */; };
 		7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB336D2EE4633E008AC600 /* AdminViewModel.swift */; };
 		7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33732EE464EC008AC600 /* Activity.storyboard */; };
-		7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */; };
 		7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */; };
 		7FAB33872EE466A2008AC600 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33862EE466A2008AC600 /* Notification.swift */; };
 		7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33892EE46701008AC600 /* AuthManager.swift */; };
@@ -138,12 +145,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		102592862F043B5E003F6C5F /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		102592872F043B5E003F6C5F /* Favorites.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		10BD0DB32F041A26009FC85D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = "Flux/Features/HomeDiscovery 2/ViewControllers/HomeViewModel.swift"; sourceTree = SOURCE_ROOT; };
 		10BD0DB42F041A26009FC85D /* ServiceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewModel.swift; sourceTree = "<group>"; };
 		10BD0DB62F041A26009FC85D /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
 		10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailsViewController.swift; sourceTree = "<group>"; };
 		10BD0DB92F041A26009FC85D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		10D2EDFA2F0039110030B2B9 /* DisputeCenterVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVM.swift; sourceTree = "<group>"; };
+		10F207D92F044C2700834613 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		10F207DD2F044E7900834613 /* HistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/HistoryVM.swift"; sourceTree = SOURCE_ROOT; };
+		10F207DF2F044E8A00834613 /* FavoritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/FavoritesVM.swift"; sourceTree = SOURCE_ROOT; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
@@ -201,6 +214,12 @@
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
+		7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
+		7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNotificationViewController.swift; sourceTree = "<group>"; };
 		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVC.swift; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -227,10 +246,6 @@
 		7FAB333D2EE45DA3008AC600 /* RequestListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListViewModel.swift; sourceTree = "<group>"; };
 		7FAB33452EE45EB1008AC600 /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		7FAB33472EE45ED9008AC600 /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
-		7FAB334F2EE45F9E008AC600 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
-		7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceHistoryViewController.swift; sourceTree = "<group>"; };
-		7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
-		7FAB33552EE46047008AC600 /* HistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryViewModel.swift; path = Flux/Features/HistoryAndFavorites/ViewControllers/HistoryViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB335B2EE46130008AC600 /* Dispute.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dispute.storyboard; sourceTree = "<group>"; };
 		7FAB335D2EE46159008AC600 /* ReportUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReportUserViewController.swift; path = Flux/Features/SupportCenter/Storyboards/ReportUserViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB335F2EE46177008AC600 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReportViewModel.swift; path = Flux/Features/SupportCenter/Storyboards/ReportViewModel.swift; sourceTree = SOURCE_ROOT; };
@@ -240,7 +255,6 @@
 		7FAB336B2EE46308008AC600 /* CategoryManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagerViewController.swift; sourceTree = "<group>"; };
 		7FAB336D2EE4633E008AC600 /* AdminViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdminViewModel.swift; path = Flux/Features/AdminDashboard/ViewControllers/AdminViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33732EE464EC008AC600 /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
-		7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationCenterViewController.swift; path = Flux/Features/Notifications/Storyboards/NotificationCenterViewController.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33772EE4656A008AC600 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		7FAB33862EE466A2008AC600 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7FAB33892EE46701008AC600 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -283,6 +297,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1025927E2F0439BC003F6C5F /* History&Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				102592802F0439DE003F6C5F /* ViewControllers */,
+				1025927F2F0439CF003F6C5F /* ViewModels */,
+				102592882F043B5E003F6C5F /* Storyboards */,
+			);
+			path = "History&Favorites";
+			sourceTree = "<group>";
+		};
+		1025927F2F0439CF003F6C5F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				10F207DD2F044E7900834613 /* HistoryVM.swift */,
+				10F207DF2F044E8A00834613 /* FavoritesVM.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		102592802F0439DE003F6C5F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				10F207D92F044C2700834613 /* HistoryVC.swift */,
+				10F207DB2F044C3800834613 /* FavoritesVC.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		102592882F043B5E003F6C5F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				102592862F043B5E003F6C5F /* History.storyboard */,
+				102592872F043B5E003F6C5F /* Favorites.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		10BD0DB52F041A26009FC85D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -419,12 +470,12 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				1025927E2F0439BC003F6C5F /* History&Favorites */,
 				7FA993E32EFD403E00CE5748 /* DisputeCenter */,
 				7FAB339F2EF1893C008AC600 /* SeekerProfile */,
 				7FAB336F2EE4635C008AC600 /* Notifications */,
 				7FAB33612EE461B8008AC600 /* AdminDashboard */,
 				7FAB33572EE46095008AC600 /* SupportCenter */,
-				7FAB334B2EE45F20008AC600 /* HistoryAndFavorites */,
 				7FAB333F2EE45DD9008AC600 /* Messaging */,
 				7FAB33312EE45C32008AC600 /* MyRequests */,
 				7FAB33252EE45AC0008AC600 /* BookingFlow */,
@@ -534,6 +585,7 @@
 				7FAB32F02EE45500008AC600 /* SettingsViewController.swift */,
 				7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */,
 				7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */,
+				7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -542,6 +594,9 @@
 			isa = PBXGroup;
 			children = (
 				7FAB32F72EE455C1008AC600 /* SettingsViewModel.swift */,
+				7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */,
+				7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */,
+				7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -733,41 +788,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		7FAB334B2EE45F20008AC600 /* HistoryAndFavorites */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB334E2EE45F6A008AC600 /* ViewModels */,
-				7FAB334D2EE45F56008AC600 /* ViewControllers */,
-				7FAB334C2EE45F3F008AC600 /* Storyboards */,
-			);
-			path = HistoryAndFavorites;
-			sourceTree = "<group>";
-		};
-		7FAB334C2EE45F3F008AC600 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB334F2EE45F9E008AC600 /* History.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		7FAB334D2EE45F56008AC600 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB33512EE45FD3008AC600 /* ServiceHistoryViewController.swift */,
-				7FAB33532EE4601B008AC600 /* FavoritesViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7FAB334E2EE45F6A008AC600 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				7FAB33552EE46047008AC600 /* HistoryViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		7FAB33572EE46095008AC600 /* SupportCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -859,7 +879,8 @@
 		7FAB33712EE4646F008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB33752EE4652B008AC600 /* NotificationCenterViewController.swift */,
+				7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */,
+				7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1169,11 +1190,12 @@
 				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
+				102592892F043B5E003F6C5F /* Favorites.storyboard in Resources */,
+				1025928A2F043B5E003F6C5F /* History.storyboard in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */,
 				7FB368932F01D36C005AEB44 /* Main.storyboard in Resources */,
 				7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */,
-				7FAB33502EE45F9E008AC600 /* History.storyboard in Resources */,
 				7FAB33362EE45CA5008AC600 /* Requests.storyboard in Resources */,
 				7FAB32FE2EE4565D008AC600 /* ProviderProfile.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
@@ -1190,13 +1212,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
 				7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */,
 				7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */,
 				7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */,
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
 				10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */,
 				10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */,
+				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
+				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
 				10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */,
 				10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */,
 				7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */,
@@ -1210,15 +1233,17 @@
 				3AE4B19F2EFC8ADA00BE4A01 /* AdminToolsViewModel.swift in Sources */,
 				3AE4B1A02EFC8ADA00BE4A01 /* ReportViewController.swift in Sources */,
 				3AE4B1A12EFC8ADA00BE4A01 /* UsersAccountsViewController.swift in Sources */,
+				10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */,
 				3AE4B1A22EFC8ADA00BE4A01 /* AdminToolsViewController.swift in Sources */,
+				10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */,
 				7FB368812F0196EC005AEB44 /* SeekerProfileViewModel.swift in Sources */,
 				3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
 				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
 				7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */,
+				10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */,
 				7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */,
-				7FAB33522EE45FD3008AC600 /* ServiceHistoryViewController.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
 				7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */,
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
@@ -1229,7 +1254,6 @@
 				7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */,
 				7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */,
 				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
-				7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
@@ -1257,6 +1281,9 @@
 				7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */,
 				7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */,
 				AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */,
+				7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */,
+				7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */,
+				7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */,
 				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
@@ -1264,6 +1291,7 @@
 				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
 				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
 				7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */,
+				10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */,
 				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
 				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
 				7F5A0D262EFEB49A001135C2 /* ChatRepository.swift in Sources */,
@@ -1273,9 +1301,9 @@
 				7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */,
 				7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */,
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
-				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,
 				7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */,
+				7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,

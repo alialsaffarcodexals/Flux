@@ -8,6 +8,7 @@ class SeekerProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
     
     @IBOutlet weak var providerProfileButton: UIButton!
     
@@ -54,6 +55,9 @@ class SeekerProfileViewController: UIViewController {
                 
                 // 📍 Displays "Bahrain" (default) OR updated Provider location
                 self?.locationLabel.text = user.location
+                
+                // Safety: Optional chain phoneLabel in case it's not connected
+                self?.phoneLabel?.text = user.phoneNumber ?? "Not set"
                 
                 if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
                     // Optimized image loading (placeholder logic recommended)
