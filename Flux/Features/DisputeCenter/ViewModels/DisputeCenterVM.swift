@@ -2,7 +2,6 @@ import Foundation
 import UIKit
 import FirebaseAuth
 import FirebaseFirestore
-import FirebaseStorage
 
 final class DisputeCenterVM {
     
@@ -17,13 +16,14 @@ final class DisputeCenterVM {
     private var currentDescription: String = ""
     
     // MARK: - Callbacks
-    var onRecipientsLoaded: (() -> Void)?  // Only called when recipients are first loaded
+    var onRecipientsLoaded: (() -> Void)?
     var onSendEnabledChanged: ((Bool) -> Void)?
     var onImagePicked: ((UIImage?) -> Void)?
     var onReportSubmitted: ((Error?) -> Void)?
     
     // MARK: - Dependencies (MVVM)
     private let reportRepo = ReportRepository.shared
+    private let storageManager = StorageManager.shared
     
     // MARK: - Public Methods
     func loadInitialData() {
@@ -114,32 +114,24 @@ final class DisputeCenterVM {
         
         print("🔥 Submitting report - Reporter: \(reporterID), Reported: \(reportedID), Reason: \(reason)")
         
-        // Upload image if present, then create report (image is optional)
-        if let image = selectedImage,
-           let jpegData = image.jpegData(compressionQuality: 0.8) {
+        // Upload image to Cloudinary if present, then create report (image is optional)
+        if let image = selectedImage {
+            print("🔥 Uploading image to Cloudinary...")
             
-            let storageRef = Storage.storage().reference().child("reportEvidence/\(UUID().uuidString).jpg")
-            
-            storageRef.putData(jpegData, metadata: nil) { [weak self] _, error in
-                if let error = error {
+            storageManager.uploadReportEvidenceImage(image: image) { [weak self] result in
+                switch result {
+                case .success(let url):
+                    print("🔥 Image uploaded successfully: \(url)")
+                    self?.createReport(
+                        reporterID: reporterID,
+                        reportedID: reportedID,
+                        reason: reason,
+                        description: desc,
+                        evidenceURL: url
+                    )
+                case .failure(let error):
                     print("🔥 Image upload error: \(error.localizedDescription)")
                     self?.onReportSubmitted?(error)
-                    return
-                }
-                // Get download URL
-                storageRef.downloadURL { url, error in
-                    if let url = url {
-                        self?.createReport(
-                            reporterID: reporterID,
-                            reportedID: reportedID,
-                            reason: reason,
-                            description: desc,
-                            evidenceURL: url.absoluteString
-                        )
-                    } else if let error = error {
-                        print("🔥 Download URL error: \(error.localizedDescription)")
-                        self?.onReportSubmitted?(error)
-                    }
                 }
             }
         } else {
