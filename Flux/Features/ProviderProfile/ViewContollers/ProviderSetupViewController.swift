@@ -4,6 +4,7 @@ class ProviderSetupViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var businessNameTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField! //
     @IBOutlet weak var bioTextView: UITextView!
     
     // MARK: - Properties
@@ -19,18 +20,16 @@ class ProviderSetupViewController: UIViewController {
     
     // MARK: - Setup & Binding
     private func setupUI() {
-        // Basic styling for the TextView to look like a field
+        // Basic styling for the TextView
         bioTextView.layer.borderWidth = 1
         bioTextView.layer.borderColor = UIColor.systemGray5.cgColor
         bioTextView.layer.cornerRadius = 8
         
-        // Loader setup
         view.addSubview(activityIndicator)
         activityIndicator.center = view.center
     }
     
     private func bindViewModel() {
-        // Handle Loading State
         viewModel.onLoadingChanged = { [weak self] isLoading in
             if isLoading {
                 self?.activityIndicator.startAnimating()
@@ -41,31 +40,28 @@ class ProviderSetupViewController: UIViewController {
             }
         }
 
-        // Handle Errors
         viewModel.onError = { [weak self] message in
             self?.showAlert(message: message)
         }
 
-        // Handle Success
-        viewModel.onSuccess = {  user in
+        viewModel.onSuccess = { user in
             print("✅ Provider Setup Complete. Routing via AppNavigator...")
-            // ✅ Centralized Navigation: Routes to Provider Tabs because mode is now 'Seller'
+            // The user object here now includes the new location
             AppNavigator.shared.navigate(user: user)
         }
     }
 
     // MARK: - Actions
     @IBAction func doneTapped(_ sender: UIButton) {
+        view.endEditing(true)
         
-        // 1. Force keyboard to close immediately
-                view.endEditing(true)
         viewModel.submitProviderSetup(
             businessName: businessNameTextField.text,
+            location: locationTextField.text, //
             bio: bioTextView.text
         )
     }
     
-    // MARK: - Helper
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Flux", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="13y-PT-MNl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IJv-E4-y1e">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZrX-nL-jMQ">
-                                <rect key="frame" x="0.0" y="162" width="393" height="573"/>
+                                <rect key="frame" x="0.0" y="162" width="393" height="622"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uQC-HY-5vm" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="393" height="837.33333333333337"/>
@@ -42,7 +42,13 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="140" id="Tgj-Si-oIn"/>
                                                                     <constraint firstAttribute="width" constant="140" id="ZlC-is-Brt"/>
+                                                                    <constraint firstAttribute="width" secondItem="5Sx-Sw-f11" secondAttribute="height" multiplier="1:1" id="t3a-xz-M98"/>
                                                                 </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                        <integer key="value" value="70"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ym2-6K-0Dg">
                                                                 <rect key="frame" x="152" y="0.0" width="209" height="119.33333333333333"/>
@@ -291,8 +297,8 @@
                                                                             </constraints>
                                                                         </collectionViewCellContentView>
                                                                         <constraints>
-                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="top" secondItem="ECr-nL-zgo" secondAttribute="topMargin" constant="-8" id="JgZ-2f-WHc"/>
-                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="leading" secondItem="ECr-nL-zgo" secondAttribute="leadingMargin" constant="-8" id="ztu-rD-TzM"/>
+                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="top" secondItem="ECr-nL-zgo" secondAttribute="topMargin" constant="-8" id="EDx-np-0EP"/>
+                                                                            <constraint firstItem="XY1-7U-qpn" firstAttribute="leading" secondItem="ECr-nL-zgo" secondAttribute="leadingMargin" constant="-8" id="SEf-nV-5MY"/>
                                                                         </constraints>
                                                                         <connections>
                                                                             <outlet property="actionButton" destination="Snd-vW-mpY" id="FXX-t1-utI"/>
@@ -453,6 +459,9 @@
                     <navigationItem key="navigationItem" id="obh-S9-DJ1">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="gear" catalog="system" id="UJq-T8-r6q">
                             <color key="tintColor" systemColor="labelColor"/>
+                            <connections>
+                                <action selector="settingsTapped:" destination="1Nr-3a-wwB" id="dcY-Gs-LAY"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -470,7 +479,7 @@
         <!--Profile-->
         <scene sceneID="r0L-1b-5cC">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IJv-E4-y1e" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SeekerProfileNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IJv-E4-y1e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Profile" image="person.circle.fill" catalog="system" selectedImage="person.crop.circle.fill" id="NFB-5f-9Sv"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="B57-Px-2D5">
@@ -485,85 +494,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rl-eN-nJM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="-285"/>
-        </scene>
-        <!--Home-->
-        <scene sceneID="MVB-xZ-8Kt">
-            <objects>
-                <viewController id="kPe-PV-Dzx" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="nOW-fF-YBk">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="ENi-mG-DhI"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" selectedImage="house.fill" id="ChT-zq-6VX"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0tw-Qh-1SJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-21" y="-947"/>
-        </scene>
-        <!--Booking-->
-        <scene sceneID="4u3-pZ-kvp">
-            <objects>
-                <viewController id="ZaR-BH-TCP" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YPr-gk-QQL">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="X2F-I7-cDj"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Booking" image="bookmark.fill" catalog="system" selectedImage="bookmark.fill" id="SOP-0I-cup"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bfN-oK-GIe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="634" y="-970"/>
-        </scene>
-        <!--Message-->
-        <scene sceneID="TbJ-Ut-5x5">
-            <objects>
-                <viewController id="iHP-71-n5a" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eWD-SG-KCA">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="g5f-tN-gN0"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Message" image="ellipsis.message" catalog="system" selectedImage="ellipsis.message" id="gRu-tn-k83"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OXg-YQ-BUV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1337" y="-947"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="LyD-VT-K58">
-            <objects>
-                <tabBarController storyboardIdentifier="SeekerTabBarController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="13y-PT-MNl" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mCL-pU-bEq">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="kPe-PV-Dzx" kind="relationship" relationship="viewControllers" id="RhD-B6-snw"/>
-                        <segue destination="ZaR-BH-TCP" kind="relationship" relationship="viewControllers" id="3jr-r6-9ud"/>
-                        <segue destination="iHP-71-n5a" kind="relationship" relationship="viewControllers" id="pHv-y3-QxK"/>
-                        <segue destination="IJv-E4-y1e" kind="relationship" relationship="viewControllers" id="v4I-Gi-h7i"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ik0-dw-xt0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="46.564885496183201" y="-301.40845070422534"/>
+            <point key="canvasLocation" x="1053" y="-301"/>
         </scene>
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="110" height="128"/>
-        <image name="bookmark.fill" catalog="system" width="110" height="128"/>
         <image name="chevron.right" catalog="system" width="97" height="128"/>
-        <image name="ellipsis.message" catalog="system" width="128" height="116"/>
         <image name="gear" catalog="system" width="128" height="122"/>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="person.circle" catalog="system" width="128" height="123"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
