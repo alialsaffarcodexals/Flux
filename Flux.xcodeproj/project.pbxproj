@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		10D2EDFE2F0067520030B2B9 /* DisputeCenterVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D2EDFA2F0039110030B2B9 /* DisputeCenterVM.swift */; };
-		10D2EDFF2F0067560030B2B9 /* DisputeCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -64,9 +62,10 @@
 		7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */; };
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
+		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
-		7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */; };
+		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
 		7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */; };
 		7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */; };
 		7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F72EE455C1008AC600 /* SettingsViewModel.swift */; };
@@ -80,9 +79,6 @@
 		7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB330F2EE45835008AC600 /* AddProjectViewController.swift */; };
 		7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33112EE45865008AC600 /* PortfolioViewModel.swift */; };
 		7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33192EE45994008AC600 /* Home.storyboard */; };
-		7FAB331C2EE459B4008AC600 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB331B2EE459B4008AC600 /* HomeFeedViewController.swift */; };
-		7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB331D2EE45A16008AC600 /* FilterModalViewController.swift */; };
-		7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB331F2EE45A49008AC600 /* ServiceDetailsViewController.swift */; };
 		7FAB33222EE45A6D008AC600 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33212EE45A6D008AC600 /* HomeViewModel.swift */; };
 		7FAB33242EE45A98008AC600 /* ServiceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33232EE45A98008AC600 /* ServiceDetailsViewModel.swift */; };
 		7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33292EE45B55008AC600 /* Booking.storyboard */; };
@@ -119,8 +115,16 @@
 		7FAB339B2EF049FF008AC600 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 7FAB339A2EF049FF008AC600 /* FirebaseStorage */; };
 		7FAB339E2EF17B5D008AC600 /* Cloudinary in Frameworks */ = {isa = PBXBuildFile; productRef = 7FAB339D2EF17B5D008AC600 /* Cloudinary */; };
 		7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB33A32EF189BC008AC600 /* SeekerProfile.storyboard */; };
-		7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */; };
-		7FAB33A82EF18A18008AC600 /* SeekerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */; };
+		7FB3687F2F0196D4005AEB44 /* SeekerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3687E2F0196D4005AEB44 /* SeekerProfileViewController.swift */; };
+		7FB368812F0196EC005AEB44 /* SeekerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368802F0196EC005AEB44 /* SeekerProfileViewModel.swift */; };
+		7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368822F01D22C005AEB44 /* MainTabBarController.swift */; };
+		7FB368892F01D28A005AEB44 /* ProviderManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368842F01D28A005AEB44 /* ProviderManagementViewController.swift */; };
+		7FB3688A2F01D28A005AEB44 /* ProviderManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368862F01D28A005AEB44 /* ProviderManagementViewModel.swift */; };
+		7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3688D2F01D2B9005AEB44 /* ProviderRequestsViewModel.swift */; };
+		7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3688B2F01D2B9005AEB44 /* ProviderRequestsViewController.swift */; };
+		7FB368932F01D36C005AEB44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB368922F01D36C005AEB44 /* Main.storyboard */; };
+		7FB368962F01D4EF005AEB44 /* ProviderManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB368952F01D4EF005AEB44 /* ProviderManagement.storyboard */; };
+		7FB3689C2F01D699005AEB44 /* ProviderRequests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB3689B2F01D699005AEB44 /* ProviderRequests.storyboard */; };
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
@@ -187,10 +191,11 @@
 		7F68C3C92EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVC.swift; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainViewController.swift; sourceTree = "<group>"; };
+		7FAB32F02EE45500008AC600 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewController.swift; sourceTree = "<group>"; };
 		7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneViewController.swift; sourceTree = "<group>"; };
 		7FAB32F72EE455C1008AC600 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -204,9 +209,6 @@
 		7FAB330F2EE45835008AC600 /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
 		7FAB33112EE45865008AC600 /* PortfolioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioViewModel.swift; sourceTree = "<group>"; };
 		7FAB33192EE45994008AC600 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		7FAB331B2EE459B4008AC600 /* HomeFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedViewController.swift; sourceTree = "<group>"; };
-		7FAB331D2EE45A16008AC600 /* FilterModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModalViewController.swift; sourceTree = "<group>"; };
-		7FAB331F2EE45A49008AC600 /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		7FAB33212EE45A6D008AC600 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeViewModel.swift; path = Flux/Features/HomeDiscovery/ViewControllers/HomeViewModel.swift; sourceTree = SOURCE_ROOT; };
 		7FAB33232EE45A98008AC600 /* ServiceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewModel.swift; sourceTree = "<group>"; };
 		7FAB33292EE45B55008AC600 /* Booking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Booking.storyboard; sourceTree = "<group>"; };
@@ -241,8 +243,16 @@
 		7FAB338F2EE4675B008AC600 /* AdminService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminService.swift; sourceTree = "<group>"; };
 		7FAB33962EE467CC008AC600 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		7FAB33A32EF189BC008AC600 /* SeekerProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SeekerProfile.storyboard; sourceTree = "<group>"; };
-		7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewController.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewController.swift; sourceTree = SOURCE_ROOT; };
-		7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeekerProfileViewModel.swift; path = Flux/Features/SeekerProfile/Storyboards/SeekerProfileViewModel.swift; sourceTree = SOURCE_ROOT; };
+		7FB3687E2F0196D4005AEB44 /* SeekerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerProfileViewController.swift; sourceTree = "<group>"; };
+		7FB368802F0196EC005AEB44 /* SeekerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerProfileViewModel.swift; sourceTree = "<group>"; };
+		7FB368822F01D22C005AEB44 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		7FB368842F01D28A005AEB44 /* ProviderManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManagementViewController.swift; sourceTree = "<group>"; };
+		7FB368862F01D28A005AEB44 /* ProviderManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManagementViewModel.swift; sourceTree = "<group>"; };
+		7FB3688B2F01D2B9005AEB44 /* ProviderRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderRequestsViewController.swift; sourceTree = "<group>"; };
+		7FB3688D2F01D2B9005AEB44 /* ProviderRequestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderRequestsViewModel.swift; sourceTree = "<group>"; };
+		7FB368922F01D36C005AEB44 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7FB368952F01D4EF005AEB44 /* ProviderManagement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ProviderManagement.storyboard; path = Flux/Resources/ProviderManagement.storyboard; sourceTree = SOURCE_ROOT; };
+		7FB3689B2F01D699005AEB44 /* ProviderRequests.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProviderRequests.storyboard; sourceTree = "<group>"; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardCell.swift; sourceTree = "<group>"; };
 		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
@@ -344,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */,
+				7FB368822F01D22C005AEB44 /* MainTabBarController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -380,6 +391,8 @@
 				ACDA75DE2EDDD53200665266 /* Requests-Seeker  */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
 				3AE4B19A2EFC8ADA00BE4A01 /* Admin-Tools */,
+				7FB368882F01D28A005AEB44 /* ProviderManagement */,
+				7FB3688F2F01D2B9005AEB44 /* ProviderRequests */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -474,7 +487,7 @@
 		7FAB32EF2EE454D2008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB32F02EE45500008AC600 /* SettingsMainViewController.swift */,
+				7FAB32F02EE45500008AC600 /* SettingsViewController.swift */,
 				7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */,
 				7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */,
 			);
@@ -590,9 +603,6 @@
 		7FAB33152EE45922008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB331B2EE459B4008AC600 /* HomeFeedViewController.swift */,
-				7FAB331D2EE45A16008AC600 /* FilterModalViewController.swift */,
-				7FAB331F2EE45A49008AC600 /* ServiceDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -889,6 +899,7 @@
 				7FAB33962EE467CC008AC600 /* Validator.swift */,
 				7F5A0D182EFDDC9E001135C2 /* Constants.swift */,
 				7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */,
+				7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -909,6 +920,7 @@
 				7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */,
 				7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */,
 				7F68C3C82EDD93C5005B29E6 /* Info.plist */,
+				7FB368922F01D36C005AEB44 /* Main.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -934,8 +946,8 @@
 		7FAB33A12EF18979008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB33A52EF189FC008AC600 /* SeekerProfileViewController.swift */,
 				7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */,
+				7FB3687E2F0196D4005AEB44 /* SeekerProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -943,9 +955,77 @@
 		7FAB33A22EF1898E008AC600 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				7FAB33A72EF18A18008AC600 /* SeekerProfileViewModel.swift */,
+				7FB368802F0196EC005AEB44 /* SeekerProfileViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7FB368852F01D28A005AEB44 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7FB368842F01D28A005AEB44 /* ProviderManagementViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7FB368872F01D28A005AEB44 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7FB368862F01D28A005AEB44 /* ProviderManagementViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7FB368882F01D28A005AEB44 /* ProviderManagement */ = {
+			isa = PBXGroup;
+			children = (
+				7FB368942F01D49F005AEB44 /* Storyboards */,
+				7FB368852F01D28A005AEB44 /* ViewControllers */,
+				7FB368872F01D28A005AEB44 /* ViewModels */,
+			);
+			path = ProviderManagement;
+			sourceTree = "<group>";
+		};
+		7FB3688C2F01D2B9005AEB44 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7FB3688B2F01D2B9005AEB44 /* ProviderRequestsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7FB3688E2F01D2B9005AEB44 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7FB3688D2F01D2B9005AEB44 /* ProviderRequestsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7FB3688F2F01D2B9005AEB44 /* ProviderRequests */ = {
+			isa = PBXGroup;
+			children = (
+				7FB368982F01D60C005AEB44 /* Storyboards */,
+				7FB3688C2F01D2B9005AEB44 /* ViewControllers */,
+				7FB3688E2F01D2B9005AEB44 /* ViewModels */,
+			);
+			path = ProviderRequests;
+			sourceTree = "<group>";
+		};
+		7FB368942F01D49F005AEB44 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7FB368952F01D4EF005AEB44 /* ProviderManagement.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7FB368982F01D60C005AEB44 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7FB3689B2F01D699005AEB44 /* ProviderRequests.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		7FC160D82EDB15FF009B14F4 = {
@@ -1078,13 +1158,16 @@
 				7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */,
+				7FB368962F01D4EF005AEB44 /* ProviderManagement.storyboard in Resources */,
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
 				7FAB331A2EE45994008AC600 /* Home.storyboard in Resources */,
+				7FB3689C2F01D699005AEB44 /* ProviderRequests.storyboard in Resources */,
 				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
 				7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */,
 				7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */,
+				7FB368932F01D36C005AEB44 /* Main.storyboard in Resources */,
 				7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */,
 				7FAB33502EE45F9E008AC600 /* History.storyboard in Resources */,
 				7FAB33362EE45CA5008AC600 /* Requests.storyboard in Resources */,
@@ -1105,6 +1188,8 @@
 			files = (
 				7FAB33762EE4652B008AC600 /* NotificationCenterViewController.swift in Sources */,
 				7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */,
+				7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */,
+				7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */,
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
 				7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */,
 				7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */,
@@ -1118,6 +1203,7 @@
 				3AE4B1A02EFC8ADA00BE4A01 /* ReportViewController.swift in Sources */,
 				3AE4B1A12EFC8ADA00BE4A01 /* UsersAccountsViewController.swift in Sources */,
 				3AE4B1A22EFC8ADA00BE4A01 /* AdminToolsViewController.swift in Sources */,
+				7FB368812F0196EC005AEB44 /* SeekerProfileViewModel.swift in Sources */,
 				3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
 				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
@@ -1133,13 +1219,15 @@
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
 				7FAB332C2EE45B8B008AC600 /* RequestBookingViewController.swift in Sources */,
-				7FAB32F12EE45519008AC600 /* SettingsMainViewController.swift in Sources */,
+				7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */,
+				7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */,
 				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
 				7FAB33542EE4601B008AC600 /* FavoritesViewController.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
 				7FAB33222EE45A6D008AC600 /* HomeViewModel.swift in Sources */,
+				7FB3687F2F0196D4005AEB44 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */,
 				7FAB333A2EE45D30008AC600 /* LeaveReviewViewController.swift in Sources */,
 				7F60816E2EFCF0BD00FA5639 /* AuthViewModel.swift in Sources */,
@@ -1160,9 +1248,9 @@
 				7F5A0D132EFDDC56001135C2 /* ServiceRepository.swift in Sources */,
 				7F5A0D142EFDDC56001135C2 /* UserRepository.swift in Sources */,
 				7F5A0D152EFDDC56001135C2 /* SkillRepository.swift in Sources */,
+				7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */,
 				7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */,
 				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
-				7FAB331E2EE45A16008AC600 /* FilterModalViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
 				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
@@ -1182,21 +1270,18 @@
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,
 				7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
-				7FAB33A62EF189FC008AC600 /* SeekerProfileViewController.swift in Sources */,
-				10D2EDFE2F0067520030B2B9 /* DisputeCenterVM.swift in Sources */,
-				7FAB33A82EF18A18008AC600 /* SeekerProfileViewModel.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
-				7FAB33202EE45A49008AC600 /* ServiceDetailsViewController.swift in Sources */,
 				3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */,
 				7F5A0D242EFEB141001135C2 /* ChatMessage.swift in Sources */,
 				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
 				7FAB330E2EE45829008AC600 /* PortfolioListViewController.swift in Sources */,
+				7FB368892F01D28A005AEB44 /* ProviderManagementViewController.swift in Sources */,
+				7FB3688A2F01D28A005AEB44 /* ProviderManagementViewModel.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
 				7FAB33972EE467CC008AC600 /* Validator.swift in Sources */,
-				7FAB331C2EE459B4008AC600 /* HomeFeedViewController.swift in Sources */,
 				7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */,
 				7FAB33482EE45ED9008AC600 /* ChatRoomViewController.swift in Sources */,
 			);
@@ -1228,7 +1313,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = DisputeCenter;
+				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1256,7 +1341,7 @@
 				INFOPLIST_FILE = Flux/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
-				INFOPLIST_KEY_UIMainStoryboardFile = DisputeCenter;
+				INFOPLIST_KEY_UIMainStoryboardFile = Authentication;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

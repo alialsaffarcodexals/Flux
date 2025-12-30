@@ -4,12 +4,15 @@ import UIKit
 final class AddSkillViewModel {
     var onSaveSuccess: (() -> Void)?
     var onError: ((String) -> Void)?
+    var onLoading: ((Bool) -> Void)?
 
     func uploadProofImage(
         _ image: UIImage,
         completion: @escaping (Result<String, Error>) -> Void
     ) {
-        StorageManager.shared.uploadSkillProofImage(image: image) { result in
+        onLoading?(true)
+        StorageManager.shared.uploadSkillProofImage(image: image) { [weak self] result in
+            self?.onLoading?(false)
             completion(result)
         }
     }
@@ -63,7 +66,9 @@ final class AddSkillViewModel {
             adminFeedback: nil
         )
 
+        onLoading?(true)
         SkillRepository.shared.createSkill(skill) { [weak self] result in
+            self?.onLoading?(false)
             switch result {
             case .success:
                 self?.onSaveSuccess?()

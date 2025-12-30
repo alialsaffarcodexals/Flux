@@ -102,28 +102,47 @@ class ProviderMainProfileVC: UIViewController {
             print("Error: \(error)")
         }
         
-        viewModel.onSwitchToBuyer = { [weak self] updatedUser in
+        viewModel.onLoading = { [weak self] isLoading in
             DispatchQueue.main.async {
-                self?.performSwitchToSeekerProfile()
+                if isLoading {
+                    self?.showLoadingIndicator()
+                } else {
+                    self?.hideLoadingIndicator()
+                }
             }
         }
+        
+//        viewModel.onSwitchToBuyer = { [weak self] updatedUser in
+//            DispatchQueue.main.async {
+//                self?.navigateToSeekerProfile()
+//            }
+//        }
     }
     
     // MARK: - Actions
     @IBAction func seekerProfileTapped(_ sender: UIButton) {
-        viewModel.didTapServiceSeekerProfile()
+        // viewModel.didTapServiceSeekerProfile()
+        navigateToSeekerProfile()
+    }
+    
+    @IBAction func settingsTapped(_ sender: Any) {
+        print("⚙️ Settings Tapped in Provider Profile")
+        
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        
+        guard let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else {
+            print("🔴 Error: Could not find 'SettingsViewController' in Settings.storyboard")
+            return
+        }
+        
+        // Push onto existing navigation stack (preserves Back button)
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     // MARK: - Navigation Logic
-    private func performSwitchToSeekerProfile() {
-        let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
-        guard let seekerVC = storyboard.instantiateViewController(withIdentifier: "SeekerProfileViewController") as? SeekerProfileViewController else { return }
-        
-        if let nav = self.navigationController {
-            var viewControllers = nav.viewControllers
-            viewControllers.removeAll { $0 === self }
-            viewControllers.append(seekerVC)
-            nav.setViewControllers(viewControllers, animated: true)
+    private func navigateToSeekerProfile() {
+        if let tabBarController = self.tabBarController as? MainTabBarController {
+             tabBarController.switchRole(to: .seeker)
         }
     }
     
