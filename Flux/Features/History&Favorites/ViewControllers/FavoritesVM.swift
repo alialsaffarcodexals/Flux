@@ -150,4 +150,5 @@ final class FavoritesVM {
         filteredItems = []
         onDataChanged?()
     }
+    
 }
