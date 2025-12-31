@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */; };
 		102592892F043B5E003F6C5F /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102592872F043B5E003F6C5F /* Favorites.storyboard */; };
 		1025928A2F043B5E003F6C5F /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 102592862F043B5E003F6C5F /* History.storyboard */; };
 		10BD0DBC2F041A26009FC85D /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10BD0DB92F041A26009FC85D /* Home.storyboard */; };
@@ -19,6 +18,7 @@
 		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
 		10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DD2F044E7900834613 /* HistoryVM.swift */; };
 		10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DF2F044E8A00834613 /* FavoritesVM.swift */; };
+		3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -50,7 +50,6 @@
 		7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D272EFEE471001135C2 /* ProviderSkillsListViewController.swift */; };
 		7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D282EFEE471001135C2 /* SkillDetailsViewController.swift */; };
 		7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */; };
-		7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */; };
 		7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */; };
 		7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
@@ -157,11 +156,11 @@
 		10BD0DB72F041A26009FC85D /* CompanyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailsViewController.swift; sourceTree = "<group>"; };
 		10BD0DB92F041A26009FC85D /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		10D2EDFA2F0039110030B2B9 /* DisputeCenterVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVM.swift; sourceTree = "<group>"; };
-		3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		10F207D92F044C2700834613 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		10F207DD2F044E7900834613 /* HistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/HistoryVM.swift"; sourceTree = SOURCE_ROOT; };
 		10F207DF2F044E8A00834613 /* FavoritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/FavoritesVM.swift"; sourceTree = SOURCE_ROOT; };
+		3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
@@ -193,7 +192,6 @@
 		7F5A0D272EFEE471001135C2 /* ProviderSkillsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSkillsListViewController.swift; sourceTree = "<group>"; };
 		7F5A0D282EFEE471001135C2 /* SkillDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailsViewController.swift; sourceTree = "<group>"; };
 		7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSkillViewModel.swift; sourceTree = "<group>"; };
-		7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileViewModel.swift; sourceTree = "<group>"; };
 		7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSkillsListViewModel.swift; sourceTree = "<group>"; };
 		7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailsViewModel.swift; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
@@ -647,7 +645,6 @@
 				7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */,
 				7FAB33052EE45720008AC600 /* ProviderProfileViewModel.swift */,
 				7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */,
-				7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */,
 				7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */,
 				7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */,
 			);
@@ -1235,7 +1232,6 @@
 				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
 				10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */,
 				10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */,
-				7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */,
 				7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */,
 				7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */,
 				7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */,
