@@ -19,7 +19,7 @@ struct User: Identifiable, Codable {
     var lastName: String
     var username: String
     var email: String
-    var phoneNumber: String
+    var phoneNumber: String?
     var profileImageURL: String?
     var location: String?
 
@@ -47,7 +47,7 @@ struct User: Identifiable, Codable {
         lastName: String,
         username: String,
         email: String,
-        phoneNumber: String,
+        phoneNumber: String? = nil,
         role: UserRole = .seeker
     ) {
         self.id = id

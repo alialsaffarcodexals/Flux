@@ -12,44 +12,117 @@ enum RequestState {
     case pending, inProgress, completed
 }
 
-class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
+class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+            
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    @IBOutlet weak var tableView: UITableView!
+    // Create the segmented control programmatically so we can return it in the header view
+    let segmentedControl: UISegmentedControl = {
+        let sc = UISegmentedControl(items: ["Pending", "In Progress", "Completed"])
+        sc.selectedSegmentIndex = 0
+        return sc
+    }()
     
-    // Data for each tab
-    var pendingServices = ["Home Deep Cleaning service"]
-    var inProgressServices = ["Hashim Sharaf", "English Teacher"]
-    var completedServices = ["Sam Altman", "CleanMax"]
+    // The "Master" lists
+    let allPending = ["Home Deep Cleaning service", "Car Wash", "AC Repair"]
+    let allInProgress = ["Hashim Sharaf", "English Teacher"]
+    let allCompleted = ["Sam Altman", "CleanMax", "Plumbing"]
+    
+    // The "Display" lists (These change when searching)
+    var pendingServices: [String] = []
+    var inProgressServices: [String] = []
+    var completedServices: [String] = []
     
     var currentState: RequestState = .pending
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        pendingServices = allPending
+        inProgressServices = allInProgress
+        completedServices = allCompleted
+        
         tableView.delegate = self
         tableView.dataSource = self
-        
-        // Listen for tab changes
+        searchBar.delegate = self
+
+        // Setup Segmented Control Action
         segmentedControl.addTarget(self, action: #selector(tabChanged), for: .valueChanged)
         
         tableView.tableFooterView = UIView()
     }
+    
+    // MARK: - Search Bar Logic
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // If search bar is empty, restore all data
+        if searchText.isEmpty {
+            restoreAllData()
+        } else {
+            // Filter the data based on the text
+            pendingServices = allPending.filter { $0.lowercased().contains(searchText.lowercased()) }
+            inProgressServices = allInProgress.filter { $0.lowercased().contains(searchText.lowercased()) }
+            completedServices = allCompleted.filter { $0.lowercased().contains(searchText.lowercased()) }
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        // Dismiss keyboard when "Search" is tapped on keyboard
+        searchBar.resignFirstResponder()
+    }
+    
+    func restoreAllData() {
+        pendingServices = allPending
+        inProgressServices = allInProgress
+        completedServices = allCompleted
+    }
 
+    // MARK: - Segment Control Logic
     @objc func tabChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: currentState = .pending
         case 1: currentState = .inProgress
         default: currentState = .completed
         }
+    
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        restoreAllData()
+        
         tableView.reloadData()
     }
 
-    // MARK: - TableView Methods
+    // MARK: - TableView Header (Sticky Segment)
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .systemBackground
+        
+        headerView.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            segmentedControl.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10),
+            segmentedControl.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -10),
+            segmentedControl.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            segmentedControl.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16)
+        ])
+        
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+
+    
+    // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentState {
         case .pending: return pendingServices.count
@@ -65,16 +138,17 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
         case .pending:
             cell.serviceTitleLabel.text = pendingServices[indexPath.row]
             cell.providerNameLabel.text = "CleanMax"
-            cell.serviceImgView.layer.cornerRadius = 12 // Square-ish
+            cell.serviceImgView.layer.cornerRadius = 12
         case .inProgress:
             cell.serviceTitleLabel.text = inProgressServices[indexPath.row]
-            cell.providerNameLabel.text = (indexPath.row == 0) ? "Filming" : "Private lesson"
-            cell.serviceImgView.layer.cornerRadius = 30 // Circular
+            cell.providerNameLabel.text = "Provider Info"
+            cell.serviceImgView.layer.cornerRadius = 30
         case .completed:
             cell.serviceTitleLabel.text = completedServices[indexPath.row]
-            cell.providerNameLabel.text = "Home Cleaning Services"
-            cell.serviceImgView.layer.cornerRadius = 30 // Circular
+            cell.providerNameLabel.text = "Home Services"
+            cell.serviceImgView.layer.cornerRadius = 30
         }
+        
         cell.serviceImgView.clipsToBounds = true
         return cell
     }
@@ -82,6 +156,7 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90
     }
+    
 
     // MARK: - Swipe Actions
     

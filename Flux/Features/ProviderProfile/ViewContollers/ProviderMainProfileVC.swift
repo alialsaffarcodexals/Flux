@@ -9,6 +9,8 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!        // Displays Business Name
     @IBOutlet weak var bioLabel: UILabel!         // Displays Bio
     @IBOutlet weak var locationLabel: UILabel!    // Displays Location
+    @IBOutlet weak var phoneLabel: UILabel!
+    
     @IBOutlet weak var profileImageView: UIImageView! // Shared Profile Image
     @IBOutlet weak var skillsTagContainer: UIStackView?
     @IBOutlet weak var skillsRowOneStackView: UIStackView?
@@ -19,6 +21,8 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var skillTagButtonThree: UIButton?
     @IBOutlet weak var skillTagButtonFour: UIButton?
     @IBOutlet weak var skillTagMoreButton: UIButton?
+    
+    @IBOutlet weak var editPortfolioButton: UIButton!
     
     // Properties
     private var viewModel = ProviderProfileViewModel()
@@ -33,6 +37,13 @@ class ProviderMainProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 🧹 Clear labels to prevent dummy text
+        nameLabel.text = ""
+        bioLabel.text = ""
+        locationLabel.text = ""
+        phoneLabel.text = ""
+        
         setupBindings()
         resetSkillTagUI()
         removeWidthConstraints()
@@ -78,6 +89,8 @@ class ProviderMainProfileVC: UIViewController {
                 // 📍 Show Location (Shared Source)
                 self?.locationLabel.text = user.location
                 
+                // Safety: Optional chain phoneLabel in case it's not connected
+                self?.phoneLabel?.text = user.phoneNumber ?? "Not set"
                 // 🖼️ Load Shared Profile Image
                 if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
                     DispatchQueue.global().async {
@@ -138,6 +151,18 @@ class ProviderMainProfileVC: UIViewController {
         // Push onto existing navigation stack (preserves Back button)
         navigationController?.pushViewController(settingsVC, animated: true)
     }
+    
+    @IBAction func editPortfolioTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Portfolio", bundle: nil)
+
+        guard let portfolioVC = storyboard.instantiateViewController(withIdentifier: "PortfolioVC") as? PortfolioListViewController else {
+            assertionFailure("PortfolioVC in Portfolio.storyboard is not PortfolioListViewController. Check storyboard Class/Module.")
+            return
+        }
+
+        navigationController?.pushViewController(portfolioVC, animated: true)
+    }
+
     
     // MARK: - Navigation Logic
     private func navigateToSeekerProfile() {
@@ -264,6 +289,7 @@ class ProviderMainProfileVC: UIViewController {
             label.textColor = .secondaryLabel
             label.numberOfLines = 0
             label.textAlignment = .left
+            label.font = .systemFont(ofSize: 18)
             emptySkillsLabel = label
             return label
         }()

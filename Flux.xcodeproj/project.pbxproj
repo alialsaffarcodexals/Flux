@@ -18,6 +18,7 @@
 		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
 		10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DD2F044E7900834613 /* HistoryVM.swift */; };
 		10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DF2F044E8A00834613 /* FavoritesVM.swift */; };
+		3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -51,7 +52,6 @@
 		7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D272EFEE471001135C2 /* ProviderSkillsListViewController.swift */; };
 		7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D282EFEE471001135C2 /* SkillDetailsViewController.swift */; };
 		7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */; };
-		7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */; };
 		7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */; };
 		7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */; };
 		7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081192EF98CB300FA5639 /* Skill.swift */; };
@@ -76,6 +76,14 @@
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
+		7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */; };
+		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
+		7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */; };
+		7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */; };
+		7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */; };
+		7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */; };
+		7FA8DA8A2F048D8A0012A48F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA892F048D8A0012A48F /* LoadingViewController.swift */; };
+		7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA8D2F04AB690012A48F /* DummyDataSeeder.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
@@ -137,6 +145,7 @@
 		7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */; };
 		AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */; };
 		AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D52F04460B003B7C7D /* RequestTableCell.swift */; };
+		ACB2A18B2F053EB5005F9F62 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */; };
 		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -153,6 +162,7 @@
 		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		10F207DD2F044E7900834613 /* HistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/HistoryVM.swift"; sourceTree = SOURCE_ROOT; };
 		10F207DF2F044E8A00834613 /* FavoritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/FavoritesVM.swift"; sourceTree = SOURCE_ROOT; };
+		3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
@@ -186,7 +196,6 @@
 		7F5A0D272EFEE471001135C2 /* ProviderSkillsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSkillsListViewController.swift; sourceTree = "<group>"; };
 		7F5A0D282EFEE471001135C2 /* SkillDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailsViewController.swift; sourceTree = "<group>"; };
 		7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSkillViewModel.swift; sourceTree = "<group>"; };
-		7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderProfileViewModel.swift; sourceTree = "<group>"; };
 		7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderSkillsListViewModel.swift; sourceTree = "<group>"; };
 		7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillDetailsViewModel.swift; sourceTree = "<group>"; };
 		7F6081192EF98CB300FA5639 /* Skill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skill.swift; sourceTree = "<group>"; };
@@ -212,6 +221,14 @@
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
+		7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePhoneViewModel.swift; sourceTree = "<group>"; };
+		7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
+		7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNotificationViewController.swift; sourceTree = "<group>"; };
+		7FA8DA892F048D8A0012A48F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		7FA8DA8D2F04AB690012A48F /* DummyDataSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataSeeder.swift; sourceTree = "<group>"; };
 		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVC.swift; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -270,6 +287,7 @@
 		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsViewController.swift; sourceTree = "<group>"; };
 		AC9616D52F04460B003B7C7D /* RequestTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableCell.swift; sourceTree = "<group>"; };
+		ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -577,6 +595,7 @@
 				7FAB32F02EE45500008AC600 /* SettingsViewController.swift */,
 				7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */,
 				7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */,
+				7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -585,6 +604,9 @@
 			isa = PBXGroup;
 			children = (
 				7FAB32F72EE455C1008AC600 /* SettingsViewModel.swift */,
+				7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */,
+				7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */,
+				7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -627,7 +649,6 @@
 				7F60813B2EFAE09500FA5639 /* ProviderSetupViewModel.swift */,
 				7FAB33052EE45720008AC600 /* ProviderProfileViewModel.swift */,
 				7F5A0D2B2EFEE48F001135C2 /* AddSkillViewModel.swift */,
-				7F5A0D2C2EFEE48F001135C2 /* ProviderProfileViewModel.swift */,
 				7F5A0D2D2EFEE48F001135C2 /* ProviderSkillsListViewModel.swift */,
 				7F5A0D2E2EFEE48F001135C2 /* SkillDetailsViewModel.swift */,
 			);
@@ -764,6 +785,7 @@
 			children = (
 				7FAB33452EE45EB1008AC600 /* ChatListViewController.swift */,
 				7FAB33472EE45ED9008AC600 /* ChatRoomViewController.swift */,
+				3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -867,8 +889,8 @@
 		7FAB33712EE4646F008AC600 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				603DBC262F0461DF0097FC7D /* NotificationCenterViewController.swift */,
-				603DBC272F0461DF0097FC7D /* ViewNotificationViewController.swift */,
+				7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */,
+				7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -919,6 +941,8 @@
 				7F5A0D182EFDDC9E001135C2 /* Constants.swift */,
 				7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */,
 				7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */,
+				7FA8DA892F048D8A0012A48F /* LoadingViewController.swift */,
+				7FA8DA8D2F04AB690012A48F /* DummyDataSeeder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1075,6 +1099,7 @@
 			isa = PBXGroup;
 			children = (
 				AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */,
+				ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1206,9 +1231,11 @@
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
 				10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */,
 				10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */,
+				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
+				7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */,
+				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
 				10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */,
 				10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */,
-				7F5A0D302EFEE48F001135C2 /* ProviderProfileViewModel.swift in Sources */,
 				7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */,
 				7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */,
 				7FAB338E2EE46741008AC600 /* StorageManager.swift in Sources */,
@@ -1221,6 +1248,7 @@
 				3AE4B1A12EFC8ADA00BE4A01 /* UsersAccountsViewController.swift in Sources */,
 				10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */,
 				3AE4B1A22EFC8ADA00BE4A01 /* AdminToolsViewController.swift in Sources */,
+				7FA8DA8A2F048D8A0012A48F /* LoadingViewController.swift in Sources */,
 				10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */,
 				7FB368812F0196EC005AEB44 /* SeekerProfileViewModel.swift in Sources */,
 				3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */,
@@ -1269,8 +1297,13 @@
 				7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */,
 				7F5A0D162EFDDC56001135C2 /* AvailabilityRepository.swift in Sources */,
 				AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */,
+				7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */,
+				7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */,
+				7FA8DA822F043BC00012A48F /* ChangeEmailViewModel.swift in Sources */,
 				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
+				ACB2A18B2F053EB5005F9F62 /* ReviewViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
+				3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
 				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
 				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
@@ -1288,6 +1321,7 @@
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,
 				7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */,
+				7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */,
 				7FAB333C2EE45D73008AC600 /* ReviewSubmittedViewController.swift in Sources */,
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
