@@ -32,28 +32,29 @@ class ReportsViewController: UIViewController {
             sb.autocapitalizationType = .none
         }
 
-        // Make segment control access safe; hide if present
-        segmentControl?.setTitle("New", forSegmentAt: 0)
+        // Make segment control access safe
+        segmentControl?.setTitle("Open", forSegmentAt: 0)
         segmentControl?.setTitle("Reviewed", forSegmentAt: 1)
         if let sc = segmentControl {
             sc.selectedSegmentIndex = 0
-            sc.isHidden = true
+            // ensure it sends events even if the storyboard action isn't connected
+            sc.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         }
 
         // Use preloaded data if provided to avoid fetching after presentation
         if let prefetched = initialReports {
             allReports = prefetched
-            reports = prefetched
-            tableView.reloadData()
+            // Apply current segment filter immediately
+            updateDisplayedReports()
         } else {
             fetchReports()
         }
     }
 
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        // Keep IBAction as no-op; avoid force-unwrapping SearchBar
-        SearchBar?.text = ""
+        // Apply the segment filter and preserve any search query
         SearchBar?.resignFirstResponder()
+        updateDisplayedReports()
     }
     private func fetchReports() {
         guard let vm = viewModel else {
@@ -66,8 +67,8 @@ class ReportsViewController: UIViewController {
                 switch result {
                 case .success(let data):
                     self?.allReports = data
-                    self?.reports = data
-                    self?.tableView.reloadData()
+                    // Apply the currently selected segment + search filter
+                    self?.updateDisplayedReports()
                 case .failure(let error):
                     print("❌ Fetch reports error:", error.localizedDescription)
                 }
@@ -75,16 +76,31 @@ class ReportsViewController: UIViewController {
         }
     }
     private func updateDisplayedReports() {
-        // Always show all reports; apply search filter only
         let query = SearchBar?.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 
+        // Start from all reports, then apply segment filter (if available), then search
+        var filtered = allReports
+
+        if let sc = segmentControl {
+            switch sc.selectedSegmentIndex {
+            case 0:
+                // 'New' -> open
+                filtered = filtered.filter { $0.status.lowercased() == "open" }
+            case 1:
+                // 'Reviewed'
+                filtered = filtered.filter { $0.status.lowercased() == "reviewed" }
+            default:
+                break
+            }
+        }
+
         if query.isEmpty {
-            reports = allReports
+            reports = filtered
         } else {
             let q = query.lowercased()
-            reports = allReports.filter {
-                let reason = ($0.reason ?? "").lowercased()
-                let reporter = ($0.reporterId ?? "").lowercased()
+            reports = filtered.filter {
+                let reason = $0.reason.lowercased()
+                let reporter = $0.reporterId.lowercased()
                 return reason.contains(q) || reporter.contains(q)
             }
         }
@@ -148,7 +164,7 @@ extension ReportsViewController: UITableViewDataSource {
 
         // Replace reporter id with readable username when available
         if let vm = viewModel {
-            vm.fetchUser(userID: report.reporterId) { result in
+            vm.fetchUserByIdentifier(report.reporterId) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let user):
@@ -163,6 +179,7 @@ extension ReportsViewController: UITableViewDataSource {
                             current.detailTextLabel?.attributedText = updatedAttr
                         }
                     case .failure:
+                        // unable to resolve user — leave reporter id as-is
                         break
                     }
                 }

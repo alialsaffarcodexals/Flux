@@ -33,20 +33,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notifications" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hW-f7-JCx">
-                                <rect key="frame" x="16" y="88" width="181" height="36"/>
+                                <rect key="frame" x="16" y="170" width="181" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rXA-Oq-QMR">
-                                <rect key="frame" x="16" y="141" width="361" height="32"/>
+                                <rect key="frame" x="16" y="223" width="361" height="32"/>
                                 <segments>
                                     <segment title="Notifications"/>
                                     <segment title="Activities"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentChanged:" destination="EgZ-ms-Riq" eventType="valueChanged" id="sij-D1-sgP"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pgl-eU-8OV">
-                                <rect key="frame" x="0.0" y="180" width="393" height="604"/>
+                                <rect key="frame" x="0.0" y="262" width="393" height="522"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ReportCell" textLabel="nwD-5D-ejo" detailTextLabel="zF6-t5-gjX" style="IBUITableViewCellStyleSubtitle" id="Bba-yb-RP1">
@@ -79,7 +82,7 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bDt-Yi-qfX">
-                                <rect key="frame" x="0.0" y="132" width="393" height="1"/>
+                                <rect key="frame" x="0.0" y="214" width="393" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Dyz-a4-uZR"/>
@@ -90,7 +93,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zsS-kV-PpI" firstAttribute="trailing" secondItem="bDt-Yi-qfX" secondAttribute="trailing" id="10c-Yg-6Bz"/>
-                            <constraint firstItem="4hW-f7-JCx" firstAttribute="top" secondItem="2d7-gW-aQX" secondAttribute="top" constant="88" id="22i-vl-pZY"/>
+                            <constraint firstItem="4hW-f7-JCx" firstAttribute="top" secondItem="zsS-kV-PpI" secondAttribute="top" constant="8" id="22i-vl-pZY"/>
                             <constraint firstItem="pgl-eU-8OV" firstAttribute="top" secondItem="rXA-Oq-QMR" secondAttribute="bottom" constant="8" id="2rD-gw-KMW"/>
                             <constraint firstItem="zsS-kV-PpI" firstAttribute="trailing" secondItem="rXA-Oq-QMR" secondAttribute="trailing" constant="16" id="3O3-b3-c4w"/>
                             <constraint firstItem="pgl-eU-8OV" firstAttribute="leading" secondItem="zsS-kV-PpI" secondAttribute="leading" id="8P2-LP-X7o"/>
@@ -105,6 +108,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="IED-wT-9ev"/>
                     <connections>
+                        <outlet property="NotificationTitle" destination="4hW-f7-JCx" id="ssW-bn-wO3"/>
                         <outlet property="segmentControl" destination="rXA-Oq-QMR" id="RUF-4F-mkk"/>
                         <outlet property="tableView" destination="pgl-eU-8OV" id="Z3u-Rr-UL0"/>
                     </connections>
@@ -116,19 +120,19 @@
         <!--View Notification View Controller-->
         <scene sceneID="dtB-wJ-DKN">
             <objects>
-                <viewController id="diA-jQ-aDg" customClass="ViewNotificationViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewNotificationViewController" id="diA-jQ-aDg" customClass="ViewNotificationViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9pz-fN-OIV">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIew Notification" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Fv-tB-uyz">
-                                <rect key="frame" x="16" y="162" width="241" height="36"/>
+                                <rect key="frame" x="16" y="170" width="241" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="zFS-rj-TAl">
-                                <rect key="frame" x="16" y="214" width="361" height="100"/>
+                                <rect key="frame" x="16" y="222" width="361" height="100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROd-HI-FTB">
                                         <rect key="frame" x="0.0" y="0.0" width="361" height="49.666666666666664"/>
@@ -252,7 +256,6 @@
                                             <constraint firstItem="TSJ-Q3-GtZ" firstAttribute="leading" secondItem="WQ0-gw-J1L" secondAttribute="leading" constant="16" id="Orr-KB-zfd"/>
                                             <constraint firstItem="TSJ-Q3-GtZ" firstAttribute="top" secondItem="WQ0-gw-J1L" secondAttribute="top" constant="14.33" id="QOV-WR-Fr8"/>
                                             <constraint firstAttribute="bottom" secondItem="pgj-60-4tn" secondAttribute="bottom" id="Qwa-02-rNH"/>
-                                            <constraint firstItem="yWh-4g-cro" firstAttribute="leading" secondItem="pgj-60-4tn" secondAttribute="trailing" constant="16" id="T1t-Zl-VNu"/>
                                             <constraint firstAttribute="bottom" secondItem="TSJ-Q3-GtZ" secondAttribute="bottom" constant="14.33" id="tNB-Zx-yuT"/>
                                         </constraints>
                                     </view>
@@ -270,13 +273,13 @@
                                 </userDefinedRuntimeAttributes>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="div-06-7v5">
-                                <rect key="frame" x="16.000000000000004" y="330" width="63.333333333333343" height="24"/>
+                                <rect key="frame" x="16.000000000000004" y="338" width="63.333333333333343" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="I have a problem with the services" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PIZ-9F-EDo">
-                                <rect key="frame" x="16" y="370" width="361" height="200"/>
+                                <rect key="frame" x="16" y="378" width="361" height="200"/>
                                 <color key="backgroundColor" white="0.94999999999999996" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="HV5-EZ-SkU"/>
@@ -299,7 +302,7 @@
                             <constraint firstItem="PIZ-9F-EDo" firstAttribute="leading" secondItem="O6N-o7-8Xg" secondAttribute="leading" constant="16" id="NJo-yH-iBP"/>
                             <constraint firstItem="O6N-o7-8Xg" firstAttribute="trailing" secondItem="zFS-rj-TAl" secondAttribute="trailing" constant="16" id="bjB-fw-EGA"/>
                             <constraint firstItem="PIZ-9F-EDo" firstAttribute="top" secondItem="div-06-7v5" secondAttribute="bottom" constant="16" id="bx9-a3-CLZ"/>
-                            <constraint firstItem="4Fv-tB-uyz" firstAttribute="top" secondItem="O6N-o7-8Xg" secondAttribute="top" id="fu5-d9-Ugt"/>
+                            <constraint firstItem="4Fv-tB-uyz" firstAttribute="top" secondItem="O6N-o7-8Xg" secondAttribute="top" constant="8" id="fu5-d9-Ugt"/>
                             <constraint firstItem="4Fv-tB-uyz" firstAttribute="leading" secondItem="O6N-o7-8Xg" secondAttribute="leading" constant="16" id="lng-Wq-aL7"/>
                             <constraint firstItem="zFS-rj-TAl" firstAttribute="leading" secondItem="O6N-o7-8Xg" secondAttribute="leading" constant="16" id="nKz-Zh-5pX"/>
                             <constraint firstItem="div-06-7v5" firstAttribute="leading" secondItem="O6N-o7-8Xg" secondAttribute="leading" constant="16" id="oOA-KK-aMA"/>
@@ -308,6 +311,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="bge-zP-Jp8"/>
                     <connections>
+                        <outlet property="NotificationTitle" destination="4Fv-tB-uyz" id="Ieq-dG-cTt"/>
                         <outlet property="dateLabel" destination="pJd-Cf-iCK" id="ID1-g4-qJT"/>
                         <outlet property="deliveredFrom" destination="vYW-qJ-78v" id="A7U-EL-lbP"/>
                         <outlet property="detailsTextView" destination="PIZ-9F-EDo" id="kAy-XE-jJE"/>
