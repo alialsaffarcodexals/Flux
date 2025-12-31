@@ -233,6 +233,9 @@
                                                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                                                     <color key="baseForegroundColor" systemColor="systemGrayColor"/>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="editPortfolioTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="LRL-i3-dzp"/>
+                                                                </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="czh-Qg-PXL">
                                                                 <rect key="frame" x="0.0" y="42.333333333333357" width="361" height="177.66666666666663"/>
@@ -432,6 +435,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bioLabel" destination="6mC-g8-h3w" id="Sr3-YQ-MVN"/>
+                        <outlet property="editPortfolioButton" destination="cwd-eF-aXE" id="ems-hl-sHI"/>
                         <outlet property="locationLabel" destination="Mda-hT-rSO" id="H9F-3X-GuH"/>
                         <outlet property="nameLabel" destination="e8z-eh-Ziw" id="BT5-DV-7cQ"/>
                         <outlet property="phoneLabel" destination="bSz-hH-bmv" id="UDl-yW-Qlt"/>
