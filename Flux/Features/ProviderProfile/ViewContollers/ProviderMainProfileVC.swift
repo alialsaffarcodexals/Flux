@@ -22,6 +22,8 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var skillTagButtonFour: UIButton?
     @IBOutlet weak var skillTagMoreButton: UIButton?
     
+    @IBOutlet weak var editPortfolioButton: UIButton!
+    
     // Properties
     private var viewModel = ProviderProfileViewModel()
     private var skills: [Skill] = []
@@ -149,6 +151,18 @@ class ProviderMainProfileVC: UIViewController {
         // Push onto existing navigation stack (preserves Back button)
         navigationController?.pushViewController(settingsVC, animated: true)
     }
+    
+    @IBAction func editPortfolioTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Portfolio", bundle: nil)
+
+        guard let portfolioVC = storyboard.instantiateViewController(withIdentifier: "PortfolioVC") as? PortfolioListViewController else {
+            assertionFailure("PortfolioVC in Portfolio.storyboard is not PortfolioListViewController. Check storyboard Class/Module.")
+            return
+        }
+
+        navigationController?.pushViewController(portfolioVC, animated: true)
+    }
+
     
     // MARK: - Navigation Logic
     private func navigateToSeekerProfile() {
