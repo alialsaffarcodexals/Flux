@@ -1,16 +1,17 @@
 import UIKit
 
-class ChangePhoneViewController: UIViewController {
+class ChangePasswordViewController: UIViewController {
 
     // MARK: - IBOutlets
     
-    @IBOutlet weak var newPhoneTextField: UITextField!
+    @IBOutlet weak var newPasswordTextField: UITextField!
+    @IBOutlet weak var confirmNewPasswordTextField: UITextField!
     @IBOutlet weak var currentPasswordTextField: UITextField!
     @IBOutlet weak var saveChangesButton: UIButton!
     
     // MARK: - Properties
     
-    private let viewModel = ChangePhoneViewModel()
+    private let viewModel = ChangePasswordViewModel()
     
     // MARK: - Lifecycle
     
@@ -18,8 +19,10 @@ class ChangePhoneViewController: UIViewController {
         super.viewDidLoad()
         setupBindings()
         
-        // Setup keyboard type for phone
-        newPhoneTextField.keyboardType = .phonePad
+        // Setup secure text entry
+        newPasswordTextField.isSecureTextEntry = true
+        confirmNewPasswordTextField.isSecureTextEntry = true
+        currentPasswordTextField.isSecureTextEntry = true
     }
     
     // MARK: - Setup
@@ -60,14 +63,16 @@ class ChangePhoneViewController: UIViewController {
     
     @IBAction func saveChangesTapped(_ sender: UIButton) {
         // Show confirmation alert
-        let alert = UIAlertController(title: "Confirm", message: "Would you like to save your new phone number? You will be logged out.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Confirm", message: "Would you like to save your new password? You will be logged out.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self] _ in
             guard let self = self else { return }
-            let phone = self.newPhoneTextField.text ?? ""
-            let password = self.currentPasswordTextField.text ?? ""
-            self.viewModel.submit(newPhone: phone, password: password)
+            let startPassword = self.newPasswordTextField.text ?? ""
+            let confirm = self.confirmNewPasswordTextField.text ?? ""
+            let current = self.currentPasswordTextField.text ?? ""
+            
+            self.viewModel.submit(currentPassword: current, newPassword: startPassword, confirmPassword: confirm)
         }))
         
         present(alert, animated: true)
