@@ -35,6 +35,13 @@ class ProviderMainProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 🧹 Clear labels to prevent dummy text
+        nameLabel.text = ""
+        bioLabel.text = ""
+        locationLabel.text = ""
+        phoneLabel.text = ""
+        
         setupBindings()
         resetSkillTagUI()
         removeWidthConstraints()
@@ -268,6 +275,7 @@ class ProviderMainProfileVC: UIViewController {
             label.textColor = .secondaryLabel
             label.numberOfLines = 0
             label.textAlignment = .left
+            label.font = .systemFont(ofSize: 18)
             emptySkillsLabel = label
             return label
         }()
