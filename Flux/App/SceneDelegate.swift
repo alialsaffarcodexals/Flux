@@ -16,12 +16,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Setup Window
         let window = UIWindow(windowScene: windowScene)
         
-        // Fix Black Screen: Set an initial Loading View Controller immediately
-        window.rootViewController = LoadingViewController()
+        // 2. Create a temporary Loading View Controller (White screen + Spinner)
+        // This satisfies the OS "Watchdog" so the app doesn't get killed
+        let loadingVC = UIViewController()
+        loadingVC.view.backgroundColor = .systemBackground
+        let spinner = UIActivityIndicatorView(style: .medium)
+        spinner.center = CGPoint(x: window.bounds.midX, y: window.bounds.midY)
+        spinner.startAnimating()
+        loadingVC.view.addSubview(spinner)
+        
+        // 3. Set it as root and make visible
+        window.rootViewController = loadingVC
+        self.window = window
+        window.makeKeyAndVisible()
+    
+        
         
         self.window = window
         window.makeKeyAndVisible()
         
+        
+        // 2. CRITICAL: Give the window to AppNavigator
+                AppNavigator.shared.configure(window: window)
+                
+        // 3. Start App
+        AppNavigator.shared.startApp()
         // Launch Logic: Let AppNavigator decide based on Auth state
         // This will eventually replace the rootViewController once ready
         AppNavigator.shared.startApp()

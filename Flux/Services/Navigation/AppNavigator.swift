@@ -4,7 +4,18 @@ import FirebaseAuth
 class AppNavigator {
     
     static let shared = AppNavigator()
+    private weak var window: UIWindow? // weak reference to the window to avoid memory cycles
+        
     private init() {}
+    
+    // 2. New function to receive the window from SceneDelegate
+    func configure(window: UIWindow) {
+        self.window = window
+    }
+    
+    //private var window: UIWindow? {
+            //return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+        //}
     
     // MARK: - Navigation Entry Point
     
@@ -92,10 +103,13 @@ class AppNavigator {
     func navigateToAuth() {
         print("🔙 Navigating to Authentication Flow")
         let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-        guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
-            return
-        }
-        setRoot(viewController: authNav)
+        
+        // CHANGED HERE:
+        guard let authVC = storyboard.instantiateInitialViewController() else {
+                    print("❌ CRITICAL ERROR: Could not find Initial View Controller in Authentication.storyboard. Please open the Storyboard and check the 'Is Initial View Controller' box on your Navigation Controller.")
+                    return
+                }
+        setRoot(viewController: authVC)
     }
     
     /// Public method to switch to Authentication flow (Logout/Reset).
@@ -103,17 +117,18 @@ class AppNavigator {
         // Reuse the existing logic which already handles Storyboard instantiation and Root switching safely.
         navigateToAuth()
     }
-    
+    // CHANGE HERE:
     // MARK: - Helper: Change Root
     private func setRoot(viewController: UIViewController) {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
-            return
+            // Use the class property 'window' we defined at the top
+            guard let window = self.window else {
+                print("❌ Error: No active window found to set root view controller.")
+                return
+            }
+            
+            window.rootViewController = viewController
+            window.makeKeyAndVisible()
+            
+            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
         }
-        
-        window.rootViewController = viewController
-        window.makeKeyAndVisible()
-        
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
-    }
 }
