@@ -45,9 +45,10 @@ class ProviderSetupViewController: UIViewController {
         }
 
         viewModel.onSuccess = { user in
-            print("✅ Provider Setup Complete. Routing via AppNavigator...")
-            // The user object here now includes the new location
-            AppNavigator.shared.navigate(user: user)
+            print("✅ Provider Setup Complete. Routing to Provider Profile...")
+            
+            // ✅ UPDATE: Navigate to Tab 4 (Provider Profile)
+            AppNavigator.shared.navigate(user: user, destinationTab: 4)
         }
     }
 

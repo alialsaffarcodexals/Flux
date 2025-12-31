@@ -66,9 +66,10 @@ class SeekerProfileViewModel {
                 UserRepository.shared.getUser(uid: uid) { result in
                     switch result {
                     case .success(let updatedUser):
-                        // 🚀 Centralized Navigation handles the screen switch
                         DispatchQueue.main.async {
-                            AppNavigator.shared.navigate(user: updatedUser)
+                            // ✅ UPDATE: Navigate to Tab 4 (Provider Profile)
+                            // Provider Tabs: [Home, Requests, Manage, Chat, Profile] -> Index 4
+                            AppNavigator.shared.navigate(user: updatedUser, destinationTab: 4)
                         }
                     case .failure:
                         self?.onError?("Failed to switch modes.")

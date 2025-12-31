@@ -32,11 +32,9 @@ class SeekerProfileViewController: UIViewController {
         viewModel.fetchUserProfile()
     }
     
+    // ✅ FIX 1: Do not switch tabs directly. Ask the ViewModel.
     @IBAction func providerProfileTapped(_ sender: UIButton) {
-        // Switch to Provider Mode
-        if let tabBarController = self.tabBarController as? MainTabBarController {
-            tabBarController.switchRole(to: .provider)
-        }
+        viewModel.didTapServiceProviderProfile()
     }
     
     @IBAction func historyButtonTapped(_ sender: UIButton) {
@@ -99,11 +97,19 @@ class SeekerProfileViewController: UIViewController {
             }
         }
         
+        // ✅ FIX 2: Handle the navigation to the Intro VC
         viewModel.onNavigateToProviderSetup = { [weak self] in
             let storyboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
-            if let introVC = storyboard.instantiateViewController(withIdentifier: "ProviderSetupViewController") as? ProviderIntroViewController {
+            
+            // Instantiate the Intro VC using the ID you provided
+            if let introVC = storyboard.instantiateViewController(withIdentifier: "ProviderIntroViewController") as? ProviderIntroViewController {
+                
+                // Hide bottom bar so the user focuses on the setup flow
                 introVC.hidesBottomBarWhenPushed = true
+                
                 self?.navigationController?.pushViewController(introVC, animated: true)
+            } else {
+                print("🔴 Error: Could not find 'ProviderIntroViewController'")
             }
         }
         
