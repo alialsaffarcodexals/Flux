@@ -1,9 +1,11 @@
 import UIKit
+import FirebaseFirestore
 
 class SkillVerificationViewController: UIViewController {
 
     @IBOutlet weak var SkillsTable: UITableView!
     @IBOutlet weak var SearchBar: UISearchBar!
+    @IBOutlet weak var SegmentControl: UISegmentedControl!
     
     private var allSkills: [Skill] = []   // original data
     private var skills: [Skill] = []      // filtered data
@@ -16,11 +18,14 @@ class SkillVerificationViewController: UIViewController {
         super.viewDidLoad()
         setupTable()
         setupSearchBar()
+        // Ensure segment control sends events and set initial index
+        SegmentControl?.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
+        SegmentControl?.selectedSegmentIndex = SegmentControl?.selectedSegmentIndex ?? 0
         // Use prefetched skills if available
         if let prefetched = initialSkills {
             allSkills = prefetched
-            skills = prefetched
-            SkillsTable.reloadData()
+            // apply current filters immediately
+            updateDisplayedSkills()
         } else {
             fetchSkills()
         }
@@ -58,13 +63,48 @@ class SkillVerificationViewController: UIViewController {
                 switch result {
                 case .success(let data):
                     self?.allSkills = data
-                    self?.skills = data
-                    self?.SkillsTable.reloadData()
+                    // apply current filters (segment + search)
+                    self?.updateDisplayedSkills()
                 case .failure(let error):
                     print("❌ Fetch skills error:", error.localizedDescription)
                 }
             }
         }
+    }
+
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        // Re-apply filters when segment changes
+        SearchBar?.resignFirstResponder()
+        updateDisplayedSkills()
+    }
+
+    private func updateDisplayedSkills() {
+        // Start from all skills, apply segment filter, then search filter
+        var filtered = allSkills
+
+        if let sc = SegmentControl {
+            switch sc.selectedSegmentIndex {
+            case 0:
+                // Pending
+                filtered = filtered.filter { $0.status == .pending }
+            case 1:
+                // Approved
+                filtered = filtered.filter { $0.status == .approved }
+            case 2:
+                // Rejected
+                filtered = filtered.filter { $0.status == .rejected }
+            default:
+                break
+            }
+        }
+
+        if let query = SearchBar?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !query.isEmpty {
+            let q = query.lowercased()
+            filtered = filtered.filter { $0.name.lowercased().contains(q) }
+        }
+
+        skills = filtered
+        SkillsTable.reloadData()
     }
 }
 
@@ -124,6 +164,33 @@ extension SkillVerificationViewController: UITableViewDataSource {
             }
         }
 
+        // Fetch skill document timestamp if available; otherwise show Unknown
+        if let skillId = skill.id {
+            let db = Firestore.firestore()
+            db.collection("skills").document(skillId).getDocument { snap, _ in
+                DispatchQueue.main.async {
+                    var timeText = "Unknown"
+                    if let data = snap?.data() {
+                        if let ts = data["createdAt"] as? Timestamp {
+                            let d = ts.dateValue()
+                            let fmt = DateFormatter()
+                            fmt.dateStyle = .medium
+                            fmt.timeStyle = .short
+                            timeText = fmt.string(from: d)
+                        } else if let s = data["createdAt"] as? String {
+                            timeText = s
+                        }
+                    }
+
+                    if let current = tableView.cellForRow(at: indexPath) {
+                        let base = current.detailTextLabel?.text ?? "Provider: \(skill.providerId) • Status: \(statusText)"
+                        current.detailTextLabel?.text = base + " • Time: \(timeText)"
+                        current.detailTextLabel?.textColor = statusColor
+                    }
+                }
+            }
+        }
+
         // Make non-pending skills non-interactive
         if skill.status == .pending {
             cell.accessoryType = .disclosureIndicator
@@ -172,23 +239,13 @@ extension SkillVerificationViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String) {
 
-        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        if query.isEmpty {
-            skills = allSkills
-        } else {
-            skills = allSkills.filter {
-                $0.name.lowercased().contains(query.lowercased())
-            }
-        }
-
-        SkillsTable.reloadData()
+        // Use the unified filter so search applies to the currently selected segment
+        updateDisplayedSkills()
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
-        skills = allSkills
-        SkillsTable.reloadData()
+        updateDisplayedSkills()
     }
 }
