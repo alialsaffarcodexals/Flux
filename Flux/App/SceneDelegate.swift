@@ -21,7 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
         window.makeKeyAndVisible()
+    
         
+        
+       
         // Launch Logic: Let AppNavigator decide based on Auth state
         // This will eventually replace the rootViewController once ready
         AppNavigator.shared.startApp()
