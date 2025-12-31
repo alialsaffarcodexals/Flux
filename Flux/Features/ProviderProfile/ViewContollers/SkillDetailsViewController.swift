@@ -124,7 +124,7 @@ final class SkillDetailsViewController: UIViewController {
     }
 
     private func proofDisplayName(urlString: String?) -> String {
-        guard let urlString = urlString, !urlString.isEmpty else {
+        guard let urlString = urlString?.trimmingCharacters(in: .whitespacesAndNewlines), !urlString.isEmpty else {
             return "No proof uploaded"
         }
 
@@ -132,7 +132,8 @@ final class SkillDetailsViewController: UIViewController {
             return url.lastPathComponent
         }
 
-        return "No proof uploaded"
+        // Fallback: If we have a string but it's not a valid URL, logic dictates proof exists.
+        return "Proof Uploaded"
     }
 
     private func applyPillStyle(title: String, toButton button: UIButton?) {

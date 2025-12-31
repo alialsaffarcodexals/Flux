@@ -10,6 +10,7 @@ enum BookingStatus: String, Codable {
     case completed = "Completed"
     case rejected  = "Rejected"      // Provider Dropped/Rejected
     case canceled  = "Canceled"      // optional
+    case pending = "Pending"
 }
 
 

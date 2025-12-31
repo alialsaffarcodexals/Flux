@@ -36,4 +36,14 @@ final class UserRepository {
             }
         }
     }
+
+    func updateUserField(uid: String, field: String, value: Any, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(uid).updateData([field: value]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 }
