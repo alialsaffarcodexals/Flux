@@ -7,24 +7,35 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
-class ReviewViewController: UIViewController {
-
+class ReviewViewController: UIViewController, UITextViewDelegate {
+    
     // MARK: - Outlets
     @IBOutlet weak var providerImageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var reviewTextView: UITextView!
-
+    @IBOutlet weak var reviewContainerView: UIView!
+    @IBOutlet weak var titleContainerView: UIView!
+    
     // Connect these 5 buttons from your Storyboard
     @IBOutlet var starButtons: [UIButton]!
     
+    var bookingId: String = ""
+    var serviceId: String = ""
+    var providerId: String = ""
     var currentRating: Int = 0
-
+    var providerName: String = ""
+    var serviceName: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
+        
+        titleTextField.text = serviceName
     }
+    
     
     func setupUI() {
         // Image Styling
@@ -43,29 +54,29 @@ class ReviewViewController: UIViewController {
         reviewTextView.delegate = self
     }
     // MARK: - TextView Delegate (The Placeholder Logic)
-        
-        // When user starts typing, remove the "placeholder" text
-        func textViewDidBeginEditing(_ textView: UITextView) {
-            if textView.textColor == UIColor.lightGray {
-                textView.text = nil
-                textView.textColor = UIColor.label // Default black/white color
-            }
-        }
-        
-        // When user stops typing, if empty, put "placeholder" back
-        func textViewDidEndEditing(_ textView: UITextView) {
-            if textView.text.isEmpty {
-                textView.text = "Write your review"
-                textView.textColor = UIColor.lightGray
-            }
-        }
-        
-        // Close keyboard when touching outside
-        override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-            self.view.endEditing(true)
-        }
     
-
+    // When user starts typing, remove the "placeholder" text
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.label // Default black/white color
+        }
+    }
+    
+    // When user stops typing, if empty, put "placeholder" back
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Write your review"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+    
+    // Close keyboard when touching outside
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    
     // MARK: - Star Logic
     // Connect ALL 5 buttons to this ONE action in Storyboard
     // IMPORTANT: Set Tags in Storyboard: Button 1 -> Tag 1, Button 2 -> Tag 2, etc.
@@ -86,33 +97,56 @@ class ReviewViewController: UIViewController {
             }
         }
     }
-
+    
     // MARK: - Navigation
     @IBAction func sendButtonTapped(_ sender: Any) {
-        // Validation
+        // 1. Validation: Did they select a star?
         guard currentRating > 0 else {
-            // Show alert: Please select a star rating
+            print("Please select a rating")
             return
         }
         
-        // Navigate to Success Screen
-        performSegue(withIdentifier: "goToSuccess", sender: self)
-    }
-}
-
-// Helper to make TextView behave like TextField with placeholder
-extension ReviewViewController: UITextViewDelegate {
-    /**func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == .lightGray {
-            textView.text = nil
-            textView.textColor = .label
+        // 2. Get Current User ID (Seeker)
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
+            print("Error: No user logged in")
+            return
+        }
+        
+        // 3. Create the Review Object
+        let newReview = Review(
+            bookingId: bookingId,
+            serviceId: serviceId,
+            providerId: providerId,
+            seekerId: currentUserId,
+            rating: currentRating,
+            comment: reviewTextView.text
+        )
+        
+        // 4. ADD THIS: Send to Firestore using Repository
+        ReviewRepository.shared.createReview(newReview) { result in
+            switch result {
+            case .success(let savedReview):
+                print("✅ Review saved successfully! ID: \(savedReview.id ?? "Unknown")")
+                
+                // 5. Navigate to Success Screen on Main Thread
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "goToSuccess", sender: self)
+                }
+                
+            case .failure(let error):
+                print("❌ Error saving review: \(error.localizedDescription)")
+                // Optional: Show an alert here telling the user it failed
+            }
+        }
+        
+        func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text.isEmpty {
+                textView.text = "Write your review"
+                textView.textColor = .lightGray
+            }
         }
     }
+        
+        
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "Write your review"
-            textView.textColor = .lightGray
-        }
-    }**/
 }

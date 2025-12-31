@@ -3,6 +3,10 @@ import FirebaseFirestore
 
 // MARK: - Review
 
+import Foundation
+import FirebaseFirestore
+
+
 struct Review: Identifiable, Codable {
     @DocumentID var id: String?
 
@@ -15,4 +19,15 @@ struct Review: Identifiable, Codable {
     var comment: String
 
     var timestamp: Date
+
+    // Custom Initializer (Fixes the "Extra Argument" error)
+    init(bookingId: String, serviceId: String, providerId: String, seekerId: String, rating: Int, comment: String) {
+        self.bookingId = bookingId
+        self.serviceId = serviceId
+        self.providerId = providerId
+        self.seekerId = seekerId
+        self.rating = rating
+        self.comment = comment
+        self.timestamp = Date()
+    }
 }
