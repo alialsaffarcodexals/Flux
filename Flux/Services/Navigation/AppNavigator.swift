@@ -4,18 +4,7 @@ import FirebaseAuth
 class AppNavigator {
     
     static let shared = AppNavigator()
-    private weak var window: UIWindow? // weak reference to the window to avoid memory cycles
-        
     private init() {}
-    
-    // 2. New function to receive the window from SceneDelegate
-    func configure(window: UIWindow) {
-        self.window = window
-    }
-    
-    //private var window: UIWindow? {
-            //return (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
-        //}
     
     // MARK: - Navigation Entry Point
     
@@ -85,7 +74,7 @@ class AppNavigator {
         // 3. Handle Active Profile Mode / Initial Tab Selection
         // If the user was in Seller Mode (Provider), we might want to switch them to that context.
         // MainTabBarController.setupTabs(for: user.role) already sets up the correct tabs.
-        // If we want to strictly follow "activeProfileMode should still work normally", 
+        // If we want to strictly follow "activeProfileMode should still work normally",
         // we ensure the tabs are correct (which they are by passing user.role).
         
         // Optional: If you want to force them to the profile tab or specific tab based on state:
@@ -103,13 +92,10 @@ class AppNavigator {
     func navigateToAuth() {
         print("🔙 Navigating to Authentication Flow")
         let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-        
-        // CHANGED HERE:
-        guard let authVC = storyboard.instantiateInitialViewController() else {
-                    print("❌ CRITICAL ERROR: Could not find Initial View Controller in Authentication.storyboard. Please open the Storyboard and check the 'Is Initial View Controller' box on your Navigation Controller.")
-                    return
-                }
-        setRoot(viewController: authVC)
+        guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
+            return
+        }
+        setRoot(viewController: authNav)
     }
     
     /// Public method to switch to Authentication flow (Logout/Reset).
@@ -117,18 +103,17 @@ class AppNavigator {
         // Reuse the existing logic which already handles Storyboard instantiation and Root switching safely.
         navigateToAuth()
     }
-    // CHANGE HERE:
+    
     // MARK: - Helper: Change Root
     private func setRoot(viewController: UIViewController) {
-            // Use the class property 'window' we defined at the top
-            guard let window = self.window else {
-                print("❌ Error: No active window found to set root view controller.")
-                return
-            }
-            
-            window.rootViewController = viewController
-            window.makeKeyAndVisible()
-            
-            UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
         }
+        
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        
+        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
+    }
 }
