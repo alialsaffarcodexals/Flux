@@ -12,76 +12,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
         
-        // 1. Check if authenticated
-        if let authUser = Auth.auth().currentUser {
-            
-            // 2. Use the Repository to get the User Model
-            UserRepository.shared.getUser(uid: authUser.uid) { [weak self] result in
-                guard let self = self else { return }
-                
-                switch result {
-                case .success(let user):
-                    // 3. Determine where to go based on Role & Mode
-                    self.navigateBasedOnRole(user: user)
-                    
-                case .failure(let error):
-                    print("Error fetching user profile: \(error.localizedDescription)")
-                    // If we can't get the user profile, fallback to login
-                    self.navigateToLogin()
-                }
-            }
-        } else {
-            // Not logged in
-            navigateToLogin()
-        }
+        // Setup Window
+        let window = UIWindow(windowScene: windowScene)
         
-        window?.makeKeyAndVisible()
-    }
-
-    // MARK: - Navigation Logic
-    
-    func navigateBasedOnRole(user: User) {
-        let storyboardID: String
+        // Fix Black Screen: Set an initial Loading View Controller immediately
+        window.rootViewController = LoadingViewController()
         
-        switch user.role {
-        case .admin:
-            storyboardID = "AdminNavigationController"
-            
-        case .seeker, .provider:
-            storyboardID = "HomeNav"
-            
-
-//            // Check which mode they were last in
-//            if let mode = user.activeProfileMode, mode == .sellerMode {
-//                storyboardID = "ProviderHomeVC" // ID for the Dashboard showing incoming jobs
-//            } else {
-//                // If .buyerMode (or nil), they act like a seeker
-//                storyboardID = "SeekerHomeVC"
-//            }
-        }
+        self.window = window
+        window.makeKeyAndVisible()
         
-        launchViewController(withID: storyboardID)
-    }
-    
-    func launchViewController(withID id: String) {
-        // Ensure this runs on the Main Thread because we are updating UI
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Home", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: id)
-            self.window?.rootViewController = vc
-        }
-    }
-    
-    func navigateToLogin() {
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            // Assuming the initial VC in storyboard is the Login screen
-            if let loginVC = storyboard.instantiateInitialViewController() {
-                self.window?.rootViewController = loginVC
-            }
-        }
+        // Launch Logic: Let AppNavigator decide based on Auth state
+        // This will eventually replace the rootViewController once ready
+        AppNavigator.shared.startApp()
     }
 
     /// Handles the sceneDidDisconnect lifecycle event.

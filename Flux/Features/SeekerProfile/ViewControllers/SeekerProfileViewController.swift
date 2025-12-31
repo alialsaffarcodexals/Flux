@@ -12,6 +12,9 @@ class SeekerProfileViewController: UIViewController {
     
     @IBOutlet weak var providerProfileButton: UIButton!
     
+    @IBOutlet weak var historyButton: UIButton!
+    @IBOutlet weak var favoritesButton: UIButton!
+    
     var viewModel = SeekerProfileViewModel()
 
     override func viewDidLoad() {
@@ -25,11 +28,27 @@ class SeekerProfileViewController: UIViewController {
     }
     
     @IBAction func providerProfileTapped(_ sender: UIButton) {
-        //viewModel.didTapServiceProviderProfile()
-        
         // Switch to Provider Mode
         if let tabBarController = self.tabBarController as? MainTabBarController {
             tabBarController.switchRole(to: .provider)
+        }
+    }
+    
+    @IBAction func historyButtonTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "History", bundle: nil)
+        if let historyVC = storyboard.instantiateViewController(withIdentifier: "HistoryViewController") as? HistoryVC {
+            navigationController?.pushViewController(historyVC, animated: true)
+        } else {
+             print("Error: Could not instantiate HistoryViewController with ID 'HistoryViewController'")
+        }
+    }
+
+    @IBAction func favoritesButtonTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Favorites", bundle: nil)
+        if let favoritesVC = storyboard.instantiateViewController(withIdentifier: "FavoritesViewController") as? FavoritesVC {
+            navigationController?.pushViewController(favoritesVC, animated: true)
+        } else {
+            print("Error: Could not instantiate FavoritesViewController with ID 'FavoritesViewController'")
         }
     }
     
