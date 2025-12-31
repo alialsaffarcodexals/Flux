@@ -74,7 +74,7 @@ class AppNavigator {
         // 3. Handle Active Profile Mode / Initial Tab Selection
         // If the user was in Seller Mode (Provider), we might want to switch them to that context.
         // MainTabBarController.setupTabs(for: user.role) already sets up the correct tabs.
-        // If we want to strictly follow "activeProfileMode should still work normally", 
+        // If we want to strictly follow "activeProfileMode should still work normally",
         // we ensure the tabs are correct (which they are by passing user.role).
         
         // Optional: If you want to force them to the profile tab or specific tab based on state:

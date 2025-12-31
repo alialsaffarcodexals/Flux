@@ -3,19 +3,14 @@
 /// Location: App/SceneDelegate.swift
 
 import UIKit
+import FirebaseAuth
 
-/// Class SceneDelegate: Responsible for the lifecycle, state, and behavior related to SceneDelegate.
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    /// Handles the scene connection lifecycle.
-    /// - Parameters:
-    ///   - scene: The scene to connect.
-    ///   - session: The session being connected.
-    ///   - connectionOptions: Additional options for configuration.
-    /// - Returns: Void
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         // Setup Window
@@ -26,7 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
         window.makeKeyAndVisible()
+    
         
+        
+       
         // Launch Logic: Let AppNavigator decide based on Auth state
         // This will eventually replace the rootViewController once ready
         AppNavigator.shared.startApp()
