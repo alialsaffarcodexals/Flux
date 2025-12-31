@@ -33,6 +33,8 @@
 		3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B1942EFC8ADA00BE4A01 /* SkillVerificationViewController.swift */; };
 		3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B18D2EFC8ADA00BE4A01 /* AdminTools.storyboard */; };
 		3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */; };
+		603DBC282F0461DF0097FC7D /* ViewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603DBC272F0461DF0097FC7D /* ViewNotificationViewController.swift */; };
+		603DBC292F0461DF0097FC7D /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603DBC262F0461DF0097FC7D /* NotificationCenterViewController.swift */; };
 		7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */; };
 		7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0A2EFDDC56001135C2 /* PortfolioRepository.swift */; };
 		7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0B2EFDDC56001135C2 /* ReportRepository.swift */; };
@@ -175,6 +177,8 @@
 		3AE4B1962EFC8ADA00BE4A01 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
 		3AE4B1982EFC8ADA00BE4A01 /* AdminToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewModel.swift; sourceTree = "<group>"; };
 		3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
+		603DBC262F0461DF0097FC7D /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
+		603DBC272F0461DF0097FC7D /* ViewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNotificationViewController.swift; sourceTree = "<group>"; };
 		7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityBlock.swift; sourceTree = "<group>"; };
 		7F5A0D082EFDDC56001135C2 /* AvailabilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityRepository.swift; sourceTree = "<group>"; };
 		7F5A0D092EFDDC56001135C2 /* BookingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRepository.swift; sourceTree = "<group>"; };
@@ -1276,6 +1280,8 @@
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
+				603DBC282F0461DF0097FC7D /* ViewNotificationViewController.swift in Sources */,
+				603DBC292F0461DF0097FC7D /* NotificationCenterViewController.swift in Sources */,
 				7F6081642EFCF01800FA5639 /* ProviderAvailability.swift in Sources */,
 				7F6081382EFAD01F00FA5639 /* ProviderIntroViewController.swift in Sources */,
 				AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */,
