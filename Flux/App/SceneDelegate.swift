@@ -17,23 +17,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     /// - Returns: Void
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-
-        // Required Behavior: Always start at Authentication flow
-        print("🚀 App Launched. Setting Root VC to Authentication Navigation Controller.")
         
-        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-        
-        // "AuthenticationNC" is the initial Navigation Controller in Authentication.storyboard
-        guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
-            print("🔴 Error: Could not find 'AuthenticationNC' (Auth Nav) in Authentication.storyboard")
-            return
-        }
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-
+        // Setup Window
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = authNav
+        
+        // Fix Black Screen: Set an initial Loading View Controller immediately
+        window.rootViewController = LoadingViewController()
+        
         self.window = window
         window.makeKeyAndVisible()
+        
+        // Launch Logic: Let AppNavigator decide based on Auth state
+        // This will eventually replace the rootViewController once ready
+        AppNavigator.shared.startApp()
     }
 
     /// Handles the sceneDidDisconnect lifecycle event.

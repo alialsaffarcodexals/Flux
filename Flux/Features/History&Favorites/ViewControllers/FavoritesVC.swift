@@ -72,7 +72,7 @@ extension FavoritesVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoriteCell", for: indexPath)
         
         guard let item = viewModel.item(at: indexPath.row) else {
             return cell

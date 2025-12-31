@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 class AppNavigator {
     
@@ -6,12 +7,44 @@ class AppNavigator {
     private init() {}
     
     // MARK: - Navigation Entry Point
+    
+    /// Called by SceneDelegate to decide where to start.
+    func startApp() {
+        if let user = FirebaseAuth.Auth.auth().currentUser {
+            print("🚀 Found active session for UID: \(user.uid). Fetching profile...")
+            
+            // Fetch detailed user profile from Firestore
+            UserRepository.shared.getUser(uid: user.uid) { [weak self] result in
+                guard let self = self else { return }
+                
+                switch result {
+                case .success(let userData):
+                    print("✅ Profile fetched. Navigating to App.")
+                    DispatchQueue.main.async {
+                        self.navigate(user: userData)
+                    }
+                case .failure(let error):
+                    print("⚠️ Failed to fetch profile: \(error). Falling back to Auth.")
+                    DispatchQueue.main.async {
+                        self.navigateToAuth()
+                    }
+                }
+            }
+        } else {
+            print("ℹ️ No active session. Navigate to Auth.")
+            navigateToAuth()
+        }
+    }
+    
     func navigate(user: User) {
                 if user.role == .admin {
                     // Route to Admin Flow
                     loadAdminInterface()
                 } else {
                     // Route to Standard App (Seeker/Provider)
+                    #if DEBUG
+                    DummyDataSeeder.shared.seedIfNeeded()
+                    #endif
                     loadMainTabBar(for: user)
                 }
     }

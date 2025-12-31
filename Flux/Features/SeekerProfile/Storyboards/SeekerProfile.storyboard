@@ -228,6 +228,9 @@
                                                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                                                     <color key="baseForegroundColor" systemColor="systemGrayColor"/>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="historyButtonTapped:" destination="1Nr-3a-wwB" eventType="touchUpInside" id="bQO-SR-j5m"/>
+                                                                </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IOJ-l7-PRl">
                                                                 <rect key="frame" x="0.0" y="42.333333333333243" width="361" height="177.66666666666663"/>
@@ -340,6 +343,9 @@
                                                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                                                     <color key="baseForegroundColor" systemColor="systemGrayColor"/>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="favoritesButtonTapped:" destination="1Nr-3a-wwB" eventType="touchUpInside" id="GUS-YO-30S"/>
+                                                                </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nAF-mQ-2W0">
                                                                 <rect key="frame" x="0.0" y="42.333333333333243" width="361" height="177.66666666666663"/>
@@ -465,6 +471,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="favoritesButton" destination="Go2-G7-lsF" id="n2V-pK-L7V"/>
+                        <outlet property="historyButton" destination="uYl-VY-1Zj" id="DEO-R9-l07"/>
                         <outlet property="locationLabel" destination="fuF-cQ-7mG" id="1fN-Mf-tc5"/>
                         <outlet property="nameLabel" destination="EAa-39-xkC" id="QWx-Ix-Rkw"/>
                         <outlet property="phoneLabel" destination="4zS-0N-niV" id="D0j-iE-L52"/>
