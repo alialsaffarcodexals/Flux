@@ -117,8 +117,8 @@ class ReportViewController: UIViewController, UITextViewDelegate {
                 case .success(let r):
                     self?.report = r
                     self?.populate(with: r)
-                    // fetch reporter and reported user display names
-                    self?.viewModel?.fetchUser(userID: r.reporterId) { userResult in
+                    // fetch reporter and reported user display names (tolerant lookup)
+                    self?.viewModel?.fetchUserByIdentifier(r.reporterId) { userResult in
                         DispatchQueue.main.async {
                             if case .success(let user) = userResult {
                                 self?.reporterLabel.text = "@\(user.username)"
@@ -128,7 +128,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
                         }
                     }
 
-                    self?.viewModel?.fetchUser(userID: r.reportedUserId) { userResult in
+                    self?.viewModel?.fetchUserByIdentifier(r.reportedUserId) { userResult in
                         DispatchQueue.main.async {
                             if case .success(let user) = userResult {
                                 self?.reportedLabel.text = "@\(user.username)"

@@ -42,9 +42,9 @@ class AppNavigator {
                     loadAdminInterface()
                 } else {
                     // Route to Standard App (Seeker/Provider)
-                    #if DEBUG
-                    DummyDataSeeder.shared.seedIfNeeded()
-                    #endif
+//                    #if DEBUG
+//                    DummyDataSeeder.shared.seedIfNeeded()
+//                    #endif
                     loadMainTabBar(for: user)
                 }
     }
@@ -106,14 +106,16 @@ class AppNavigator {
     
     // MARK: - Helper: Change Root
     private func setRoot(viewController: UIViewController) {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
+        guard
+            let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = scene.delegate as? SceneDelegate,
+            let window = sceneDelegate.window
+        else {
             return
         }
-        
+
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
+
 }
