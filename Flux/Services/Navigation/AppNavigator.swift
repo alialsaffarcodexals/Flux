@@ -42,6 +42,9 @@ class AppNavigator {
                     loadAdminInterface()
                 } else {
                     // Route to Standard App (Seeker/Provider)
+                    #if DEBUG
+                    DummyDataSeeder.shared.seedIfNeeded()
+                    #endif
                     loadMainTabBar(for: user)
                 }
     }

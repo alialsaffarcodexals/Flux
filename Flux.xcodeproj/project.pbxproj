@@ -81,6 +81,7 @@
 		7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */; };
 		7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */; };
 		7FA8DA8A2F048D8A0012A48F /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA892F048D8A0012A48F /* LoadingViewController.swift */; };
+		7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA8D2F04AB690012A48F /* DummyDataSeeder.swift */; };
 		7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */; };
 		7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FAB32ED2EE454C9008AC600 /* Settings.storyboard */; };
 		7FAB32F12EE45519008AC600 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB32F02EE45500008AC600 /* SettingsViewController.swift */; };
@@ -222,6 +223,7 @@
 		7FA8DA852F045DC00012A48F /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
 		7FA8DA862F045DC00012A48F /* ViewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNotificationViewController.swift; sourceTree = "<group>"; };
 		7FA8DA892F048D8A0012A48F /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		7FA8DA8D2F04AB690012A48F /* DummyDataSeeder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataSeeder.swift; sourceTree = "<group>"; };
 		7FA993E72EFD410900CE5748 /* DisputeCenter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DisputeCenter.storyboard; sourceTree = "<group>"; };
 		7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisputeCenterVC.swift; sourceTree = "<group>"; };
 		7FAB32ED2EE454C9008AC600 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -934,6 +936,7 @@
 				7F5A0D192EFDDC9E001135C2 /* Extenstion.swift */,
 				7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */,
 				7FA8DA892F048D8A0012A48F /* LoadingViewController.swift */,
+				7FA8DA8D2F04AB690012A48F /* DummyDataSeeder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1222,6 +1225,7 @@
 				10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */,
 				10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */,
 				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
+				7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */,
 				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
 				10BD0DBF2F041A26009FC85D /* CompanyDetailsViewController.swift in Sources */,
 				10BD0DC02F041A26009FC85D /* HomeFeedViewController.swift in Sources */,
