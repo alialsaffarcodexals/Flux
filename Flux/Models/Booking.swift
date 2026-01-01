@@ -16,7 +16,7 @@ enum BookingStatus: String, Codable {
 
 struct Booking: Identifiable, Codable {
     @DocumentID var id: String?
-
+    
     var seekerId: String
     var providerId: String
     var serviceId: String
@@ -26,10 +26,10 @@ struct Booking: Identifiable, Codable {
     var priceAtBooking: Double
     var currencyCode: String?
     var coverImageURLAtBooking: String?   // optional, useful for UI cards
-
+    
     // ✅ Single chosen slot only (no session duration)
     var scheduledAt: Date
-
+    var providerImageURL: String?
     var note: String?
     var status: BookingStatus
     var acceptedAt: Date?
@@ -37,5 +37,5 @@ struct Booking: Identifiable, Codable {
     var completedAt: Date?
     var rejectedAt: Date?
     var createdAt: Date
-    var isReviewed: Bool? = false
+    var isReviewed: Bool?
 }
