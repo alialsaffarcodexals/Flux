@@ -121,12 +121,30 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch currentState {
-        case .pending: return pendingBookings.count
-        case .inProgress: return inProgressBookings.count
-        case .completed: return completedBookings.count
+            var count = 0
+            
+            // 1. Get the count based on the selected tab
+            switch currentState {
+            case .pending:
+                count = pendingBookings.count
+                if count == 0 { setEmptyMessage("No Pending Requests") }
+                
+            case .inProgress:
+                count = inProgressBookings.count
+                if count == 0 { setEmptyMessage("No Requests In Progress") }
+                
+            case .completed:
+                count = completedBookings.count
+                if count == 0 { setEmptyMessage("No Completed Requests") }
+            }
+            
+            // 2. If we have data, clear the message
+            if count > 0 {
+                restoreBackground()
+            }
+            
+            return count
         }
-    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell", for: indexPath) as! RequestTableCell
@@ -342,6 +360,24 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
             
             // Refresh data so the button turns Blue
             fetchBookings()
+        }
+    // MARK: - Empty State Helper
+        func setEmptyMessage(_ message: String) {
+            let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            messageLabel.text = message
+            messageLabel.textColor = .secondaryLabel // Light Gray
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = .center
+            messageLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            messageLabel.sizeToFit()
+
+            tableView.backgroundView = messageLabel
+            tableView.separatorStyle = .none // Hide the empty lines
+        }
+
+        func restoreBackground() {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine // Bring back lines
         }
 }
     /*
