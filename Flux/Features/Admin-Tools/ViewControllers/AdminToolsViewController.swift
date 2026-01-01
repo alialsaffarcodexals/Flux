@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 class AdminToolsViewController: UIViewController {
 
@@ -141,6 +142,37 @@ class AdminToolsViewController: UIViewController {
                 present(vc, animated: true, completion: nil)
             }
         }
+    }
+
+    @IBAction func logoutTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive) { [weak self] _ in
+            do {
+                try AuthManager.shared.signOut()
+                // Log current auth state for debugging
+                let current = FirebaseAuth.Auth.auth().currentUser?.uid ?? "<nil>"
+                print("🔔 Signed out. currentUser after signOut: \(current)")
+
+                // Dismiss any presented view controllers first, then switch root on main thread
+                DispatchQueue.main.async {
+                    if let presented = self?.presentedViewController {
+                        presented.dismiss(animated: false) {
+                            AppNavigator.shared.navigateToAuth()
+                        }
+                    } else {
+                        AppNavigator.shared.navigateToAuth()
+                    }
+                }
+            } catch {
+                print("🔴 Error signing out: \(error)")
+                let e = UIAlertController(title: "Error", message: "Failed to sign out: \(error.localizedDescription)", preferredStyle: .alert)
+                e.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(e, animated: true)
+            }
+        })
+
+        present(alert, animated: true, completion: nil)
     }
 
     // Intercept show segues to prefetch data before presenting screens.
