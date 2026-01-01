@@ -108,6 +108,14 @@ class AppNavigator {
         else {
             return
         }
+        
+        // Ensure theme is applied when changing root
+        AppSettingsManager.shared.applyTheme()
+        
+        // Apply fonts to the new root view controller
+        DispatchQueue.main.async {
+            AppSettingsManager.shared.applyFonts(to: viewController.view)
+        }
 
         window.rootViewController = viewController
         window.makeKeyAndVisible()
