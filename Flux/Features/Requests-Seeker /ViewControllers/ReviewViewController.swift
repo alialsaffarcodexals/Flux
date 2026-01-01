@@ -141,10 +141,15 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
             switch result {
             case .success(let savedReview):
                 print("✅ Review saved successfully! ID: \(savedReview.id ?? "Unknown")")
-                
-                // 5. Navigate to Success Screen on Main Thread
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "goToSuccess", sender: self)
+                            
+                BookingRepository.shared.markAsReviewed(bookingId: self.bookingId) { _ in
+                    
+                    print("✅ Booking marked as reviewed in Firestore")
+                    
+                    // Navigate to Success Screen (Main Thread)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "goToSuccess", sender: self)
+                    }
                 }
                 
             case .failure(let error):
