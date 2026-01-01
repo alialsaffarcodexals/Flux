@@ -18,11 +18,12 @@ class ProjectUploadSuccessViewController: UIViewController {
     @IBAction func doneButtonTapped(_ sender: Any) {
         if let nav = self.navigationController {
             nav.popToRootViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
+        }
+        // 2. If it was presented modally, dismiss it and tell the parent to close
+        else {
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         }
     }
-    
     /*
     // MARK: - Navigation
 
