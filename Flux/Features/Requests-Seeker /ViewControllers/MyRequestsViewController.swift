@@ -160,47 +160,75 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     // MARK: - Swipe Actions
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        if currentState == .inProgress {
-            let messageAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
-                print("Open Chat")
-                completion(true)
+            
+            // 1. IN PROGRESS STATE (Green Chat)
+            if currentState == .inProgress {
+                let messageAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
+                    print("Open Chat")
+                    completion(true)
+                }
+                messageAction.image = UIImage(systemName: "bubble.left.fill")
+                messageAction.backgroundColor = .systemGreen
+                return UISwipeActionsConfiguration(actions: [messageAction])
+                
+            // 2. PENDING STATE (Red Delete + Orange Settings)
+            } else if currentState == .pending {
+                let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completion) in
+                    // Ensure 'showDeleteAlert' function exists in your class
+                    self.showDeleteAlert(at: indexPath)
+                    completion(true)
+                }
+                deleteAction.image = UIImage(systemName: "trash.fill")
+                
+                let settingsAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
+                    completion(true)
+                }
+                settingsAction.backgroundColor = .systemOrange
+                settingsAction.image = UIImage(systemName: "gearshape.fill")
+                
+                return UISwipeActionsConfiguration(actions: [deleteAction, settingsAction])
+                
+            // 3. COMPLETED STATE (Yellow Review OR Blue Read)
+            } else if currentState == .completed {
+                
+                let booking = completedBookings[indexPath.row]
+                let isReviewed = booking.isReviewed ?? false
+                
+                if isReviewed {
+                    // --- CASE A: ALREADY REVIEWED (Blue Button) ---
+                    let readAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
+                        print("Show created review")
+                        // Future: Navigate to see the review details
+                        completion(true)
+                    }
+                    readAction.image = UIImage(systemName: "checkmark.seal.fill")
+                    readAction.backgroundColor = .systemBlue
+                    
+                    return UISwipeActionsConfiguration(actions: [readAction])
+                    
+                } else {
+                    // --- CASE B: NOT REVIEWED (Yellow Button + Green Settings) ---
+                    let reviewAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
+                        // Pass indexPath to sender so prepare(for segue) knows which item
+                        self.performSegue(withIdentifier: "goToReview", sender: indexPath)
+                        completion(true)
+                    }
+                    reviewAction.image = UIImage(systemName: "star.fill")
+                    reviewAction.backgroundColor = .systemYellow
+                    
+                    let settingsAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
+                        // Settings logic
+                        completion(true)
+                    }
+                    settingsAction.image = UIImage(systemName: "gearshape.fill")
+                    settingsAction.backgroundColor = .systemGreen
+                    
+                    return UISwipeActionsConfiguration(actions: [reviewAction, settingsAction])
+                }
             }
-            messageAction.image = UIImage(systemName: "bubble.left.fill")
-            messageAction.backgroundColor = .systemGreen
-            return UISwipeActionsConfiguration(actions: [messageAction])
             
-        } else if currentState == .pending {
-            let delete = UIContextualAction(style: .destructive, title: nil) { (_, _, completion) in
-                self.showDeleteAlert(at: indexPath)
-                completion(true)
-            }
-            delete.image = UIImage(systemName: "trash.fill")
-            
-            let settings = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
-                completion(true)
-            }
-            settings.backgroundColor = .systemOrange
-            settings.image = UIImage(systemName: "gearshape.fill")
-            
-            return UISwipeActionsConfiguration(actions: [delete, settings])
-        } else if currentState == .completed {
-            let reviewAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
-                self.performSegue(withIdentifier: "goToReview", sender: self)
-                completion(true)
-            }
-            reviewAction.image = UIImage(systemName: "star.fill")
-            reviewAction.backgroundColor = .systemYellow // Yellow button from design
-            
-            let settingsAction = UIContextualAction(style: .normal, title: nil) { (_, _, _) in }
-            settingsAction.image = UIImage(systemName: "gearshape.fill")
-            settingsAction.backgroundColor = .systemGreen
-            
-            return UISwipeActionsConfiguration(actions: [reviewAction, settingsAction])
+            return nil
         }
-        
-        return nil
-    }
 
     func showDeleteAlert(at indexPath: IndexPath) {
             let alert = UIAlertController(title: "Are you sure?", message: "Are you sure you want to delete your request?", preferredStyle: .alert)
@@ -260,11 +288,19 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     func fetchBookings() {
-        guard let seekerId = Auth.auth().currentUser?.uid else { return }
+        guard let currentUser = Auth.auth().currentUser else {
+            print("🕵️ ERROR: No user is logged in!")
+            return
+        }
+        
+        let seekerId = currentUser.uid
+        print("🕵️ I am searching for bookings with Seeker ID: \(seekerId)")
         
         BookingRepository.shared.fetchBookingsForSeeker(seekerId: seekerId, status: nil) { result in
             switch result {
             case .success(let bookings):
+                print("🕵️ SUCCESS: Found \(bookings.count) bookings in Firestore.")
+                
                 // 1. Clear all lists
                 self.allPendingBookings.removeAll()
                 self.allInProgressBookings.removeAll()
@@ -272,6 +308,8 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 // 2. Sort into Master lists
                 for booking in bookings {
+                    print("   - Found Booking: \(booking.serviceTitle) | Status: \(booking.status.rawValue)")
+                    
                     switch booking.status {
                     case .pending, .requested:
                         self.allPendingBookings.append(booking)
@@ -291,7 +329,7 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
                 
             case .failure(let error):
-                print("Error fetching bookings: \(error)")
+                print("🕵️ FAILURE: Error fetching bookings: \(error)")
             }
         }
     }

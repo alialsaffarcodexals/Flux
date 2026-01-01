@@ -12,13 +12,12 @@ import FirebaseAuth
 class ReviewViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Outlets
+    @IBOutlet weak var reviewContainerView: UIView!
     @IBOutlet weak var providerImageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var reviewTextView: UITextView!
-    @IBOutlet weak var reviewContainerView: UIView!
     @IBOutlet weak var titleContainerView: UIView!
-    
-    // Connect these 5 buttons from your Storyboard
+        // Connect these 5 buttons from your Storyboard
     @IBOutlet var starButtons: [UIButton]!
     
     var bookingId: String = ""
@@ -33,22 +32,29 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
         
         setupUI()
         
-        titleTextField.text = serviceName
     }
     
     
     func setupUI() {
-        // Image Styling
+        // 1. Round Image
         providerImageView.layer.cornerRadius = providerImageView.frame.height / 2
         providerImageView.clipsToBounds = true
         
-        // Text Input Styling (Gray Backgrounds)
-        titleTextField.backgroundColor = .systemGray6
-        titleTextField.layer.cornerRadius = 8
-        titleTextField.placeholder = "Title"
+        // 2. Style the CONTAINERS (The Box Shape)
+        titleContainerView.backgroundColor = .systemGray6
+        titleContainerView.layer.cornerRadius = 12
+        titleContainerView.clipsToBounds = true
         
-        reviewTextView.backgroundColor = .systemGray6
-        reviewTextView.layer.cornerRadius = 8
+        reviewContainerView.backgroundColor = .systemGray6
+        reviewContainerView.layer.cornerRadius = 12
+        reviewContainerView.clipsToBounds = true
+        
+        // 3. Style the INPUTS (Make them clear so they sit inside the box)
+        titleTextField.backgroundColor = .clear
+        titleTextField.borderStyle = .none
+        titleTextField.textColor = .label
+        
+        reviewTextView.backgroundColor = .clear 
         reviewTextView.text = "Write your review"
         reviewTextView.textColor = .lightGray
         reviewTextView.delegate = self

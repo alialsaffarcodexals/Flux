@@ -175,4 +175,13 @@ final class BookingRepository {
                 self.manager.decodeDocuments(snapshot, error: error, completion: completion)
             }
     }
+    func markAsReviewed(bookingId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+            bookingsCollection.document(bookingId).updateData(["isReviewed": true]) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        }
 }
