@@ -87,13 +87,16 @@
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIj-ap-rxC">
                                                                 <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="29.666666666666668"/>
                                                                 <state key="normal" title="Button"/>
-                                                                <buttonConfiguration key="configuration" style="filled" title="Edit Public Profile" cornerStyle="capsule">
+                                                                <buttonConfiguration key="configuration" style="filled" title="Edit Profile Picture" cornerStyle="capsule">
                                                                     <backgroundConfiguration key="background">
                                                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                                                     </backgroundConfiguration>
                                                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="13"/>
                                                                     <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="editProfilePictureTapped:" destination="kcP-1c-UGo" eventType="touchUpInside" id="FMw-ir-2zp"/>
+                                                                </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cT1-Ah-YT6">
                                                                 <rect key="frame" x="185.66666666666663" y="0.0" width="175.33333333333337" height="29.666666666666668"/>

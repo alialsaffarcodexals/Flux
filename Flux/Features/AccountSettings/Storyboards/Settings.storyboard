@@ -12,7 +12,7 @@
         <!--Font Size-->
         <scene sceneID="QyT-vO-G3r">
             <objects>
-                <tableViewController id="ZQk-KZ-O61" sceneMemberID="viewController">
+                <tableViewController id="ZQk-KZ-O61" customClass="FontSizeTableViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="mpF-nd-CVj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,7 +88,7 @@
         <!--App Theme-->
         <scene sceneID="qUA-OQ-0ai">
             <objects>
-                <tableViewController id="U3O-Le-0en" sceneMemberID="viewController">
+                <tableViewController id="U3O-Le-0en" customClass="AppThemeTableViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="VrP-qD-DlD">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

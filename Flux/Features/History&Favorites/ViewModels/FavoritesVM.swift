@@ -85,7 +85,7 @@ final class FavoritesVM {
                         providerId: providerId,
                         providerName: provider.name,
                         serviceName: serviceName,
-                        profileImageURL: provider.profileImageURL
+                        profileImageURL: provider.profileImageURL(for: .sellerMode)
                     )
                     items.append(item)
                 case .failure:

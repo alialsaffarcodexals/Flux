@@ -464,6 +464,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Dashboard" image="house" catalog="system" id="VGv-Bf-dj4"/>
                     <navigationItem key="navigationItem" id="uol-Yz-V6t">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="Csi-ea-yO1">
+                            <connections>
+                                <action selector="logoutTapped:" destination="Y6W-OH-hqX" id="G8V-xC-0I8"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="bell" catalog="system" id="llU-88-8Mr">
                             <connections>
                                 <action selector="notificationTapped:" destination="Y6W-OH-hqX" id="ZGZ-BR-Ajh"/>
