@@ -68,6 +68,15 @@ class SeekerProfileViewController: UIViewController {
         // Push onto existing navigation stack (preserves Back button)
         navigationController?.pushViewController(settingsVC, animated: true)
     }
+    
+    // ✅ Edit Profile Picture Action
+    @IBAction func editProfilePictureTapped(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
+    }
 
     func setupBindings() {
         viewModel.onUserDataUpdated = { [weak self] user in
@@ -81,16 +90,22 @@ class SeekerProfileViewController: UIViewController {
                 // Safety: Optional chain phoneLabel in case it's not connected
                 self?.phoneLabel?.text = user.phoneNumber ?? "Not set"
                 
-                if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
-                    // Optimized image loading (placeholder logic recommended)
+                // ✅ Display Seeker profile image
+                // Only load image if URL exists and is not empty - otherwise keep storyboard placeholder
+                if let imageURL = user.seekerProfileImageURL,
+                   !imageURL.isEmpty,
+                   let url = URL(string: imageURL) {
+                    // Load image asynchronously
                     DispatchQueue.global().async {
                         if let data = try? Data(contentsOf: url) {
                             DispatchQueue.main.async {
                                 self?.profileImageView.image = UIImage(data: data)
                             }
                         }
+                        // If loading fails, do nothing - keep existing image (storyboard placeholder)
                     }
                 }
+                // If URL is nil/empty, do nothing - storyboard placeholder remains
                 
                 // 🎨 Dynamic Interests
                 self?.updateInterests(with: user.interests)
@@ -201,5 +216,31 @@ class SeekerProfileViewController: UIViewController {
 
             stackView.addArrangedSubview(rowStack)
         }
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension SeekerProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        if let editedImage = info[.editedImage] as? UIImage {
+            print("📸 Image selected for Seeker profile")
+            // Optimistic UI update
+            profileImageView.image = editedImage
+            // Upload and save
+            viewModel.updateSeekerProfileImage(image: editedImage)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            print("📸 Image selected for Seeker profile")
+            // Optimistic UI update
+            profileImageView.image = originalImage
+            // Upload and save
+            viewModel.updateSeekerProfileImage(image: originalImage)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }
