@@ -91,16 +91,23 @@ class ProviderMainProfileVC: UIViewController {
                 
                 // Safety: Optional chain phoneLabel in case it's not connected
                 self?.phoneLabel?.text = user.phoneNumber ?? "Not set"
-                // 🖼️ Load Shared Profile Image
-                if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
+                
+                // ✅ Display Provider profile image
+                // Only load image if URL exists and is not empty - otherwise keep storyboard placeholder
+                if let imageURL = user.providerProfileImageURL,
+                   !imageURL.isEmpty,
+                   let url = URL(string: imageURL) {
+                    // Load image asynchronously
                     DispatchQueue.global().async {
                         if let data = try? Data(contentsOf: url) {
                             DispatchQueue.main.async {
                                 self?.profileImageView.image = UIImage(data: data)
                             }
                         }
+                        // If loading fails, do nothing - keep existing image (storyboard placeholder)
                     }
                 }
+                // If URL is nil/empty, do nothing - storyboard placeholder remains
             }
         }
         
@@ -161,6 +168,15 @@ class ProviderMainProfileVC: UIViewController {
         }
 
         navigationController?.pushViewController(portfolioVC, animated: true)
+    }
+    
+    // ✅ Edit Provider Profile Picture Action
+    @IBAction func editProviderProfilePictureTapped(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
     }
 
     
@@ -416,5 +432,31 @@ class ProviderMainProfileVC: UIViewController {
             btn.configuration = config
             // FIX ENDS HERE
         }
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension ProviderMainProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        if let editedImage = info[.editedImage] as? UIImage {
+            print("📸 Image selected for Provider profile")
+            // Optimistic UI update
+            profileImageView.image = editedImage
+            // Upload and save
+            viewModel.updateProviderProfileImage(image: editedImage)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            print("📸 Image selected for Provider profile")
+            // Optimistic UI update
+            profileImageView.image = originalImage
+            // Upload and save
+            viewModel.updateProviderProfileImage(image: originalImage)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }

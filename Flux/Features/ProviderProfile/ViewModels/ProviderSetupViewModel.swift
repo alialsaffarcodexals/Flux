@@ -49,7 +49,8 @@ class ProviderSetupViewModel {
             "location": loc,
             "bio": about,
             "role": UserRole.provider.rawValue,
-            "activeProfileMode": ProfileMode.sellerMode.rawValue
+            "activeProfileMode": ProfileMode.sellerMode.rawValue,
+            "hasCompletedProviderSetup": true             // ✅ Set the new flag
         ]
 
         let db = Firestore.firestore()

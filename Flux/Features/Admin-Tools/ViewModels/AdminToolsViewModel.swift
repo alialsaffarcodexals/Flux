@@ -240,7 +240,10 @@ class AdminToolsViewModel {
                         // use these in place
                         let user = User(id: doc.documentID, firstName: f, lastName: l, username: username.isEmpty ? full : username, email: (data["email"] as? String) ?? "", phoneNumber: (data["phoneNumber"] as? String) ?? "", role: UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker)
                         var mutableUser = user
-                        mutableUser.profileImageURL = data["profileImageURL"] as? String
+                        // Support both old and new field names for backward compatibility
+                        let legacy = data["profileImageURL"] as? String
+                        mutableUser.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                        mutableUser.providerProfileImageURL = data["providerProfileImageURL"] as? String
                         mutableUser.location = data["location"] as? String
                         mutableUser.interests = data["interests"] as? [String]
                         mutableUser.favoriteServiceIds = data["favoriteServiceIds"] as? [String]
@@ -265,7 +268,10 @@ class AdminToolsViewModel {
                 // not enough data, but still try to return a partial user
                 let fallbackUser = User(id: doc.documentID, firstName: firstName, lastName: lastName, username: username, email: (data["email"] as? String) ?? "", phoneNumber: (data["phoneNumber"] as? String) ?? "", role: UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker)
                 var mutableUser = fallbackUser
-                mutableUser.profileImageURL = data["profileImageURL"] as? String
+                // Support both old and new field names for backward compatibility
+                let legacy = data["profileImageURL"] as? String
+                mutableUser.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                mutableUser.providerProfileImageURL = data["providerProfileImageURL"] as? String
                 mutableUser.location = data["location"] as? String
                 mutableUser.interests = data["interests"] as? [String]
                 mutableUser.favoriteServiceIds = data["favoriteServiceIds"] as? [String]
@@ -279,7 +285,10 @@ class AdminToolsViewModel {
 
             let user = User(id: doc.documentID, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phoneNumber, role: role)
             var mutableUser = user
-            mutableUser.profileImageURL = data["profileImageURL"] as? String
+            // Support both old and new field names for backward compatibility
+            let legacy = data["profileImageURL"] as? String
+            mutableUser.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+            mutableUser.providerProfileImageURL = data["providerProfileImageURL"] as? String
             mutableUser.location = data["location"] as? String
             mutableUser.activeProfileMode = ProfileMode(rawValue: (data["activeProfileMode"] as? String) ?? "")
             mutableUser.interests = data["interests"] as? [String]
@@ -322,7 +331,10 @@ class AdminToolsViewModel {
 
                 var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phoneNumber, role: role)
                 user.joinedDate = joinedDate.dateValue()
-                user.profileImageURL = data["profileImageURL"] as? String
+                // Support both old and new field names for backward compatibility
+                let legacy = data["profileImageURL"] as? String
+                user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                user.providerProfileImageURL = data["providerProfileImageURL"] as? String
                 user.location = data["location"] as? String
                 user.activeProfileMode = ProfileMode(rawValue: (data["activeProfileMode"] as? String) ?? "")
                 user.interests = data["interests"] as? [String]
@@ -369,7 +381,9 @@ class AdminToolsViewModel {
                                     let phone = (data["phoneNumber"] as? String) ?? ""
                                     let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
                                     var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
-                                    user.profileImageURL = data["profileImageURL"] as? String
+                                    // Support both old and new field names for backward compatibility
+                                    user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? (data["profileImageURL"] as? String)
+                                    user.providerProfileImageURL = data["providerProfileImageURL"] as? String
                                     completion(.success(user))
                                     return
                                 }
@@ -389,7 +403,9 @@ class AdminToolsViewModel {
                                         let phone = (data["phoneNumber"] as? String) ?? ""
                                         let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
                                         var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
-                                        user.profileImageURL = data["profileImageURL"] as? String
+                                        // Support both old and new field names for backward compatibility
+                                    user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? (data["profileImageURL"] as? String)
+                                    user.providerProfileImageURL = data["providerProfileImageURL"] as? String
                                         completion(.success(user))
                                         return
                                     }
@@ -409,7 +425,10 @@ class AdminToolsViewModel {
                             let phone = (data["phoneNumber"] as? String) ?? ""
                             let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
                             var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
-                            user.profileImageURL = data["profileImageURL"] as? String
+                            // Support both old and new field names for backward compatibility
+                            let legacy = data["profileImageURL"] as? String
+                            user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                            user.providerProfileImageURL = data["providerProfileImageURL"] as? String
                             completion(.success(user))
                             return
                         }
@@ -428,7 +447,10 @@ class AdminToolsViewModel {
                                 let phone = (data["phoneNumber"] as? String) ?? ""
                                 let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
                                 var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
-                                user.profileImageURL = data["profileImageURL"] as? String
+                                // Support both old and new field names for backward compatibility
+                                let legacy = data["profileImageURL"] as? String
+                                user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                                user.providerProfileImageURL = data["providerProfileImageURL"] as? String
                                 completion(.success(user))
                                 return
                             }
@@ -444,7 +466,9 @@ class AdminToolsViewModel {
                                     let phone = (data["phoneNumber"] as? String) ?? ""
                                     let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
                                     var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
-                                    user.profileImageURL = data["profileImageURL"] as? String
+                                    // Support both old and new field names for backward compatibility
+                                    user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? (data["profileImageURL"] as? String)
+                                    user.providerProfileImageURL = data["providerProfileImageURL"] as? String
                                     completion(.success(user))
                                     return
                                 }

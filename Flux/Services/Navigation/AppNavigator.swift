@@ -36,17 +36,18 @@ class AppNavigator {
         }
     }
     
-    func navigate(user: User) {
-                if user.role == .admin {
-                    // Route to Admin Flow
-                    loadAdminInterface()
-                } else {
-                    // Route to Standard App (Seeker/Provider)
-                    #if DEBUG
-                    DummyDataSeeder.shared.seedIfNeeded()
-                    #endif
-                    loadMainTabBar(for: user)
-                }
+    // ✅ UPDATE 1: Add 'destinationTab' parameter (default is nil)
+    func navigate(user: User, destinationTab: Int? = nil) {
+        if user.role == .admin {
+            // Route to Admin Flow
+            loadAdminInterface()
+        } else {
+            // Route to Standard App (Seeker/Provider)
+//                    #if DEBUG
+//                    DummyDataSeeder.shared.seedIfNeeded()
+//                    #endif
+            loadMainTabBar(for: user, initialIndex: destinationTab)
+        }
     }
     
     // MARK: - Admin Navigation
@@ -62,8 +63,9 @@ class AppNavigator {
             setRoot(viewController: adminNav)
         }
     
-    private func loadMainTabBar(for user: User) {
-        print("🔄 Switching to MainTabBarController for user: \(user.firstName) (\(user.role.rawValue))")
+    // ✅ UPDATE 2: Handle the index in loadMainTabBar
+    private func loadMainTabBar(for user: User, initialIndex: Int?) {
+        print("🔄 Switching to MainTabBarController for user: \(user.firstName). Target Index: \(String(describing: initialIndex))")
         
         // 1. Instantiate MainTabBarController programmatically
         let mainTabBarController = MainTabBarController()
@@ -71,17 +73,10 @@ class AppNavigator {
         // 2. Configure Tabs based on User Role
         mainTabBarController.setupTabs(for: user.role)
         
-        // 3. Handle Active Profile Mode / Initial Tab Selection
-        // If the user was in Seller Mode (Provider), we might want to switch them to that context.
-        // MainTabBarController.setupTabs(for: user.role) already sets up the correct tabs.
-        // If we want to strictly follow "activeProfileMode should still work normally",
-        // we ensure the tabs are correct (which they are by passing user.role).
-        
-        // Optional: If you want to force them to the profile tab or specific tab based on state:
-        // if user.role == .provider && user.activeProfileMode == .sellerMode {
-        //      mainTabBarController.selectedIndex = 4 // Index of Profile in Provider mode
-        // }
-        // For now, defaulting to Home (Index 0) is standard for a fresh login/launch transition.
+        // 3. Apply target index if provided (e.g., 4 for Provider Profile)
+        if let index = initialIndex {
+            mainTabBarController.selectedIndex = index
+        }
         
         // 4. Set as Root
         setRoot(viewController: mainTabBarController)
@@ -106,14 +101,16 @@ class AppNavigator {
     
     // MARK: - Helper: Change Root
     private func setRoot(viewController: UIViewController) {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first else {
+        guard
+            let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = scene.delegate as? SceneDelegate,
+            let window = sceneDelegate.window
+        else {
             return
         }
-        
+
         window.rootViewController = viewController
         window.makeKeyAndVisible()
-        
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
+
 }

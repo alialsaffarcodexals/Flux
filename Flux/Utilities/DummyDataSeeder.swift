@@ -214,7 +214,7 @@ final class DummyDataSeeder {
             id: nil,
             seekerId: uid,
             providerId: "dummy_provider_id_99", // Fake provider
-            serviceId: "dummy_service_id_99",
+            serviceId: "dummy_service_id_99", providerName: "Ali Abdullah",
             serviceTitle: "AC Maintenance",
             priceAtBooking: 30.0,
             currencyCode: "BHD",
@@ -234,7 +234,7 @@ final class DummyDataSeeder {
             id: nil,
             seekerId: "dummy_seeker_id_88", // Fake seeker
             providerId: uid,
-            serviceId: "dummy_service_id_101",
+            serviceId: "dummy_service_id_101", providerName: "Son Huge Min",
             serviceTitle: "Premium House Cleaning",
             priceAtBooking: 45.0,
             currencyCode: "BHD",
@@ -264,26 +264,26 @@ final class DummyDataSeeder {
     private func seedReviews(for uid: String, completion: @escaping () -> Void) {
         // Review FOR us (as Provider)
         let r1 = Review(
-            id: nil,
+            
             bookingId: "dummy_booking_id_1",
             serviceId: "dummy_service_id_101",
             providerId: uid,
             seekerId: "dummy_seeker_id_88",
             rating: 5,
             comment: "Excellent service! Very professional and thorough.",
-            timestamp: Date()
+            
         )
         
         // Review BY us (as Seeker)
         let r2 = Review(
-            id: nil,
+            
             bookingId: "dummy_booking_id_2",
             serviceId: "dummy_service_id_99",
             providerId: "dummy_provider_id_99",
             seekerId: uid,
             rating: 4,
             comment: "Good job, but arrived a bit late.",
-            timestamp: Date().addingTimeInterval(-86400)
+            
         )
         
         let group = DispatchGroup()
