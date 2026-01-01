@@ -271,12 +271,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Review " largeTitleDisplayMode="never" id="1rf-Dv-Mcs">
-                        <barButtonItem key="rightBarButtonItem" title="Send" style="done" id="uYf-8O-WhX"/>
+                        <barButtonItem key="rightBarButtonItem" title="Send" style="done" id="uYf-8O-WhX">
+                            <connections>
+                                <action selector="sendButtonTapped:" destination="MFy-Aw-JYm" id="3sG-hG-IhP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="providerImageView" destination="QnJ-Xs-PbE" id="b3U-Ep-o0B"/>
                         <outlet property="reviewContainerView" destination="T0I-Fp-bpW" id="LkT-lU-Psa"/>
                         <outlet property="reviewTextView" destination="mhH-NV-nCi" id="hty-fD-kzi"/>
+                        <outlet property="sendButton" destination="uYf-8O-WhX" id="dkQ-F8-Wys"/>
                         <outlet property="titleContainerView" destination="squ-JW-mC8" id="OKr-ha-g9x"/>
                         <outlet property="titleTextField" destination="g6t-Qn-5jY" id="9S8-IS-hK5"/>
                         <outletCollection property="starButtons" destination="J2k-fb-Te3" collectionClass="NSMutableArray" id="1Cw-Qf-eu1"/>
