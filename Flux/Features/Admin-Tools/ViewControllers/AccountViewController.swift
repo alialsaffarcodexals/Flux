@@ -6,6 +6,7 @@ class AccountViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet var suspendOrBanReason: UITextView!
+    @IBOutlet weak var profileImageView: UIImageView?
     
     var userID: String?
     var user: User?
@@ -128,6 +129,37 @@ class AccountViewController: UIViewController {
             usernameLabel?.text = "(no username)"
         } else {
             usernameLabel?.text = "@\(username)"
+        }
+
+        // Load profile image for details screen. Prefer active profile mode, then role.
+        profileImageView?.image = UIImage(systemName: "person.crop.square")
+        profileImageView?.contentMode = .scaleAspectFill
+        profileImageView?.clipsToBounds = true
+        profileImageView?.layer.cornerRadius = (profileImageView?.frame.height ?? 44) / 2
+
+        // Determine URL to use
+        var urlString: String? = nil
+        if let mode = user.activeProfileMode {
+            urlString = user.profileImageURL(for: mode)
+        }
+        if urlString == nil {
+            // fallback to role preference
+            if user.role == .provider {
+                urlString = user.providerProfileImageURL ?? user.seekerProfileImageURL
+            } else {
+                urlString = user.seekerProfileImageURL ?? user.providerProfileImageURL
+            }
+        }
+
+        if let s = urlString, let url = URL(string: s) {
+            URLSession.shared.dataTask(with: url) { data, _, err in
+                guard let data = data, let img = UIImage(data: data), err == nil else { return }
+                DispatchQueue.main.async {
+                    self.profileImageView?.image = img
+                    self.profileImageView?.layer.cornerRadius = (self.profileImageView?.frame.height ?? 44) / 2
+                    self.profileImageView?.clipsToBounds = true
+                }
+            }.resume()
         }
     }
 
