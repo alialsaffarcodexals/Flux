@@ -33,6 +33,7 @@ class HistoryVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 80
+        tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryCell")
     }
     
     private func setupSearchBar() {
@@ -58,9 +59,7 @@ class HistoryVC: UIViewController {
     
     // MARK: - Actions
     @objc private func favoriteButtonTapped(_ sender: UIButton) {
-        let point = sender.convert(CGPoint.zero, to: tableView)
-        guard let indexPath = tableView.indexPathForRow(at: point) else { return }
-        viewModel.toggleFavorite(at: indexPath.row)
+        viewModel.toggleFavorite(at: sender.tag)
     }
 }
 
@@ -72,48 +71,25 @@ extension HistoryVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath)
-        
-        guard let item = viewModel.item(at: indexPath.row) else {
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryCell", for: indexPath) as? HistoryTableViewCell,
+              let item = viewModel.item(at: indexPath.row) else {
+            return UITableViewCell()
         }
-        
-        // Get elements by tag
-        let profileImageView = cell.contentView.viewWithTag(100) as? UIImageView
-        let topLabel = cell.contentView.viewWithTag(101) as? UILabel
-        let bottomLabel = cell.contentView.viewWithTag(102) as? UILabel
-        let favoriteButton = cell.contentView.viewWithTag(103) as? UIButton
         
         // Configure for History: Service name (top), Provider name (bottom)
-        topLabel?.text = item.serviceName
-        bottomLabel?.text = item.providerName
+        cell.configure(
+            topText: item.serviceName,
+            bottomText: item.providerName,
+            imageURL: item.profileImageURL,
+            isFavorite: item.isFavorite
+        )
         
-        // Configure favorite button
-        let starImage = item.isFavorite ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
-        favoriteButton?.setImage(starImage, for: .normal)
-        favoriteButton?.removeTarget(nil, action: nil, for: .allEvents)
-        favoriteButton?.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
-        
-        // Load profile image
-        profileImageView?.layer.cornerRadius = 30
-        profileImageView?.clipsToBounds = true
-        if let urlString = item.profileImageURL, let url = URL(string: urlString) {
-            loadImage(from: url, into: profileImageView)
-        } else {
-            profileImageView?.image = UIImage(systemName: "person.circle.fill")
-            profileImageView?.tintColor = .systemGray3
-        }
+        // Set up favorite button action
+        cell.favoriteButton.tag = indexPath.row
+        cell.favoriteButton.removeTarget(nil, action: nil, for: .allEvents)
+        cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
         
         return cell
-    }
-    
-    private func loadImage(from url: URL, into imageView: UIImageView?) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async {
-                imageView?.image = UIImage(data: data)
-            }
-        }.resume()
     }
 }
 
@@ -122,7 +98,13 @@ extension HistoryVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // Navigate to provider detail if needed
+        
+        // Navigate to booking/provider details
+        guard let item = viewModel.item(at: indexPath.row) else { return }
+        
+        // TODO: Navigate to details screen
+        // Example: performSegue(withIdentifier: "showBookingDetail", sender: item)
+        print("Selected: \(item.serviceName) - \(item.providerName)")
     }
     
     // Swipe actions
@@ -164,5 +146,120 @@ extension HistoryVC: UISearchBarDelegate {
         searchBar.text = ""
         viewModel.clearSearch()
         searchBar.resignFirstResponder()
+    }
+}
+
+// MARK: - Custom Cell
+class HistoryTableViewCell: UITableViewCell {
+    
+    let profileImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.backgroundColor = .systemGray5
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    
+    let topLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .medium)
+        label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let bottomLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let favoriteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.tintColor = .systemBlue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupCell()
+    }
+    
+    private func setupCell() {
+        accessoryType = .disclosureIndicator
+        
+        contentView.addSubview(profileImageView)
+        contentView.addSubview(topLabel)
+        contentView.addSubview(bottomLabel)
+        contentView.addSubview(favoriteButton)
+        
+        let imageSize: CGFloat = 60
+        
+        NSLayoutConstraint.activate([
+            // Profile image - left side
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            profileImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            profileImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            profileImageView.heightAnchor.constraint(equalToConstant: imageSize),
+            
+            // Favorite button - right side (before disclosure indicator)
+            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            favoriteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 44),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            // Top label
+            topLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 12),
+            topLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -8),
+            topLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 18),
+            
+            // Bottom label
+            bottomLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 12),
+            bottomLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -8),
+            bottomLabel.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 4),
+        ])
+        
+        profileImageView.layer.cornerRadius = imageSize / 2
+    }
+    
+    func configure(topText: String, bottomText: String, imageURL: String?, isFavorite: Bool) {
+        topLabel.text = topText
+        bottomLabel.text = bottomText
+        
+        // Update star
+        let starImage = isFavorite ? UIImage(systemName: "star.fill") : UIImage(systemName: "star")
+        favoriteButton.setImage(starImage, for: .normal)
+        
+        // Load image
+        if let urlString = imageURL, let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self?.profileImageView.image = UIImage(data: data)
+                    }
+                }
+            }.resume()
+        } else {
+            profileImageView.image = UIImage(systemName: "person.circle.fill")
+            profileImageView.tintColor = .systemGray3
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImageView.image = nil
+        topLabel.text = nil
+        bottomLabel.text = nil
+        favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
     }
 }

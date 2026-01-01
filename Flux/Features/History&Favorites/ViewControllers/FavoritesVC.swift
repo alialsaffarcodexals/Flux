@@ -33,6 +33,7 @@ class FavoritesVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 80
+        tableView.register(FavoritesTableViewCell.self, forCellReuseIdentifier: "FavoritesCell")
     }
     
     private func setupSearchBar() {
@@ -58,9 +59,7 @@ class FavoritesVC: UIViewController {
     
     // MARK: - Actions
     @objc private func favoriteButtonTapped(_ sender: UIButton) {
-        let point = sender.convert(CGPoint.zero, to: tableView)
-        guard let indexPath = tableView.indexPathForRow(at: point) else { return }
-        viewModel.removeFromFavorites(at: indexPath.row)
+        viewModel.removeFromFavorites(at: sender.tag)
     }
 }
 
@@ -72,47 +71,24 @@ extension FavoritesVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath)
-        
-        guard let item = viewModel.item(at: indexPath.row) else {
-            return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavoritesCell", for: indexPath) as? FavoritesTableViewCell,
+              let item = viewModel.item(at: indexPath.row) else {
+            return UITableViewCell()
         }
-        
-        // Get elements by tag
-        let profileImageView = cell.contentView.viewWithTag(100) as? UIImageView
-        let topLabel = cell.contentView.viewWithTag(101) as? UILabel
-        let bottomLabel = cell.contentView.viewWithTag(102) as? UILabel
-        let favoriteButton = cell.contentView.viewWithTag(103) as? UIButton
         
         // Configure for Favorites: Provider name (top), Service name (bottom)
-        topLabel?.text = item.providerName
-        bottomLabel?.text = item.serviceName
+        cell.configure(
+            topText: item.providerName,
+            bottomText: item.serviceName,
+            imageURL: item.profileImageURL
+        )
         
-        // Configure favorite button (always filled in favorites)
-        favoriteButton?.setImage(UIImage(systemName: "star.fill"), for: .normal)
-        favoriteButton?.removeTarget(nil, action: nil, for: .allEvents)
-        favoriteButton?.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
-        
-        // Load profile image
-        profileImageView?.layer.cornerRadius = 30
-        profileImageView?.clipsToBounds = true
-        if let urlString = item.profileImageURL, let url = URL(string: urlString) {
-            loadImage(from: url, into: profileImageView)
-        } else {
-            profileImageView?.image = UIImage(systemName: "person.circle.fill")
-            profileImageView?.tintColor = .systemGray3
-        }
+        // Set up favorite button action
+        cell.favoriteButton.tag = indexPath.row
+        cell.favoriteButton.removeTarget(nil, action: nil, for: .allEvents)
+        cell.favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped(_:)), for: .touchUpInside)
         
         return cell
-    }
-    
-    private func loadImage(from url: URL, into imageView: UIImageView?) {
-        URLSession.shared.dataTask(with: url) { data, _, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async {
-                imageView?.image = UIImage(data: data)
-            }
-        }.resume()
     }
 }
 
@@ -121,7 +97,13 @@ extension FavoritesVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        // Navigate to provider detail if needed
+        
+        // Navigate to provider details
+        guard let item = viewModel.item(at: indexPath.row) else { return }
+        
+        // TODO: Navigate to details screen
+        // Example: performSegue(withIdentifier: "showProviderDetail", sender: item)
+        print("Selected: \(item.providerName) - \(item.serviceName)")
     }
     
     // Swipe actions
@@ -180,5 +162,115 @@ extension FavoritesVC: UISearchBarDelegate {
         searchBar.text = ""
         viewModel.clearSearch()
         searchBar.resignFirstResponder()
+    }
+}
+
+// MARK: - Custom Cell
+class FavoritesTableViewCell: UITableViewCell {
+    
+    let profileImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.backgroundColor = .systemGray5
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    
+    let topLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .medium)
+        label.textColor = .label
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let bottomLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let favoriteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        button.tintColor = .systemBlue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupCell()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupCell()
+    }
+    
+    private func setupCell() {
+        accessoryType = .disclosureIndicator
+        
+        contentView.addSubview(profileImageView)
+        contentView.addSubview(topLabel)
+        contentView.addSubview(bottomLabel)
+        contentView.addSubview(favoriteButton)
+        
+        let imageSize: CGFloat = 60
+        
+        NSLayoutConstraint.activate([
+            // Profile image - left side
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            profileImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            profileImageView.widthAnchor.constraint(equalToConstant: imageSize),
+            profileImageView.heightAnchor.constraint(equalToConstant: imageSize),
+            
+            // Favorite button - right side (before disclosure indicator)
+            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            favoriteButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 44),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 44),
+            
+            // Top label
+            topLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 12),
+            topLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -8),
+            topLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 18),
+            
+            // Bottom label
+            bottomLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 12),
+            bottomLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant: -8),
+            bottomLabel.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 4),
+        ])
+        
+        profileImageView.layer.cornerRadius = imageSize / 2
+    }
+    
+    func configure(topText: String, bottomText: String, imageURL: String?) {
+        topLabel.text = topText
+        bottomLabel.text = bottomText
+        
+        // Load image
+        if let urlString = imageURL, let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        self?.profileImageView.image = UIImage(data: data)
+                    }
+                }
+            }.resume()
+        } else {
+            profileImageView.image = UIImage(systemName: "person.circle.fill")
+            profileImageView.tintColor = .systemGray3
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImageView.image = nil
+        topLabel.text = nil
+        bottomLabel.text = nil
     }
 }
