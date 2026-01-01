@@ -178,8 +178,6 @@
 		3AE4B1962EFC8ADA00BE4A01 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
 		3AE4B1982EFC8ADA00BE4A01 /* AdminToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewModel.swift; sourceTree = "<group>"; };
 		3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
-		603DBC262F0461DF0097FC7D /* NotificationCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenterViewController.swift; sourceTree = "<group>"; };
-		603DBC272F0461DF0097FC7D /* ViewNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNotificationViewController.swift; sourceTree = "<group>"; };
 		7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityBlock.swift; sourceTree = "<group>"; };
 		7F5A0D082EFDDC56001135C2 /* AvailabilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityRepository.swift; sourceTree = "<group>"; };
 		7F5A0D092EFDDC56001135C2 /* BookingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRepository.swift; sourceTree = "<group>"; };
@@ -472,15 +470,6 @@
 				7FB368822F01D22C005AEB44 /* MainTabBarController.swift */,
 			);
 			path = Navigation;
-			sourceTree = "<group>";
-		};
-		7F60D5AC2F05B9910034FE1F /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				603DBC272F0461DF0097FC7D /* ViewNotificationViewController.swift */,
-				603DBC262F0461DF0097FC7D /* NotificationCenterViewController.swift */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
@@ -1099,7 +1088,6 @@
 				7FC160FC2EDB2AAF009B14F4 /* Frameworks */,
 				7FC160E22EDB15FF009B14F4 /* Products */,
 				7F68C3CF2EDD93C5005B29E6 /* Flux */,
-				7F60D5AC2F05B9910034FE1F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1252,10 +1240,8 @@
 				7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */,
 				7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */,
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
-				10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */,
 				7F60D5B02F06A42B0034FE1F /* FavoritesVM.swift in Sources */,
 				7F60D5B12F06A42B0034FE1F /* HistoryVM.swift in Sources */,
-				10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */,
 				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
 				7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */,
 				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
