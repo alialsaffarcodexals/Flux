@@ -121,12 +121,30 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch currentState {
-        case .pending: return pendingBookings.count
-        case .inProgress: return inProgressBookings.count
-        case .completed: return completedBookings.count
+            var count = 0
+            
+            // 1. Get the count based on the selected tab
+            switch currentState {
+            case .pending:
+                count = pendingBookings.count
+                if count == 0 { setEmptyMessage("No Pending Requests") }
+                
+            case .inProgress:
+                count = inProgressBookings.count
+                if count == 0 { setEmptyMessage("No Requests In Progress") }
+                
+            case .completed:
+                count = completedBookings.count
+                if count == 0 { setEmptyMessage("No Completed Requests") }
+            }
+            
+            // 2. If we have data, clear the message
+            if count > 0 {
+                restoreBackground()
+            }
+            
+            return count
         }
-    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell", for: indexPath) as! RequestTableCell
@@ -190,36 +208,39 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 
             // 3. COMPLETED STATE (Yellow Review OR Blue Read)
             } else if currentState == .completed {
-                
+                        
                 let booking = completedBookings[indexPath.row]
-                let isReviewed = booking.isReviewed ?? false
                 
-                if isReviewed {
-                    // --- CASE A: ALREADY REVIEWED (Blue Button) ---
-                    let readAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
-                        print("Show created review")
-                        // Future: Navigate to see the review details
+                // Check if it is reviewed (Default to false if missing)
+                let isAlreadyReviewed = booking.isReviewed ?? false
+                
+                if isAlreadyReviewed {
+                    // --- BLUE BUTTON (Already Reviewed) ---
+                    let seenAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
+                        
+                        // Show the Alert you wanted
+                        let alert = UIAlertController(title: "Reviewed", message: "You have already reviewed this request.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default))
+                        self.present(alert, animated: true)
+                        
                         completion(true)
                     }
-                    readAction.image = UIImage(systemName: "checkmark.seal.fill")
-                    readAction.backgroundColor = .systemBlue
+                    seenAction.image = UIImage(systemName: "checkmark.seal.fill") // Checkmark badge
+                    seenAction.backgroundColor = .systemBlue
                     
-                    return UISwipeActionsConfiguration(actions: [readAction])
+                    return UISwipeActionsConfiguration(actions: [seenAction])
                     
                 } else {
-                    // --- CASE B: NOT REVIEWED (Yellow Button + Green Settings) ---
+                    // --- YELLOW BUTTON (Write Review) ---
                     let reviewAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
-                        // Pass indexPath to sender so prepare(for segue) knows which item
                         self.performSegue(withIdentifier: "goToReview", sender: indexPath)
                         completion(true)
                     }
                     reviewAction.image = UIImage(systemName: "star.fill")
                     reviewAction.backgroundColor = .systemYellow
                     
-                    let settingsAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
-                        // Settings logic
-                        completion(true)
-                    }
+                    // Add settings button if you want it too
+                    let settingsAction = UIContextualAction(style: .normal, title: nil) { (_, _, _) in }
                     settingsAction.image = UIImage(systemName: "gearshape.fill")
                     settingsAction.backgroundColor = .systemGreen
                     
@@ -333,6 +354,31 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
+    // PUT THIS IN MyRequestsViewController.swift
+        @IBAction func unwindToRequests(segue: UIStoryboardSegue) {
+            print("✅ Success! Returned to Request List.")
+            
+            // Refresh data so the button turns Blue
+            fetchBookings()
+        }
+    // MARK: - Empty State Helper
+        func setEmptyMessage(_ message: String) {
+            let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            messageLabel.text = message
+            messageLabel.textColor = .secondaryLabel // Light Gray
+            messageLabel.numberOfLines = 0
+            messageLabel.textAlignment = .center
+            messageLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+            messageLabel.sizeToFit()
+
+            tableView.backgroundView = messageLabel
+            tableView.separatorStyle = .none // Hide the empty lines
+        }
+
+        func restoreBackground() {
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .singleLine // Bring back lines
+        }
 }
     /*
     // MARK: - Navigation

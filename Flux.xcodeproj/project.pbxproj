@@ -142,6 +142,7 @@
 		7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */; };
 		AC7DF5B32F06974D00B5EB09 /* PortfolioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DF5B22F06974D00B5EB09 /* PortfolioListViewController.swift */; };
 		AC7DF5B52F06A35500B5EB09 /* PortfolioTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DF5B42F06A35500B5EB09 /* PortfolioTableCell.swift */; };
+		AC3F6AAD2F0691540076A296 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3F6AAC2F0691540076A296 /* SuccessViewController.swift */; };
 		AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */; };
 		AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D52F04460B003B7C7D /* RequestTableCell.swift */; };
 		ACB2A18B2F053EB5005F9F62 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */; };
@@ -285,6 +286,7 @@
 		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		AC7DF5B22F06974D00B5EB09 /* PortfolioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioListViewController.swift; sourceTree = "<group>"; };
 		AC7DF5B42F06A35500B5EB09 /* PortfolioTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTableCell.swift; sourceTree = "<group>"; };
+		AC3F6AAC2F0691540076A296 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsViewController.swift; sourceTree = "<group>"; };
 		AC9616D52F04460B003B7C7D /* RequestTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableCell.swift; sourceTree = "<group>"; };
 		ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
@@ -1111,6 +1113,7 @@
 			children = (
 				AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */,
 				ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */,
+				AC3F6AAC2F0691540076A296 /* SuccessViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1285,6 +1288,7 @@
 				7FB3687F2F0196D4005AEB44 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */,
 				7FAB333A2EE45D30008AC600 /* LeaveReviewViewController.swift in Sources */,
+				AC3F6AAD2F0691540076A296 /* SuccessViewController.swift in Sources */,
 				7F60816E2EFCF0BD00FA5639 /* AuthViewModel.swift in Sources */,
 				7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */,
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
