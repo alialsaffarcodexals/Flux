@@ -118,7 +118,7 @@
         <!--New Project-->
         <scene sceneID="tMM-Ed-8mh">
             <objects>
-                <viewController id="7Qi-mt-rYD" sceneMemberID="viewController">
+                <viewController id="7Qi-mt-rYD" customClass="AddProjectViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="spK-Pu-ADq">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -205,7 +205,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nva-6a-Cz7">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nva-6a-Cz7">
                                         <rect key="frame" x="0.0" y="382.66666666666663" width="361" height="150"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tab to Upload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRc-Aq-9i3">
@@ -235,10 +235,18 @@
                     </view>
                     <navigationItem key="navigationItem" title="New Project" id="fBo-zq-Ug2">
                         <barButtonItem key="backBarButtonItem" title="Back" id="hry-AA-Pvj"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="BL9-rN-Q2M"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="BL9-rN-Q2M">
+                            <connections>
+                                <action selector="saveBarButtonTapped:" destination="7Qi-mt-rYD" id="mRh-S1-CNP"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="datePicker" destination="lV8-j7-AKQ" id="v1K-uc-Q2v"/>
+                        <outlet property="descriptionTextView" destination="qGJ-TV-I1d" id="swC-af-68v"/>
+                        <outlet property="projectNameTextField" destination="gi3-Z3-ZOu" id="1nR-Gg-M1n"/>
+                        <outlet property="uploadView" destination="Nva-6a-Cz7" id="auv-I8-xlk"/>
                         <segue destination="orB-vD-SsA" kind="presentation" identifier="toSuccessScreen" id="FxH-fn-ztX"/>
                     </connections>
                 </viewController>
@@ -277,7 +285,8 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="done"/>
                                         <connections>
-                                            <action selector="doneButtonTapped:" destination="orB-vD-SsA" eventType="touchUpInside" id="6uh-Pf-aa1"/>
+                                            <action selector="doneButtonTapped:" destination="orB-vD-SsA" eventType="touchUpInside" id="gBz-PP-62q"/>
+                                            <segue destination="eMw-CY-cM8" kind="unwind" unwindAction="unwindToPortfolioWithSegue:" id="INA-D2-2TD"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -296,6 +305,7 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O1u-it-02e" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="eMw-CY-cM8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3734" y="1634"/>
         </scene>
