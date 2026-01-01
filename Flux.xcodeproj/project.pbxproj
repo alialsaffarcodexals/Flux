@@ -16,8 +16,6 @@
 		10E6FCF02F0582D600156591 /* CompanyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10E6FCEF2F0582D600156591 /* CompanyDetailsViewController.swift */; };
 		10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207D92F044C2700834613 /* HistoryVC.swift */; };
 		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
-		10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DD2F044E7900834613 /* HistoryVM.swift */; };
-		10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DF2F044E8A00834613 /* FavoritesVM.swift */; };
 		3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
@@ -67,6 +65,13 @@
 		7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081652EFCF0A500FA5639 /* LoginViewController.swift */; };
 		7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6081672EFCF0A500FA5639 /* SignUpViewController.swift */; };
 		7F60816E2EFCF0BD00FA5639 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60816D2EFCF0BD00FA5639 /* AuthViewModel.swift */; };
+		7F60D5B02F06A42B0034FE1F /* FavoritesVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5AE2F06A42B0034FE1F /* FavoritesVM.swift */; };
+		7F60D5B12F06A42B0034FE1F /* HistoryVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5AF2F06A42B0034FE1F /* HistoryVM.swift */; };
+		7F60D5B32F06A7080034FE1F /* AppSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5B22F06A7080034FE1F /* AppSettingsManager.swift */; };
+		7F60D5B52F06A7280034FE1F /* UIFont+Scaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5B42F06A7280034FE1F /* UIFont+Scaling.swift */; };
+		7F60D5B72F06A7590034FE1F /* AppThemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5B62F06A7590034FE1F /* AppThemeTableViewController.swift */; };
+		7F60D5B92F06A7690034FE1F /* FontSizeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5B82F06A7680034FE1F /* FontSizeTableViewController.swift */; };
+		7F60D5BB2F06B30E0034FE1F /* UIViewController+FontScaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5BA2F06B30E0034FE1F /* UIViewController+FontScaling.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
@@ -158,8 +163,6 @@
 		10E6FCEF2F0582D600156591 /* CompanyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDetailsViewController.swift; sourceTree = "<group>"; };
 		10F207D92F044C2700834613 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
-		10F207DD2F044E7900834613 /* HistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/HistoryVM.swift"; sourceTree = SOURCE_ROOT; };
-		10F207DF2F044E8A00834613 /* FavoritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FavoritesVM.swift; path = "Flux/Features/History&Favorites/ViewControllers/FavoritesVM.swift"; sourceTree = SOURCE_ROOT; };
 		3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
@@ -211,6 +214,13 @@
 		7F6081652EFCF0A500FA5639 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7F6081672EFCF0A500FA5639 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7F60816D2EFCF0BD00FA5639 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		7F60D5AE2F06A42B0034FE1F /* FavoritesVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVM.swift; sourceTree = "<group>"; };
+		7F60D5AF2F06A42B0034FE1F /* HistoryVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVM.swift; sourceTree = "<group>"; };
+		7F60D5B22F06A7080034FE1F /* AppSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsManager.swift; sourceTree = "<group>"; };
+		7F60D5B42F06A7280034FE1F /* UIFont+Scaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Scaling.swift"; sourceTree = "<group>"; };
+		7F60D5B62F06A7590034FE1F /* AppThemeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeTableViewController.swift; sourceTree = "<group>"; };
+		7F60D5B82F06A7680034FE1F /* FontSizeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSizeTableViewController.swift; sourceTree = "<group>"; };
+		7F60D5BA2F06B30E0034FE1F /* UIViewController+FontScaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+FontScaling.swift"; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -318,8 +328,8 @@
 		1025927F2F0439CF003F6C5F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				10F207DD2F044E7900834613 /* HistoryVM.swift */,
-				10F207DF2F044E8A00834613 /* FavoritesVM.swift */,
+				7F60D5AE2F06A42B0034FE1F /* FavoritesVM.swift */,
+				7F60D5AF2F06A42B0034FE1F /* HistoryVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -425,6 +435,8 @@
 				7FAB33892EE46701008AC600 /* AuthManager.swift */,
 				7FAB338B2EE46728008AC600 /* FirestoreManager.swift */,
 				7FAB338D2EE46741008AC600 /* StorageManager.swift */,
+				7F60D5B22F06A7080034FE1F /* AppSettingsManager.swift */,
+				7F60D5BA2F06B30E0034FE1F /* UIViewController+FontScaling.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -603,6 +615,8 @@
 				7FAB32F22EE45552008AC600 /* ChangeEmailViewController.swift */,
 				7FAB32F42EE4557B008AC600 /* ChangePhoneViewController.swift */,
 				7FA8DA832F043BE20012A48F /* ChangePasswordViewController.swift */,
+				7F60D5B62F06A7590034FE1F /* AppThemeTableViewController.swift */,
+				7F60D5B82F06A7680034FE1F /* FontSizeTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -950,6 +964,7 @@
 				7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */,
 				7FA8DA892F048D8A0012A48F /* LoadingViewController.swift */,
 				7FA8DA8D2F04AB690012A48F /* DummyDataSeeder.swift */,
+				7F60D5B42F06A7280034FE1F /* UIFont+Scaling.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1237,6 +1252,10 @@
 				7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */,
 				7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */,
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
+				10BD0DBD2F041A26009FC85D /* ServiceDetailsViewModel.swift in Sources */,
+				7F60D5B02F06A42B0034FE1F /* FavoritesVM.swift in Sources */,
+				7F60D5B12F06A42B0034FE1F /* HistoryVM.swift in Sources */,
+				10BD0DBE2F041A26009FC85D /* HomeViewModel.swift in Sources */,
 				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
 				7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */,
 				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
@@ -1260,12 +1279,13 @@
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
 				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
+				7F60D5B52F06A7280034FE1F /* UIFont+Scaling.swift in Sources */,
 				7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */,
-				10F207DE2F044E7900834613 /* HistoryVM.swift in Sources */,
 				7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */,
 				7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */,
 				7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */,
 				7FAB335E2EE46159008AC600 /* ReportUserViewController.swift in Sources */,
+				7F60D5B72F06A7590034FE1F /* AppThemeTableViewController.swift in Sources */,
 				7FAB336A2EE462D4008AC600 /* UserManagementViewController.swift in Sources */,
 				7FAB336C2EE46308008AC600 /* CategoryManagerViewController.swift in Sources */,
 				7FAB33682EE462A6008AC600 /* AdminHomeViewController.swift in Sources */,
@@ -1313,11 +1333,13 @@
 				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
 				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
 				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
+				7F60D5BB2F06B30E0034FE1F /* UIViewController+FontScaling.swift in Sources */,
+				7F60D5B32F06A7080034FE1F /* AppSettingsManager.swift in Sources */,
 				7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */,
-				10F207E02F044E8A00834613 /* FavoritesVM.swift in Sources */,
 				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
 				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
 				7F5A0D262EFEB49A001135C2 /* ChatRepository.swift in Sources */,
+				7F60D5B92F06A7690034FE1F /* FontSizeTableViewController.swift in Sources */,
 				7F60812E2EF99E2C00FA5639 /* Booking.swift in Sources */,
 				7F60812F2EF99E2C00FA5639 /* Service.swift in Sources */,
 				7FAB32F32EE45552008AC600 /* ChangeEmailViewController.swift in Sources */,
