@@ -333,6 +333,13 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
+    // PUT THIS IN MyRequestsViewController.swift
+        @IBAction func unwindToRequests(segue: UIStoryboardSegue) {
+            print("✅ Success! Returned to Request List.")
+            
+            // Refresh data so the button turns Blue
+            fetchBookings()
+        }
 }
     /*
     // MARK: - Navigation

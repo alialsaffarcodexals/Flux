@@ -113,6 +113,10 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
             print("Please select a rating")
             return
         }
+        if reviewTextView.text.isEmpty || reviewTextView.text == "Write your review" {
+             showAlert(message: "Please write a review comment.") // Show alert if review is empty
+             return // Stop here
+        }
         
         // 2. Get Current User ID (Seeker)
         guard let currentUserId = Auth.auth().currentUser?.uid else {
