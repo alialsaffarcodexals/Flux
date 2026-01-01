@@ -15,4 +15,6 @@ struct Report: Identifiable, Codable {
 
     var status: String           // "Open", "Resolved"
     var timestamp: Date
+    // Optional admin response stored when a report is reviewed
+    var answer: String? = nil
 }

@@ -7,6 +7,7 @@ class SkillVerificationViewController: UIViewController {
     @IBOutlet weak var SearchBar: UISearchBar!
     @IBOutlet weak var SegmentControl: UISegmentedControl!
     
+    
     private var allSkills: [Skill] = []   // original data
     private var skills: [Skill] = []      // filtered data
     // Optional preloaded skills to show immediately
@@ -191,16 +192,10 @@ extension SkillVerificationViewController: UITableViewDataSource {
             }
         }
 
-        // Make non-pending skills non-interactive
-        if skill.status == .pending {
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .default
-            cell.isUserInteractionEnabled = true
-        } else {
-            cell.accessoryType = .none
-            cell.selectionStyle = .none
-            cell.isUserInteractionEnabled = false
-        }
+        // Always allow navigation to the skill detail so admins can view any skill.
+        cell.accessoryType = .disclosureIndicator
+        cell.selectionStyle = .default
+        cell.isUserInteractionEnabled = true
 
         return cell
     }
@@ -214,9 +209,6 @@ extension SkillVerificationViewController: UITableViewDelegate {
 
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedSkill = skills[indexPath.row]
-
-        // Do nothing for non-pending skills
-        guard selectedSkill.status == .pending else { return }
 
         if let vc = storyboard?.instantiateViewController(withIdentifier: "SkillViewController") as? SkillViewController {
             vc.skillID = selectedSkill.id

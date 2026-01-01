@@ -84,8 +84,48 @@ extension UsersAccountsViewController: UITableViewDataSource {
         cell.detailTextLabel?.font = .systemFont(ofSize: 13)
         cell.detailTextLabel?.textColor = .secondaryLabel
 
-        cell.imageView?.image = UIImage(systemName: "person.crop.square")
-        cell.imageView?.tintColor = .systemGray
+        // Show profile image depending on available fields.
+        // Placeholder (circular) and fixed size
+        let targetSize = CGSize(width: 44, height: 44)
+        func resized(_ image: UIImage) -> UIImage {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            return renderer.image { _ in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+        }
+
+        if let placeholder = UIImage(systemName: "person.crop.square") {
+            let p = resized(placeholder.withTintColor(.systemGray, renderingMode: .alwaysOriginal))
+            cell.imageView?.image = p
+        }
+
+        // Choose image URL: prefer provider image for providers, otherwise seeker image.
+        var imageURLString: String? = nil
+        if user.role == .provider {
+            imageURLString = user.providerProfileImageURL ?? user.seekerProfileImageURL
+        } else {
+            imageURLString = user.seekerProfileImageURL ?? user.providerProfileImageURL
+        }
+
+        if let urlString = imageURLString, let url = URL(string: urlString) {
+            let idx = indexPath
+            URLSession.shared.dataTask(with: url) { data, resp, err in
+                guard let data = data, let img = UIImage(data: data), err == nil else { return }
+                let thumb = resized(img)
+                DispatchQueue.main.async {
+                    if let current = tableView.cellForRow(at: idx) {
+                        current.imageView?.image = thumb
+                        current.imageView?.layer.cornerRadius = targetSize.width / 2
+                        current.imageView?.clipsToBounds = true
+                        current.setNeedsLayout()
+                    }
+                }
+            }.resume()
+        } else {
+            // ensure placeholder has circular style
+            cell.imageView?.layer.cornerRadius = 22
+            cell.imageView?.clipsToBounds = true
+        }
 
         cell.accessoryType = .disclosureIndicator
         return cell

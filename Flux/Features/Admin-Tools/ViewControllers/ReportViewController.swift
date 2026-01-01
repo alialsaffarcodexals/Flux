@@ -11,7 +11,10 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var reviewedButton: UIButton?
     @IBOutlet weak var alterButton: UIButton?
     @IBOutlet weak var resolvedButton: UIButton?
-
+    
+    @IBOutlet weak var reviewedButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var alterButtonHeight: NSLayoutConstraint!
+    
     var reportID: String?
     var report: Report?
     var viewModel: AdminToolsViewModel?
@@ -78,11 +81,26 @@ class ReportViewController: UIViewController, UITextViewDelegate {
 
     private func updateActionButtons() {
         let status = report?.status.lowercased() ?? ""
-        let isEditable = (status == "open" || status == "reviewed")
-        reviewedButton?.isHidden = !isEditable
-        alterButton?.isHidden = !isEditable
-        resolvedButton?.isHidden = !isEditable
+        // Adjust heights and visibility per status:
+        // - "open": buttons visible and normal height
+        // - "reviewed": buttons collapsed and hidden
+        // - others: collapsed and hidden
+        if status == "open" {
+            reviewedButtonHeight?.constant = 44
+            alterButtonHeight?.constant = 44
+            reviewedButton?.isHidden = false
+            alterButton?.isHidden = false
+            resolvedButton?.isHidden = false
+        } else {
+            reviewedButtonHeight?.constant = 0
+            alterButtonHeight?.constant = 0
+            reviewedButton?.isHidden = true
+            alterButton?.isHidden = true
+            resolvedButton?.isHidden = true
+        }
+
         updateReviewedButtonState()
+        view.layoutIfNeeded()
     }
 
     // MARK: - UITextViewDelegate
@@ -148,6 +166,15 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     private func populate(with report: Report) {
         subjectLabel?.text = report.reason
         reportDescription?.text = report.description
+        // Show admin answer if present
+        if let ans = report.answer, !ans.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            reportAnswer?.text = ans
+            reportAnswer?.textColor = .label
+        }
+
+        // Make text view editable only when report is open
+        let status = report.status.lowercased()
+        reportAnswer?.isEditable = (status == "open")
         updateActionButtons()
     }
 
@@ -169,13 +196,18 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         let alert = UIAlertController(title: "Mark Reviewed", message: "Are you sure you want to mark this report as Reviewed?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Confirm", style: .default) { _ in
-            self.viewModel?.updateReport(reportID: id, status: "Reviewed") { error in
+            // capture the admin answer (if any) and save it together with status
+            let answerText = (self.reportAnswer?.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            let answerToSave: String? = (answerText.isEmpty || answerText == "Write your response...") ? nil : answerText
+
+            self.viewModel?.updateReport(reportID: id, status: "Reviewed", answer: answerToSave) { error in
                 DispatchQueue.main.async {
                     if let err = error {
                         self.presentError(err)
                     } else {
                         self.presentSuccess("Report marked Reviewed")
                         self.report?.status = "Reviewed"
+                        if let a = answerToSave { self.report?.answer = a }
                         self.populateIfNeeded()
                     }
                 }

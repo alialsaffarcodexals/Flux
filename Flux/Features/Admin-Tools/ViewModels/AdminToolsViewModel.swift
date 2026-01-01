@@ -98,7 +98,8 @@ class AdminToolsViewModel {
                     if let statusRaw = data["status"] as? String, let status = BookingStatus(rawValue: statusRaw) {
                         switch status {
                         case .rejected: rejected += 1
-                        case .pending: pending += 1
+                        // Admin dashboard treats 'Requested' bookings as the pending count
+                        case .requested: pending += 1
                         case .accepted, .completed: approved += 1
                         default: break
                         }
@@ -133,10 +134,26 @@ class AdminToolsViewModel {
                     let proofImageURL = data["proofImageURL"] as? String
                     let adminFeedback = data["adminFeedback"] as? String
 
+                    // Parse skill level from possible fields and tolerant formats
+                    var level: SkillLevel? = nil
+                    if let levelRaw = (data["level"] as? String) ?? (data["skillLevel"] as? String) {
+                        if let parsed = SkillLevel(rawValue: levelRaw) {
+                            level = parsed
+                        } else {
+                            switch levelRaw.lowercased() {
+                            case "beginner": level = .beginner
+                            case "intermediate": level = .intermediate
+                            case "expert": level = .expert
+                            default: level = nil
+                            }
+                        }
+                    }
+
                     return Skill(
                         id: id,
                         providerId: providerId,
                         name: name,
+                        level: level,
                         description: description,
                         proofImageURL: proofImageURL,
                         status: status,
@@ -178,7 +195,22 @@ class AdminToolsViewModel {
             let proofImageURL = data["proofImageURL"] as? String
             let adminFeedback = data["adminFeedback"] as? String
 
-            let skill = Skill(id: doc.documentID, providerId: providerId, name: name, description: description, proofImageURL: proofImageURL, status: status, adminFeedback: adminFeedback)
+            // Parse skill level (tolerant to field name and casing)
+            var level: SkillLevel? = nil
+            if let levelRaw = (data["level"] as? String) ?? (data["skillLevel"] as? String) {
+                if let parsed = SkillLevel(rawValue: levelRaw) {
+                    level = parsed
+                } else {
+                    switch levelRaw.lowercased() {
+                    case "beginner": level = .beginner
+                    case "intermediate": level = .intermediate
+                    case "expert": level = .expert
+                    default: level = nil
+                    }
+                }
+            }
+
+            let skill = Skill(id: doc.documentID, providerId: providerId, name: name, level: level, description: description, proofImageURL: proofImageURL, status: status, adminFeedback: adminFeedback)
             completion(.success(skill))
         }
     }
@@ -568,7 +600,8 @@ class AdminToolsViewModel {
                               description: description,
                               evidenceImageURL: evidenceImageURL,
                               status: status,
-                              timestamp: tsDate)
+                              timestamp: tsDate,
+                              answer: nil)
             }
 
             completion(.success(reports))
@@ -634,7 +667,8 @@ class AdminToolsViewModel {
                                   description: description,
                                   evidenceImageURL: evidenceImageURL,
                                   status: status,
-                                  timestamp: tsDate)
+                                  timestamp: tsDate,
+                                  answer: nil)
                 }
 
                 completion(.success(reports))
@@ -684,6 +718,7 @@ class AdminToolsViewModel {
             }
 
             let evidenceImageURL = data["evidenceImageURL"] as? String
+            let answer = data["answer"] as? String
 
             let report = Report(id: doc.documentID,
                                 reporterId: reporterId,
@@ -692,7 +727,8 @@ class AdminToolsViewModel {
                                 description: description,
                                 evidenceImageURL: evidenceImageURL,
                                 status: status,
-                                timestamp: tsDate)
+                                timestamp: tsDate,
+                                answer: answer)
 
             completion(.success(report))
         }
@@ -713,12 +749,13 @@ class AdminToolsViewModel {
     }
 
     // MARK: - Update Report Fields
-    func updateReport(reportID: String, reason: String? = nil, description: String? = nil, evidenceImageURL: String? = nil, status: String? = nil, completion: ((Error?) -> Void)? = nil) {
+    func updateReport(reportID: String, reason: String? = nil, description: String? = nil, evidenceImageURL: String? = nil, status: String? = nil, answer: String? = nil, completion: ((Error?) -> Void)? = nil) {
         var data: [String: Any] = [:]
         if let r = reason { data["reason"] = r }
         if let d = description { data["description"] = d }
         if let e = evidenceImageURL { data["evidenceImageURL"] = e }
         if let s = status { data["status"] = s }
+        if let a = answer { data["answer"] = a }
 
         guard !data.isEmpty else { completion?(nil); return }
 
@@ -743,7 +780,7 @@ class AdminToolsViewModel {
         )
 
         do {
-            let docRef = try db.collection("serviceCategories").addDocument(from: category)
+            _ = try db.collection("serviceCategories").addDocument(from: category)
             completion?(nil)
             // notify about new category
             self.createActivityNotification(title: "Category added", message: name, toUserId: "all")
