@@ -87,7 +87,7 @@ class CategoryManagementViewController: UIViewController {
 
                 switch result {
                 case .success(let data):
-                    self.categories = data
+                    self.categories = self.deduplicatedCategories(from: data)
                     self.tableView.reloadData()
                     self.tableView.isHidden = false
 
@@ -96,6 +96,22 @@ class CategoryManagementViewController: UIViewController {
                 }
             }
         }
+    }
+
+    private func deduplicatedCategories(from list: [ServiceCategory]) -> [ServiceCategory] {
+        var seenNames = Set<String>()
+        var out: [ServiceCategory] = []
+
+        for item in list {
+            let key = item.name.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            if seenNames.contains(key) {
+                continue
+            }
+            seenNames.insert(key)
+            out.append(item)
+        }
+
+        return out
     }
 
     // MARK: - Add Button
@@ -245,6 +261,33 @@ extension CategoryManagementViewController {
                 categoryID: id,
                 newName: newName
             )
+        })
+
+        // Add delete option
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+
+            let confirm = UIAlertController(title: "Delete Category", message: "Are you sure you want to delete \"\(category.name)\"? This cannot be undone.", preferredStyle: .alert)
+            confirm.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            confirm.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+                // perform delete
+                self.viewModel.deleteCategory(categoryID: id) { err in
+                    DispatchQueue.main.async {
+                        if let err = err {
+                            let e = UIAlertController(title: "Error", message: "Failed to delete category: \(err.localizedDescription)", preferredStyle: .alert)
+                            e.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(e, animated: true)
+                            return
+                        }
+
+                        // remove locally and update table
+                        self.categories.remove(at: indexPath.row)
+                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                }
+            })
+
+            self.present(confirm, animated: true)
         })
 
         present(alert, animated: true)

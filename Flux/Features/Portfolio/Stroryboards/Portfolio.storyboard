@@ -14,7 +14,7 @@
         <!--My Portfolio-->
         <scene sceneID="4QY-69-JMy">
             <objects>
-                <viewController id="AKg-vu-EDr" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PortfolioVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AKg-vu-EDr" customClass="PortfolioListViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hQh-D8-nPl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="162" width="393" height="573"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProjectTableViewCell" rowHeight="100" id="nEx-h3-X42">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PortfolioCell" rowHeight="100" id="nEx-h3-X42">
                                         <rect key="frame" x="0.0" y="50" width="393" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nEx-h3-X42" id="KGh-qx-jc1">
@@ -114,6 +114,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="Jha-ha-aWv" id="AeM-3b-Hk2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YFP-cb-Osd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -310,7 +313,7 @@
         <!--Navigation Controller-->
         <scene sceneID="JwN-fz-7Y7">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="u8K-8p-JCM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PortfolioNC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="u8K-8p-JCM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="LjX-AM-pBA">
                         <rect key="frame" x="0.0" y="118" width="393" height="96"/>
