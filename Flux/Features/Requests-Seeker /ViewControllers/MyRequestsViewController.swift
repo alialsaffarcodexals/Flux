@@ -147,28 +147,36 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
         }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell", for: indexPath) as! RequestTableCell
-           
-           let booking: Booking
-           switch currentState {
-           case .pending: booking = pendingBookings[indexPath.row]
-           case .inProgress: booking = inProgressBookings[indexPath.row]
-           case .completed: booking = completedBookings[indexPath.row]
-           }
-           
-           // Populate Cell
-           cell.serviceTitleLabel.text = booking.serviceTitle
-           // cell.providerNameLabel.text = ... (Add this later)
-           
-           // Styling
-           if currentState == .pending {
-               cell.serviceImgView.layer.cornerRadius = 12
-           } else {
-               cell.serviceImgView.layer.cornerRadius = 30
-           }
-           
-           return cell
-       }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RequestCell", for: indexPath) as! RequestTableCell
+            
+            let booking: Booking
+            switch currentState {
+            case .pending: booking = pendingBookings[indexPath.row]
+            case .inProgress: booking = inProgressBookings[indexPath.row]
+            case .completed: booking = completedBookings[indexPath.row]
+            }
+            
+            // 1. Text Data
+            cell.serviceTitleLabel.text = booking.serviceTitle
+            cell.providerNameLabel.text = booking.providerName 
+            
+            // 2. Image Logic
+            cell.serviceImgView.image = nil
+            cell.serviceImgView.backgroundColor = .systemGray5
+            
+            // ✅ FIX 1: Make image fill the space properly
+            cell.serviceImgView.contentMode = .scaleAspectFill
+            
+            cell.serviceImgView.loadImage(from: booking.providerImageURL)
+            
+            // ✅ FIX 2: Make EVERYTHING a Circle (No more square for pending)
+            // Since your constraints are 60x60, half is 30.
+            cell.serviceImgView.layer.cornerRadius = 30
+            
+            cell.serviceImgView.clipsToBounds = true
+            
+            return cell
+        }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 90

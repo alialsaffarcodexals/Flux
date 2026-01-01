@@ -142,6 +142,7 @@
 		7FE70B312EF30F3500DFBE12 /* ServiceCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */; };
 		7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */; };
 		AC3F6AAD2F0691540076A296 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3F6AAC2F0691540076A296 /* SuccessViewController.swift */; };
+		AC3F6AB22F06ACBE0076A296 /* Booking.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3F6AB12F06ACBE0076A296 /* Booking.storyboard */; };
 		AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */; };
 		AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D52F04460B003B7C7D /* RequestTableCell.swift */; };
 		ACB2A18B2F053EB5005F9F62 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */; };
@@ -285,6 +286,7 @@
 		7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardCell.swift; sourceTree = "<group>"; };
 		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		AC3F6AAC2F0691540076A296 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		AC3F6AB12F06ACBE0076A296 /* Booking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Booking.storyboard; sourceTree = "<group>"; };
 		AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsViewController.swift; sourceTree = "<group>"; };
 		AC9616D52F04460B003B7C7D /* RequestTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableCell.swift; sourceTree = "<group>"; };
 		ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
@@ -489,6 +491,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				AC3F6AB02F06AC820076A296 /* Booking- alnoohy */,
 				1025927E2F0439BC003F6C5F /* History&Favorites */,
 				7FA993E32EFD403E00CE5748 /* DisputeCenter */,
 				7FAB339F2EF1893C008AC600 /* SeekerProfile */,
@@ -1105,6 +1108,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AC3F6AB02F06AC820076A296 /* Booking- alnoohy */ = {
+			isa = PBXGroup;
+			children = (
+				AC3F6AB12F06ACBE0076A296 /* Booking.storyboard */,
+			);
+			path = "Booking- alnoohy";
+			sourceTree = "<group>";
+		};
 		AC9616CE2F04446B003B7C7D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1205,6 +1216,7 @@
 			files = (
 				7FAB330C2EE457B4008AC600 /* Portfolio.storyboard in Resources */,
 				10BD0DBC2F041A26009FC85D /* Home.storyboard in Resources */,
+				AC3F6AB22F06ACBE0076A296 /* Booking.storyboard in Resources */,
 				7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */,

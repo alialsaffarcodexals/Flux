@@ -29,7 +29,7 @@ struct Booking: Identifiable, Codable {
     
     // ✅ Single chosen slot only (no session duration)
     var scheduledAt: Date
-    
+    var providerImageURL: String?
     var note: String?
     var status: BookingStatus
     var acceptedAt: Date?
