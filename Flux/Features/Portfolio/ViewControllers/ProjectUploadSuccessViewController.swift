@@ -11,17 +11,9 @@ class ProjectUploadSuccessViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
 
-    // MANUALLY ADD THIS ACTION CODE
-    @IBAction func doneButtonTapped(_ sender: UIButton) {
-        if let nav = self.navigationController {
-            nav.popToRootViewController(animated: true)
-        } else {
-            self.dismiss(animated: true, completion: nil)
-        }
+        // Do any additional setup after loading the view.
     }
-}
     
 
     /*
@@ -34,4 +26,4 @@ class ProjectUploadSuccessViewController: UIViewController {
     }
     */
 
-
+}
