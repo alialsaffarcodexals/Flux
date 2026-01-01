@@ -468,20 +468,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SkillListCell" id="BtC-ni-Zcw">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="47.333332061767578"/>
+                                        <rect key="frame" x="0.0" y="50" width="393" height="47.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BtC-ni-Zcw" id="DDD-PH-dMe">
-                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="47.333332061767578"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="47.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rX-X6-8or">
-                                                    <rect key="frame" x="20.000000000000004" y="12.999999999999998" width="41.333333333333343" height="21.333333333333329"/>
+                                                    <rect key="frame" x="20.000000000000004" y="13.000000000000002" width="41.333333333333343" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MZ8-Zc-RDg">
-                                                    <rect key="frame" x="308.33333333333331" y="12.999999999999998" width="44.333333333333314" height="21.333333333333329"/>
+                                                    <rect key="frame" x="308.33333333333331" y="13.000000000000002" width="44.333333333333314" height="21.666666666666671"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" systemColor="systemRedColor"/>
                                                     <nil key="highlightedColor"/>

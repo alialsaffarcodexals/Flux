@@ -1,45 +1,62 @@
+//
+//  PortfolioListViewController.swift
+//  Flux
+//
+//  Created by Guest User on 01/01/2026.
+//
+
 import UIKit
 
-final class PortfolioListViewController: UIViewController {
-
-    @IBOutlet private weak var tableView: UITableView!
-
-    // Temporary data so table has something valid
-    private var items: [String] = []
+class PortfolioListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "My Portfolio"
-
-        // If you already connected delegate/dataSource in storyboard, this is still fine.
-        tableView.dataSource = self
+        
+        //Setup Large Title
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        
+        //Setup Table
         tableView.delegate = self
-
-        // If your prototype cell has NO identifier, use this fallback approach:
-        // tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PortfolioCell")
-
-        items = [] // start empty (no crash)
-        tableView.reloadData()
+        tableView.dataSource = self
     }
-}
-
-extension PortfolioListViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        // OPTION 1 (recommended): set prototype cell identifier in storyboard to "PortfolioCell"
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "PortfolioCell") {
-            cell.textLabel?.text = items[indexPath.row]
-            return cell
+    
+    // MARK: - TableView DataSource
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 3 // Show 3 fake items
         }
 
-        // OPTION 2 (safe fallback if identifier not set)
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.textLabel?.text = items[indexPath.row]
-        return cell
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            // Make sure Identifier in Storyboard is "PortfolioCell"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "PortfolioCell", for: indexPath) as! PortfolioTableCell
+            
+            // Fake Data Configuration
+            if indexPath.row == 0 {
+                cell.titleLabel.text = "Project: Fitness Tracker"
+                cell.dateLabel.text = "17 Dec 2024"
+                // cell.posterImageView.image = ... (Set a dummy image in storyboard to test)
+            } else if indexPath.row == 1 {
+                cell.titleLabel.text = "Project: Travel Planner"
+                cell.dateLabel.text = "10 Jan 2025"
+            } else {
+                cell.titleLabel.text = "Project: Food Delivery"
+                cell.dateLabel.text = "05 Feb 2025"
+            }
+            
+            return cell
+        }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
+    */
+
 }
