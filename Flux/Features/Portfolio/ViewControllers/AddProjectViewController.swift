@@ -15,52 +15,57 @@ class AddProjectViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var uploadView: UIView!
-    @IBOutlet weak var saveButton: UIButton!
-    
-    var selectedImage: UIImage? // Fixes: cannot find 'selectedImage'
+    var selectedImage: UIImage?
+    let db = Firestore.firestore()
+    let placeholderText = "Describe your service and experience"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        // Tap gesture for Upload View
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto))
         uploadView.addGestureRecognizer(tap)
         uploadView.isUserInteractionEnabled = true
     }
     
-    @objc func handleSelectPhoto() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = true
-        present(picker, animated: true)
-    }
-    // Image Picker Delegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.editedImage] as? UIImage {
-            self.selectedImage = image
-            // Optional: show a small preview inside your uploadView
+    override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    addDashedBorder() // Draw dashed border after layout is calculated
         }
-        dismiss(animated: true)
-    }
-    @IBAction func saveProjectPressed(_ sender: UIButton) {
-        guard let name = projectNameTextField.text, !name.isEmpty,
-              let desc = descriptionTextView.text, !desc.isEmpty,
-              let image = selectedImage else {
-            print("Please fill all fields and select an image")
-            return
+    
+    // MARK: - Navigation Action
+        @IBAction func saveBarButtonTapped(_ sender: UIBarButtonItem) {
+            validateAndUpload()
         }
         
-        // Disable button to prevent double-clicks
-        saveButton.isEnabled = false
+        // MARK: - Validation & Upload Logic
+        func validateAndUpload() {
+            guard let name = projectNameTextField.text, !name.isEmpty,
+                  let desc = descriptionTextView.text, desc != placeholderText, !desc.isEmpty,
+                  let image = selectedImage else {
+                showAlert(message: "Please fill all fields and upload a project image.")
+                return
+            }
+            
+            // Step 1: Upload to Cloudinary
+            uploadImageToCloudinary(image: image) { imageUrl in
+                guard let url = imageUrl else {
+                    self.showAlert(message: "Image upload failed.")
+                    return
+                }
+                
+                // Step 2: Save to Firebase
+                self.saveToFirebase(name: name, date: self.datePicker.date, description: desc, imageUrl: url)
+            }
+        }
         
-        func uploadToCloudinary(image: UIImage, completion: @escaping (String?) -> Void) {
+        func uploadImageToCloudinary(image: UIImage, completion: @escaping (String?) -> Void) {
             let config = CLDConfiguration(cloudName: "your_cloud_name", apiKey: "your_api_key")
             let cloudinary = CLDCloudinary(configuration: config)
             
             guard let data = image.jpegData(compressionQuality: 0.7) else { return }
             
-            // Fixed: Added 'completionHandler:' label to suppress warning
-            cloudinary.createUploader().upload(data: data, uploadPreset: "your_unsigned_preset", completionHandler: { result, error in
+            cloudinary.createUploader().upload(data: data, uploadPreset: "your_preset", completionHandler: { result, error in
                 if let error = error {
                     print("Cloudinary Error: \(error.localizedDescription)")
                     completion(nil)
@@ -69,9 +74,93 @@ class AddProjectViewController: UIViewController, UIImagePickerControllerDelegat
                 }
             })
         }
+        
+        func saveToFirebase(name: String, date: Date, description: String, imageUrl: String) {
+            let data: [String: Any] = [
+                "projectName": name,
+                "date": date,
+                "description": description,
+                "imageUrl": imageUrl,
+                "createdAt": FieldValue.serverTimestamp()
+            ]
+            
+            db.collection("Projects").addDocument(data: data) { error in
+                if let error = error {
+                    self.showAlert(message: "Error saving: \(error.localizedDescription)")
+                } else {
+                    // SUCCESS! Instead of just going back, we trigger the Segue
+                    self.performSegue(withIdentifier: "toSuccessScreen", sender: self)
+                }
+            }
+        }
+        
+        // MARK: - Figma Styling
+        func setupDesign() {
+            descriptionTextView.text = placeholderText
+            descriptionTextView.textColor = .lightGray
+            descriptionTextView.layer.cornerRadius = 12
+            descriptionTextView.backgroundColor = UIColor.systemGray6
+            descriptionTextView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+            
+            uploadView.backgroundColor = UIColor.systemGray6
+            uploadView.layer.cornerRadius = 12
+            uploadView.clipsToBounds = true // Fixes date picker radius issues
+        }
+        
+        func addDashedBorder() {
+            uploadView.layer.sublayers?.filter { $0 is CAShapeLayer }.forEach { $0.removeFromSuperlayer() }
+            let shapeLayer = CAShapeLayer()
+            let shapeRect = CGRect(x: 0, y: 0, width: uploadView.frame.width, height: uploadView.frame.height)
+            shapeLayer.bounds = shapeRect
+            shapeLayer.position = CGPoint(x: uploadView.frame.width/2, y: uploadView.frame.height/2)
+            shapeLayer.fillColor = UIColor.clear.cgColor
+            shapeLayer.strokeColor = UIColor.systemGray3.cgColor
+            shapeLayer.lineWidth = 2
+            shapeLayer.lineDashPattern = [6, 3]
+            shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 12).cgPath
+            uploadView.layer.addSublayer(shapeLayer)
+        }
+        
+        // MARK: - TextView Placeholder Logic
+        func textViewDidBeginEditing(_ textView: UITextView) {
+            if textView.textColor == .lightGray {
+                textView.text = nil
+                textView.textColor = .black
+            }
+        }
+        
+        func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text.isEmpty {
+                textView.text = placeholderText
+                textView.textColor = .lightGray
+            }
+        }
+        
+        // MARK: - Image Picker
+        @objc func handleSelectPhoto() {
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.allowsEditing = true
+            present(picker, animated: true)
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.editedImage] as? UIImage {
+                self.selectedImage = image
+                let preview = UIImageView(image: image)
+                preview.frame = uploadView.bounds
+                preview.contentMode = .scaleAspectFill
+                uploadView.addSubview(preview)
+            }
+            dismiss(animated: true)
+        }
+        
+        func showAlert(message: String) {
+            let alert = UIAlertController(title: "Flux", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
     }
-}
-
    
     /*
     // MARK: - Navigation
