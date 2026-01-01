@@ -225,7 +225,8 @@ final class HistoryVM {
                 switch result {
                 case .success(let user):
                     providerName = user.name
-                    profileImageURL = user.profileImageURL
+                    // Use provider profile image (seller mode)
+                    profileImageURL = user.profileImageURL(for: .sellerMode)
                 case .failure:
                     // Provider fetch failed, fallback to defaults but keep booking
                     break

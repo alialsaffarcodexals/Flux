@@ -20,7 +20,8 @@ struct User: Identifiable, Codable {
     var username: String
     var email: String
     var phoneNumber: String?
-    var profileImageURL: String?
+    var seekerProfileImageURL: String?
+    var providerProfileImageURL: String?
     var location: String?
 
     var role: UserRole
@@ -43,6 +44,16 @@ struct User: Identifiable, Codable {
     var isVerified: Bool?
 
     var name: String { "\(firstName) \(lastName)" }
+    
+    /// Helper computed property to get the profile image URL for a specific mode
+    func profileImageURL(for mode: ProfileMode) -> String? {
+        switch mode {
+        case .buyerMode:
+            return seekerProfileImageURL
+        case .sellerMode:
+            return providerProfileImageURL
+        }
+    }
 
     init(
         id: String? = nil,
