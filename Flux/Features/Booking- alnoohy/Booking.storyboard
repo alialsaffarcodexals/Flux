@@ -15,35 +15,8 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="stw-4z-uxX">
-                                <rect key="frame" x="76" y="362" width="240" height="128"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PYm-Qy-wvd">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="622"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="aAv-If-rd9" firstAttribute="bottom" secondItem="PYm-Qy-wvd" secondAttribute="bottom" id="I1v-xv-nY0"/>
-                                    <constraint firstItem="PYm-Qy-wvd" firstAttribute="leading" secondItem="aAv-If-rd9" secondAttribute="leading" id="oy9-bs-egZ"/>
-                                    <constraint firstItem="aAv-If-rd9" firstAttribute="trailing" secondItem="PYm-Qy-wvd" secondAttribute="trailing" id="teY-mL-K7B"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="Hex-OO-iXJ"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="aAv-If-rd9"/>
-                            </scrollView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="stw-4z-uxX" secondAttribute="trailing" id="G0e-z1-37R"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="stw-4z-uxX" secondAttribute="bottom" id="S0P-8m-JFn"/>
-                            <constraint firstItem="stw-4z-uxX" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="topMargin" id="V7H-Qc-XUR"/>
-                            <constraint firstItem="stw-4z-uxX" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="WfT-jo-8gq"/>
-                            <constraint firstItem="stw-4z-uxX" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="eAp-6g-LbM"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="stw-4z-uxX" secondAttribute="bottom" id="gIm-LB-NnP"/>
-                            <constraint firstItem="stw-4z-uxX" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leadingMargin" id="mXJ-tt-LQZ"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Booking" id="4zr-Q0-fJe"/>
                 </viewController>
