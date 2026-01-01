@@ -176,10 +176,14 @@ final class BookingRepository {
             }
     }
     func markAsReviewed(bookingId: String, completion: @escaping (Result<Void, Error>) -> Void) {
-            bookingsCollection.document(bookingId).updateData(["isReviewed": true]) { error in
+            // ERROR CHECK: Is your collection named "bookings" or "Bookings"?
+            // It must match your Firestore exactly (lowercase 'b').
+            manager.db.collection("bookings").document(bookingId).updateData(["isReviewed": true]) { error in
                 if let error = error {
+                    print("❌ Error updating booking: \(error)")
                     completion(.failure(error))
                 } else {
+                    print("✅ Successfully marked booking as reviewed in database")
                     completion(.success(()))
                 }
             }
