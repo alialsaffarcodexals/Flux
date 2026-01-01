@@ -1,237 +1,124 @@
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
+// MARK: - 1. MODELS
+struct Conversation {
+    let id: String
+    let otherUserEmail: String
+    let otherUserName: String
+    let lastMessage: String
+    let date: Date
+}
+
+struct ChatMessage {
+    let id: String?
+    let senderId: String
+    let text: String
+    let sentAt: Date
+    
+    // Helper to convert to Firestore Data
+    var dictionary: [String: Any] {
+        return [
+            "senderId": senderId,
+            "text": text,
+            "sentAt": Timestamp(date: sentAt)
+        ]
+    }
+}
+
+// MARK: - 2. REPOSITORY
 final class ChatRepository {
+    
     static let shared = ChatRepository()
-    private let manager = FirestoreManager.shared
-
+    private let db = Firestore.firestore()
     private init() {}
 
-    private var conversationsCollection: CollectionReference {
-        manager.db.collection("conversations")
-    }
+    // --- CONVERSATIONS ---
+    
+    func fetchConversations(completion: @escaping (Result<[Conversation], Error>) -> Void) {
+        guard let currentUserEmail = Auth.auth().currentUser?.email else { return }
 
-    private func messagesCollection(conversationId: String) -> CollectionReference {
-        conversationsCollection.document(conversationId).collection("messages")
-    }
-
-    // MARK: - Conversation Helpers
-
-    func createOrFetchConversation(
-        seekerId: String,
-        providerId: String,
-        completion: @escaping (Result<Conversation, Error>) -> Void
-    ) {
-        conversationsCollection.whereField("seekerId", isEqualTo: seekerId)
-            .whereField("providerId", isEqualTo: providerId)
-            .limit(to: 1)
-            .getDocuments { snapshot, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-
-                guard let snapshot = snapshot else {
-                    completion(.failure(self.manager.missingSnapshotError()))
-                    return
-                }
-
-                if let document = snapshot.documents.first {
-                    do {
-                        let conversation = try document.data(as: Conversation.self)
-                        completion(.success(conversation))
-                    } catch {
-                        completion(.failure(error))
-                    }
-                    return
-                }
-
-                let conversation = Conversation(
-                    id: nil,
-                    participantIds: [seekerId, providerId],
-                    seekerId: seekerId,
-                    providerId: providerId,
-                    serviceId: nil,
-                    bookingId: nil,
-                    lastMessageText: nil,
-                    lastMessageSenderId: nil,
-                    lastMessageAt: nil,
-                    unreadCount: [seekerId: 0, providerId: 0],
-                    createdAt: Date(),
-                    updatedAt: Date()
-                )
-
-                let document = self.conversationsCollection.document()
-                do {
-                    try document.setData(from: conversation) { error in
-                        if let error = error {
-                            completion(.failure(error))
-                            return
+        db.collection("conversations")
+            .whereField("participants", arrayContains: currentUserEmail)
+            .addSnapshotListener { snapshot, error in
+                
+                if let error = error { completion(.failure(error)); return }
+                guard let documents = snapshot?.documents else { completion(.success([])); return }
+                
+                var fetchedChats: [Conversation] = []
+                let group = DispatchGroup()
+                
+                for doc in documents {
+                    let data = doc.data()
+                    let id = doc.documentID
+                    let lastMsg = data["lastMessage"] as? String ?? "New Chat"
+                    let ts = data["lastMessageTimestamp"] as? Timestamp
+                    let date = ts?.dateValue() ?? Date()
+                    let participants = data["participants"] as? [String] ?? []
+                    
+                    if let otherEmail = participants.first(where: { $0 != currentUserEmail }) {
+                        group.enter()
+                        self.fetchUserName(email: otherEmail) { name in
+                            fetchedChats.append(Conversation(id: id, otherUserEmail: otherEmail, otherUserName: name, lastMessage: lastMsg, date: date))
+                            group.leave()
                         }
-
-                        var createdConversation = conversation
-                        createdConversation.id = document.documentID
-                        completion(.success(createdConversation))
                     }
-                } catch {
-                    completion(.failure(error))
+                }
+                
+                group.notify(queue: .main) {
+                    fetchedChats.sort { $0.date > $1.date }
+                    completion(.success(fetchedChats))
                 }
             }
     }
 
-    func fetchConversations(
-        for userId: String,
-        completion: @escaping (Result<[Conversation], Error>) -> Void
-    ) {
-        conversationsCollection.whereField("participantIds", arrayContains: userId)
-            .order(by: "lastMessageAt", descending: true)
-            .getDocuments { snapshot, error in
-                self.manager.decodeDocuments(snapshot, error: error, completion: completion)
-            }
-    }
+    // --- MESSAGES (The missing part!) ---
 
-    func updateConversationLastMessage(
-        conversationId: String,
-        lastMessageText: String?,
-        lastMessageSenderId: String,
-        lastMessageAt: Date,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) {
-        let lastMessageValue: Any = lastMessageText ?? NSNull()
-        let updates: [String: Any] = [
-            "lastMessageText": lastMessageValue,
-            "lastMessageSenderId": lastMessageSenderId,
-            "lastMessageAt": lastMessageAt,
-            "updatedAt": lastMessageAt,
-        ]
-
-        conversationsCollection.document(conversationId).updateData(updates) { error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            completion(.success(()))
-        }
-    }
-
-    func incrementUnreadCount(
-        conversationId: String,
-        receiverId: String,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) {
-        let updates: [String: Any] = [
-            "unreadCount.\(receiverId)": FieldValue.increment(Int64(1)),
-        ]
-
-        conversationsCollection.document(conversationId).updateData(updates) { error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            completion(.success(()))
-        }
-    }
-
-    func resetUnreadCount(
-        conversationId: String,
-        userId: String,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) {
-        let updates: [String: Any] = [
-            "unreadCount.\(userId)": 0,
-        ]
-
-        conversationsCollection.document(conversationId).updateData(updates) { error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            completion(.success(()))
-        }
-    }
-
-    // MARK: - Message Helpers
-
-    func sendMessage(
-        _ message: ChatMessage,
-        completion: @escaping (Result<ChatMessage, Error>) -> Void
-    ) {
-        let document = messagesCollection(conversationId: message.conversationId).document()
-        do {
-            try document.setData(from: message) { error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-
-                var createdMessage = message
-                createdMessage.id = document.documentID
-                completion(.success(createdMessage))
-            }
-        } catch {
-            completion(.failure(error))
-        }
-    }
-
-    func fetchMessages(
-        conversationId: String,
-        limit: Int? = nil,
-        startAfter: DocumentSnapshot? = nil,
-        completion: @escaping (Result<[ChatMessage], Error>) -> Void
-    ) {
-        var query: Query = messagesCollection(conversationId: conversationId)
+    func fetchMessages(conversationId: String, completion: @escaping (Result<[ChatMessage], Error>) -> Void) {
+        db.collection("conversations").document(conversationId).collection("messages")
             .order(by: "sentAt", descending: false)
-
-        if let startAfter = startAfter {
-            query = query.start(afterDocument: startAfter)
-        }
-
-        if let limit = limit {
-            query = query.limit(to: limit)
-        }
-
-        query.getDocuments { snapshot, error in
-            self.manager.decodeDocuments(snapshot, error: error, completion: completion)
+            .addSnapshotListener { snapshot, error in
+                
+                if let error = error { completion(.failure(error)); return }
+                
+                let messages = snapshot?.documents.compactMap { doc -> ChatMessage? in
+                    let data = doc.data()
+                    let senderId = data["senderId"] as? String ?? ""
+                    let text = data["text"] as? String ?? ""
+                    let ts = data["sentAt"] as? Timestamp
+                    return ChatMessage(id: doc.documentID, senderId: senderId, text: text, sentAt: ts?.dateValue() ?? Date())
+                } ?? []
+                
+                completion(.success(messages))
+            }
+    }
+    
+    func sendMessage(conversationId: String, message: ChatMessage, completion: @escaping (Result<Void, Error>) -> Void) {
+        // 1. Add message to subcollection
+        db.collection("conversations").document(conversationId).collection("messages").addDocument(data: message.dictionary) { error in
+            if let error = error { completion(.failure(error)); return }
+            
+            // 2. Update parent conversation with last message
+            self.db.collection("conversations").document(conversationId).updateData([
+                "lastMessage": message.text,
+                "lastMessageTimestamp": Timestamp(date: message.sentAt)
+            ])
+            
+            completion(.success(()))
         }
     }
 
-    func markMessagesAsRead(
-        conversationId: String,
-        userId: String,
-        completion: @escaping (Result<Void, Error>) -> Void
-    ) {
-        messagesCollection(conversationId: conversationId)
-            .whereField("receiverId", isEqualTo: userId)
-            .getDocuments { snapshot, error in
-                if let error = error {
-                    completion(.failure(error))
-                    return
-                }
-
-                guard let snapshot = snapshot else {
-                    completion(.failure(self.manager.missingSnapshotError()))
-                    return
-                }
-
-                guard !snapshot.documents.isEmpty else {
-                    completion(.success(()))
-                    return
-                }
-
-                let batch = self.manager.db.batch()
-                let readAt = Date()
-
-                snapshot.documents.forEach { document in
-                    batch.updateData(["isRead": true, "readAt": readAt], forDocument: document.reference)
-                }
-
-                batch.commit { error in
-                    if let error = error {
-                        completion(.failure(error))
-                        return
-                    }
-                    completion(.success(()))
-                }
+    // --- HELPER ---
+    private func fetchUserName(email: String, completion: @escaping (String) -> Void) {
+        db.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, _ in
+            if let doc = snapshot?.documents.first {
+                let firstName = doc["firstName"] as? String ?? "User"
+                let lastName = doc["lastName"] as? String ?? ""
+                completion("\(firstName) \(lastName)")
+            } else {
+                completion(email)
             }
+        }
     }
 }

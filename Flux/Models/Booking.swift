@@ -10,6 +10,7 @@ enum BookingStatus: String, Codable {
     case completed = "Completed"
     case rejected  = "Rejected"      // Provider Dropped/Rejected
     case canceled  = "Canceled"      // optional
+    case pending = "Pending"
 }
 
 
@@ -19,7 +20,7 @@ struct Booking: Identifiable, Codable {
     var seekerId: String
     var providerId: String
     var serviceId: String
-
+    var providerName: String
     // Snapshot of service details at booking time
     var serviceTitle: String
     var priceAtBooking: Double
@@ -36,4 +37,5 @@ struct Booking: Identifiable, Codable {
     var completedAt: Date?
     var rejectedAt: Date?
     var createdAt: Date
+    var isReviewed: Bool? = false
 }

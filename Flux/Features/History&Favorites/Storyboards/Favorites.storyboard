@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H4q-T2-eo6">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
@@ -11,7 +11,7 @@
         <!--FavoritesVC-->
         <scene sceneID="6Kh-WD-IMW">
             <objects>
-                <viewController id="H4q-T2-eo6" customClass="FavoritesVC" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoritesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="H4q-T2-eo6" customClass="FavoritesVC" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oQG-nG-dz3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,8 +96,10 @@
                         <viewLayoutGuide key="safeArea" id="U7Q-Wl-F2V"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="U7Q-Wl-F2V" firstAttribute="trailing" secondItem="7SK-a8-I0J" secondAttribute="trailing" id="8vQ-Tj-C1V"/>
-                            <constraint firstItem="7SK-a8-I0J" firstAttribute="leading" secondItem="U7Q-Wl-F2V" secondAttribute="leading" id="NMx-q5-0NS"/>
+                            <constraint firstAttribute="bottom" secondItem="ut3-Qa-2TL" secondAttribute="bottom" id="C3z-lO-8Qn"/>
+                            <constraint firstAttribute="trailing" secondItem="ut3-Qa-2TL" secondAttribute="trailing" id="D6Y-s7-CMo"/>
+                            <constraint firstItem="ut3-Qa-2TL" firstAttribute="leading" secondItem="U7Q-Wl-F2V" secondAttribute="leading" id="GGm-Sm-3MQ"/>
+                            <constraint firstItem="ut3-Qa-2TL" firstAttribute="top" secondItem="U7Q-Wl-F2V" secondAttribute="top" id="PNQ-l1-6LS"/>
                         </constraints>
                     </view>
                     <connections>

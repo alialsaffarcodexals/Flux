@@ -19,13 +19,17 @@ struct User: Identifiable, Codable {
     var lastName: String
     var username: String
     var email: String
-    var phoneNumber: String
-    var profileImageURL: String?
+    var phoneNumber: String?
+    var seekerProfileImageURL: String?
+    var providerProfileImageURL: String?
     var location: String?
 
     var role: UserRole
     var joinedDate: Date
     var activeProfileMode: ProfileMode?
+
+    // ✅ New Field: Tracks if the user has finished the Provider onboarding
+    var hasCompletedProviderSetup: Bool?
 
     var interests: [String]?
 
@@ -40,6 +44,16 @@ struct User: Identifiable, Codable {
     var isVerified: Bool?
 
     var name: String { "\(firstName) \(lastName)" }
+    
+    /// Helper computed property to get the profile image URL for a specific mode
+    func profileImageURL(for mode: ProfileMode) -> String? {
+        switch mode {
+        case .buyerMode:
+            return seekerProfileImageURL
+        case .sellerMode:
+            return providerProfileImageURL
+        }
+    }
 
     init(
         id: String? = nil,
@@ -47,7 +61,7 @@ struct User: Identifiable, Codable {
         lastName: String,
         username: String,
         email: String,
-        phoneNumber: String,
+        phoneNumber: String? = nil,
         role: UserRole = .seeker
     ) {
         self.id = id

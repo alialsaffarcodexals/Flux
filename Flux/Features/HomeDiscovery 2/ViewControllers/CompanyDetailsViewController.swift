@@ -2,21 +2,22 @@
 //  CompanyDetailsViewController.swift
 //  Flux
 //
-//  Created by Musa Almatri on 30/12/2025.
-//
+
 import UIKit
 
 class CompanyDetailsViewController: UIViewController {
-  
+    
+    // MARK: - Properties
     var company: Company!
     
+    // MARK: - Outlets (We will connect this later)
     @IBOutlet weak var companyLabel: UILabel!
     
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        companyLabel?.text = company?.name
-
+        // Set the company name on the label
+        companyLabel.text = company.name
     }
 }
