@@ -249,7 +249,7 @@
         <!--Project Upload Success View Controller-->
         <scene sceneID="73t-QK-yfq">
             <objects>
-                <viewController id="orB-vD-SsA" customClass="ProjectUploadSuccessViewController" sceneMemberID="viewController">
+                <viewController id="orB-vD-SsA" customClass="ProjectUploadSuccessViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MZW-ze-dSK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -276,6 +276,9 @@
                                         <rect key="frame" x="19.999999999999986" y="128.66666666666669" width="232.66666666666663" height="38.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="done"/>
+                                        <connections>
+                                            <action selector="doneButtonTapped:" destination="orB-vD-SsA" eventType="touchUpInside" id="6uh-Pf-aa1"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
