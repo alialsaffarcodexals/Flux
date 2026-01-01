@@ -55,18 +55,18 @@ class MainTabBarController: UITabBarController {
                 let requestsVC = instantiateViewController(storyboardName: "ProviderRequests", storyboardID: "ProviderRequestsVC")
                 requestsVC.tabBarItem = UITabBarItem(title: "Requests", image: UIImage(systemName: "list.clipboard"), selectedImage: UIImage(systemName: "list.clipboard.fill"))
                 
-                // Provider: Management
-                // Storyboard ID: ProviderManagementViewController
-                let managementVC = instantiateViewController(storyboardName: "ProviderManagement", storyboardID: "ProviderManagementViewController")
-                managementVC.tabBarItem = UITabBarItem(title: "Management", image: UIImage(systemName: "briefcase"), selectedImage: UIImage(systemName: "briefcase.fill"))
+                // Provider: Availability
+                // Storyboard ID: ProviderAvailabilityNav
+                let availabilityNav = instantiateViewController(storyboardName: "ProviderAvailabilityCalendar", storyboardID: "ProviderAvailabilityNav")
+                availabilityNav.tabBarItem = UITabBarItem(title: "Availability", image: UIImage(systemName: "calendar.badge.clock"), selectedImage: UIImage(systemName: "calendar.badge.clock.fill"))
                 
                 // Provider: Profile
                 // Storyboard ID: ProviderProfileNavigationController
                 let providerProfileNav = instantiateViewController(storyboardName: "ProviderProfile", storyboardID: "ProviderProfileNavigationController")
                 providerProfileNav.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
                 
-                // Order: Home, Requests, Management, Messages, Profile
-                viewControllers = [homeNav, requestsVC, managementVC, messagesNav, providerProfileNav]
+                // Order: Home, Requests, Availability, Messages, Profile
+                viewControllers = [homeNav, requestsVC, availabilityNav, messagesNav, providerProfileNav]
             }
             
             // --- 2. Set View Controllers ---

@@ -15,9 +15,132 @@
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="abc-12-SEG">
+                                <rect key="frame" x="16" y="69" width="361" height="32"/>
+                                <segments>
+                                    <segment title="Requests"/>
+                                    <segment title="Upcoming"/>
+                                </segments>
+                                <connections>
+                                    <action selector="didChangeSegment:" destination="Y6W-OH-hqX" eventType="valueChanged" id="act-SEG-001"/>
+                                </connections>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="def-34-TBL">
+                                <rect key="frame" x="0.0" y="110" width="393" height="742"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProviderBookingCell" rowHeight="120" id="ghi-56-CEL" customClass="ProviderBookingCell" customModule="Flux" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="120"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ghi-56-CEL" id="jkl-78-CNT">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="120"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-TIT-01">
+                                                    <rect key="frame" x="16" y="12" width="361" height="20"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-DAT-02">
+                                                    <rect key="frame" x="16" y="36" width="31" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-STA-03">
+                                                    <rect key="frame" x="16" y="57" width="39" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="stk-ACT-04">
+                                                    <rect key="frame" x="16" y="84" width="361" height="24"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-REJ-05">
+                                                            <rect key="frame" x="0.0" y="0.0" width="175.66666666666666" height="24"/>
+                                                            <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                            <state key="normal" title="Reject">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="didTapReject:" destination="ghi-56-CEL" eventType="touchUpInside" id="act-REJ-001"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-ACC-06">
+                                                            <rect key="frame" x="185.66666666666663" y="0.0" width="175.33333333333337" height="24"/>
+                                                            <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                            <state key="normal" title="Accept">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="didTapAccept:" destination="ghi-56-CEL" eventType="touchUpInside" id="act-ACC-002"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="cst-STK-HGT"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lbl-TIT-01" firstAttribute="top" secondItem="jkl-78-CNT" secondAttribute="top" constant="12" id="cst-TIT-TOP"/>
+                                                <constraint firstAttribute="trailing" secondItem="lbl-TIT-01" secondAttribute="trailing" constant="16" id="cst-TIT-TRL"/>
+                                                <constraint firstItem="lbl-TIT-01" firstAttribute="leading" secondItem="jkl-78-CNT" secondAttribute="leading" constant="16" id="cst-TIT-LDG"/>
+                                                
+                                                <constraint firstItem="lbl-DAT-02" firstAttribute="top" secondItem="lbl-TIT-01" secondAttribute="bottom" constant="4" id="cst-DAT-TOP"/>
+                                                <constraint firstItem="lbl-DAT-02" firstAttribute="leading" secondItem="jkl-78-CNT" secondAttribute="leading" constant="16" id="cst-DAT-LDG"/>
+                                                
+                                                <constraint firstItem="lbl-STA-03" firstAttribute="top" secondItem="lbl-DAT-02" secondAttribute="bottom" constant="4" id="cst-STA-TOP"/>
+                                                <constraint firstItem="lbl-STA-03" firstAttribute="leading" secondItem="jkl-78-CNT" secondAttribute="leading" constant="16" id="cst-STA-LDG"/>
+                                                
+                                                <constraint firstItem="stk-ACT-04" firstAttribute="top" secondItem="lbl-STA-03" secondAttribute="bottom" constant="12" id="cst-STK-TOP"/>
+                                                <constraint firstAttribute="trailing" secondItem="stk-ACT-04" secondAttribute="trailing" constant="16" id="cst-STK-TRL"/>
+                                                <constraint firstItem="stk-ACT-04" firstAttribute="leading" secondItem="jkl-78-CNT" secondAttribute="leading" constant="16" id="cst-STK-LDG"/>
+                                                <constraint firstAttribute="bottom" secondItem="stk-ACT-04" secondAttribute="bottom" constant="12" id="cst-STK-BOT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="acceptButton" destination="btn-ACC-06" id="out-ACC-001"/>
+                                            <outlet property="actionStackView" destination="stk-ACT-04" id="out-STK-001"/>
+                                            <outlet property="dateLabel" destination="lbl-DAT-02" id="out-DAT-001"/>
+                                            <outlet property="rejectButton" destination="btn-REJ-05" id="out-REJ-001"/>
+                                            <outlet property="statusLabel" destination="lbl-STA-03" id="out-STA-001"/>
+                                            <outlet property="titleLabel" destination="lbl-TIT-01" id="out-TIT-001"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="con-DAT-src"/>
+                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="con-DEL-del"/>
+                                </connections>
+                            </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="mno-78-IND">
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="abc-12-SEG" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="cst-SEG-TOP"/>
+                            <constraint firstItem="abc-12-SEG" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="cst-SEG-LDG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="abc-12-SEG" secondAttribute="trailing" constant="16" id="cst-SEG-TRL"/>
+                            
+                            <constraint firstItem="def-34-TBL" firstAttribute="top" secondItem="abc-12-SEG" secondAttribute="bottom" constant="10" id="cst-TBL-TOP"/>
+                            <constraint firstItem="def-34-TBL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cst-TBL-LDG"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="def-34-TBL" secondAttribute="trailing" id="cst-TBL-TRL"/>
+                            <constraint firstAttribute="bottom" secondItem="def-34-TBL" secondAttribute="bottom" id="cst-TBL-BOT"/>
+                            
+                            <constraint firstItem="mno-78-IND" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="cst-IND-CX"/>
+                            <constraint firstItem="mno-78-IND" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="cst-IND-CY"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="mno-78-IND" id="out-IND-VC"/>
+                        <outlet property="segmentedControl" destination="abc-12-SEG" id="out-SEG-VC"/>
+                        <outlet property="tableView" destination="def-34-TBL" id="out-TBL-VC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -25,8 +148,17 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
