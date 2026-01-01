@@ -12,13 +12,13 @@ import FirebaseAuth
 class ReviewViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Outlets
+    @IBOutlet weak var sendButton: UIBarButtonItem!
+    @IBOutlet weak var reviewContainerView: UIView!
     @IBOutlet weak var providerImageView: UIImageView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var reviewTextView: UITextView!
-    @IBOutlet weak var reviewContainerView: UIView!
     @IBOutlet weak var titleContainerView: UIView!
-    
-    // Connect these 5 buttons from your Storyboard
+        // Connect these 5 buttons from your Storyboard
     @IBOutlet var starButtons: [UIButton]!
     
     var bookingId: String = ""
@@ -33,22 +33,29 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
         
         setupUI()
         
-        titleTextField.text = serviceName
     }
     
     
     func setupUI() {
-        // Image Styling
+        // 1. Round Image
         providerImageView.layer.cornerRadius = providerImageView.frame.height / 2
         providerImageView.clipsToBounds = true
         
-        // Text Input Styling (Gray Backgrounds)
-        titleTextField.backgroundColor = .systemGray6
-        titleTextField.layer.cornerRadius = 8
-        titleTextField.placeholder = "Title"
+        // 2. Style the CONTAINERS (The Box Shape)
+        titleContainerView.backgroundColor = .systemGray6
+        titleContainerView.layer.cornerRadius = 12
+        titleContainerView.clipsToBounds = true
         
-        reviewTextView.backgroundColor = .systemGray6
-        reviewTextView.layer.cornerRadius = 8
+        reviewContainerView.backgroundColor = .systemGray6
+        reviewContainerView.layer.cornerRadius = 12
+        reviewContainerView.clipsToBounds = true
+        
+        // 3. Style the INPUTS (Make them clear so they sit inside the box)
+        titleTextField.backgroundColor = .clear
+        titleTextField.borderStyle = .none
+        titleTextField.textColor = .label
+        
+        reviewTextView.backgroundColor = .clear 
         reviewTextView.text = "Write your review"
         reviewTextView.textColor = .lightGray
         reviewTextView.delegate = self
@@ -100,10 +107,15 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Navigation
     @IBAction func sendButtonTapped(_ sender: Any) {
+        print("👆 Send Button Tapped!")
         // 1. Validation: Did they select a star?
         guard currentRating > 0 else {
             print("Please select a rating")
             return
+        }
+        if reviewTextView.text.isEmpty || reviewTextView.text == "Write your review" {
+             showAlert(message: "Please write a review comment.") // Show alert if review is empty
+             return // Stop here
         }
         
         // 2. Get Current User ID (Seeker)
@@ -122,22 +134,32 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
             comment: reviewTextView.text
         )
         
+        print("🚀 Sending to Firestore...")
+        
         // 4. ADD THIS: Send to Firestore using Repository
         ReviewRepository.shared.createReview(newReview) { result in
             switch result {
             case .success(let savedReview):
                 print("✅ Review saved successfully! ID: \(savedReview.id ?? "Unknown")")
-                
-                // 5. Navigate to Success Screen on Main Thread
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "goToSuccess", sender: self)
+                            
+                BookingRepository.shared.markAsReviewed(bookingId: self.bookingId) { _ in
+                    
+                    print("✅ Booking marked as reviewed in Firestore")
+                    
+                    // Navigate to Success Screen (Main Thread)
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "goToSuccess", sender: self)
+                    }
                 }
                 
             case .failure(let error):
                 print("❌ Error saving review: \(error.localizedDescription)")
                 // Optional: Show an alert here telling the user it failed
+                self.showAlert(message: "Failed to send: \(error.localizedDescription)")
             }
         }
+        
+        
         
         func textViewDidEndEditing(_ textView: UITextView) {
             if textView.text.isEmpty {
@@ -146,6 +168,11 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
+    func showAlert(message: String) {
+            let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
         
         
     

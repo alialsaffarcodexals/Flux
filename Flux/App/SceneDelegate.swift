@@ -14,6 +14,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
                 let window = UIWindow(windowScene: windowScene)
                 self.window = window
+                
+                // Apply saved theme immediately
+                // Apply saved theme immediately using the created window
+                AppSettingsManager.shared.applyTheme(to: window)
 
                 window.rootViewController = LoadingViewController()
                 window.makeKeyAndVisible()

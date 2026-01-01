@@ -1,100 +1,129 @@
-//
-//  HomeFeedViewController.swift
-//  Flux
-//
-//  Created by Mohammed on 24/12/2025.
-//
-
 import UIKit
 
-class CompanyCell: UICollectionViewCell {
-    
-    @IBOutlet weak var companyNameLabel: UILabel!
-    @IBOutlet weak var companyDescription: UILabel!
-    @IBOutlet weak var companyBackgroundColorView: UIView!
-    
-}
+class HomeFeedViewController: UIViewController {
 
-class HomeFeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
-    // 1. OUTLETS
-    // matches the name in your old code so the connection stays safe
-    @IBOutlet weak var recommendationsCollectionview: UICollectionView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    // 2. VIEW MODEL
-    var viewModel = HomeViewModel()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Setup the Collection View
-        setupCollectionView()
         
-        // Load the fake data from the ViewModel
-        viewModel.loadDummyData()
+        // 1. Set the Layout
+        collectionView.collectionViewLayout = createLayout()
         
-        recommendationsCollectionview.reloadData()
-    }
-    
-    func setupCollectionView() {
-        // Assign the delegate and data source to "self" (this file)
-        recommendationsCollectionview.dataSource = self
-        recommendationsCollectionview.delegate = self
-    }
-    
-    @IBAction func filterButtonClicked(_ sender: Any) {
-        let vc = UIViewController()
-        present(vc, animated: true)
-    }
-    
-    // MARK: - Collection View Data Source
-
-    // How many items to show? -> Count the services in our ViewModel
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.recommendedCompanies.count
+        // 2. Setup DataSource/Delegate
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
 
-    // What does each cell look like?
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let company = viewModel.recommendedCompanies[indexPath.row]
-        
-        // Create (dequeue) the cell
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CompanyCell", for: indexPath) as? CompanyCell else {
-            return UICollectionViewCell()
+    func createLayout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { (sectionIndex, _) -> NSCollectionLayoutSection? in
+            
+            // Use an enum or simple switch to choose the layout
+            switch sectionIndex {
+            case 0:
+                return self.createRecommendedSection()
+            case 1:
+                return self.createCategoriesSection()
+            default:
+                return self.createServicesSection()
+            }
         }
-        
-        // Configure the cell with data
-        cell.companyNameLabel.text = company.name
-        cell.companyDescription.text = company.description
-        cell.companyBackgroundColorView.backgroundColor = company.backgroundColor
-        cell.companyBackgroundColorView.layer.cornerRadius = 10
-        
-        return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let company = viewModel.recommendedCompanies[indexPath.row]
+    // --- SECTION 0: RECOMMENDED ---
+    private func createRecommendedSection() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 12)
+        
+        // REDUCED SIZE: Width 70% of screen, Height 120pt
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .absolute(120))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
+        
+        // ADDED TOP PADDING: To prevent the title from hitting the search bar
+        section.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 16, bottom: 20, trailing: 0)
+        section.boundarySupplementaryItems = [self.createHeader()]
+        
+        return section
+    }
 
-        print("User pressed on company", company.name)
+    // --- SECTION 1: CATEGORIES ---
+    private func createCategoriesSection() -> NSCollectionLayoutSection {
+        let item = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(36)))
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 8)
         
-        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(36)), subitems: [item])
         
-        let companyDetailsVC = storyboard.instantiateViewController(identifier: "CompanyDetailsViewController") as! CompanyDetailsViewController
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .continuous
         
-        companyDetailsVC.company = company
+        // ADDED VERTICAL SPACING
+        section.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 16, bottom: 25, trailing: 0)
+        section.boundarySupplementaryItems = [self.createHeader()]
         
-//        present(companyDetailsVC, animated: true)
-        navigationController?.pushViewController(companyDetailsVC, animated: true)
+        return section
+    }
+
+    // --- SECTION 2: SERVICES (The Grid) ---
+    private func createServicesSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .estimated(200))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 15, trailing: 8)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8)
+        
+        return section
     }
     
-    // MARK: - Layout (Cell Size)
+    private func createHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        // INCREASED HEIGHT TO 50
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        
+        // This pushes the text down away from the section above it
+        header.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)
+        return header
+    }
+}
+
+// MARK: - DataSource & Delegate
+extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    // How big should each square be?
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Width: 160, Height: 200 (Matches your XIB design)
-        return CGSize(width: 140, height: 100)
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 6 // Dummy count for testing
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecommendedCell", for: indexPath) as! RecommendedCell
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ServiceCell", for: indexPath) as! ServiceCell
+            return cell
+        }
+    }
+    
+    // Configures the Headers (Recommended / Categories)
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeader
+        header.titleLabel.text = (indexPath.section == 0) ? "Recommended" : "Categories"
+        return header
     }
 }

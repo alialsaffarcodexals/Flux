@@ -104,8 +104,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchBar" destination="Ms2-HM-PhK" id="search-bar-outlet-hist"/>
-                        <outlet property="tableView" destination="nUE-No-ecn" id="table-view-outlet-hist"/>
+                        <outlet property="searchBar" destination="Ms2-HM-PhK" id="mou-4S-zFy"/>
+                        <outlet property="tableView" destination="nUE-No-ecn" id="Qzj-Ya-Spd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
