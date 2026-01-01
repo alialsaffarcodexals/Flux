@@ -153,6 +153,7 @@
 		AC9616D62F04460B003B7C7D /* RequestTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D52F04460B003B7C7D /* RequestTableCell.swift */; };
 		ACB2A18B2F053EB5005F9F62 /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */; };
 		ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */; };
+		ACF4F9A82F06F332003B9D45 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4F9A72F06F332003B9D45 /* SectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -302,7 +303,16 @@
 		AC9616D52F04460B003B7C7D /* RequestTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestTableCell.swift; sourceTree = "<group>"; };
 		ACB2A18A2F053EB5005F9F62 /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		ACDA75E22EDDD78500665266 /* Requests-seeker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Requests-seeker.storyboard"; sourceTree = "<group>"; };
+		ACF4F9A72F06F332003B9D45 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		ACF4F9AB2F06F6C9003B9D45 /* Cells */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Cells;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7FC160DE2EDB15FF009B14F4 /* Frameworks */ = {
@@ -371,6 +381,7 @@
 				10E6FCEB2F0582BC00156591 /* HomeFeedViewController.swift */,
 				10E6FCED2F0582CA00156591 /* FilterViewController.swift */,
 				10E6FCEF2F0582D600156591 /* CompanyDetailsViewController.swift */,
+				ACF4F9A72F06F332003B9D45 /* SectionHeader.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -389,6 +400,7 @@
 				10BD0DB52F041A26009FC85D /* ViewModels */,
 				10BD0DB82F041A26009FC85D /* ViewControllers */,
 				10BD0DBA2F041A26009FC85D /* Storyboards */,
+				ACF4F9AB2F06F6C9003B9D45 /* Cells */,
 			);
 			path = "HomeDiscovery 2";
 			sourceTree = "<group>";
@@ -1167,6 +1179,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				ACF4F9AB2F06F6C9003B9D45 /* Cells */,
+			);
 			name = Flux;
 			packageProductDependencies = (
 				7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */,
@@ -1335,6 +1350,7 @@
 				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
 				ACB2A18B2F053EB5005F9F62 /* ReviewViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
+				ACF4F9A82F06F332003B9D45 /* SectionHeader.swift in Sources */,
 				3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
 				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
