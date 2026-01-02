@@ -18,7 +18,7 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    // Create the segmented control programmatically so we can return it in the header view
+    // Create the segmented control programmatically
     let segmentedControl: UISegmentedControl = {
         let sc = UISegmentedControl(items: ["Pending", "In Progress", "Completed"])
         sc.selectedSegmentIndex = 0
@@ -123,7 +123,7 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             var count = 0
             
-            // 1. Get the count based on the selected tab
+            
             switch currentState {
             case .pending:
                 count = pendingBookings.count
@@ -138,7 +138,7 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 if count == 0 { setEmptyMessage("No Completed Requests") }
             }
             
-            // 2. If we have data, clear the message
+            
             if count > 0 {
                 restoreBackground()
             }
@@ -164,13 +164,11 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.serviceImgView.image = nil
             cell.serviceImgView.backgroundColor = .systemGray5
             
-            // ✅ FIX 1: Make image fill the space properly
+
             cell.serviceImgView.contentMode = .scaleAspectFill
             
             cell.serviceImgView.loadImage(from: booking.providerImageURL)
             
-            // ✅ FIX 2: Make EVERYTHING a Circle (No more square for pending)
-            // Since your constraints are 60x60, half is 30.
             cell.serviceImgView.layer.cornerRadius = 30
             
             cell.serviceImgView.clipsToBounds = true
@@ -187,7 +185,6 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
             
-            // 1. IN PROGRESS STATE (Green Chat)
             if currentState == .inProgress {
                 let messageAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
                     print("Open Chat")
@@ -197,10 +194,8 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 messageAction.backgroundColor = .systemGreen
                 return UISwipeActionsConfiguration(actions: [messageAction])
                 
-            // 2. PENDING STATE (Red Delete + Orange Settings)
             } else if currentState == .pending {
                 let deleteAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completion) in
-                    // Ensure 'showDeleteAlert' function exists in your class
                     self.showDeleteAlert(at: indexPath)
                     completion(true)
                 }
@@ -214,32 +209,27 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 return UISwipeActionsConfiguration(actions: [deleteAction, settingsAction])
                 
-            // 3. COMPLETED STATE (Yellow Review OR Blue Read)
             } else if currentState == .completed {
                         
                 let booking = completedBookings[indexPath.row]
                 
-                // Check if it is reviewed (Default to false if missing)
                 let isAlreadyReviewed = booking.isReviewed ?? false
                 
                 if isAlreadyReviewed {
-                    // --- BLUE BUTTON (Already Reviewed) ---
                     let seenAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
                         
-                        // Show the Alert you wanted
                         let alert = UIAlertController(title: "Reviewed", message: "You have already reviewed this request.", preferredStyle: .alert)
                         alert.addAction(UIAlertAction(title: "OK", style: .default))
                         self.present(alert, animated: true)
                         
                         completion(true)
                     }
-                    seenAction.image = UIImage(systemName: "checkmark.seal.fill") // Checkmark badge
+                    seenAction.image = UIImage(systemName: "checkmark.seal.fill")
                     seenAction.backgroundColor = .systemBlue
                     
                     return UISwipeActionsConfiguration(actions: [seenAction])
                     
                 } else {
-                    // --- YELLOW BUTTON (Write Review) ---
                     let reviewAction = UIContextualAction(style: .normal, title: nil) { (_, _, completion) in
                         self.performSegue(withIdentifier: "goToReview", sender: indexPath)
                         completion(true)
@@ -247,7 +237,6 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                     reviewAction.image = UIImage(systemName: "star.fill")
                     reviewAction.backgroundColor = .systemYellow
                     
-                    // Add settings button if you want it too
                     let settingsAction = UIContextualAction(style: .normal, title: nil) { (_, _, _) in }
                     settingsAction.image = UIImage(systemName: "gearshape.fill")
                     settingsAction.backgroundColor = .systemGreen
@@ -266,24 +255,18 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
             
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                 
-                // 1. Get the booking object
                 let bookingToDelete = self.pendingBookings[indexPath.row]
                 
-                // 2. Ensure it has an ID
                 guard let bookingId = bookingToDelete.id else { return }
                 
-                // 3. Call Repository to Delete from Firestore
                 BookingRepository.shared.deleteBooking(id: bookingId) { result in
                     switch result {
                     case .success:
                         print("Booking deleted from database")
                         
-                        // 4. Update UI (Main Thread)
                         DispatchQueue.main.async {
-                            // Remove from the new array 'pendingBookings'
                             self.pendingBookings.remove(at: indexPath.row)
                             
-                            // Also remove from master array to keep sync
                             self.allPendingBookings.removeAll { $0.id == bookingId }
                             
                             // Animate the row deletion
@@ -330,12 +313,12 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
             case .success(let bookings):
                 print("🕵️ SUCCESS: Found \(bookings.count) bookings in Firestore.")
                 
-                // 1. Clear all lists
+                // Clear all lists
                 self.allPendingBookings.removeAll()
                 self.allInProgressBookings.removeAll()
                 self.allCompletedBookings.removeAll()
                 
-                // 2. Sort into Master lists
+                // Sort into Master lists
                 for booking in bookings {
                     print("   - Found Booking: \(booking.serviceTitle) | Status: \(booking.status.rawValue)")
                     
@@ -350,7 +333,7 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                     }
                 }
                 
-                // 3. Update Display lists
+                // Update Display lists
                 self.restoreAllData()
                 
                 DispatchQueue.main.async {
@@ -362,7 +345,8 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
             }
         }
     }
-    // PUT THIS IN MyRequestsViewController.swift
+    
+    // MARK: - navigation for sccesse
         @IBAction func unwindToRequests(segue: UIStoryboardSegue) {
             print("✅ Success! Returned to Request List.")
             
@@ -373,19 +357,19 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
         func setEmptyMessage(_ message: String) {
             let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
             messageLabel.text = message
-            messageLabel.textColor = .secondaryLabel // Light Gray
+            messageLabel.textColor = .secondaryLabel
             messageLabel.numberOfLines = 0
             messageLabel.textAlignment = .center
             messageLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
             messageLabel.sizeToFit()
 
             tableView.backgroundView = messageLabel
-            tableView.separatorStyle = .none // Hide the empty lines
+            tableView.separatorStyle = .none
         }
 
         func restoreBackground() {
             tableView.backgroundView = nil
-            tableView.separatorStyle = .singleLine // Bring back lines
+            tableView.separatorStyle = .singleLine
         }
 }
     /*

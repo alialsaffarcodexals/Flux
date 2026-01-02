@@ -24,7 +24,7 @@ class AddProjectViewController: UIViewController, UIImagePickerControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Tap gesture for Upload View
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto))
         uploadView.addGestureRecognizer(tap)
         uploadView.isUserInteractionEnabled = true
@@ -50,7 +50,7 @@ class AddProjectViewController: UIViewController, UIImagePickerControllerDelegat
             showAlert(message: "Please fill all fields and select a photo.")
             return
         }
-
+// error for faild uploding
         uploadToCloudinary(image: image) { imageUrl in
             guard let url = imageUrl else {
                 self.showAlert(message: "Image upload failed. Check Cloudinary settings.")
@@ -59,7 +59,7 @@ class AddProjectViewController: UIViewController, UIImagePickerControllerDelegat
 
             let imageUrls = [url]
 
-            // Decide if we are Updating or Creating
+            
             if let originalId = self.editingProject?.id {
                 let updatedProject = PortfolioProject(
                     id: originalId,
