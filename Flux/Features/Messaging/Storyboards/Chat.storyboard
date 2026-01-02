@@ -96,15 +96,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PcB-g5-aIe">
-                                <rect key="frame" x="171" y="743" width="115" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="testBooking"/>
-                                <connections>
-                                    <segue destination="lrK-b5-GF3" kind="show" id="ZkJ-ym-RQk"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -119,16 +110,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="7472.5190839694651" y="-2.1126760563380285"/>
-        </scene>
-        <!--Booking-->
-        <scene sceneID="iPy-NN-0uj">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Booking" id="lrK-b5-GF3" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="V9S-Rr-1ub"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f8W-eL-zHG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7473" y="509"/>
         </scene>
         <!--CleanMax-->
         <scene sceneID="moi-fU-Imk">
