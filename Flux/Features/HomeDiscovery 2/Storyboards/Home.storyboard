@@ -157,7 +157,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                     <constraints>
                                                         <constraint firstItem="9xx-tK-G8E" firstAttribute="centerY" secondItem="PSd-FY-y6m" secondAttribute="centerY" id="jPX-PQ-Kxm"/>
                                                         <constraint firstItem="9xx-tK-G8E" firstAttribute="centerX" secondItem="PSd-FY-y6m" secondAttribute="centerX" id="pRR-T2-epP"/>
@@ -265,16 +264,15 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGA-Xj-u7o">
-                                            <rect key="frame" x="24" y="18" width="142" height="14"/>
+                                            <rect key="frame" x="24" y="13" width="142" height="24"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="jGA-Xj-u7o" firstAttribute="top" secondItem="fJL-w8-woO" secondAttribute="topMargin" constant="10" id="WaX-Pj-0I3"/>
+                                        <constraint firstItem="jGA-Xj-u7o" firstAttribute="centerY" secondItem="fJL-w8-woO" secondAttribute="centerY" id="5GA-vn-nEa"/>
                                         <constraint firstItem="jGA-Xj-u7o" firstAttribute="leading" secondItem="fJL-w8-woO" secondAttribute="leadingMargin" constant="16" id="nYQ-LN-Jve"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="jGA-Xj-u7o" secondAttribute="bottom" constant="10" id="taA-bs-ULi"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="titleLabel" destination="jGA-Xj-u7o" id="zla-7H-eKv"/>
@@ -311,9 +309,6 @@
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
