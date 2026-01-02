@@ -1,5 +1,5 @@
 {
-  "originHash" : "1c1760ad74e54d9b39cbadc521c151d6c1a99bff210eb5ae60f6d099c3410a66",
+  "originHash" : "7b14e141c5c7e46a3c418517f384c335020b4851f6d9c977525965ee4eaf83c8",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "61b85103a1aeed8218f17c794687781505fbbef5",
         "version" : "11.2.0"
+      }
+    },
+    {
+      "identity" : "calendarkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/richardtop/CalendarKit.git",
+      "state" : {
+        "revision" : "89e02a1472e9ad815ae72b62fd15430144fd1c4c",
+        "version" : "1.1.11"
       }
     },
     {

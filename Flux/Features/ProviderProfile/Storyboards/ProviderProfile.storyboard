@@ -323,6 +323,9 @@
                                                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                                                     <color key="baseForegroundColor" systemColor="systemGrayColor"/>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="viewServicePackagesTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="view-svc-pkg"/>
+                                                                </connections>
                                                             </button>
                                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fe5-ho-swA">
                                                                 <rect key="frame" x="0.0" y="42.333333333333357" width="361" height="177.66666666666663"/>

@@ -72,12 +72,26 @@
 		7F60D5B72F06A7590034FE1F /* AppThemeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5B62F06A7590034FE1F /* AppThemeTableViewController.swift */; };
 		7F60D5B92F06A7690034FE1F /* FontSizeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5B82F06A7680034FE1F /* FontSizeTableViewController.swift */; };
 		7F60D5BB2F06B30E0034FE1F /* UIViewController+FontScaling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5BA2F06B30E0034FE1F /* UIViewController+FontScaling.swift */; };
+		7F60D5C62F0721820034FE1F /* CalendarKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7F60D5C52F0721820034FE1F /* CalendarKit */; };
+		7F60D5D02F0724FF0034FE1F /* AvailabilitySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5CF2F0724FF0034FE1F /* AvailabilitySlot.swift */; };
+		7F60D5D22F0725070034FE1F /* BlockedSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5D12F0725070034FE1F /* BlockedSlot.swift */; };
+		7F60D5D42F0725550034FE1F /* CalendarEventWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5D32F0725550034FE1F /* CalendarEventWrapper.swift */; };
+		7F60D5D62F0725A80034FE1F /* ProviderAvailabilityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5D52F0725A80034FE1F /* ProviderAvailabilityRepository.swift */; };
+		7F60D5DD2F07395B0034FE1F /* ProviderBookingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F60D5DB2F07395B0034FE1F /* ProviderBookingCell.swift */; };
 		7F68C3D02EDD93C5005B29E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */; };
 		7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */; };
 		7F68C3D32EDD93C5005B29E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */; };
 		7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */; };
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
+		7F745E8E2F075A3200181F7E /* ServicePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E8D2F075A3200181F7E /* ServicePackage.swift */; };
+		7F745E902F075A8400181F7E /* ServicePackagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E8F2F075A8400181F7E /* ServicePackagesRepository.swift */; };
+		7F745E942F075ABB00181F7E /* ServicePackageEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E912F075ABB00181F7E /* ServicePackageEditorViewController.swift */; };
+		7F745E952F075ABB00181F7E /* ServicePackagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E922F075ABB00181F7E /* ServicePackagesListViewController.swift */; };
+		7F745E992F075AC400181F7E /* ServicePackageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E962F075AC400181F7E /* ServicePackageEditorViewModel.swift */; };
+		7F745E9A2F075AC400181F7E /* ServicePackagesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E972F075AC400181F7E /* ServicePackagesListViewModel.swift */; };
+		7F745E9C2F075DB400181F7E /* ServicePackages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F745E9B2F075DB400181F7E /* ServicePackages.storyboard */; };
+		7F745E9F2F07627700181F7E /* ServicePackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E9D2F07627700181F7E /* ServicePackageCell.swift */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
 		7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */; };
 		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
@@ -133,13 +147,13 @@
 		7FB3687F2F0196D4005AEB44 /* SeekerProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3687E2F0196D4005AEB44 /* SeekerProfileViewController.swift */; };
 		7FB368812F0196EC005AEB44 /* SeekerProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368802F0196EC005AEB44 /* SeekerProfileViewModel.swift */; };
 		7FB368832F01D22C005AEB44 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368822F01D22C005AEB44 /* MainTabBarController.swift */; };
-		7FB368892F01D28A005AEB44 /* ProviderManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368842F01D28A005AEB44 /* ProviderManagementViewController.swift */; };
-		7FB3688A2F01D28A005AEB44 /* ProviderManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB368862F01D28A005AEB44 /* ProviderManagementViewModel.swift */; };
 		7FB368902F01D2B9005AEB44 /* ProviderRequestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3688D2F01D2B9005AEB44 /* ProviderRequestsViewModel.swift */; };
 		7FB368912F01D2B9005AEB44 /* ProviderRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB3688B2F01D2B9005AEB44 /* ProviderRequestsViewController.swift */; };
 		7FB368932F01D36C005AEB44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB368922F01D36C005AEB44 /* Main.storyboard */; };
-		7FB368962F01D4EF005AEB44 /* ProviderManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB368952F01D4EF005AEB44 /* ProviderManagement.storyboard */; };
 		7FB3689C2F01D699005AEB44 /* ProviderRequests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB3689B2F01D699005AEB44 /* ProviderRequests.storyboard */; };
+		7FB814C42F073B4700B81D9B /* ProviderAvailabilityCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB814C02F073B4700B81D9B /* ProviderAvailabilityCalendarViewModel.swift */; };
+		7FB814C52F073B4700B81D9B /* ProviderAvailabilityCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB814BE2F073B4700B81D9B /* ProviderAvailabilityCalendarViewController.swift */; };
+		7FB814C72F073B9800B81D9B /* ProviderAvailabilityCalendar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB814C62F073B9800B81D9B /* ProviderAvailabilityCalendar.storyboard */; };
 		7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FD2EDB2AAF009B14F4 /* FirebaseCore */; };
 		7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC160FF2EDB2ABC009B14F4 /* FirebaseAuth */; };
 		7FC161022EDB2AD6009B14F4 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */; };
@@ -223,6 +237,11 @@
 		7F60D5B62F06A7590034FE1F /* AppThemeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppThemeTableViewController.swift; sourceTree = "<group>"; };
 		7F60D5B82F06A7680034FE1F /* FontSizeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontSizeTableViewController.swift; sourceTree = "<group>"; };
 		7F60D5BA2F06B30E0034FE1F /* UIViewController+FontScaling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+FontScaling.swift"; sourceTree = "<group>"; };
+		7F60D5CF2F0724FF0034FE1F /* AvailabilitySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilitySlot.swift; sourceTree = "<group>"; };
+		7F60D5D12F0725070034FE1F /* BlockedSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockedSlot.swift; sourceTree = "<group>"; };
+		7F60D5D32F0725550034FE1F /* CalendarEventWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventWrapper.swift; sourceTree = "<group>"; };
+		7F60D5D52F0725A80034FE1F /* ProviderAvailabilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvailabilityRepository.swift; sourceTree = "<group>"; };
+		7F60D5DB2F07395B0034FE1F /* ProviderBookingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderBookingCell.swift; sourceTree = "<group>"; };
 		7F68C3C52EDD93C5005B29E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F68C3C62EDD93C5005B29E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -230,6 +249,14 @@
 		7F68C3C92EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		7F745E8D2F075A3200181F7E /* ServicePackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackage.swift; sourceTree = "<group>"; };
+		7F745E8F2F075A8400181F7E /* ServicePackagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackagesRepository.swift; sourceTree = "<group>"; };
+		7F745E912F075ABB00181F7E /* ServicePackageEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackageEditorViewController.swift; sourceTree = "<group>"; };
+		7F745E922F075ABB00181F7E /* ServicePackagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackagesListViewController.swift; sourceTree = "<group>"; };
+		7F745E962F075AC400181F7E /* ServicePackageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackageEditorViewModel.swift; sourceTree = "<group>"; };
+		7F745E972F075AC400181F7E /* ServicePackagesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackagesListViewModel.swift; sourceTree = "<group>"; };
+		7F745E9B2F075DB400181F7E /* ServicePackages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServicePackages.storyboard; sourceTree = "<group>"; };
+		7F745E9D2F07627700181F7E /* ServicePackageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackageCell.swift; sourceTree = "<group>"; };
 		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewModel.swift; sourceTree = "<group>"; };
 		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
@@ -284,13 +311,13 @@
 		7FB3687E2F0196D4005AEB44 /* SeekerProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerProfileViewController.swift; sourceTree = "<group>"; };
 		7FB368802F0196EC005AEB44 /* SeekerProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekerProfileViewModel.swift; sourceTree = "<group>"; };
 		7FB368822F01D22C005AEB44 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		7FB368842F01D28A005AEB44 /* ProviderManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManagementViewController.swift; sourceTree = "<group>"; };
-		7FB368862F01D28A005AEB44 /* ProviderManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderManagementViewModel.swift; sourceTree = "<group>"; };
 		7FB3688B2F01D2B9005AEB44 /* ProviderRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderRequestsViewController.swift; sourceTree = "<group>"; };
 		7FB3688D2F01D2B9005AEB44 /* ProviderRequestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderRequestsViewModel.swift; sourceTree = "<group>"; };
 		7FB368922F01D36C005AEB44 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		7FB368952F01D4EF005AEB44 /* ProviderManagement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ProviderManagement.storyboard; path = Flux/Resources/ProviderManagement.storyboard; sourceTree = SOURCE_ROOT; };
 		7FB3689B2F01D699005AEB44 /* ProviderRequests.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProviderRequests.storyboard; sourceTree = "<group>"; };
+		7FB814BE2F073B4700B81D9B /* ProviderAvailabilityCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvailabilityCalendarViewController.swift; sourceTree = "<group>"; };
+		7FB814C02F073B4700B81D9B /* ProviderAvailabilityCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderAvailabilityCalendarViewModel.swift; sourceTree = "<group>"; };
+		7FB814C62F073B9800B81D9B /* ProviderAvailabilityCalendar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProviderAvailabilityCalendar.storyboard; sourceTree = "<group>"; };
 		7FC160E12EDB15FF009B14F4 /* Flux.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flux.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FE70B302EF30F3500DFBE12 /* ServiceCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCardCell.swift; sourceTree = "<group>"; };
 		7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
@@ -320,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FC160FE2EDB2AAF009B14F4 /* FirebaseCore in Frameworks */,
+				7F60D5C62F0721820034FE1F /* CalendarKit in Frameworks */,
 				7FAB339B2EF049FF008AC600 /* FirebaseStorage in Frameworks */,
 				7FAB339E2EF17B5D008AC600 /* Cloudinary in Frameworks */,
 				7FC161002EDB2ABC009B14F4 /* FirebaseAuth in Frameworks */,
@@ -470,6 +498,8 @@
 				7F5A0D0E2EFDDC56001135C2 /* SkillRepository.swift */,
 				7F5A0D0F2EFDDC56001135C2 /* UserRepository.swift */,
 				7F5A0D252EFEB49A001135C2 /* ChatRepository.swift */,
+				7F60D5D52F0725A80034FE1F /* ProviderAvailabilityRepository.swift */,
+				7F745E8F2F075A8400181F7E /* ServicePackagesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -491,6 +521,14 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+		7F60D5DC2F07395B0034FE1F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F60D5DB2F07395B0034FE1F /* ProviderBookingCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		7F68C3CF2EDD93C5005B29E6 /* Flux */ = {
 			isa = PBXGroup;
 			children = (
@@ -507,6 +545,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				7FB814CE2F0752E500B81D9B /* ServicePackages */,
 				AC3F6AB02F06AC820076A296 /* Booking- alnoohy */,
 				1025927E2F0439BC003F6C5F /* History&Favorites */,
 				7FA993E32EFD403E00CE5748 /* DisputeCenter */,
@@ -523,9 +562,9 @@
 				ACDA75DE2EDDD53200665266 /* Requests-Seeker  */,
 				7F68C3D92EDD93EC005B29E6 /* Authentication */,
 				3AE4B19A2EFC8ADA00BE4A01 /* Admin-Tools */,
-				7FB368882F01D28A005AEB44 /* ProviderManagement */,
 				7FB3688F2F01D2B9005AEB44 /* ProviderRequests */,
 				10BD0DBB2F041A26009FC85D /* HomeDiscovery 2 */,
+				7FB814C22F073B4700B81D9B /* ProviderAvailabilityCalendar */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -563,6 +602,32 @@
 				7F60816D2EFCF0BD00FA5639 /* AuthViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F745E932F075ABB00181F7E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F745E912F075ABB00181F7E /* ServicePackageEditorViewController.swift */,
+				7F745E922F075ABB00181F7E /* ServicePackagesListViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7F745E982F075AC400181F7E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F745E962F075AC400181F7E /* ServicePackageEditorViewModel.swift */,
+				7F745E972F075AC400181F7E /* ServicePackagesListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F745E9E2F07627700181F7E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7F745E9D2F07627700181F7E /* ServicePackageCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7FA993E32EFD403E00CE5748 /* DisputeCenter */ = {
@@ -951,6 +1016,10 @@
 				7F6081192EF98CB300FA5639 /* Skill.swift */,
 				7FAB33862EE466A2008AC600 /* Notification.swift */,
 				7F6081632EFCF01800FA5639 /* ProviderAvailability.swift */,
+				7F60D5CF2F0724FF0034FE1F /* AvailabilitySlot.swift */,
+				7F60D5D12F0725070034FE1F /* BlockedSlot.swift */,
+				7F60D5D32F0725550034FE1F /* CalendarEventWrapper.swift */,
+				7F745E8D2F075A3200181F7E /* ServicePackage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1036,32 +1105,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		7FB368852F01D28A005AEB44 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				7FB368842F01D28A005AEB44 /* ProviderManagementViewController.swift */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		7FB368872F01D28A005AEB44 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				7FB368862F01D28A005AEB44 /* ProviderManagementViewModel.swift */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		7FB368882F01D28A005AEB44 /* ProviderManagement */ = {
-			isa = PBXGroup;
-			children = (
-				7FB368942F01D49F005AEB44 /* Storyboards */,
-				7FB368852F01D28A005AEB44 /* ViewControllers */,
-				7FB368872F01D28A005AEB44 /* ViewModels */,
-			);
-			path = ProviderManagement;
-			sourceTree = "<group>";
-		};
 		7FB3688C2F01D2B9005AEB44 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1084,22 +1127,68 @@
 				7FB368982F01D60C005AEB44 /* Storyboards */,
 				7FB3688C2F01D2B9005AEB44 /* ViewControllers */,
 				7FB3688E2F01D2B9005AEB44 /* ViewModels */,
+				7F60D5DC2F07395B0034FE1F /* Views */,
 			);
 			path = ProviderRequests;
-			sourceTree = "<group>";
-		};
-		7FB368942F01D49F005AEB44 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				7FB368952F01D4EF005AEB44 /* ProviderManagement.storyboard */,
-			);
-			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		7FB368982F01D60C005AEB44 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				7FB3689B2F01D699005AEB44 /* ProviderRequests.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7FB814BD2F073B4700B81D9B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7FB814C62F073B9800B81D9B /* ProviderAvailabilityCalendar.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7FB814BF2F073B4700B81D9B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7FB814BE2F073B4700B81D9B /* ProviderAvailabilityCalendarViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7FB814C12F073B4700B81D9B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7FB814C02F073B4700B81D9B /* ProviderAvailabilityCalendarViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7FB814C22F073B4700B81D9B /* ProviderAvailabilityCalendar */ = {
+			isa = PBXGroup;
+			children = (
+				7FB814BD2F073B4700B81D9B /* Storyboards */,
+				7FB814BF2F073B4700B81D9B /* ViewControllers */,
+				7FB814C12F073B4700B81D9B /* ViewModels */,
+			);
+			path = ProviderAvailabilityCalendar;
+			sourceTree = "<group>";
+		};
+		7FB814CE2F0752E500B81D9B /* ServicePackages */ = {
+			isa = PBXGroup;
+			children = (
+				7FB814CF2F07530400B81D9B /* Storyboards */,
+				7F745E932F075ABB00181F7E /* ViewControllers */,
+				7F745E982F075AC400181F7E /* ViewModels */,
+				7F745E9E2F07627700181F7E /* Views */,
+			);
+			path = ServicePackages;
+			sourceTree = "<group>";
+		};
+		7FB814CF2F07530400B81D9B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7F745E9B2F075DB400181F7E /* ServicePackages.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1189,6 +1278,7 @@
 				7FC161012EDB2AD6009B14F4 /* FirebaseFirestore */,
 				7FAB339A2EF049FF008AC600 /* FirebaseStorage */,
 				7FAB339D2EF17B5D008AC600 /* Cloudinary */,
+				7F60D5C52F0721820034FE1F /* CalendarKit */,
 			);
 			productName = Flux;
 			productReference = 7FC160E12EDB15FF009B14F4 /* Flux.app */;
@@ -1221,6 +1311,7 @@
 			packageReferences = (
 				7FC160FB2EDB27D5009B14F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				7FAB339C2EF17B5D008AC600 /* XCRemoteSwiftPackageReference "cloudinary_ios" */,
+				7F60D5C42F0721820034FE1F /* XCRemoteSwiftPackageReference "CalendarKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 7FC160E22EDB15FF009B14F4 /* Products */;
@@ -1242,7 +1333,6 @@
 				7FA993E82EFD410900CE5748 /* DisputeCenter.storyboard in Resources */,
 				7FAB33742EE464EC008AC600 /* Activity.storyboard in Resources */,
 				3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */,
-				7FB368962F01D4EF005AEB44 /* ProviderManagement.storyboard in Resources */,
 				7FAB335C2EE46130008AC600 /* Dispute.storyboard in Resources */,
 				7FB3689C2F01D699005AEB44 /* ProviderRequests.storyboard in Resources */,
 				7FAB33A42EF189BC008AC600 /* SeekerProfile.storyboard in Resources */,
@@ -1255,10 +1345,12 @@
 				7FB368932F01D36C005AEB44 /* Main.storyboard in Resources */,
 				7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */,
 				7FAB33362EE45CA5008AC600 /* Requests.storyboard in Resources */,
+				7F745E9C2F075DB400181F7E /* ServicePackages.storyboard in Resources */,
 				7FAB32FE2EE4565D008AC600 /* ProviderProfile.storyboard in Resources */,
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
 				7FAB33662EE46270008AC600 /* Admin.storyboard in Resources */,
 				3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */,
+				7FB814C72F073B9800B81D9B /* ProviderAvailabilityCalendar.storyboard in Resources */,
 				ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1276,8 +1368,10 @@
 				7F5A0D2F2EFEE48F001135C2 /* AddSkillViewModel.swift in Sources */,
 				7F60D5B02F06A42B0034FE1F /* FavoritesVM.swift in Sources */,
 				7F60D5B12F06A42B0034FE1F /* HistoryVM.swift in Sources */,
+				7F745E902F075A8400181F7E /* ServicePackagesRepository.swift in Sources */,
 				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
 				7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */,
+				7F60D5DD2F07395B0034FE1F /* ProviderBookingCell.swift in Sources */,
 				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
 				7F5A0D312EFEE48F001135C2 /* SkillDetailsViewModel.swift in Sources */,
 				7F5A0D322EFEE48F001135C2 /* ProviderSkillsListViewModel.swift in Sources */,
@@ -1299,7 +1393,12 @@
 				AC3F6AB62F06DF170076A296 /* ProjectUploadSuccessViewController.swift in Sources */,
 				7FAB33062EE45720008AC600 /* ProviderProfileViewModel.swift in Sources */,
 				7F60811C2EF98CFC00FA5639 /* ServiceCategory.swift in Sources */,
+				7F745E942F075ABB00181F7E /* ServicePackageEditorViewController.swift in Sources */,
+				7F745E952F075ABB00181F7E /* ServicePackagesListViewController.swift in Sources */,
 				7FAB332E2EE45BCF008AC600 /* BookingConfirmationVC.swift in Sources */,
+				7FB814C42F073B4700B81D9B /* ProviderAvailabilityCalendarViewModel.swift in Sources */,
+				7FB814C52F073B4700B81D9B /* ProviderAvailabilityCalendarViewController.swift in Sources */,
+				7F745E9F2F07627700181F7E /* ServicePackageCell.swift in Sources */,
 				7F60D5B52F06A7280034FE1F /* UIFont+Scaling.swift in Sources */,
 				7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */,
 				7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */,
@@ -1316,10 +1415,12 @@
 				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
+				7F60D5D02F0724FF0034FE1F /* AvailabilitySlot.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
 				7FB3687F2F0196D4005AEB44 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */,
 				7FAB333A2EE45D30008AC600 /* LeaveReviewViewController.swift in Sources */,
+				7F60D5D42F0725550034FE1F /* CalendarEventWrapper.swift in Sources */,
 				AC3F6AAD2F0691540076A296 /* SuccessViewController.swift in Sources */,
 				7F60816E2EFCF0BD00FA5639 /* AuthViewModel.swift in Sources */,
 				7FAB338A2EE46701008AC600 /* AuthManager.swift in Sources */,
@@ -1350,6 +1451,8 @@
 				7F5A0D172EFDDC56001135C2 /* BookingRepository.swift in Sources */,
 				ACB2A18B2F053EB5005F9F62 /* ReviewViewController.swift in Sources */,
 				7FAB33462EE45EB1008AC600 /* ChatListViewController.swift in Sources */,
+				7F745E992F075AC400181F7E /* ServicePackageEditorViewModel.swift in Sources */,
+				7F745E9A2F075AC400181F7E /* ServicePackagesListViewModel.swift in Sources */,
 				ACF4F9A82F06F332003B9D45 /* SectionHeader.swift in Sources */,
 				3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */,
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
@@ -1370,6 +1473,7 @@
 				7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */,
 				7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */,
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
+				7F745E8E2F075A3200181F7E /* ServicePackage.swift in Sources */,
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,
 				7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */,
 				7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */,
@@ -1377,18 +1481,18 @@
 				7FAB338C2EE46728008AC600 /* FirestoreManager.swift in Sources */,
 				7FAB33042EE456FC008AC600 /* AddSkillViewController.swift in Sources */,
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
+				7F60D5D22F0725070034FE1F /* BlockedSlot.swift in Sources */,
 				3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */,
 				AC7DF5B52F06A35500B5EB09 /* PortfolioTableCell.swift in Sources */,
 				7F5A0D242EFEB141001135C2 /* ChatMessage.swift in Sources */,
 				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
-				7FB368892F01D28A005AEB44 /* ProviderManagementViewController.swift in Sources */,
-				7FB3688A2F01D28A005AEB44 /* ProviderManagementViewModel.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
 				7FAB33782EE4656A008AC600 /* NotificationViewModel.swift in Sources */,
 				7FAB33972EE467CC008AC600 /* Validator.swift in Sources */,
 				AC7DF5B32F06974D00B5EB09 /* PortfolioListViewController.swift in Sources */,
 				7FAB32F82EE455C1008AC600 /* SettingsViewModel.swift in Sources */,
 				7FAB33482EE45ED9008AC600 /* ChatRoomViewController.swift in Sources */,
+				7F60D5D62F0725A80034FE1F /* ProviderAvailabilityRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1605,6 +1709,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7F60D5C42F0721820034FE1F /* XCRemoteSwiftPackageReference "CalendarKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/richardtop/CalendarKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.11;
+			};
+		};
 		7FAB339C2EF17B5D008AC600 /* XCRemoteSwiftPackageReference "cloudinary_ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/cloudinary/cloudinary_ios";
@@ -1624,6 +1736,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7F60D5C52F0721820034FE1F /* CalendarKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7F60D5C42F0721820034FE1F /* XCRemoteSwiftPackageReference "CalendarKit" */;
+			productName = CalendarKit;
+		};
 		7FAB339A2EF049FF008AC600 /* FirebaseStorage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7FC160FB2EDB27D5009B14F4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
