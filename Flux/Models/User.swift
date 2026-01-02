@@ -46,6 +46,8 @@ struct User: Identifiable, Codable {
     var isSuspended: Bool?
     var isBanned: Bool?
     var suspendedUntil: Date?
+    // Reason provided by admin when suspending or banning
+    var moderationReason: String?
 
     var name: String { "\(firstName) \(lastName)" }
     

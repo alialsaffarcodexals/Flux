@@ -13,10 +13,9 @@ class SkillViewController: UIViewController {
     @IBOutlet weak var approveButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var rejectButtonHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var DownloadFIle: UIButton!
-    
     @IBOutlet weak var ProviderPhoto: UIImageView!
-    @IBOutlet weak var ProofPhoto: UIImageView!
+    
+    @IBOutlet var SkillDescription: UILabel!
     
     var skillID: String?
     var skill: Skill?
@@ -27,14 +26,11 @@ class SkillViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Setup default placeholders and styling early so IBOutlets render correctly
-        let placeholderProvider = UIImage(systemName: "person.crop.circle.fill")
-        let placeholderProof = UIImage(systemName: "photo")
         ProviderPhoto.contentMode = .scaleAspectFill
         ProviderPhoto.clipsToBounds = true
-        ProviderPhoto.image = placeholderProvider
-        ProofPhoto.contentMode = .scaleAspectFill
-        ProofPhoto.clipsToBounds = true
-        ProofPhoto.image = placeholderProof
+        if let placeholder = placeholderAvatar() {
+            ProviderPhoto.image = placeholder
+        }
 
         loadData()
     }
@@ -70,7 +66,9 @@ class SkillViewController: UIViewController {
                                 if let strong = self {
                                     strong.providerName.text = user.name
                                     strong.providerUserName.text = "@\(user.username)"
-                                    strong.setImage(from: user.providerProfileImageURL, into: strong.ProviderPhoto, size: strong.imageDisplaySize)
+                                    if let urlString = strong.preferredProfileImageURL(for: user) {
+                                        strong.setImage(from: urlString, into: strong.ProviderPhoto, size: strong.imageDisplaySize)
+                                    }
                                 }
                             case .failure:
                                 self?.providerName.text = s.providerId
@@ -95,19 +93,14 @@ class SkillViewController: UIViewController {
         let isPending = (skill.status == .pending)
         approveButtonHeight?.constant = isPending ? 44 : 0
         rejectButtonHeight?.constant = isPending ? 44 : 0
-        // Do not change `isHidden` or `isEnabled` here — keep the screen navigable.
-        // Load images: provider photo (from fetched user) and proof photo (from skill)
-        // Provider photo is set when the user fetch completes; ensure proof is loaded here.
-        setImage(from: skill.proofImageURL, into: ProofPhoto, size: imageDisplaySize)
-
+        // Also hide the button views when collapsed so their titles don't remain visible
+        approveButton?.isHidden = !isPending
+        rejectButton?.isHidden = !isPending
         ProviderPhoto.contentMode = .scaleAspectFill
         ProviderPhoto.clipsToBounds = true
-        ProofPhoto.contentMode = .scaleAspectFill
-        ProofPhoto.clipsToBounds = true
 
-        // Make circular appearance
-        ProviderPhoto.layer.cornerRadius = min(imageDisplaySize.width, imageDisplaySize.height) / 2
-        ProofPhoto.layer.cornerRadius = min(imageDisplaySize.width, imageDisplaySize.height) / 2
+        // Show the skill description if available
+        SkillDescription.text = skill.description ?? "No description provided."
 
         view.layoutIfNeeded()
     }
@@ -116,39 +109,61 @@ class SkillViewController: UIViewController {
     private func setImage(from urlString: String?, into imageView: UIImageView, size: CGSize) {
         guard let s = urlString, let url = URL(string: s) else {
             DispatchQueue.main.async {
-                // keep existing image (placeholder) and log missing URL
                 print("⚠️ SkillViewController: no URL for imageView \(imageView) — leaving placeholder")
             }
             return
         }
 
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
                 print("⚠️ SkillViewController: image download error for \(url): \(error.localizedDescription)")
                 return
             }
-            guard let data = data, let img = UIImage(data: data) else {
+            guard let data = data, let downloaded = UIImage(data: data) else {
                 print("⚠️ SkillViewController: image data invalid for \(url)")
                 return
             }
-            let resized = self?.resizeImage(image: img, targetSize: size) ?? img
+            let thumb = self?.resizedImage(downloaded, to: size) ?? downloaded
             DispatchQueue.main.async {
-                imageView.image = resized
+                imageView.image = thumb
+                imageView.layer.cornerRadius = min(size.width, size.height) / 2
+                imageView.clipsToBounds = true
                 print("✅ SkillViewController: loaded image for \(url)")
             }
         }.resume()
     }
 
-    private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-        let format = UIGraphicsImageRendererFormat.default()
-        format.scale = UIScreen.main.scale
-        let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
+    // Downscale avatar assets so they stay sharp without stretching.
+    private func resizedImage(_ image: UIImage, to size: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: size)
         return renderer.image { _ in
-            image.draw(in: CGRect(origin: .zero, size: targetSize))
+            image.draw(in: CGRect(origin: .zero, size: size))
         }
+    }
+
+    private func placeholderAvatar() -> UIImage? {
+        guard let symbol = UIImage(systemName: "person.crop.circle.fill") else { return nil }
+        let tinted = symbol.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        return resizedImage(tinted, to: imageDisplaySize)
+    }
+
+    private func preferredProfileImageURL(for user: User) -> String? {
+        if let mode = user.activeProfileMode, let url = user.profileImageURL(for: mode), !url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return url
+        }
+
+        if user.role == .provider {
+            return user.providerProfileImageURL ?? user.seekerProfileImageURL
+        }
+
+        return user.seekerProfileImageURL ?? user.providerProfileImageURL
+    }
+
+    // Ensure the provider photo is circular after layout
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        ProviderPhoto.layer.cornerRadius = ProviderPhoto.frame.height / 2
+        ProviderPhoto.clipsToBounds = true
     }
 
     @IBAction func approveTapped(_ sender: UIButton) {
@@ -243,55 +258,9 @@ class SkillViewController: UIViewController {
     }
 
     @IBAction func downloadFileTapped(_ sender: UIButton) {
-        guard let urlString = skill?.proofImageURL, let url = URL(string: urlString) else {
-            let a = UIAlertController(title: "No file", message: "No proof file available for this skill.", preferredStyle: .alert)
-            a.addAction(UIAlertAction(title: "OK", style: .default))
-            present(a, animated: true)
-            return
-        }
-
-        sender.isEnabled = false
-        let loading = UIAlertController(title: nil, message: "Downloading…", preferredStyle: .alert)
-        present(loading, animated: true)
-
-        let task = URLSession.shared.downloadTask(with: url) { localURL, response, error in
-            DispatchQueue.main.async {
-                loading.dismiss(animated: true) {
-                    sender.isEnabled = true
-                    if let error = error {
-                        let a = UIAlertController(title: "Download failed", message: error.localizedDescription, preferredStyle: .alert)
-                        a.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(a, animated: true)
-                        return
-                    }
-
-                    guard let localURL = localURL else {
-                        let a = UIAlertController(title: "Download failed", message: "No file returned.", preferredStyle: .alert)
-                        a.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(a, animated: true)
-                        return
-                    }
-
-                    // Move to a temporary file with the original filename if possible
-                    let fileName = url.lastPathComponent.isEmpty ? "prooffile" : url.lastPathComponent
-                    let tmpDir = FileManager.default.temporaryDirectory
-                    let destURL = tmpDir.appendingPathComponent(fileName)
-                    try? FileManager.default.removeItem(at: destURL)
-                    do {
-                        try FileManager.default.moveItem(at: localURL, to: destURL)
-                    } catch {
-                        // If move fails, fallback to the original localURL
-                        print("⚠️ moveItem failed:", error.localizedDescription)
-                    }
-
-                    // Present share sheet so user can save or open the file
-                    let activity = UIActivityViewController(activityItems: [destURL], applicationActivities: nil)
-                    activity.popoverPresentationController?.sourceView = sender
-                    self.present(activity, animated: true)
-                }
-            }
-        }
-
-        task.resume()
+        // Proof files have been removed from the skill UI.
+        let a = UIAlertController(title: "Removed", message: "Proof files are no longer attached to skills.", preferredStyle: .alert)
+        a.addAction(UIAlertAction(title: "OK", style: .default))
+        present(a, animated: true)
     }
 }

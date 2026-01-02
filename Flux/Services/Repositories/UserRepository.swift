@@ -78,4 +78,22 @@ final class UserRepository {
                 self.manager.decodeDocuments(snapshot, error: error, completion: completion)
             }
     }
+    // Check if email exists
+    func checkEmailExists(email: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        usersCollection
+            .whereField("email", isEqualTo: email)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let snapshot = snapshot else {
+                    completion(.failure(self.manager.missingSnapshotError()))
+                    return
+                }
+                
+                completion(.success(!snapshot.isEmpty))
+            }
+    }
 }

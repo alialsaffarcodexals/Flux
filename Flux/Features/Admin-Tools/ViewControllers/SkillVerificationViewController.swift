@@ -6,26 +6,29 @@ class SkillVerificationViewController: UIViewController {
     @IBOutlet weak var SkillsTable: UITableView!
     @IBOutlet weak var SearchBar: UISearchBar!
     @IBOutlet weak var SegmentControl: UISegmentedControl!
-    
-    
-    private var allSkills: [Skill] = []   // original data
-    private var skills: [Skill] = []      // filtered data
-    // Optional preloaded skills to show immediately
+
+    private var allSkills: [Skill] = []
+    private var skills: [Skill] = []
+
     var initialSkills: [Skill]?
-    
     var viewModel: AdminToolsViewModel? = AdminToolsViewModel()
+
+    // ✅ Cache to avoid refetching users on scroll
+    private var userNameCache: [String: String] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTable()
         setupSearchBar()
-        // Ensure segment control sends events and set initial index
-        SegmentControl?.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
-        SegmentControl?.selectedSegmentIndex = SegmentControl?.selectedSegmentIndex ?? 0
-        // Use prefetched skills if available
+
+        SegmentControl.addTarget(
+            self,
+            action: #selector(segmentChanged(_:)),
+            for: .valueChanged
+        )
+
         if let prefetched = initialSkills {
             allSkills = prefetched
-            // apply current filters immediately
             updateDisplayedSkills()
         } else {
             fetchSkills()
@@ -34,16 +37,15 @@ class SkillVerificationViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Refresh skills list when returning from detail (approve/reject)
         fetchSkills()
     }
 
     // MARK: - Setup
+
     private func setupTable() {
         SkillsTable.dataSource = self
         SkillsTable.delegate = self
         SkillsTable.tableFooterView = UIView()
-        SkillsTable.allowsSelection = true
     }
 
     private func setupSearchBar() {
@@ -53,18 +55,15 @@ class SkillVerificationViewController: UIViewController {
     }
 
     // MARK: - Fetch
+
     private func fetchSkills() {
-        guard let vm = viewModel else {
-            print("⚠️ SkillVerificationViewController: viewModel is nil, cannot fetch skills")
-            return
-        }
+        guard let vm = viewModel else { return }
 
         vm.fetchSkills(filterStatus: nil) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
                     self?.allSkills = data
-                    // apply current filters (segment + search)
                     self?.updateDisplayedSkills()
                 case .failure(let error):
                     print("❌ Fetch skills error:", error.localizedDescription)
@@ -74,34 +73,29 @@ class SkillVerificationViewController: UIViewController {
     }
 
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
-        // Re-apply filters when segment changes
-        SearchBar?.resignFirstResponder()
+        SearchBar.resignFirstResponder()
         updateDisplayedSkills()
     }
 
     private func updateDisplayedSkills() {
-        // Start from all skills, apply segment filter, then search filter
         var filtered = allSkills
 
-        if let sc = SegmentControl {
-            switch sc.selectedSegmentIndex {
-            case 0:
-                // Pending
-                filtered = filtered.filter { $0.status == .pending }
-            case 1:
-                // Approved
-                filtered = filtered.filter { $0.status == .approved }
-            case 2:
-                // Rejected
-                filtered = filtered.filter { $0.status == .rejected }
-            default:
-                break
-            }
+        switch SegmentControl.selectedSegmentIndex {
+        case 0:
+            filtered = filtered.filter { $0.status == .pending }
+        case 1:
+            filtered = filtered.filter { $0.status == .approved }
+        case 2:
+            filtered = filtered.filter { $0.status == .rejected }
+        default:
+            break
         }
 
-        if let query = SearchBar?.text?.trimmingCharacters(in: .whitespacesAndNewlines), !query.isEmpty {
-            let q = query.lowercased()
-            filtered = filtered.filter { $0.name.lowercased().contains(q) }
+        if let text = SearchBar.text?.lowercased(),
+           !text.isEmpty {
+            filtered = filtered.filter {
+                $0.name.lowercased().contains(text)
+            }
         }
 
         skills = filtered
@@ -110,6 +104,7 @@ class SkillVerificationViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
+
 extension SkillVerificationViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView,
@@ -130,78 +125,52 @@ extension SkillVerificationViewController: UITableViewDataSource {
         cell.textLabel?.text = skill.name
         cell.textLabel?.font = .systemFont(ofSize: 16, weight: .medium)
 
-        let statusText: String
         let statusColor: UIColor
         switch skill.status {
         case .approved:
-            statusText = "Accepted"
             statusColor = .systemGreen
         case .pending:
-            statusText = "Pending"
             statusColor = .systemOrange
         case .rejected:
-            statusText = "Rejected"
             statusColor = .systemRed
         }
 
-        cell.detailTextLabel?.text = "Provider: \(skill.providerId) • Status: \(statusText)"
         cell.detailTextLabel?.font = .systemFont(ofSize: 13)
         cell.detailTextLabel?.textColor = statusColor
 
-        // Replace providerId with readable username when available
-        if let vm = viewModel {
-            vm.fetchUser(userID: skill.providerId) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let user):
-                        if let current = tableView.cellForRow(at: indexPath) {
-                            current.detailTextLabel?.text = "Provider: @\(user.username) • Status: \(statusText)"
+        let providerId = skill.providerId
+
+        // ✅ Use cached username if available
+        if let cachedName = userNameCache[providerId] {
+            cell.detailTextLabel?.text = "Submitted by: \(cachedName)"
+        } else {
+            cell.detailTextLabel?.text = "Submitted by: \(providerId)"
+
+            viewModel?.fetchUser(userID: providerId) { [weak self, weak tableView] result in
+                guard let self = self else { return }
+
+                if case .success(let user) = result {
+                    let fullName = "\(user.firstName) \(user.lastName)"
+                    self.userNameCache[providerId] = fullName
+
+                    DispatchQueue.main.async {
+                        if let current = tableView?.cellForRow(at: indexPath) {
+                            current.detailTextLabel?.text = "Submitted by: \(fullName)"
                             current.detailTextLabel?.textColor = statusColor
                         }
-                    case .failure:
-                        break
                     }
                 }
             }
         }
 
-        // Fetch skill document timestamp if available; otherwise show Unknown
-        if let skillId = skill.id {
-            let db = Firestore.firestore()
-            db.collection("skills").document(skillId).getDocument { snap, _ in
-                DispatchQueue.main.async {
-                    var timeText = "Unknown"
-                    if let data = snap?.data() {
-                        if let ts = data["createdAt"] as? Timestamp {
-                            let d = ts.dateValue()
-                            let fmt = DateFormatter()
-                            fmt.dateStyle = .medium
-                            fmt.timeStyle = .short
-                            timeText = fmt.string(from: d)
-                        } else if let s = data["createdAt"] as? String {
-                            timeText = s
-                        }
-                    }
-
-                    if let current = tableView.cellForRow(at: indexPath) {
-                        let base = current.detailTextLabel?.text ?? "Provider: \(skill.providerId) • Status: \(statusText)"
-                        current.detailTextLabel?.text = base + " • Time: \(timeText)"
-                        current.detailTextLabel?.textColor = statusColor
-                    }
-                }
-            }
-        }
-
-        // Always allow navigation to the skill detail so admins can view any skill.
         cell.accessoryType = .disclosureIndicator
         cell.selectionStyle = .default
-        cell.isUserInteractionEnabled = true
-
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
+
 extension SkillVerificationViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView,
@@ -210,28 +179,26 @@ extension SkillVerificationViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let selectedSkill = skills[indexPath.row]
 
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "SkillViewController") as? SkillViewController {
+        if let vc = storyboard?
+            .instantiateViewController(
+                withIdentifier: "SkillViewController"
+            ) as? SkillViewController {
+
             vc.skillID = selectedSkill.id
             vc.skill = selectedSkill
             vc.viewModel = viewModel
 
-            if let nav = navigationController {
-                nav.pushViewController(vc, animated: true)
-            } else {
-                vc.modalPresentationStyle = .fullScreen
-                present(vc, animated: true, completion: nil)
-            }
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
 
 // MARK: - UISearchBarDelegate
+
 extension SkillVerificationViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar,
                    textDidChange searchText: String) {
-
-        // Use the unified filter so search applies to the currently selected segment
         updateDisplayedSkills()
     }
 
