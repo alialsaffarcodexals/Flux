@@ -92,6 +92,7 @@
 		7F745E9A2F075AC400181F7E /* ServicePackagesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E972F075AC400181F7E /* ServicePackagesListViewModel.swift */; };
 		7F745E9C2F075DB400181F7E /* ServicePackages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F745E9B2F075DB400181F7E /* ServicePackages.storyboard */; };
 		7F745E9F2F07627700181F7E /* ServicePackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E9D2F07627700181F7E /* ServicePackageCell.swift */; };
+		7F745EA12F07E6A800181F7E /* OneOffAvailabilitySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EA02F07E6A800181F7E /* OneOffAvailabilitySlot.swift */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
 		7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */; };
 		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
@@ -258,6 +259,7 @@
 		7F745E972F075AC400181F7E /* ServicePackagesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackagesListViewModel.swift; sourceTree = "<group>"; };
 		7F745E9B2F075DB400181F7E /* ServicePackages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServicePackages.storyboard; sourceTree = "<group>"; };
 		7F745E9D2F07627700181F7E /* ServicePackageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackageCell.swift; sourceTree = "<group>"; };
+		7F745EA02F07E6A800181F7E /* OneOffAvailabilitySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneOffAvailabilitySlot.swift; sourceTree = "<group>"; };
 		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewModel.swift; sourceTree = "<group>"; };
 		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
@@ -1023,6 +1025,7 @@
 				7F60D5D12F0725070034FE1F /* BlockedSlot.swift */,
 				7F60D5D32F0725550034FE1F /* CalendarEventWrapper.swift */,
 				7F745E8D2F075A3200181F7E /* ServicePackage.swift */,
+				7F745EA02F07E6A800181F7E /* OneOffAvailabilitySlot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1384,6 +1387,7 @@
 				3AE4B19C2EFC8ADA00BE4A01 /* AccountViewController.swift in Sources */,
 				3AE4B19D2EFC8ADA00BE4A01 /* CategoryManagementViewController.swift in Sources */,
 				3AE4B19E2EFC8ADA00BE4A01 /* ReportsViewController.swift in Sources */,
+				7F745EA12F07E6A800181F7E /* OneOffAvailabilitySlot.swift in Sources */,
 				3AE4B19F2EFC8ADA00BE4A01 /* AdminToolsViewModel.swift in Sources */,
 				3AE4B1A02EFC8ADA00BE4A01 /* ReportViewController.swift in Sources */,
 				3AE4B1A12EFC8ADA00BE4A01 /* UsersAccountsViewController.swift in Sources */,

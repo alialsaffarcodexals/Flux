@@ -27,8 +27,8 @@ class ProviderAvailabilityCalendarViewController: DayViewController {
             // Optional: Handle logged out state
         }
         
-        // Initial load
-        viewModel.loadData(for: Date()...Date().addingTimeInterval(86400 * 7))
+        // Initial load - 6 months (approx 180 days) to cover future availability
+        viewModel.loadData(for: Date()...Date().addingTimeInterval(86400 * 180))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +56,7 @@ class ProviderAvailabilityCalendarViewController: DayViewController {
         // Bind loading state
         viewModel.$isLoading
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] isLoading in
+            .sink { isLoading in
                 if isLoading {
                     // Show loader (e.g. self.showActivityIndicator())
                 } else {
@@ -71,8 +71,10 @@ class ProviderAvailabilityCalendarViewController: DayViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] message in
                 guard let message = message else { return }
-                // Show alert
-                print("Error: \(message)")
+                
+                let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(alert, animated: true)
             }
             .store(in: &cancellables)
     }
@@ -139,24 +141,53 @@ class ProviderAvailabilityCalendarViewController: DayViewController {
     }
     
     override func dayView(dayView: DayView, didTapTimelineAt date: Date) {
-        // Round to nearest 30 mins or hour?
-        // Let's assume user tapped X:XX. We propose a 1-hour slot by default.
         let start = date
-        let end = date.addingTimeInterval(3600)
-        
-        let alert = UIAlertController(title: "Manage Time", message: "Select action for \(DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short))", preferredStyle: .actionSheet)
-        
-        // 1. Block Time
-        alert.addAction(UIAlertAction(title: "Block Time (1h)", style: .destructive, handler: { [weak self] _ in
-            self?.showBlockInput(start: start, end: end)
-        }))
-        
-        // 2. Add Availability (Repeating)
+        // Calculate Max Duration (1-8 hours) based on conflicts
+        let maxHours = viewModel.calculateMaxDuration(from: start)
         let weekday = Calendar.current.component(.weekday, from: date)
         let weekdayName = DateFormatter().weekdaySymbols[weekday - 1]
         
-        alert.addAction(UIAlertAction(title: "Add Weekly Availability", style: .default, handler: { [weak self] _ in
-            self?.viewModel.addAvailabilitySlot(dayOfWeek: weekday, start: self?.formatTime(date) ?? "", end: self?.formatTime(end) ?? "")
+        // Validation: Prevent past actions unless it's today and > 1 hour from now
+        let now = Date()
+        let oneHourFromNow = now.addingTimeInterval(3600)
+        
+        let isToday = Calendar.current.isDateInToday(date)
+        let isFutureDay = date >= Calendar.current.startOfDay(for: now.addingTimeInterval(86400))
+        
+        var isValid = false
+        if isFutureDay {
+            isValid = true
+        } else if isToday && date >= oneHourFromNow {
+            isValid = true
+        }
+        
+        if !isValid {
+             let alert = UIAlertController(title: "Invalid Date", message: "Cannot schedule in the past. Must be at least 1 hour in the future.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
+        
+        let alert = UIAlertController(title: "Manage Time", message: "Select action for \(DateFormatter.localizedString(from: date, dateStyle: .none, timeStyle: .short))", preferredStyle: .actionSheet)
+        
+        // 1. Block Time (One-Off)
+        alert.addAction(UIAlertAction(title: "Block Time", style: .destructive, handler: { [weak self] _ in
+            self?.promptForDetailsAndAdd(dayOfWeek: nil, start: start, type: .blocked, isRecurring: false, maxHours: maxHours)
+        }))
+        
+        // 2. Block Weekly (Recurring)
+        alert.addAction(UIAlertAction(title: "Block Weekly", style: .destructive, handler: { [weak self] _ in
+            self?.promptForDetailsAndAdd(dayOfWeek: weekday, start: start, type: .blocked, isRecurring: true, maxHours: maxHours)
+        }))
+        
+        // 3. Add Availability (One-Off)
+         alert.addAction(UIAlertAction(title: "Add Availability", style: .default, handler: { [weak self] _ in
+             self?.promptForDetailsAndAdd(dayOfWeek: nil, start: start, type: .available, isRecurring: false, maxHours: maxHours)
+        }))
+        
+        // 4. Add Availability (Recurring)
+        alert.addAction(UIAlertAction(title: "Add Weekly Availability (\(weekdayName))", style: .default, handler: { [weak self] _ in
+            self?.promptForDetailsAndAdd(dayOfWeek: weekday, start: start, type: .available, isRecurring: true, maxHours: maxHours)
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -170,18 +201,83 @@ class ProviderAvailabilityCalendarViewController: DayViewController {
     
     // MARK: - Helpers
     
-    private func showBlockInput(start: Date, end: Date) {
-        let alert = UIAlertController(title: "Block Reason", message: nil, preferredStyle: .alert)
+    private func promptForDetailsAndAdd(dayOfWeek: Int?, start: Date, type: AvailabilitySlot.SlotType, isRecurring: Bool, maxHours: Int) {
+        
+        let title = isRecurring ? "Repeating \(type == .blocked ? "Block" : "Availability")" : (type == .blocked ? "Block Time" : "Add Availability")
+        var message = "Enter duration (1-\(maxHours) hours)"
+        if isRecurring { message += " and number of weeks." }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // 1. Hours Input
         alert.addTextField { tf in
-            tf.placeholder = "Reason (Optional)"
+            tf.placeholder = "Hours (1-\(maxHours))"
+            tf.keyboardType = .numberPad
         }
         
-        alert.addAction(UIAlertAction(title: "Block", style: .destructive, handler: { [weak self] _ in
-            let reason = alert.textFields?.first?.text
-            self?.viewModel.blockTime(start: start, end: end, reason: reason)
+        // 2. Weeks Input (if recurring)
+        if isRecurring {
+            alert.addTextField { tf in
+                tf.placeholder = "Weeks (1-30)"
+                tf.keyboardType = .numberPad
+            }
+        }
+        
+        // 3. Reason Input (if one-off block)
+        if !isRecurring && type == .blocked {
+            alert.addTextField { tf in
+                tf.placeholder = "Reason (Optional)"
+            }
+        }
+        
+        alert.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] _ in
+            guard let textFields = alert.textFields, let hoursText = textFields.first?.text, let hours = Int(hoursText) else {
+                self?.showError("Invalid Hours")
+                return
+            }
+            
+            // Validate Hours
+            guard hours >= 1 && hours <= maxHours else {
+                self?.showError("Hours must be between 1 and \(maxHours)")
+                return
+            }
+            
+            let end = start.addingTimeInterval(TimeInterval(hours * 3600))
+            
+            if isRecurring {
+                // Validate Weeks
+                guard textFields.count > 1, let weeksText = textFields[1].text, let weeks = Int(weeksText), weeks >= 1 && weeks <= 30 else {
+                    self?.showError("Weeks must be between 1 and 30")
+                    return
+                }
+                
+                if let dayOfWeek = dayOfWeek {
+                    self?.viewModel.addAvailabilitySlot(
+                        dayOfWeek: dayOfWeek,
+                        start: self?.formatTime(start) ?? "",
+                        end: self?.formatTime(end) ?? "",
+                        weeks: weeks,
+                        type: type
+                    )
+                }
+            } else {
+                // One-Off
+                if type == .blocked {
+                    let reason = textFields.last?.text
+                    self?.viewModel.blockTime(start: start, end: end, reason: reason)
+                } else {
+                    self?.viewModel.addOneOffAvailabilitySlot(start: start, end: end)
+                }
+            }
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func showError(_ message: String) {
+        let alert = UIAlertController(title: "Invalid Input", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
     
