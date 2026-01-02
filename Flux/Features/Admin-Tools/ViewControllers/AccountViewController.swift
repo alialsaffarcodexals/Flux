@@ -8,6 +8,9 @@ class AccountViewController: UIViewController {
     @IBOutlet var suspendOrBanReason: UITextView!
     @IBOutlet weak var profileImageView: UIImageView?
     
+    @IBOutlet weak var SuspendButton: UIButton!
+    @IBOutlet weak var BanButton: UIButton!
+    
     var userID: String?
     var user: User?
     var viewModel: AdminToolsViewModel?
@@ -161,6 +164,29 @@ class AccountViewController: UIViewController {
                 }
             }.resume()
         }
+
+        // Update Suspend/Ban button titles and enablement based on current flags
+        let suspended = user.isSuspended ?? false
+        let banned = user.isBanned ?? false
+        // If banned, prefer showing Unban and disable suspend
+        if banned {
+            BanButton?.setTitle("Unban", for: .normal)
+            BanButton?.isEnabled = true
+            SuspendButton?.setTitle("Suspend", for: .normal)
+            SuspendButton?.isEnabled = false
+        } else if suspended {
+            // If suspended, show Unsuspend and disable ban
+            SuspendButton?.setTitle("Unsuspend", for: .normal)
+            SuspendButton?.isEnabled = true
+            BanButton?.setTitle("Ban", for: .normal)
+            BanButton?.isEnabled = false
+        } else {
+            // Normal state
+            SuspendButton?.setTitle("Suspend", for: .normal)
+            SuspendButton?.isEnabled = true
+            BanButton?.setTitle("Ban", for: .normal)
+            BanButton?.isEnabled = true
+        }
     }
 
     // MARK: - Admin Actions
@@ -171,27 +197,55 @@ class AccountViewController: UIViewController {
             return
         }
 
+        // Determine if this is an unsuspend action
+        if let suspendedUntil = user?.suspendedUntil, let isSusp = user?.isSuspended, isSusp, suspendedUntil > Date() {
+            // Unsuspend flow
+            showConfirmation(title: "Unsuspend User", message: "Are you sure you want to unsuspend this user?\n\nReason:\n\(reason)") {
+                guard let id = self.user?.id else { return }
+                sender.isEnabled = false
+                sender.setTitle("Unsuspending...", for: .normal)
+                self.viewModel?.updateUserFlags(userID: id, isSuspended: false, suspendedUntil: nil, removeSuspendedUntil: true) { [weak self] error in
+                    DispatchQueue.main.async {
+                        sender.isEnabled = true
+                        sender.setTitle("Suspend", for: .normal)
+                        if let error = error {
+                            print("❌ Unsuspend user error:", error.localizedDescription)
+                            self?.showAlert(title: "Error", message: "Failed to unsuspend user.")
+                        } else {
+                            print("User unsuspended")
+                            self?.showAlert(title: "Success", message: "User unsuspended.")
+                            // Refresh user state
+                            if let id = self?.user?.id { self?.viewModel?.fetchUser(userID: id) { _ in DispatchQueue.main.async { self?.loadUser() } } }
+                        }
+                    }
+                }
+            }
+            return
+        }
+
+        // Normal suspend flow — suspend for 7 days and ensure ban is cleared
         showConfirmation(
             title: "Suspend User",
             message: "Are you sure you want to suspend this user?\n\nReason:\n\(reason)"
         ) {
             guard let id = self.user?.id else { return }
             sender.isEnabled = false
-            let spinner = UIActivityIndicatorView(style: .medium)
-            spinner.startAnimating()
             sender.setTitle("Suspending...", for: .normal)
 
-            self.viewModel?.updateUserFlags(userID: id, isSuspended: true) { [weak self] error in
+            let sevenDays = Date().addingTimeInterval(7 * 24 * 60 * 60)
+            // Set isSuspended = true, isBanned = false to keep only one flag active
+            self.viewModel?.updateUserFlags(userID: id, isSuspended: true, isBanned: false, suspendedUntil: sevenDays) { [weak self] error in
                 DispatchQueue.main.async {
-                    spinner.stopAnimating()
                     sender.isEnabled = true
                     sender.setTitle("Suspend", for: .normal)
                     if let error = error {
                         print("❌ Suspend user error:", error.localizedDescription)
                         self?.showAlert(title: "Error", message: "Failed to suspend user.")
                     } else {
-                        print("User suspended")
-                        self?.showAlert(title: "Success", message: "User suspended.")
+                        print("User suspended for 7 days")
+                        self?.showAlert(title: "Success", message: "User suspended for 7 days.")
+                        // Refresh user state
+                        if let id = self?.user?.id { self?.viewModel?.fetchUser(userID: id) { _ in DispatchQueue.main.async { self?.loadUser() } } }
                     }
                 }
             }
@@ -205,6 +259,32 @@ class AccountViewController: UIViewController {
             return
         }
 
+        // If currently banned, treat as unban
+        if let isBanned = user?.isBanned, isBanned {
+            showConfirmation(title: "Unban User", message: "Are you sure you want to unban this user?\n\nReason:\n\(reason)") {
+                guard let id = self.user?.id else { return }
+                sender.isEnabled = false
+                sender.setTitle("Unbanning...", for: .normal)
+                self.viewModel?.updateUserFlags(userID: id, isBanned: false) { [weak self] error in
+                    DispatchQueue.main.async {
+                        sender.isEnabled = true
+                        sender.setTitle("Ban", for: .normal)
+                        if let error = error {
+                            print("❌ Unban user error:", error.localizedDescription)
+                            self?.showAlert(title: "Error", message: "Failed to unban user.")
+                        } else {
+                            print("User unbanned")
+                            self?.showAlert(title: "Success", message: "User unbanned.")
+                            // Refresh user state
+                            if let id = self?.user?.id { self?.viewModel?.fetchUser(userID: id) { _ in DispatchQueue.main.async { self?.loadUser() } } }
+                        }
+                    }
+                }
+            }
+            return
+        }
+
+        // Normal ban flow — make ban exclusive and clear suspension
         showConfirmation(
             title: "Ban User",
             message: "This action is permanent. Continue?\n\nReason:\n\(reason)"
@@ -213,7 +293,8 @@ class AccountViewController: UIViewController {
             sender.isEnabled = false
             sender.setTitle("Banning...", for: .normal)
 
-            self.viewModel?.updateUserFlags(userID: id, isBanned: true) { [weak self] error in
+            // Set isBanned = true and clear suspension flags
+            self.viewModel?.updateUserFlags(userID: id, isSuspended: false, isBanned: true, removeSuspendedUntil: true) { [weak self] error in
                 DispatchQueue.main.async {
                     sender.isEnabled = true
                     sender.setTitle("Ban", for: .normal)
@@ -223,6 +304,8 @@ class AccountViewController: UIViewController {
                     } else {
                         print("User banned")
                         self?.showAlert(title: "Success", message: "User banned.")
+                        // Refresh user state
+                        if let id = self?.user?.id { self?.viewModel?.fetchUser(userID: id) { _ in DispatchQueue.main.async { self?.loadUser() } } }
                     }
                 }
             }

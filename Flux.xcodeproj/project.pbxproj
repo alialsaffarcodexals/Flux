@@ -17,7 +17,6 @@
 		10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207D92F044C2700834613 /* HistoryVC.swift */; };
 		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
 		3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */; };
-		3ACBF5D62F06469600F26BB3 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -93,6 +92,15 @@
 		7F745E9C2F075DB400181F7E /* ServicePackages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F745E9B2F075DB400181F7E /* ServicePackages.storyboard */; };
 		7F745E9F2F07627700181F7E /* ServicePackageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E9D2F07627700181F7E /* ServicePackageCell.swift */; };
 		7F745EA12F07E6A800181F7E /* OneOffAvailabilitySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EA02F07E6A800181F7E /* OneOffAvailabilitySlot.swift */; };
+		7F745EAE2F08151B00181F7E /* ServiceDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F745EAD2F08151B00181F7E /* ServiceDetails.storyboard */; };
+		7F745EB02F08196700181F7E /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EAF2F08196700181F7E /* ServiceDetailsViewController.swift */; };
+		7F745EB22F08197000181F7E /* ServiceDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EB12F08197000181F7E /* ServiceDetailsViewModel.swift */; };
+		7F745EB42F081DA100181F7E /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EB32F081DA100181F7E /* Company.swift */; };
+		7F745EBA2F08225F00181F7E /* ProviderDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F745EB92F08225F00181F7E /* ProviderDetails.storyboard */; };
+		7F745EBC2F08266A00181F7E /* ProviderDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EBB2F08266A00181F7E /* ProviderDetailsViewController.swift */; };
+		7F745EBE2F08267400181F7E /* ProviderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EBD2F08267400181F7E /* ProviderDetailsViewModel.swift */; };
+		7F745EBF2F0834A000181F7E /* DisputeCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */; };
+		7F745EC02F0834A800181F7E /* DisputeCenterVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D2EDFA2F0039110030B2B9 /* DisputeCenterVM.swift */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
 		7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */; };
 		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
@@ -184,7 +192,6 @@
 		10F207D92F044C2700834613 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
-		3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
@@ -260,6 +267,13 @@
 		7F745E9B2F075DB400181F7E /* ServicePackages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServicePackages.storyboard; sourceTree = "<group>"; };
 		7F745E9D2F07627700181F7E /* ServicePackageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackageCell.swift; sourceTree = "<group>"; };
 		7F745EA02F07E6A800181F7E /* OneOffAvailabilitySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneOffAvailabilitySlot.swift; sourceTree = "<group>"; };
+		7F745EAD2F08151B00181F7E /* ServiceDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ServiceDetails.storyboard; sourceTree = "<group>"; };
+		7F745EAF2F08196700181F7E /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
+		7F745EB12F08197000181F7E /* ServiceDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewModel.swift; sourceTree = "<group>"; };
+		7F745EB32F081DA100181F7E /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		7F745EB92F08225F00181F7E /* ProviderDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProviderDetails.storyboard; sourceTree = "<group>"; };
+		7F745EBB2F08266A00181F7E /* ProviderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDetailsViewController.swift; sourceTree = "<group>"; };
+		7F745EBD2F08267400181F7E /* ProviderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDetailsViewModel.swift; sourceTree = "<group>"; };
 		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewModel.swift; sourceTree = "<group>"; };
 		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
@@ -549,6 +563,8 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				7F745EB52F0821DC00181F7E /* ProviderDetails */,
+				7F745EA92F0814D500181F7E /* ServiceDetails */,
 				7FB814CE2F0752E500B81D9B /* ServicePackages */,
 				1025927E2F0439BC003F6C5F /* History&Favorites */,
 				7FA993E32EFD403E00CE5748 /* DisputeCenter */,
@@ -631,6 +647,74 @@
 				7F745E9D2F07627700181F7E /* ServicePackageCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7F745EA92F0814D500181F7E /* ServiceDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EAC2F0814FF00181F7E /* ViewModels */,
+				7F745EAB2F0814EF00181F7E /* ViewControllers */,
+				7F745EAA2F0814E600181F7E /* Storyboards */,
+			);
+			path = ServiceDetails;
+			sourceTree = "<group>";
+		};
+		7F745EAA2F0814E600181F7E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EAD2F08151B00181F7E /* ServiceDetails.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7F745EAB2F0814EF00181F7E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EAF2F08196700181F7E /* ServiceDetailsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7F745EAC2F0814FF00181F7E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EB12F08197000181F7E /* ServiceDetailsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F745EB52F0821DC00181F7E /* ProviderDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EB82F08224400181F7E /* ViewModels */,
+				7F745EB72F08223C00181F7E /* ViewControllers */,
+				7F745EB62F08222900181F7E /* Storyboards */,
+			);
+			path = ProviderDetails;
+			sourceTree = "<group>";
+		};
+		7F745EB62F08222900181F7E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EB92F08225F00181F7E /* ProviderDetails.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7F745EB72F08223C00181F7E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EBB2F08266A00181F7E /* ProviderDetailsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7F745EB82F08224400181F7E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F745EBD2F08267400181F7E /* ProviderDetailsViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		7FA993E32EFD403E00CE5748 /* DisputeCenter */ = {
@@ -1024,6 +1108,7 @@
 				7F60D5D32F0725550034FE1F /* CalendarEventWrapper.swift */,
 				7F745E8D2F075A3200181F7E /* ServicePackage.swift */,
 				7F745EA02F07E6A800181F7E /* OneOffAvailabilitySlot.swift */,
+				7F745EB32F081DA100181F7E /* Company.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1346,6 +1431,8 @@
 				7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */,
 				7FAB33662EE46270008AC600 /* Admin.storyboard in Resources */,
 				3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */,
+				7F745EBA2F08225F00181F7E /* ProviderDetails.storyboard in Resources */,
+				7F745EAE2F08151B00181F7E /* ServiceDetails.storyboard in Resources */,
 				7FB814C72F073B9800B81D9B /* ProviderAvailabilityCalendar.storyboard in Resources */,
 				ACDA75E32EDDD78500665266 /* Requests-seeker.storyboard in Resources */,
 			);
@@ -1385,6 +1472,7 @@
 				3AE4B1A22EFC8ADA00BE4A01 /* AdminToolsViewController.swift in Sources */,
 				7FA8DA8A2F048D8A0012A48F /* LoadingViewController.swift in Sources */,
 				10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */,
+				7F745EBE2F08267400181F7E /* ProviderDetailsViewModel.swift in Sources */,
 				7FB368812F0196EC005AEB44 /* SeekerProfileViewModel.swift in Sources */,
 				3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */,
 				AC3F6AB62F06DF170076A296 /* ProjectUploadSuccessViewController.swift in Sources */,
@@ -1396,6 +1484,7 @@
 				7FB814C42F073B4700B81D9B /* ProviderAvailabilityCalendarViewModel.swift in Sources */,
 				7FB814C52F073B4700B81D9B /* ProviderAvailabilityCalendarViewController.swift in Sources */,
 				7F745E9F2F07627700181F7E /* ServicePackageCell.swift in Sources */,
+				7F745EB42F081DA100181F7E /* Company.swift in Sources */,
 				7F60D5B52F06A7280034FE1F /* UIFont+Scaling.swift in Sources */,
 				7F5A0D1A2EFDDC9E001135C2 /* Extenstion.swift in Sources */,
 				7F5A0D1B2EFDDC9E001135C2 /* Constants.swift in Sources */,
@@ -1412,8 +1501,10 @@
 				7F60811A2EF98CB700FA5639 /* Skill.swift in Sources */,
 				7FAB33602EE46177008AC600 /* ReportViewModel.swift in Sources */,
 				7FAB33872EE466A2008AC600 /* Notification.swift in Sources */,
+				7F745EB22F08197000181F7E /* ServiceDetailsViewModel.swift in Sources */,
 				7F60D5D02F0724FF0034FE1F /* AvailabilitySlot.swift in Sources */,
 				7FAB33902EE4675B008AC600 /* AdminService.swift in Sources */,
+				7F745EC02F0834A800181F7E /* DisputeCenterVM.swift in Sources */,
 				7FB3687F2F0196D4005AEB44 /* SeekerProfileViewController.swift in Sources */,
 				7FAB32F52EE4557B008AC600 /* ChangePhoneViewController.swift in Sources */,
 				7FAB333A2EE45D30008AC600 /* LeaveReviewViewController.swift in Sources */,
@@ -1432,7 +1523,6 @@
 				AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
-				3ACBF5D62F06469600F26BB3 /* ServiceDetailsViewController.swift in Sources */,
 				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
 				7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */,
 				7F5A0D122EFDDC56001135C2 /* ReviewRepository.swift in Sources */,
@@ -1458,7 +1548,10 @@
 				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
 				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
 				7F60D5BB2F06B30E0034FE1F /* UIViewController+FontScaling.swift in Sources */,
+				7F745EBC2F08266A00181F7E /* ProviderDetailsViewController.swift in Sources */,
+				7F745EBF2F0834A000181F7E /* DisputeCenterVC.swift in Sources */,
 				7F60D5B32F06A7080034FE1F /* AppSettingsManager.swift in Sources */,
+				7F745EB02F08196700181F7E /* ServiceDetailsViewController.swift in Sources */,
 				7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */,
 				7F60813C2EFAE09A00FA5639 /* ProviderSetupViewModel.swift in Sources */,
 				7F60812D2EF99E2C00FA5639 /* User.swift in Sources */,
