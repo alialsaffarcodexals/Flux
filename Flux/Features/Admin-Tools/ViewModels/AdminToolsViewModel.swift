@@ -310,6 +310,7 @@ class AdminToolsViewModel {
                 mutableUser.businessName = data["businessName"] as? String
                 mutableUser.bio = data["bio"] as? String
                 mutableUser.isVerified = data["isVerified"] as? Bool
+                mutableUser.moderationReason = data["moderationReason"] as? String
                 if let ts = data["joinedDate"] as? Timestamp { mutableUser.joinedDate = ts.dateValue() }
                 completion(.success(mutableUser))
                 return
@@ -331,6 +332,7 @@ class AdminToolsViewModel {
             // Account flags (suspension/ban)
             mutableUser.isSuspended = data["isSuspended"] as? Bool
             mutableUser.isBanned = data["isBanned"] as? Bool
+            mutableUser.moderationReason = data["moderationReason"] as? String
             if let ts = data["suspendedUntil"] as? Timestamp { mutableUser.suspendedUntil = ts.dateValue() }
             if let ts = data["joinedDate"] as? Timestamp { mutableUser.joinedDate = ts.dateValue() }
 
@@ -524,6 +526,7 @@ class AdminToolsViewModel {
                          isVerified: Bool? = nil,
                          suspendedUntil: Date? = nil,
                          removeSuspendedUntil: Bool = false,
+                         moderationReason: String? = nil,
                          completion: ((Error?) -> Void)? = nil) {
 
         var data: [String: Any] = [:]
@@ -532,6 +535,7 @@ class AdminToolsViewModel {
         if let v = isVerified { data["isVerified"] = v }
         if let dt = suspendedUntil { data["suspendedUntil"] = Timestamp(date: dt) }
         if removeSuspendedUntil { data["suspendedUntil"] = FieldValue.delete() }
+        if let r = moderationReason { data["moderationReason"] = r }
 
         guard !data.isEmpty else { completion?(nil); return }
 
@@ -605,6 +609,7 @@ class AdminToolsViewModel {
                 }
 
                 let evidenceImageURL = data["evidenceImageURL"] as? String
+                let answer = data["answer"] as? String
 
                 return Report(id: id,
                               reporterId: reporterId,
@@ -614,7 +619,7 @@ class AdminToolsViewModel {
                               evidenceImageURL: evidenceImageURL,
                               status: status,
                               timestamp: tsDate,
-                              answer: nil)
+                              answer: answer)
             }
 
             completion(.success(reports))
@@ -672,6 +677,7 @@ class AdminToolsViewModel {
                     }
 
                     let evidenceImageURL = data["evidenceImageURL"] as? String
+                    let answer = data["answer"] as? String
 
                     return Report(id: id,
                                   reporterId: reporterId,
@@ -681,7 +687,7 @@ class AdminToolsViewModel {
                                   evidenceImageURL: evidenceImageURL,
                                   status: status,
                                   timestamp: tsDate,
-                                  answer: nil)
+                                  answer: answer)
                 }
 
                 completion(.success(reports))

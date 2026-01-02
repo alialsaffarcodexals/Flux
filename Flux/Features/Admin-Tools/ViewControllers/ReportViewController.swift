@@ -80,7 +80,28 @@ class ReportViewController: UIViewController, UITextViewDelegate {
             alterButtonHeight?.constant = 0
         }
 
+        // Hide the corresponding button views when collapsed so their titles don't remain visible.
+        let shouldShow = (status == "open")
+        let buttons = findButtonsByTitles(["Reviewed", "Alter"]) 
+        buttons["Reviewed"]?.isHidden = !shouldShow
+        buttons["Alter"]?.isHidden = !shouldShow
+
         view.layoutIfNeeded()
+    }
+
+    // Find buttons in the view hierarchy by their title (defensive: works without IBOutlets)
+    private func findButtonsByTitles(_ titles: [String]) -> [String: UIButton] {
+        var found: [String: UIButton] = [:]
+        func search(in view: UIView) {
+            for sub in view.subviews {
+                if let b = sub as? UIButton, let t = b.configuration?.title ?? b.title(for: .normal) {
+                    if titles.contains(t) { found[t] = b }
+                }
+                search(in: sub)
+            }
+        }
+        search(in: self.view)
+        return found
     }
 
     // MARK: - UITextViewDelegate
@@ -144,7 +165,8 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         // Show admin answer if present
         if let ans = report.answer, !ans.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             reportAnswer?.text = ans
-            reportAnswer?.textColor = .label
+            // Keep admin answers readable by using a dark color (non-adaptive)
+            reportAnswer?.textColor = .black
         }
 
         // Make text view editable only when report is open
@@ -183,7 +205,15 @@ class ReportViewController: UIViewController, UITextViewDelegate {
                         self.presentSuccess("Report marked Reviewed")
                         self.report?.status = "Reviewed"
                         if let a = answerToSave { self.report?.answer = a }
+                        // Update UI then return to the reports list
                         self.populateIfNeeded()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                            if let nav = self.navigationController {
+                                nav.popViewController(animated: true)
+                            } else {
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                        }
                     }
                 }
             }

@@ -146,7 +146,27 @@ class ProviderDetailsViewController: UIViewController {
     
     @IBAction func bookButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Booking", bundle: nil)
-        if let bookingVC = storyboard.instantiateViewController(withIdentifier: "BookingVC") as? UIViewController {
+        if let bookingVC = storyboard.instantiateViewController(withIdentifier: "BookingVC") as? RequestBookingViewController {
+            // Pass provider data via a constructed Service object
+            if let company = viewModel?.company {
+                let service = Service(
+                    id: UUID().uuidString, // Validation might be needed later
+                    providerId: company.providerId,
+                    providerName: company.name,
+                    title: "General Booking", // Or "Custom Booking"
+                    description: "Booking with \(company.name)",
+                    category: company.category,
+                    sessionPrice: 0, // TBD
+                    currencyCode: "BHD",
+                    coverImageURL: company.imageURL,
+                    rating: company.rating,
+                    reviewCount: 0,
+                    isActive: true,
+                    createdAt: Date(),
+                    updatedAt: nil
+                )
+                bookingVC.service = service
+            }
             navigationController?.pushViewController(bookingVC, animated: true)
         }
     }
