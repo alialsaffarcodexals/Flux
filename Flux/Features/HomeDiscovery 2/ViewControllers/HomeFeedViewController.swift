@@ -217,22 +217,50 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
             viewModel.filterBy(category: viewModel.categories[indexPath.item].name)
             DispatchQueue.main.async { self.collectionView.reloadData() }
         } else if indexPath.section == 0 {
-            let selectedCompany = viewModel.recommendedCompanies[indexPath.item]
+            let provider = viewModel.recommendedProviders[indexPath.item]
+            
+            // Map User -> Company (Legacy Adapter)
+            let company = Company(
+                id: provider.id ?? UUID().uuidString,
+                providerId: provider.id ?? "",
+                name: provider.businessName ?? provider.name,
+                description: provider.bio ?? "No description",
+                backgroundColor: viewModel.getRandomColor(),
+                category: "Provider",
+                price: 0,
+                rating: 5.0, // Placeholder
+                dateAdded: Date(),
+                imageURL: provider.providerProfileImageURL ?? ""
+            )
             
             // Navigate to Provider Details
             let storyboard = UIStoryboard(name: "ProviderDetails", bundle: nil)
             if let providerVC = storyboard.instantiateViewController(withIdentifier: "ProviderDetailsVC") as? ProviderDetailsViewController {
-                let providerViewModel = ProviderDetailsViewModel(company: selectedCompany)
+                let providerViewModel = ProviderDetailsViewModel(company: company)
                 providerVC.viewModel = providerViewModel
                 navigationController?.pushViewController(providerVC, animated: true)
             }
         } else if indexPath.section == 2 {
-            let selectedCompany = viewModel.recommendedCompanies[indexPath.item]
+            let service = viewModel.displayedServices[indexPath.item]
+            
+            // Map Service -> Company (Legacy Adapter)
+            let company = Company(
+                id: service.id ?? UUID().uuidString,
+                providerId: service.providerId,
+                name: service.title, // Maps to Title
+                description: service.description,
+                backgroundColor: viewModel.getRandomColor(),
+                category: service.category,
+                price: service.sessionPrice,
+                rating: service.rating ?? 0.0,
+                dateAdded: service.createdAt,
+                imageURL: service.coverImageURL
+            )
             
             // Navigate to Service Details
             let storyboard = UIStoryboard(name: "ServiceDetails", bundle: nil)
             if let detailsVC = storyboard.instantiateViewController(withIdentifier: "ServiceDetailsVC") as? ServiceDetailsViewController {
-                let detailsViewModel = ServiceDetailsViewModel(company: selectedCompany)
+                let detailsViewModel = ServiceDetailsViewModel(company: company)
                 detailsVC.viewModel = detailsViewModel
                 navigationController?.pushViewController(detailsVC, animated: true)
             }
