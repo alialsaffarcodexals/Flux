@@ -17,6 +17,7 @@
 		10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207D92F044C2700834613 /* HistoryVC.swift */; };
 		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
 		3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */; };
+		3ACBF5D62F06469600F26BB3 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -30,7 +31,6 @@
 		3AE4B1A22EFC8ADA00BE4A01 /* AdminToolsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B1902EFC8ADA00BE4A01 /* AdminToolsViewController.swift */; };
 		3AE4B1A32EFC8ADA00BE4A01 /* SkillVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B1942EFC8ADA00BE4A01 /* SkillVerificationViewController.swift */; };
 		3AE4B1A42EFC8ADA00BE4A01 /* AdminTools.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B18D2EFC8ADA00BE4A01 /* AdminTools.storyboard */; };
-		3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */; };
 		7F5A0D072EFDD10C001135C2 /* AvailabilityBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */; };
 		7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0A2EFDDC56001135C2 /* PortfolioRepository.swift */; };
 		7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F5A0D0B2EFDDC56001135C2 /* ReportRepository.swift */; };
@@ -162,6 +162,7 @@
 		7FE70B332EF83EC600DFBE12 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE70B322EF83EC600DFBE12 /* AppNavigator.swift */; };
 		AC3F6AAD2F0691540076A296 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3F6AAC2F0691540076A296 /* SuccessViewController.swift */; };
 		AC3F6AB62F06DF170076A296 /* ProjectUploadSuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3F6AB52F06DF170076A296 /* ProjectUploadSuccessViewController.swift */; };
+		AC7231EE2F07B87C0034776A /* HomeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7231ED2F07B87C0034776A /* HomeRepository.swift */; };
 		AC7DF5B32F06974D00B5EB09 /* PortfolioListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DF5B22F06974D00B5EB09 /* PortfolioListViewController.swift */; };
 		AC7DF5B52F06A35500B5EB09 /* PortfolioTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7DF5B42F06A35500B5EB09 /* PortfolioTableCell.swift */; };
 		AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */; };
@@ -183,6 +184,7 @@
 		10F207D92F044C2700834613 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
+		3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
@@ -196,7 +198,6 @@
 		3AE4B1952EFC8ADA00BE4A01 /* SkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkillViewController.swift; sourceTree = "<group>"; };
 		3AE4B1962EFC8ADA00BE4A01 /* UsersAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersAccountsViewController.swift; sourceTree = "<group>"; };
 		3AE4B1982EFC8ADA00BE4A01 /* AdminToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminToolsViewModel.swift; sourceTree = "<group>"; };
-		3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
 		7F5A0D062EFDD109001135C2 /* AvailabilityBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityBlock.swift; sourceTree = "<group>"; };
 		7F5A0D082EFDDC56001135C2 /* AvailabilityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityRepository.swift; sourceTree = "<group>"; };
 		7F5A0D092EFDDC56001135C2 /* BookingRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingRepository.swift; sourceTree = "<group>"; };
@@ -326,6 +327,7 @@
 		AC3F6AAC2F0691540076A296 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		AC3F6AB12F06ACBE0076A296 /* Booking.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Booking.storyboard; sourceTree = "<group>"; };
 		AC3F6AB52F06DF170076A296 /* ProjectUploadSuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectUploadSuccessViewController.swift; sourceTree = "<group>"; };
+		AC7231ED2F07B87C0034776A /* HomeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRepository.swift; sourceTree = "<group>"; };
 		AC7DF5B22F06974D00B5EB09 /* PortfolioListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioListViewController.swift; sourceTree = "<group>"; };
 		AC7DF5B42F06A35500B5EB09 /* PortfolioTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTableCell.swift; sourceTree = "<group>"; };
 		AC9616D12F0444A1003B7C7D /* MyRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRequestsViewController.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				7F5A0D252EFEB49A001135C2 /* ChatRepository.swift */,
 				7F60D5D52F0725A80034FE1F /* ProviderAvailabilityRepository.swift */,
 				7F745E8F2F075A8400181F7E /* ServicePackagesRepository.swift */,
+				AC7231ED2F07B87C0034776A /* HomeRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -812,7 +815,7 @@
 			children = (
 				7FAB332B2EE45B8B008AC600 /* RequestBookingViewController.swift */,
 				7FAB332D2EE45BCF008AC600 /* BookingConfirmationVC.swift */,
-				3AE4B1A52EFC8C0800BE4A01 /* TimeCell.swift */,
+				3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1439,6 +1442,7 @@
 				AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
+				3ACBF5D62F06469600F26BB3 /* ServiceDetailsViewController.swift in Sources */,
 				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
 				7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */,
 				7F5A0D122EFDDC56001135C2 /* ReviewRepository.swift in Sources */,
@@ -1476,8 +1480,10 @@
 				10E6FCEE2F0582CA00156591 /* FilterViewController.swift in Sources */,
 				7F5A0D292EFEE471001135C2 /* ProviderSkillsListViewController.swift in Sources */,
 				7F5A0D2A2EFEE471001135C2 /* SkillDetailsViewController.swift in Sources */,
+				7FAB33562EE46047008AC600 /* HistoryViewModel.swift in Sources */,
 				3AE4B1A62EFC8C0800BE4A01 /* TimeCell.swift in Sources */,
 				7F745E8E2F075A3200181F7E /* ServicePackage.swift in Sources */,
+				AC7231EE2F07B87C0034776A /* HomeRepository.swift in Sources */,
 				7F60816A2EFCF0A500FA5639 /* LoginViewController.swift in Sources */,
 				7F60816C2EFCF0A500FA5639 /* SignUpViewController.swift in Sources */,
 				7FA8DA842F043BE20012A48F /* ChangePasswordViewController.swift in Sources */,

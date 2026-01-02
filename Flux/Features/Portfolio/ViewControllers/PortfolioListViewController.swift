@@ -71,7 +71,7 @@ class PortfolioListViewController: UIViewController, UITableViewDelegate, UITabl
          // 4. Set the real data from Firebase
          cell.titleLabel.text = project.title
          
-         // Format the date to look nice (e.g., "Jan 2026")
+         // Format the date
          let formatter = DateFormatter()
          formatter.dateFormat = "d MMM yyyy"
          cell.dateLabel.text = formatter.string(from: project.timestamp)
@@ -86,10 +86,82 @@ class PortfolioListViewController: UIViewController, UITableViewDelegate, UITabl
                      }
                  }
              }.resume()
+             
          }
-         
+         cell.onDeleteTap = { [weak self] in
+             self?.showDeleteConfirmation(for: project)
+         }
          return cell
      }
+    
+    // 4. ADD THE DELETE LOGIC FUNCTIONS
+    func showDeleteConfirmation(for project: PortfolioProject) {
+        guard let projectId = project.id else { return }
+
+        let alert = UIAlertController(title: "Delete Project", message: "Are you sure you want to delete '\(project.title)'?", preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.performDeletion(projectId: projectId)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alert, animated: true)
+    }
+
+    func performDeletion(projectId: String) {
+        // Call the Repository function you already have!
+        PortfolioRepository.shared.deletePortfolioProject(id: projectId) { result in
+            switch result {
+            case .success:
+                DispatchQueue.main.async {
+                    // THE FIX: Find the CURRENT index of this project in the array
+                    if let currentIndex = self.projects.firstIndex(where: { $0.id == projectId }) {
+                        
+                        // 1. Remove from local list using the fresh index
+                        self.projects.remove(at: currentIndex)
+                        
+                        // 2. Animate the deletion using the fresh index
+                        let indexPath = IndexPath(row: currentIndex, section: 0)
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        
+                        print("Successfully deleted project at index: \(currentIndex)")
+                    } else {
+                        // If it wasn't found in the array, just reload everything to be safe
+                        self.tableView.reloadData()
+                    }
+                }
+            case .failure(let error):
+                print("Delete failed: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    
+    
+ 
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAddProject",
+           let destination = segue.destination as? AddProjectViewController,
+           let project = sender as? PortfolioProject {
+            
+            // Pass the WHOLE object. The ID is inside it.
+            destination.editingProject = project
+            
+            // Fill the UI
+            destination.loadViewIfNeeded()
+            destination.projectNameTextField.text = project.title
+            destination.descriptionTextView.text = project.description
+            destination.descriptionTextView.textColor = .black
+            destination.datePicker.date = project.timestamp
+            
+            // This 'fake' selectedImage ensures the validation passes during an edit
+            // In a real app, you'd load the image from the URL here
+            destination.selectedImage = UIImage(systemName: "photo")
+        }
+    }
     
     // This is the "Exit Door" that other screens use to come back here
     @IBAction func unwindToPortfolio(segue: UIStoryboardSegue) {

@@ -1,6 +1,13 @@
+//
+//  Company.swift
+//  Flux
+//
+//  Created by Guest User on 02/01/2026.
+//
+
+
 import UIKit
 
-// MARK: - Models
 struct Company {
     var name: String
     var description: String
@@ -9,7 +16,7 @@ struct Company {
     var price: Double
     var rating: Double
     var dateAdded: Date
-    var imageURL: String
+    var imageURL: String 
 }
 
 struct CategoryData {
@@ -17,25 +24,8 @@ struct CategoryData {
     let color: UIColor
 }
 
-// 🔥 ADD THIS BACK: This fixes the "Cannot find FilterOptions" error
-struct FilterOptions {
-    var maxPrice: Double = 200
-    var minRating: Double = 0
-    var sortBy: SortOption = .relevance
-    
-    enum SortOption: String, CaseIterable {
-        case relevance = "Relevance"
-        case priceLowToHigh = "Price: Low to High"
-        case priceHighToLow = "Price: High to Low"
-        case rating = "Highest Rated"
-        case newest = "Newest First"
-    }
-}
-
-// MARK: - View Model
 class HomeViewModel {
-    
-    // Hardcoded Categories - Simple text, No icons
+    // 1. Hardcoded Categories (Safe for demo)
     let categories: [CategoryData] = [
         CategoryData(name: "All", color: .systemGray6),
         CategoryData(name: "Cleaning", color: UIColor(red: 0.92, green: 0.98, blue: 0.92, alpha: 1.0)),
@@ -69,24 +59,5 @@ class HomeViewModel {
         } else {
             recommendedCompanies = allCompanies.filter { $0.category == category }
         }
-    }
-    
-    // 🔥 ADD THIS BACK: So the filter screen functions correctly
-    func applyFilters(_ filters: FilterOptions) {
-        var filtered = allCompanies
-        filtered = filtered.filter { $0.price <= filters.maxPrice }
-        if filters.minRating > 0 {
-            filtered = filtered.filter { $0.rating >= filters.minRating }
-        }
-        
-        switch filters.sortBy {
-        case .relevance: break
-        case .priceLowToHigh: filtered.sort { $0.price < $1.price }
-        case .priceHighToLow: filtered.sort { $0.price > $1.price }
-        case .rating: filtered.sort { $0.rating > $1.rating }
-        case .newest: filtered.sort { $0.dateAdded > $1.dateAdded }
-        }
-        
-        recommendedCompanies = filtered
     }
 }

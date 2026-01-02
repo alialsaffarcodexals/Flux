@@ -102,6 +102,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="RyJ-Wk-POc"/>
                     <connections>
+                        <outlet property="searchBar" destination="W8G-9o-fcs" id="PAr-Sn-cen"/>
                         <outlet property="tableView" destination="mMt-jl-CT7" id="muj-Zl-acX"/>
                         <segue destination="lHA-J6-sE9" kind="show" identifier="goToChat" id="UYW-ey-clj"/>
                     </connections>
@@ -113,7 +114,7 @@
         <!--CleanMax-->
         <scene sceneID="moi-fU-Imk">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="lHA-J6-sE9" customClass="ChatRoomViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatRoomViewController" hidesBottomBarWhenPushed="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="lHA-J6-sE9" customClass="ChatRoomViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cga-Bj-sOh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -254,6 +255,7 @@
                     <navigationItem key="navigationItem" title="CleanMax" id="CHe-5J-7jx"/>
                     <connections>
                         <outlet property="messageTextField" destination="Trg-6Y-WEZ" id="9pz-sh-1xv"/>
+                        <outlet property="sendButton" destination="W2d-kA-bVx" id="EJV-im-cb1"/>
                         <outlet property="tableView" destination="n2N-6B-sKu" id="mhw-sq-mqk"/>
                     </connections>
                 </viewController>
@@ -289,16 +291,16 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
