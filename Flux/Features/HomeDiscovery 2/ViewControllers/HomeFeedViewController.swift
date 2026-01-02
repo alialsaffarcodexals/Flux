@@ -214,29 +214,28 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
             
             // 1. Update the Model
             viewModel.selectedCategoryIndex = indexPath.item
-            let selectedCategory = viewModel.categories[indexPath.item]
-            viewModel.filterBy(category: selectedCategory.name)
+            viewModel.filterBy(category: viewModel.categories[indexPath.item].name)
+            DispatchQueue.main.async { self.collectionView.reloadData() }
+        } else if indexPath.section == 0 {
+            let selectedCompany = viewModel.recommendedCompanies[indexPath.item]
             
-            // 2. Visually update the pills WITHOUT reloading the section (Prevents Jump)
-            for visibleIndexPath in collectionView.indexPathsForVisibleItems {
-                if visibleIndexPath.section == 1 {
-                    if let cell = collectionView.cellForItem(at: visibleIndexPath) as? CategoryCell {
-                        let category = viewModel.categories[visibleIndexPath.item]
-                        // Check if this specific cell should be selected
-                        let isSelected = (visibleIndexPath.item == viewModel.selectedCategoryIndex)
-                        cell.configure(with: category, isSelected: isSelected)
-                    }
-                }
+            // Navigate to Provider Details
+            let storyboard = UIStoryboard(name: "ProviderDetails", bundle: nil)
+            if let providerVC = storyboard.instantiateViewController(withIdentifier: "ProviderDetailsVC") as? ProviderDetailsViewController {
+                let providerViewModel = ProviderDetailsViewModel(company: selectedCompany)
+                providerVC.viewModel = providerViewModel
+                navigationController?.pushViewController(providerVC, animated: true)
             }
+        } else if indexPath.section == 2 {
+            let selectedCompany = viewModel.recommendedCompanies[indexPath.item]
             
-            // 3. Reload ONLY the Services grid (Section 2) to show new results
-            // Use performBatchUpdates for a smoother transition, or just reloadSection
-            UIView.performWithoutAnimation {
-                self.collectionView.reloadSections(IndexSet(integer: 2))
+            // Navigate to Service Details
+            let storyboard = UIStoryboard(name: "ServiceDetails", bundle: nil)
+            if let detailsVC = storyboard.instantiateViewController(withIdentifier: "ServiceDetailsVC") as? ServiceDetailsViewController {
+                let detailsViewModel = ServiceDetailsViewModel(company: selectedCompany)
+                detailsVC.viewModel = detailsViewModel
+                navigationController?.pushViewController(detailsVC, animated: true)
             }
-            
-            // 4. Handle Empty State
-            updateEmptyState()
         }
     }
     

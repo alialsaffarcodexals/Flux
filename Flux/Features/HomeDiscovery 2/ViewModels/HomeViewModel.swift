@@ -1,5 +1,25 @@
 import UIKit
 
+// MARK: - Models
+// Defined in Models/Company.swift
+
+
+// 🔥 ADD THIS BACK: This fixes the "Cannot find FilterOptions" error
+struct FilterOptions {
+    var maxPrice: Double = 200
+    var minRating: Double = 0
+    var sortBy: SortOption = .relevance
+    
+    enum SortOption: String, CaseIterable {
+        case relevance = "Relevance"
+        case priceLowToHigh = "Price: Low to High"
+        case priceHighToLow = "Price: High to Low"
+        case rating = "Highest Rated"
+        case newest = "Newest First"
+    }
+}
+
+// MARK: - View Model
 class HomeViewModel {
     
     // Dependencies
