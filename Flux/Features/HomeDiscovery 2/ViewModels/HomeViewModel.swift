@@ -1,138 +1,106 @@
-//
-//  HomeViewModel.swift
-//  Flux
-//
-
 import UIKit
 
-// MARK: - Company Model
-struct Company {
-    var name: String
-    var description: String
-    var backgroundColor: UIColor
-    var category: String
-    var price: Double
-    var rating: Double
-    var dateAdded: Date
-}
-
-// MARK: - Filter Options Model
-struct FilterOptions {
-    var maxPrice: Double = 200
-    var minRating: Double = 0
-    var sortBy: SortOption = .relevance
-    
-    enum SortOption: String, CaseIterable {
-        case relevance = "Relevance"
-        case priceLowToHigh = "Price: Low to High"
-        case priceHighToLow = "Price: High to Low"
-        case rating = "Highest Rated"
-        case newest = "Newest First"
-    }
-}
-
-// MARK: - Home View Model
 class HomeViewModel {
     
-    // All companies (original data)
-    private var allCompanies: [Company] = []
+    // Dependencies
+    private let serviceRepo = ServiceRepository.shared
+    private let userRepo = UserRepository.shared
     
-    // Filtered companies (what we show on screen)
-    var recommendedCompanies: [Company] = []
+    // Data Sources
+    var recommendedProviders: [User] = []
+    var displayedServices: [Service] = []
+    var categories: [ServiceCategory] = []
+    var providerNames: [String: String] = [:]
     
-    // MARK: - Load Dummy Data
-    func loadDummyData() {
+    // Data Cache (To store all services for local filtering)
+    private var allServices: [Service] = []
+    
+    // UI Helpers
+    var selectedCategoryIndex: Int = 0
+    private let fluxPastelColors: [UIColor] = [
+        UIColor(red: 0.90, green: 0.95, blue: 1.00, alpha: 1.0),
+        UIColor(red: 0.92, green: 0.98, blue: 0.92, alpha: 1.0),
+        UIColor(red: 1.00, green: 0.95, blue: 0.90, alpha: 1.0),
+        UIColor(red: 0.95, green: 0.92, blue: 1.00, alpha: 1.0)
+    ]
+
+    // MARK: - Fetching Data
+    func fetchHomeData(completion: @escaping () -> Void) {
+            let group = DispatchGroup()
+            
+            // 1. Fetch Recommended Providers (Top Section)
+            group.enter()
+            userRepo.fetchRecommendedProviders { [weak self] result in
+                defer { group.leave() }
+                if case .success(let providers) = result {
+                    self?.recommendedProviders = providers
+                }
+            }
+            
+            // 2. Fetch Services AND THEN Fetch their Provider Names
+            group.enter()
+            serviceRepo.fetchActiveServices { [weak self] result in
+                switch result {
+                case .success(let services):
+                    self?.allServices = services
+                    self?.displayedServices = services
+                    
+                    // ✅ EXTRACT IDs
+                    let providerIds = services.map { $0.providerId }
+                    
+                    // ✅ FETCH PROVIDER NAMES
+                    self?.userRepo.fetchUsers(byIds: providerIds) { userResult in
+                        if case .success(let users) = userResult {
+                            // Create the lookup dictionary
+                            for user in users {
+                                // Map ID to Business Name (or Name)
+                                self?.providerNames[user.id ?? ""] = user.businessName ?? user.name
+                            }
+                        }
+                        // Leave group ONLY after getting names
+                        group.leave()
+                    }
+                    
+                case .failure(let error):
+                    print("Error: \(error)")
+                    group.leave()
+                }
+            }
+            
+            // 3. Fetch Categories
+            group.enter()
+            serviceRepo.fetchCategories(activeOnly: true) { [weak self] result in
+                defer { group.leave() }
+                if case .success(let fetchedCategories) = result {
+                    let allCategory = ServiceCategory(id: "ALL", name: "All", isActive: true)
+                    self?.categories = [allCategory] + fetchedCategories
+                }
+            }
+            
+            group.notify(queue: .main) {
+                completion()
+            }
+        }
+    
+    // MARK: - Logic
+    
+
+    func filterBy(category: String) {
+        if category == "All" {
+            // Reset to show everything
+            displayedServices = allServices
+        } else {
+            // Filter by matching category name (Case Insensitive is safer)
+            displayedServices = allServices.filter { service in
+                return service.category.localizedCaseInsensitiveContains(category) ||
+                       category.localizedCaseInsensitiveContains(service.category)
+            }
+        }
         
-        allCompanies = [
-            Company(
-                name: "CleanMax",
-                description: "Home Cleaning Service",
-                backgroundColor: .systemGreen,
-                category: "Services",
-                price: 50.0,
-                rating: 4.8,
-                dateAdded: Date()
-            ),
-            Company(
-                name: "Max J.",
-                description: "Video Editor",
-                backgroundColor: .systemBlue.withAlphaComponent(0.5),
-                category: "Media",
-                price: 75.0,
-                rating: 4.5,
-                dateAdded: Date().addingTimeInterval(-86400)
-            ),
-            Company(
-                name: "Sam A.",
-                description: "Social Media Manager",
-                backgroundColor: .systemOrange,
-                category: "Services",
-                price: 100.0,
-                rating: 4.9,
-                dateAdded: Date().addingTimeInterval(-172800)
-            ),
-            Company(
-                name: "TutorPro",
-                description: "Math & Science Lessons",
-                backgroundColor: .systemPurple,
-                category: "Lessons",
-                price: 25.0,
-                rating: 5.0,
-                dateAdded: Date().addingTimeInterval(-259200)
-            ),
-            Company(
-                name: "CodeAcademy",
-                description: "Programming Courses",
-                backgroundColor: .systemTeal,
-                category: "Courses",
-                price: 150.0,
-                rating: 4.7,
-                dateAdded: Date().addingTimeInterval(-345600)
-            ),
-            Company(
-                name: "PhotoStudio",
-                description: "Photography & Editing",
-                backgroundColor: .systemPink,
-                category: "Media",
-                price: 80.0,
-                rating: 4.3,
-                dateAdded: Date().addingTimeInterval(-432000)
-            )
-        ]
-        
-        // Show all companies initially
-        recommendedCompanies = allCompanies
+        print("🔍 Filtered by \(category): Found \(displayedServices.count) services")
     }
     
-    // MARK: - Apply Filters
-    func applyFilters(_ filters: FilterOptions) {
-        
-        // Start with all companies
-        var filtered = allCompanies
-        
-        // Filter by max price
-        filtered = filtered.filter { $0.price <= filters.maxPrice }
-        
-        // Filter by minimum rating
-        if filters.minRating > 0 {
-            filtered = filtered.filter { $0.rating >= filters.minRating }
-        }
-        
-        // Apply sorting
-        switch filters.sortBy {
-        case .relevance:
-            break
-        case .priceLowToHigh:
-            filtered.sort { $0.price < $1.price }
-        case .priceHighToLow:
-            filtered.sort { $0.price > $1.price }
-        case .rating:
-            filtered.sort { $0.rating > $1.rating }
-        case .newest:
-            filtered.sort { $0.dateAdded > $1.dateAdded }
-        }
-        
-        // Update displayed data
-        recommendedCompanies = filtered
+    func getRandomColor() -> UIColor {
+        return fluxPastelColors.randomElement() ?? .systemGray6
     }
 }

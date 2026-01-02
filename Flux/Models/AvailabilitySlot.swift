@@ -8,6 +8,14 @@ struct AvailabilitySlot: Codable, Identifiable {
     let startTime: String // "HH:mm" 24-hour format
     let endTime: String   // "HH:mm" 24-hour format
     let isActive: Bool
+    let validUntil: Date?
+    
+    enum SlotType: String, Codable {
+        case available
+        case blocked
+    }
+    
+    let type: SlotType? // Optional for backward compatibility
 
     // Helper for Firestore mapping
     enum CodingKeys: String, CodingKey {
@@ -17,5 +25,7 @@ struct AvailabilitySlot: Codable, Identifiable {
         case startTime
         case endTime
         case isActive
+        case validUntil
+        case type
     }
 }

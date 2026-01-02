@@ -11,6 +11,10 @@ protocol ProviderAvailabilityRepository {
     
     func createBlockedSlot(_ block: BlockedSlot, completion: @escaping (Result<Void, Error>) -> Void)
     func deleteBlockedSlot(providerId: String, blockId: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    func fetchOneOffAvailabilitySlots(providerId: String, dateRange: ClosedRange<Date>, completion: @escaping (Result<[OneOffAvailabilitySlot], Error>) -> Void)
+    func createOneOffAvailabilitySlot(_ slot: OneOffAvailabilitySlot, completion: @escaping (Result<Void, Error>) -> Void)
+    func deleteOneOffAvailabilitySlot(providerId: String, slotId: String, completion: @escaping (Result<Void, Error>) -> Void)
 }
 
 final class ProviderAvailabilityFirestoreRepository: ProviderAvailabilityRepository {
@@ -32,6 +36,10 @@ final class ProviderAvailabilityFirestoreRepository: ProviderAvailabilityReposit
     
     private func bookingsCollection() -> CollectionReference {
         return db.collection("bookings")
+    }
+    
+    private func oneOffAvailabilityCollection(providerId: String) -> CollectionReference {
+        return db.collection("users").document(providerId).collection("oneOffAvailabilitySlots")
     }
 
     // MARK: - Availability Slots
@@ -158,5 +166,55 @@ final class ProviderAvailabilityFirestoreRepository: ProviderAvailabilityReposit
                     completion(.failure(error))
                 }
             }
+    }
+    // MARK: - One-Off Availability Slots
+    
+    func fetchOneOffAvailabilitySlots(providerId: String, dateRange: ClosedRange<Date>, completion: @escaping (Result<[OneOffAvailabilitySlot], Error>) -> Void) {
+        oneOffAvailabilityCollection(providerId: providerId)
+            .whereField("endTime", isGreaterThanOrEqualTo: dateRange.lowerBound)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    completion(.success([]))
+                    return
+                }
+                
+                do {
+                    var slots = try documents.compactMap { try $0.data(as: OneOffAvailabilitySlot.self) }
+                    // Client-side filter for startTime <= dateRange.upperBound
+                    slots = slots.filter { $0.startTime <= dateRange.upperBound }
+                    completion(.success(slots))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    func createOneOffAvailabilitySlot(_ slot: OneOffAvailabilitySlot, completion: @escaping (Result<Void, Error>) -> Void) {
+        do {
+            let _ = try oneOffAvailabilityCollection(providerId: slot.providerId).addDocument(from: slot) { error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func deleteOneOffAvailabilitySlot(providerId: String, slotId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        oneOffAvailabilityCollection(providerId: providerId).document(slotId).delete { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
     }
 }

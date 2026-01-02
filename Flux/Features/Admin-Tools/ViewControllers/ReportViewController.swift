@@ -8,9 +8,6 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var reporterLabel: UILabel!
     @IBOutlet weak var reportDescription: UILabel!
     @IBOutlet weak var reportAnswer: UITextView!
-    @IBOutlet weak var reviewedButton: UIButton?
-    @IBOutlet weak var alterButton: UIButton?
-    @IBOutlet weak var resolvedButton: UIButton?
     
     @IBOutlet weak var reviewedButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var alterButtonHeight: NSLayoutConstraint!
@@ -60,8 +57,6 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         } else {
             reportAnswer?.textColor = .black
         }
-
-        updateReviewedButtonState()
     }
 
     // MARK: - Answer helpers
@@ -69,14 +64,6 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         guard let text = reportAnswer?.text else { return false }
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         return !trimmed.isEmpty && trimmed != "Write your response..."
-    }
-
-    private func updateReviewedButtonState() {
-        let status = report?.status.lowercased() ?? ""
-        let allowed = (status == "open" || status == "reviewed")
-        let enabled = isAnswerValid && allowed
-        reviewedButton?.isEnabled = enabled
-        reviewedButton?.alpha = enabled ? 1.0 : 0.5
     }
 
     private func updateActionButtons() {
@@ -88,18 +75,11 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         if status == "open" {
             reviewedButtonHeight?.constant = 44
             alterButtonHeight?.constant = 44
-            reviewedButton?.isHidden = false
-            alterButton?.isHidden = false
-            resolvedButton?.isHidden = false
         } else {
             reviewedButtonHeight?.constant = 0
             alterButtonHeight?.constant = 0
-            reviewedButton?.isHidden = true
-            alterButton?.isHidden = true
-            resolvedButton?.isHidden = true
         }
 
-        updateReviewedButtonState()
         view.layoutIfNeeded()
     }
 
@@ -119,11 +99,6 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         } else {
             textView.textColor = .black
         }
-        updateReviewedButtonState()
-    }
-
-    func textViewDidChange(_ textView: UITextView) {
-        updateReviewedButtonState()
     }
 
     // MARK: - Load Report
