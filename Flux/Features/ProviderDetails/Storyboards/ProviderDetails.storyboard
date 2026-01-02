@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Provider Details View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ProviderDetailsVC" id="Y6W-OH-hqX" customClass="ProviderDetailsViewController" customModule="Flux" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="scroll-main">
+                                <rect key="frame" x="0.0" y="118" width="393" height="734"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="content-main">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="798.33333333333337"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="img-provider">
+                                                <rect key="frame" x="146.66666666666666" y="20" width="100" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="h-img"/>
+                                                    <constraint firstAttribute="width" constant="100" id="w-img"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provider Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-name">
+                                                <rect key="frame" x="20" y="130" width="353" height="28.666666666666657"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.8 ★" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-rating">
+                                                <rect key="frame" x="20" y="166.66666666666669" width="353" height="19.666666666666657"/>
+                                                <fontDescription key="fontDescription" pointSize="17"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skills" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-skills-title">
+                                                <rect key="frame" x="20" y="208.33333333333331" width="353" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="stack-skills">
+                                                <rect key="frame" x="20" y="242.33333333333331" width="353" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="h-skills"/>
+                                                </constraints>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Services" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-services-title">
+                                                <rect key="frame" x="20" y="292.33333333333331" width="353" height="24"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tbl-services">
+                                                <rect key="frame" x="20" y="326.33333333333331" width="353" height="299.99999999999994"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="300" id="h-tbl"/>
+                                                </constraints>
+                                            </tableView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="stack-actions">
+                                                <rect key="frame" x="16" y="648.33333333333337" width="361" height="50"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-book">
+                                                        <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Book Now">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="bookButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="act-book"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="btn-message">
+                                                        <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="50"/>
+                                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" title="Message">
+                                                            <fontDescription key="titleFontDescription" type="boldSystem" pointSize="16"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="messageButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="act-msg"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="h-actions"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="img-provider" firstAttribute="centerX" secondItem="content-main" secondAttribute="centerX" id="c1"/>
+                                            <constraint firstItem="lbl-skills-title" firstAttribute="leading" secondItem="content-main" secondAttribute="leading" constant="20" id="c10"/>
+                                            <constraint firstAttribute="trailing" secondItem="lbl-skills-title" secondAttribute="trailing" constant="20" id="c11"/>
+                                            <constraint firstItem="stack-skills" firstAttribute="top" secondItem="lbl-skills-title" secondAttribute="bottom" constant="10" id="c12"/>
+                                            <constraint firstItem="stack-skills" firstAttribute="leading" secondItem="content-main" secondAttribute="leading" constant="20" id="c13"/>
+                                            <constraint firstItem="lbl-services-title" firstAttribute="top" secondItem="stack-skills" secondAttribute="bottom" constant="20" id="c14"/>
+                                            <constraint firstItem="lbl-services-title" firstAttribute="leading" secondItem="content-main" secondAttribute="leading" constant="20" id="c15"/>
+                                            <constraint firstAttribute="trailing" secondItem="lbl-services-title" secondAttribute="trailing" constant="20" id="c16"/>
+                                            <constraint firstItem="tbl-services" firstAttribute="top" secondItem="lbl-services-title" secondAttribute="bottom" constant="10" id="c17"/>
+                                            <constraint firstItem="tbl-services" firstAttribute="leading" secondItem="content-main" secondAttribute="leading" constant="20" id="c18"/>
+                                            <constraint firstAttribute="trailing" secondItem="tbl-services" secondAttribute="trailing" constant="20" id="c19"/>
+                                            <constraint firstItem="img-provider" firstAttribute="top" secondItem="content-main" secondAttribute="top" constant="20" id="c2"/>
+                                            <constraint firstItem="stack-actions" firstAttribute="top" secondItem="tbl-services" secondAttribute="bottom" constant="22" id="c20"/>
+                                            <constraint firstItem="stack-actions" firstAttribute="leading" secondItem="content-main" secondAttribute="leading" constant="16" id="c21"/>
+                                            <constraint firstAttribute="trailing" secondItem="stack-actions" secondAttribute="trailing" constant="16" id="c22"/>
+                                            <constraint firstAttribute="bottom" secondItem="stack-actions" secondAttribute="bottom" constant="100" id="c23"/>
+                                            <constraint firstItem="lbl-name" firstAttribute="top" secondItem="img-provider" secondAttribute="bottom" constant="10" id="c3"/>
+                                            <constraint firstItem="lbl-name" firstAttribute="leading" secondItem="content-main" secondAttribute="leading" constant="20" id="c4"/>
+                                            <constraint firstAttribute="trailing" secondItem="lbl-name" secondAttribute="trailing" constant="20" id="c5"/>
+                                            <constraint firstItem="lbl-rating" firstAttribute="top" secondItem="lbl-name" secondAttribute="bottom" constant="8" id="c6"/>
+                                            <constraint firstItem="lbl-rating" firstAttribute="leading" secondItem="content-main" secondAttribute="leading" constant="20" id="c7"/>
+                                            <constraint firstAttribute="trailing" secondItem="lbl-rating" secondAttribute="trailing" constant="20" id="c8"/>
+                                            <constraint firstItem="lbl-skills-title" firstAttribute="top" secondItem="lbl-rating" secondAttribute="bottom" constant="22" id="c9"/>
+                                            <constraint firstItem="stack-skills" firstAttribute="trailing" secondItem="lbl-skills-title" secondAttribute="trailing" id="quB-KH-uvw"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="content-main" firstAttribute="leading" secondItem="scroll-main" secondAttribute="leading" id="s1"/>
+                                    <constraint firstItem="content-main" firstAttribute="top" secondItem="scroll-main" secondAttribute="top" id="s2"/>
+                                    <constraint firstItem="content-main" firstAttribute="trailing" secondItem="scroll-main" secondAttribute="trailing" id="s3"/>
+                                    <constraint firstItem="content-main" firstAttribute="bottom" secondItem="scroll-main" secondAttribute="bottom" id="s4"/>
+                                    <constraint firstItem="content-main" firstAttribute="width" secondItem="scroll-main" secondAttribute="width" id="s5"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="clg"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="flg"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="scroll-main" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="sc1"/>
+                            <constraint firstItem="scroll-main" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="sc2"/>
+                            <constraint firstItem="scroll-main" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="sc3"/>
+                            <constraint firstItem="scroll-main" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="sc4"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bookButton" destination="btn-book" id="out-book"/>
+                        <outlet property="messageButton" destination="btn-message" id="out-msg"/>
+                        <outlet property="nameLabel" destination="lbl-name" id="out-name"/>
+                        <outlet property="providerImageView" destination="img-provider" id="out-img"/>
+                        <outlet property="ratingLabel" destination="lbl-rating" id="out-rating"/>
+                        <outlet property="servicesTableView" destination="tbl-services" id="out-tbl"/>
+                        <outlet property="skillsStackView" destination="stack-skills" id="out-skills"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-213" y="-13"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

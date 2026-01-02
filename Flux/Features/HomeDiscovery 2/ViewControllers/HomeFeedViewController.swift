@@ -214,29 +214,56 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
             
             // 1. Update the Model
             viewModel.selectedCategoryIndex = indexPath.item
-            let selectedCategory = viewModel.categories[indexPath.item]
-            viewModel.filterBy(category: selectedCategory.name)
+            viewModel.filterBy(category: viewModel.categories[indexPath.item].name)
+            DispatchQueue.main.async { self.collectionView.reloadData() }
+        } else if indexPath.section == 0 {
+            let provider = viewModel.recommendedProviders[indexPath.item]
             
-            // 2. Visually update the pills WITHOUT reloading the section (Prevents Jump)
-            for visibleIndexPath in collectionView.indexPathsForVisibleItems {
-                if visibleIndexPath.section == 1 {
-                    if let cell = collectionView.cellForItem(at: visibleIndexPath) as? CategoryCell {
-                        let category = viewModel.categories[visibleIndexPath.item]
-                        // Check if this specific cell should be selected
-                        let isSelected = (visibleIndexPath.item == viewModel.selectedCategoryIndex)
-                        cell.configure(with: category, isSelected: isSelected)
-                    }
-                }
+            // Map User -> Company (Legacy Adapter)
+            let company = Company(
+                id: provider.id ?? UUID().uuidString,
+                providerId: provider.id ?? "",
+                name: provider.businessName ?? provider.name,
+                description: provider.bio ?? "No description",
+                backgroundColor: viewModel.getRandomColor(),
+                category: "Provider",
+                price: 0,
+                rating: 5.0, // Placeholder
+                dateAdded: Date(),
+                imageURL: provider.providerProfileImageURL ?? ""
+            )
+            
+            // Navigate to Provider Details
+            let storyboard = UIStoryboard(name: "ProviderDetails", bundle: nil)
+            if let providerVC = storyboard.instantiateViewController(withIdentifier: "ProviderDetailsVC") as? ProviderDetailsViewController {
+                let providerViewModel = ProviderDetailsViewModel(company: company)
+                providerVC.viewModel = providerViewModel
+                navigationController?.pushViewController(providerVC, animated: true)
             }
+        } else if indexPath.section == 2 {
+            let service = viewModel.displayedServices[indexPath.item]
             
-            // 3. Reload ONLY the Services grid (Section 2) to show new results
-            // Use performBatchUpdates for a smoother transition, or just reloadSection
-            UIView.performWithoutAnimation {
-                self.collectionView.reloadSections(IndexSet(integer: 2))
+            // Map Service -> Company (Legacy Adapter)
+            let company = Company(
+                id: service.id ?? UUID().uuidString,
+                providerId: service.providerId,
+                name: service.title, // Maps to Title
+                description: service.description,
+                backgroundColor: viewModel.getRandomColor(),
+                category: service.category,
+                price: service.sessionPrice,
+                rating: service.rating ?? 0.0,
+                dateAdded: service.createdAt,
+                imageURL: service.coverImageURL
+            )
+            
+            // Navigate to Service Details
+            let storyboard = UIStoryboard(name: "ServiceDetails", bundle: nil)
+            if let detailsVC = storyboard.instantiateViewController(withIdentifier: "ServiceDetailsVC") as? ServiceDetailsViewController {
+                let detailsViewModel = ServiceDetailsViewModel(company: company)
+                detailsVC.viewModel = detailsViewModel
+                navigationController?.pushViewController(detailsVC, animated: true)
             }
-            
-            // 4. Handle Empty State
-            updateEmptyState()
         }
     }
     

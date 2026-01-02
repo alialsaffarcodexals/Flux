@@ -18,7 +18,6 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var reviewTextView: UITextView!
     @IBOutlet weak var titleContainerView: UIView!
-        // Connect these 5 buttons from your Storyboard
     @IBOutlet var starButtons: [UIButton]!
     
     var bookingId: String = ""
@@ -37,11 +36,11 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
     
     
     func setupUI() {
-        // 1. Round Image
+        // Round Image
         providerImageView.layer.cornerRadius = providerImageView.frame.height / 2
         providerImageView.clipsToBounds = true
         
-        // 2. Style the CONTAINERS (The Box Shape)
+        // Style the CONTAINERS (The Box Shape)
         titleContainerView.backgroundColor = .systemGray6
         titleContainerView.layer.cornerRadius = 12
         titleContainerView.clipsToBounds = true
@@ -50,7 +49,7 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
         reviewContainerView.layer.cornerRadius = 12
         reviewContainerView.clipsToBounds = true
         
-        // 3. Style the INPUTS (Make them clear so they sit inside the box)
+        // Style the INPUTS (Make them clear so they sit inside the box)
         titleTextField.backgroundColor = .clear
         titleTextField.borderStyle = .none
         titleTextField.textColor = .label
@@ -62,7 +61,7 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
     }
     // MARK: - TextView Delegate (The Placeholder Logic)
     
-    // When user starts typing, remove the "placeholder" text
+    // remove the "placeholder" text
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
             textView.text = nil
@@ -70,7 +69,7 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
         }
     }
     
-    // When user stops typing, if empty, put "placeholder" back
+    // if empty, put "placeholder" back
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Write your review"
@@ -85,8 +84,6 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
     
     
     // MARK: - Star Logic
-    // Connect ALL 5 buttons to this ONE action in Storyboard
-    // IMPORTANT: Set Tags in Storyboard: Button 1 -> Tag 1, Button 2 -> Tag 2, etc.
     @IBAction func starTapped(_ sender: UIButton) {
         let rating = sender.tag
         currentRating = rating
@@ -107,24 +104,22 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Navigation
     @IBAction func sendButtonTapped(_ sender: Any) {
-        print("👆 Send Button Tapped!")
-        // 1. Validation: Did they select a star?
+        print(" Send Button Tapped!")
         guard currentRating > 0 else {
             print("Please select a rating")
             return
         }
         if reviewTextView.text.isEmpty || reviewTextView.text == "Write your review" {
              showAlert(message: "Please write a review comment.") // Show alert if review is empty
-             return // Stop here
+             return // Stop
         }
         
-        // 2. Get Current User ID (Seeker)
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             print("Error: No user logged in")
             return
         }
         
-        // 3. Create the Review Object
+        // Review Object
         let newReview = Review(
             bookingId: bookingId,
             serviceId: serviceId,
@@ -134,27 +129,24 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
             comment: reviewTextView.text
         )
         
-        print("🚀 Sending to Firestore...")
+        print("to Firestore...")
         
-        // 4. ADD THIS: Send to Firestore using Repository
         ReviewRepository.shared.createReview(newReview) { result in
             switch result {
             case .success(let savedReview):
-                print("✅ Review saved successfully! ID: \(savedReview.id ?? "Unknown")")
+                print("Review saved successfully! ID: \(savedReview.id ?? "Unknown")")
                             
                 BookingRepository.shared.markAsReviewed(bookingId: self.bookingId) { _ in
                     
-                    print("✅ Booking marked as reviewed in Firestore")
+                    print("Booking marked as reviewed in Firestore")
                     
-                    // Navigate to Success Screen (Main Thread)
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "goToSuccess", sender: self)
                     }
                 }
                 
             case .failure(let error):
-                print("❌ Error saving review: \(error.localizedDescription)")
-                // Optional: Show an alert here telling the user it failed
+                print("Error saving review: \(error.localizedDescription)")
                 self.showAlert(message: "Failed to send: \(error.localizedDescription)")
             }
         }
