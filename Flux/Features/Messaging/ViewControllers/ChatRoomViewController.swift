@@ -6,7 +6,7 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     // --- OUTLETS ---
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
-    @IBOutlet weak var sendButton: UIButton! // Make sure to connect this in Storyboard!
+    @IBOutlet weak var sendButton: UIButton!
     
     // --- VARIABLES ---
     var messages: [ChatMessage] = []
