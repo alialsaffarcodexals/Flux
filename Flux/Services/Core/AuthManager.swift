@@ -34,18 +34,18 @@ class AuthManager {
                     switch result {
                     case .success(let downloadURL):
                         // Pass new user data for saving.
-                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: downloadURL) { success in
+                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, seekerProfileImageURL: downloadURL) { success in
                             self?.handleFinalCompletion(success: success, completion: completion)
                         }
                     case .failure(let error):
                         print("Warning image upload: \(error)")
-                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: nil) { success in
+                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, seekerProfileImageURL: nil) { success in
                             self?.handleFinalCompletion(success: success, completion: completion)
                         }
                     }
                 }
             } else {
-                self.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: nil) { success in
+                self.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, seekerProfileImageURL: nil) { success in
                     self.handleFinalCompletion(success: success, completion: completion)
                 }
             }
@@ -54,7 +54,7 @@ class AuthManager {
 
     /// Internal save method.
 
-    private func saveUserToFirestore(uid: String, firstName: String, lastName: String, username: String, email: String, phone: String, profileImageURL: String?, completion: @escaping (Bool) -> Void) {
+    private func saveUserToFirestore(uid: String, firstName: String, lastName: String, username: String, email: String, phone: String, seekerProfileImageURL: String?, completion: @escaping (Bool) -> Void) {
         
         // Store new fields in the dictionary.
         var userData: [String: Any] = [
@@ -71,8 +71,8 @@ class AuthManager {
             "joinedDate": Timestamp(date: Date())
         ]
         
-        if let imageURL = profileImageURL {
-            userData["profileImageURL"] = imageURL
+        if let imageURL = seekerProfileImageURL {
+            userData["seekerProfileImageURL"] = imageURL
         }
         
         db.collection("users").document(uid).setData(userData) { error in
@@ -111,6 +111,49 @@ class AuthManager {
     
     public func signOut() throws {
         try auth.signOut()
+    }
+    
+    // MARK: - Update Sensitive Data
+    
+    public func reauthenticate(password: String, completion: @escaping (Bool, Error?) -> Void) {
+        guard let user = auth.currentUser, let email = user.email else {
+            completion(false, NSError(domain: "AuthManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "No current user or email found."]))
+            return
+        }
+        
+        let credential = EmailAuthProvider.credential(withEmail: email, password: password)
+        
+        user.reauthenticate(with: credential) { result, error in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+    
+    public func updateEmail(to newEmail: String, completion: @escaping (Bool, Error?) -> Void) {
+        let user = auth.currentUser
+        
+        user?.updateEmail(to: newEmail) { error in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+    
+    public func updatePassword(to newPassword: String, completion: @escaping (Bool, Error?) -> Void) {
+        let user = auth.currentUser
+        
+        user?.updatePassword(to: newPassword) { error in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
     }
 
     

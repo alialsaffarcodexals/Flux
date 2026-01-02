@@ -1,29 +1,187 @@
-//
-//  UsersAccountsViewController.swift
-//  Flux
-//
-//  Created by Ali Alkhozaae on 17/12/2025.
-//
-
 import UIKit
 
 class UsersAccountsViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var SearchBar: UISearchBar!
+    
+    var viewModel: AdminToolsViewModel? = AdminToolsViewModel()
+    
+    private var allUsers: [User] = []   // original data
+    private var users: [User] = []      // filtered data
+    // Optional preloaded users to show immediately
+    var initialUsers: [User]?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        guard tableView != nil else {
+            print("⚠️ UsersAccountsViewController: tableView outlet is not connected.")
+            return
+        }
+
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
+
+        SearchBar.delegate = self
+        SearchBar.placeholder = "Search users"
+        SearchBar.autocapitalizationType = .none
+
+        // Use prefetched users if available
+        if let prefetched = initialUsers {
+            allUsers = prefetched
+            users = prefetched
+            tableView.reloadData()
+        } else {
+            fetchUsers()
+        }
     }
-    
 
-    /*
-    // MARK: - Navigation
+    private func fetchUsers() {
+        guard let vm = viewModel else {
+            print("⚠️ UsersAccountsViewController: viewModel is nil, cannot fetch users")
+            return
+        }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+        vm.fetchUsers() { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    self?.allUsers = data
+                    self?.users = data
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    print("❌ Fetch users error:", error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension UsersAccountsViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
+        users.count
+    }
+
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: "UserCell",
+            for: indexPath
+        )
+
+        let user = users[indexPath.row]
+
+        cell.textLabel?.text = user.name
+        cell.detailTextLabel?.text = "@\(user.username)"
+
+        cell.textLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        cell.detailTextLabel?.font = .systemFont(ofSize: 13)
+        cell.detailTextLabel?.textColor = .secondaryLabel
+
+        // Show profile image depending on available fields.
+        // Placeholder (circular) and fixed size
+        let targetSize = CGSize(width: 44, height: 44)
+        func resized(_ image: UIImage) -> UIImage {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            return renderer.image { _ in
+                image.draw(in: CGRect(origin: .zero, size: targetSize))
+            }
+        }
+
+        if let placeholder = UIImage(systemName: "person.crop.square") {
+            let p = resized(placeholder.withTintColor(.systemGray, renderingMode: .alwaysOriginal))
+            cell.imageView?.image = p
+        }
+
+        // Choose image URL: prefer provider image for providers, otherwise seeker image.
+        var imageURLString: String? = nil
+        if user.role == .provider {
+            imageURLString = user.providerProfileImageURL ?? user.seekerProfileImageURL
+        } else {
+            imageURLString = user.seekerProfileImageURL ?? user.providerProfileImageURL
+        }
+
+        if let urlString = imageURLString, let url = URL(string: urlString) {
+            let idx = indexPath
+            URLSession.shared.dataTask(with: url) { data, resp, err in
+                guard let data = data, let img = UIImage(data: data), err == nil else { return }
+                let thumb = resized(img)
+                DispatchQueue.main.async {
+                    if let current = tableView.cellForRow(at: idx) {
+                        current.imageView?.image = thumb
+                        current.imageView?.layer.cornerRadius = targetSize.width / 2
+                        current.imageView?.clipsToBounds = true
+                        current.setNeedsLayout()
+                    }
+                }
+            }.resume()
+        } else {
+            // ensure placeholder has circular style
+            cell.imageView?.layer.cornerRadius = 22
+            cell.imageView?.clipsToBounds = true
+        }
+
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension UsersAccountsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        if let dest = segue.destination as? AccountViewController {
 
+            if let cell = sender as? UITableViewCell,
+               let indexPath = tableView.indexPath(for: cell) {
+
+                let selectedUser = users[indexPath.row]
+                dest.userID = selectedUser.id
+            }
+
+            dest.viewModel = viewModel
+        }
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension UsersAccountsViewController: UISearchBarDelegate {
+
+    func searchBar(_ searchBar: UISearchBar,
+                   textDidChange searchText: String) {
+
+        let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if query.isEmpty {
+            users = allUsers
+        } else {
+            users = allUsers.filter {
+                $0.name.lowercased().contains(query.lowercased()) ||
+                $0.username.lowercased().contains(query.lowercased())
+            }
+        }
+
+        tableView.reloadData()
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        users = allUsers
+        tableView.reloadData()
+    }
 }

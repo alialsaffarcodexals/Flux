@@ -3,37 +3,26 @@
 /// Location: App/SceneDelegate.swift
 
 import UIKit
+import FirebaseAuth
 
-/// Class SceneDelegate: Responsible for the lifecycle, state, and behavior related to SceneDelegate.
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    /// Handles the scene connection lifecycle.
-    /// - Parameters:
-    ///   - scene: The scene to connect.
-    ///   - session: The session being connected.
-    ///   - connectionOptions: Additional options for configuration.
-    /// - Returns: Void
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let windowScene = scene as? UIWindowScene else { return }
 
-        // Required Behavior: Always start at Authentication flow
-        print("🚀 App Launched. Setting Root VC to Authentication Navigation Controller.")
-        
-        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-        
-        // "AuthenticationNC" is the initial Navigation Controller in Authentication.storyboard
-        guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
-            print("🔴 Error: Could not find 'AuthenticationNC' (Auth Nav) in Authentication.storyboard")
-            return
-        }
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+                let window = UIWindow(windowScene: windowScene)
+                self.window = window
+                
+                // Apply saved theme immediately
+                // Apply saved theme immediately using the created window
+                AppSettingsManager.shared.applyTheme(to: window)
 
-        let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = authNav
-        self.window = window
-        window.makeKeyAndVisible()
+                window.rootViewController = LoadingViewController()
+                window.makeKeyAndVisible()
+
+                AppNavigator.shared.startApp()
     }
 
     /// Handles the sceneDidDisconnect lifecycle event.

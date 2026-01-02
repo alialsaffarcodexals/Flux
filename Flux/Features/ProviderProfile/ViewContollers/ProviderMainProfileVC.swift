@@ -9,6 +9,8 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!        // Displays Business Name
     @IBOutlet weak var bioLabel: UILabel!         // Displays Bio
     @IBOutlet weak var locationLabel: UILabel!    // Displays Location
+    @IBOutlet weak var phoneLabel: UILabel!
+    
     @IBOutlet weak var profileImageView: UIImageView! // Shared Profile Image
     @IBOutlet weak var skillsTagContainer: UIStackView?
     @IBOutlet weak var skillsRowOneStackView: UIStackView?
@@ -19,6 +21,8 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var skillTagButtonThree: UIButton?
     @IBOutlet weak var skillTagButtonFour: UIButton?
     @IBOutlet weak var skillTagMoreButton: UIButton?
+    
+    @IBOutlet weak var editPortfolioButton: UIButton!
     
     // Properties
     private var viewModel = ProviderProfileViewModel()
@@ -33,6 +37,13 @@ class ProviderMainProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 🧹 Clear labels to prevent dummy text
+        nameLabel.text = ""
+        bioLabel.text = ""
+        locationLabel.text = ""
+        phoneLabel.text = ""
+        
         setupBindings()
         resetSkillTagUI()
         removeWidthConstraints()
@@ -78,16 +89,25 @@ class ProviderMainProfileVC: UIViewController {
                 // 📍 Show Location (Shared Source)
                 self?.locationLabel.text = user.location
                 
-                // 🖼️ Load Shared Profile Image
-                if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
+                // Safety: Optional chain phoneLabel in case it's not connected
+                self?.phoneLabel?.text = user.phoneNumber ?? "Not set"
+                
+                // ✅ Display Provider profile image
+                // Only load image if URL exists and is not empty - otherwise keep storyboard placeholder
+                if let imageURL = user.providerProfileImageURL,
+                   !imageURL.isEmpty,
+                   let url = URL(string: imageURL) {
+                    // Load image asynchronously
                     DispatchQueue.global().async {
                         if let data = try? Data(contentsOf: url) {
                             DispatchQueue.main.async {
                                 self?.profileImageView.image = UIImage(data: data)
                             }
                         }
+                        // If loading fails, do nothing - keep existing image (storyboard placeholder)
                     }
                 }
+                // If URL is nil/empty, do nothing - storyboard placeholder remains
             }
         }
         
@@ -138,6 +158,36 @@ class ProviderMainProfileVC: UIViewController {
         // Push onto existing navigation stack (preserves Back button)
         navigationController?.pushViewController(settingsVC, animated: true)
     }
+    
+    @IBAction func editPortfolioTapped(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Portfolio", bundle: nil)
+
+        guard let portfolioVC = storyboard.instantiateViewController(withIdentifier: "PortfolioVC") as? PortfolioListViewController else {
+            assertionFailure("PortfolioVC in Portfolio.storyboard is not PortfolioListViewController. Check storyboard Class/Module.")
+            return
+        }
+
+        navigationController?.pushViewController(portfolioVC, animated: true)
+    }
+    
+    // MARK: - Service Packages
+    @IBAction func viewServicePackagesTapped(_ sender: Any) {
+        if let vc = AppNavigator.shared.getServicePackagesListViewController() {
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("🔴 Error: Could not instantiate ServicePackagesListViewController via AppNavigator")
+        }
+    }
+    
+    // ✅ Edit Provider Profile Picture Action
+    @IBAction func editProviderProfilePictureTapped(_ sender: UIButton) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
+    }
+
     
     // MARK: - Navigation Logic
     private func navigateToSeekerProfile() {
@@ -264,6 +314,7 @@ class ProviderMainProfileVC: UIViewController {
             label.textColor = .secondaryLabel
             label.numberOfLines = 0
             label.textAlignment = .left
+            label.font = .systemFont(ofSize: 18)
             emptySkillsLabel = label
             return label
         }()
@@ -390,5 +441,31 @@ class ProviderMainProfileVC: UIViewController {
             btn.configuration = config
             // FIX ENDS HERE
         }
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension ProviderMainProfileVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        
+        if let editedImage = info[.editedImage] as? UIImage {
+            print("📸 Image selected for Provider profile")
+            // Optimistic UI update
+            profileImageView.image = editedImage
+            // Upload and save
+            viewModel.updateProviderProfileImage(image: editedImage)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            print("📸 Image selected for Provider profile")
+            // Optimistic UI update
+            profileImageView.image = originalImage
+            // Upload and save
+            viewModel.updateProviderProfileImage(image: originalImage)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
     }
 }
