@@ -42,25 +42,37 @@ final class FavoritesVM {
     
     // MARK: - Public Methods
     func loadFavorites() {
+        print("🔥 FavoritesVM: loadFavorites() called")
+        
         guard let userId = Auth.auth().currentUser?.uid else {
+            print("🔥 FavoritesVM: No current user - userId is nil")
             onDataChanged?()
             return
         }
+        
+        print("🔥 FavoritesVM: Current user ID = \(userId)")
         
         // Get current user's favorite provider IDs
         userRepo.getUser(uid: userId) { [weak self] result in
             switch result {
             case .success(let user):
                 let favoriteIds = user.favoriteProviderIds ?? []
+                print("🔥 FavoritesVM: User loaded successfully")
+                print("🔥 FavoritesVM: favoriteProviderIds = \(favoriteIds)")
+                print("🔥 FavoritesVM: favoriteProviderIds count = \(favoriteIds.count)")
+                
                 if favoriteIds.isEmpty {
+                    print("🔥 FavoritesVM: No favorites found - list is empty")
                     DispatchQueue.main.async {
                         self?.favoriteItems = []
                         self?.onDataChanged?()
                     }
                 } else {
+                    print("🔥 FavoritesVM: Fetching provider details for \(favoriteIds.count) providers")
                     self?.fetchProviderDetails(for: favoriteIds)
                 }
             case .failure(let error):
+                print("🔥 FavoritesVM: Error loading user - \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     self?.onError?(error)
                 }
@@ -74,6 +86,7 @@ final class FavoritesVM {
         
         for providerId in providerIds {
             group.enter()
+            print("🔥 FavoritesVM: Fetching provider \(providerId)")
             
             userRepo.getUser(uid: providerId) { result in
                 defer { group.leave() }
@@ -85,17 +98,18 @@ final class FavoritesVM {
                         providerId: providerId,
                         providerName: provider.name,
                         serviceName: serviceName,
-                        profileImageURL: provider.profileImageURL(for: .sellerMode)
+                        profileImageURL: provider.providerProfileImageURL
                     )
                     items.append(item)
-                case .failure:
-                    // Skip providers we can't fetch
-                    break
+                    print("🔥 FavoritesVM: Successfully loaded provider \(provider.name)")
+                case .failure(let error):
+                    print("🔥 FavoritesVM: Failed to load provider \(providerId) - \(error.localizedDescription)")
                 }
             }
         }
         
         group.notify(queue: .main) { [weak self] in
+            print("🔥 FavoritesVM: All providers fetched - total items = \(items.count)")
             self?.favoriteItems = items
             self?.onDataChanged?()
         }
@@ -113,16 +127,20 @@ final class FavoritesVM {
         let item = displayItems[index]
         let providerId = item.providerId
         
+        print("🔥 FavoritesVM: Removing provider \(providerId) from favorites")
+        
         // Remove from Firebase
         db.collection("users").document(userId).updateData([
             "favoriteProviderIds": FieldValue.arrayRemove([providerId])
         ]) { [weak self] error in
             DispatchQueue.main.async {
                 if let error = error {
+                    print("🔥 FavoritesVM: Error removing favorite - \(error.localizedDescription)")
                     self?.onError?(error)
                     return
                 }
                 
+                print("🔥 FavoritesVM: Successfully removed from favorites")
                 // Remove from local data
                 self?.favoriteItems.removeAll { $0.providerId == providerId }
                 self?.filteredItems.removeAll { $0.providerId == providerId }
@@ -150,5 +168,4 @@ final class FavoritesVM {
         filteredItems = []
         onDataChanged?()
     }
-    
 }

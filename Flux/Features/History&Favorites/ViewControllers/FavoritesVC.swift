@@ -92,6 +92,8 @@ extension FavoritesVC: UITableViewDataSource {
     }
 }
 
+
+
 // MARK: - UITableViewDelegate
 extension FavoritesVC: UITableViewDelegate {
     
