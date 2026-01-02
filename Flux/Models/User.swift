@@ -42,6 +42,10 @@ struct User: Identifiable, Codable {
     var businessName: String?
     var bio: String?
     var isVerified: Bool?
+    // Account flags
+    var isSuspended: Bool?
+    var isBanned: Bool?
+    var suspendedUntil: Date?
 
     var name: String { "\(firstName) \(lastName)" }
     

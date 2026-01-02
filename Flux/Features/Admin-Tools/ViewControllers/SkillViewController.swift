@@ -159,33 +159,42 @@ class SkillViewController: UIViewController {
             present(a, animated: true)
             return
         }
-        approveButton.isEnabled = false
-        let loading = UIAlertController(title: nil, message: "Approving…", preferredStyle: .alert)
-        present(loading, animated: true)
-        viewModel?.updateSkillStatus(skillID: id, status: .approved) { [weak self] error in
-            DispatchQueue.main.async {
-                loading.dismiss(animated: true) {
-                    self?.approveButton.isEnabled = true
-                    if let error = error {
-                        let a = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                        a.addAction(UIAlertAction(title: "OK", style: .default))
-                        self?.present(a, animated: true)
-                    } else {
-                        // Keep the displayed level unchanged after approving
-                        self?.skillLevel.text = self?.skill?.level?.rawValue ?? "Unknown"
-                        let a = UIAlertController(title: "Success", message: "Skill approved.", preferredStyle: .alert)
-                        a.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-                            if let nav = self?.navigationController {
-                                nav.popViewController(animated: true)
-                            } else {
-                                self?.dismiss(animated: true, completion: nil)
-                            }
-                        })
-                        self?.present(a, animated: true)
+
+        // Ask for confirmation before approving
+        let confirm = UIAlertController(title: "Approve Skill?", message: "Are you sure you want to approve this skill?", preferredStyle: .alert)
+        confirm.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        confirm.addAction(UIAlertAction(title: "Approve", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            self.approveButton.isEnabled = false
+            let loading = UIAlertController(title: nil, message: "Approving…", preferredStyle: .alert)
+            self.present(loading, animated: true)
+            self.viewModel?.updateSkillStatus(skillID: id, status: .approved) { [weak self] error in
+                DispatchQueue.main.async {
+                    loading.dismiss(animated: true) {
+                        self?.approveButton.isEnabled = true
+                        if let error = error {
+                            let a = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            a.addAction(UIAlertAction(title: "OK", style: .default))
+                            self?.present(a, animated: true)
+                        } else {
+                            // Keep the displayed level unchanged after approving
+                            self?.skillLevel.text = self?.skill?.level?.rawValue ?? "Unknown"
+                            let a = UIAlertController(title: "Success", message: "Skill approved.", preferredStyle: .alert)
+                            a.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+                                if let nav = self?.navigationController {
+                                    nav.popViewController(animated: true)
+                                } else {
+                                    self?.dismiss(animated: true, completion: nil)
+                                }
+                            })
+                            self?.present(a, animated: true)
+                        }
                     }
                 }
             }
-        }
+        })
+
+        present(confirm, animated: true)
     }
 
     @IBAction func rejectTapped(_ sender: UIButton) {
