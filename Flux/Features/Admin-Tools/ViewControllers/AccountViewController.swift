@@ -204,7 +204,7 @@ class AccountViewController: UIViewController {
                 guard let id = self.user?.id else { return }
                 sender.isEnabled = false
                 sender.setTitle("Unsuspending...", for: .normal)
-                self.viewModel?.updateUserFlags(userID: id, isSuspended: false, suspendedUntil: nil, removeSuspendedUntil: true) { [weak self] error in
+                self.viewModel?.updateUserFlags(userID: id, isSuspended: false, suspendedUntil: nil, removeSuspendedUntil: true, moderationReason: reason) { [weak self] error in
                     DispatchQueue.main.async {
                         sender.isEnabled = true
                         sender.setTitle("Suspend", for: .normal)
@@ -234,7 +234,7 @@ class AccountViewController: UIViewController {
 
             let sevenDays = Date().addingTimeInterval(7 * 24 * 60 * 60)
             // Set isSuspended = true, isBanned = false to keep only one flag active
-            self.viewModel?.updateUserFlags(userID: id, isSuspended: true, isBanned: false, suspendedUntil: sevenDays) { [weak self] error in
+            self.viewModel?.updateUserFlags(userID: id, isSuspended: true, isBanned: false, suspendedUntil: sevenDays, moderationReason: reason) { [weak self] error in
                 DispatchQueue.main.async {
                     sender.isEnabled = true
                     sender.setTitle("Suspend", for: .normal)
@@ -265,7 +265,7 @@ class AccountViewController: UIViewController {
                 guard let id = self.user?.id else { return }
                 sender.isEnabled = false
                 sender.setTitle("Unbanning...", for: .normal)
-                self.viewModel?.updateUserFlags(userID: id, isBanned: false) { [weak self] error in
+                self.viewModel?.updateUserFlags(userID: id, isBanned: false, moderationReason: reason) { [weak self] error in
                     DispatchQueue.main.async {
                         sender.isEnabled = true
                         sender.setTitle("Ban", for: .normal)
@@ -294,7 +294,7 @@ class AccountViewController: UIViewController {
             sender.setTitle("Banning...", for: .normal)
 
             // Set isBanned = true and clear suspension flags
-            self.viewModel?.updateUserFlags(userID: id, isSuspended: false, isBanned: true, removeSuspendedUntil: true) { [weak self] error in
+            self.viewModel?.updateUserFlags(userID: id, isSuspended: false, isBanned: true, removeSuspendedUntil: true, moderationReason: reason) { [weak self] error in
                 DispatchQueue.main.async {
                     sender.isEnabled = true
                     sender.setTitle("Ban", for: .normal)
