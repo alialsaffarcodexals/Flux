@@ -3,28 +3,49 @@ import FirebaseAuth
 
 class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    // --- OUTLETS ---
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
+    @IBOutlet weak var sendButton: UIButton! // Make sure to connect this in Storyboard!
     
-    // Variables
+    // --- VARIABLES ---
     var messages: [ChatMessage] = []
     
-    // This ID must be passed from the ChatList screen!
-    // (For testing only, if it's empty, we use the test chat)
+    // This ID must be passed from the ChatList or ServiceDetails screen!
     var conversationId: String = "test_chat_01"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Setup Table
+        // 1. Setup Table
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none // Hides lines between bubbles
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         
-        // Start Loading
+        // 2. Setup Button State (Disabled by default)
+        sendButton.isEnabled = false
+        sendButton.alpha = 0.5
+        
+        // 3. Add Listener for Typing
+        messageTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
+        
+        // 4. Start Loading Messages
         loadMessages()
+    }
+    
+    // --- LISTENER: Check Text Field ---
+    @objc func textFieldChanged() {
+        // Check if text exists and isn't just whitespace
+        if let text = messageTextField.text, !text.trimmingCharacters(in: .whitespaces).isEmpty {
+            sendButton.isEnabled = true
+            sendButton.alpha = 1.0 // Fully visible
+        } else {
+            sendButton.isEnabled = false
+            sendButton.alpha = 0.5 // Faded
+        }
     }
     
     // --- LOAD MESSAGES ---
@@ -50,9 +71,9 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     // --- SEND ACTION ---
     @IBAction func sendButtonTapped(_ sender: Any) {
         guard let text = messageTextField.text, !text.isEmpty else { return }
-        guard let currentUserId = Auth.auth().currentUser?.email else { return } // Using Email as ID for consistency
+        guard let currentUserId = Auth.auth().currentUser?.email else { return }
         
-        // Create Message Object
+        // 1. Create Message Object
         let newMessage = ChatMessage(
             id: nil,
             senderId: currentUserId,
@@ -60,10 +81,12 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
             sentAt: Date()
         )
         
-        // Clear Text Field immediately for better UX
+        // 2. Clear Text Field & Reset Button
         messageTextField.text = ""
+        sendButton.isEnabled = false
+        sendButton.alpha = 0.5
         
-        // Send to Firebase
+        // 3. Send to Firebase
         ChatRepository.shared.sendMessage(conversationId: conversationId, message: newMessage) { result in
             switch result {
             case .success:
@@ -90,11 +113,9 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
         let message = messages[indexPath.row]
         let currentUserId = Auth.auth().currentUser?.email ?? ""
         
-        // CHECK: Are you using "MyCell" and "TheirCell" in Storyboard?
-        // If not, use "ChatCell" and configure it dynamically.
+        // Check if message is from Me or Them
         if message.senderId == currentUserId {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath)
-            // Assuming you have a Label with Tag 1 inside the cell
             if let label = cell.viewWithTag(1) as? UILabel {
                 label.text = message.text
             }

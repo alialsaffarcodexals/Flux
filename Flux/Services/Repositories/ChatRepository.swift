@@ -121,4 +121,54 @@ final class ChatRepository {
             }
         }
     }
+    // --- 1. Helper to find Email from UID ---
+        func fetchEmail(for userId: String, completion: @escaping (String?) -> Void) {
+            db.collection("users").document(userId).getDocument { snapshot, error in
+                if let data = snapshot?.data(), let email = data["email"] as? String {
+                    completion(email)
+                } else {
+                    print("Could not find email for UID: \(userId)")
+                    completion(nil)
+                }
+            }
+        }
+
+        // --- 2. Find or Create a Conversation ---
+        func getOrCreateConversation(otherUserEmail: String, completion: @escaping (String?) -> Void) {
+            guard let myEmail = Auth.auth().currentUser?.email else { return }
+
+            // A. Search for existing chat
+            db.collection("conversations")
+                .whereField("participants", arrayContains: myEmail)
+                .getDocuments { snapshot, error in
+                    
+                    // Look for a doc that ALSO has the other person's email
+                    if let docs = snapshot?.documents {
+                        for doc in docs {
+                            let participants = doc["participants"] as? [String] ?? []
+                            if participants.contains(otherUserEmail) {
+                                // Found it! Return the ID.
+                                completion(doc.documentID)
+                                return
+                            }
+                        }
+                    }
+                    
+                    // B. If not found, CREATE a new one
+                    let newChatRef = self.db.collection("conversations").document()
+                    let data: [String: Any] = [
+                        "participants": [myEmail, otherUserEmail],
+                        "lastMessage": "New Chat",
+                        "lastMessageTimestamp": Timestamp(date: Date())
+                    ]
+                    
+                    newChatRef.setData(data) { error in
+                        if error == nil {
+                            completion(newChatRef.documentID)
+                        } else {
+                            completion(nil)
+                        }
+                    }
+                }
+        }
 }
