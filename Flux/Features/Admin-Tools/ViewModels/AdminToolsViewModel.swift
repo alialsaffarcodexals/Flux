@@ -1,5 +1,6 @@
 import Foundation
 import FirebaseFirestore
+import FirebaseAuth
 
 class AdminToolsViewModel {
 
@@ -189,8 +190,16 @@ class AdminToolsViewModel {
             data["adminFeedback"] = feedback
         }
 
-        db.collection("skills").document(skillID).updateData(data) { error in
+        db.collection("skills").document(skillID).updateData(data) { [weak self] error in
             completion?(error)
+            guard error == nil else { return }
+            // create an activity notification for this admin action
+            if let self = self {
+                let title = status == .approved ? "Skill approved" : "Skill rejected"
+                var message = ""
+                if let fb = adminFeedback, !fb.isEmpty { message = fb }
+                self.createActivityNotification(title: title, message: message, toUserId: "")
+            }
         }
     }
 
@@ -231,7 +240,10 @@ class AdminToolsViewModel {
                         // use these in place
                         let user = User(id: doc.documentID, firstName: f, lastName: l, username: username.isEmpty ? full : username, email: (data["email"] as? String) ?? "", phoneNumber: (data["phoneNumber"] as? String) ?? "", role: UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker)
                         var mutableUser = user
-                        mutableUser.profileImageURL = data["profileImageURL"] as? String
+                        // Support both old and new field names for backward compatibility
+                        let legacy = data["profileImageURL"] as? String
+                        mutableUser.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                        mutableUser.providerProfileImageURL = data["providerProfileImageURL"] as? String
                         mutableUser.location = data["location"] as? String
                         mutableUser.interests = data["interests"] as? [String]
                         mutableUser.favoriteServiceIds = data["favoriteServiceIds"] as? [String]
@@ -256,7 +268,10 @@ class AdminToolsViewModel {
                 // not enough data, but still try to return a partial user
                 let fallbackUser = User(id: doc.documentID, firstName: firstName, lastName: lastName, username: username, email: (data["email"] as? String) ?? "", phoneNumber: (data["phoneNumber"] as? String) ?? "", role: UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker)
                 var mutableUser = fallbackUser
-                mutableUser.profileImageURL = data["profileImageURL"] as? String
+                // Support both old and new field names for backward compatibility
+                let legacy = data["profileImageURL"] as? String
+                mutableUser.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                mutableUser.providerProfileImageURL = data["providerProfileImageURL"] as? String
                 mutableUser.location = data["location"] as? String
                 mutableUser.interests = data["interests"] as? [String]
                 mutableUser.favoriteServiceIds = data["favoriteServiceIds"] as? [String]
@@ -270,7 +285,10 @@ class AdminToolsViewModel {
 
             let user = User(id: doc.documentID, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phoneNumber, role: role)
             var mutableUser = user
-            mutableUser.profileImageURL = data["profileImageURL"] as? String
+            // Support both old and new field names for backward compatibility
+            let legacy = data["profileImageURL"] as? String
+            mutableUser.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+            mutableUser.providerProfileImageURL = data["providerProfileImageURL"] as? String
             mutableUser.location = data["location"] as? String
             mutableUser.activeProfileMode = ProfileMode(rawValue: (data["activeProfileMode"] as? String) ?? "")
             mutableUser.interests = data["interests"] as? [String]
@@ -313,7 +331,10 @@ class AdminToolsViewModel {
 
                 var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phoneNumber, role: role)
                 user.joinedDate = joinedDate.dateValue()
-                user.profileImageURL = data["profileImageURL"] as? String
+                // Support both old and new field names for backward compatibility
+                let legacy = data["profileImageURL"] as? String
+                user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                user.providerProfileImageURL = data["providerProfileImageURL"] as? String
                 user.location = data["location"] as? String
                 user.activeProfileMode = ProfileMode(rawValue: (data["activeProfileMode"] as? String) ?? "")
                 user.interests = data["interests"] as? [String]
@@ -329,6 +350,137 @@ class AdminToolsViewModel {
         }
     }
 
+    // MARK: - Tolerant user lookup by identifier
+    /// Tries to resolve a user by document ID first, then by common fields like `username`, `email`, or `displayName`.
+    func fetchUserByIdentifier(_ identifier: String, completion: @escaping (Result<User, Error>) -> Void) {
+        // Try by document ID first
+        fetchUser(userID: identifier) { result in
+            switch result {
+            case .success(let user):
+                completion(.success(user))
+            case .failure:
+                // Fallback to query by username, email or displayName
+                self.db.collection("users")
+                    .whereField("username", isEqualTo: identifier)
+                    .limit(to: 1)
+                    .getDocuments { snap, error in
+                        if let error = error {
+                            // try email / displayName queries sequentially
+                            self.db.collection("users").whereField("email", isEqualTo: identifier).limit(to: 1).getDocuments { s2, e2 in
+                                if let e2 = e2 {
+                                    completion(.failure(e2))
+                                    return
+                                }
+                                if let doc = s2?.documents.first, let data = doc.data() as [String: Any]? {
+                                    // decode minimal user
+                                    let id = doc.documentID
+                                    let firstName = (data["firstName"] as? String) ?? ""
+                                    let lastName = (data["lastName"] as? String) ?? ""
+                                    let username = (data["username"] as? String) ?? (data["displayName"] as? String) ?? identifier
+                                    let email = (data["email"] as? String) ?? ""
+                                    let phone = (data["phoneNumber"] as? String) ?? ""
+                                    let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
+                                    var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
+                                    // Support both old and new field names for backward compatibility
+                                    user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? (data["profileImageURL"] as? String)
+                                    user.providerProfileImageURL = data["providerProfileImageURL"] as? String
+                                    completion(.success(user))
+                                    return
+                                }
+
+                                // last attempt: displayName search
+                                self.db.collection("users").whereField("displayName", isEqualTo: identifier).limit(to: 1).getDocuments { s3, e3 in
+                                    if let e3 = e3 {
+                                        completion(.failure(e3))
+                                        return
+                                    }
+                                    if let doc = s3?.documents.first, let data = doc.data() as [String: Any]? {
+                                        let id = doc.documentID
+                                        let firstName = (data["firstName"] as? String) ?? ""
+                                        let lastName = (data["lastName"] as? String) ?? ""
+                                        let username = (data["username"] as? String) ?? (data["displayName"] as? String) ?? identifier
+                                        let email = (data["email"] as? String) ?? ""
+                                        let phone = (data["phoneNumber"] as? String) ?? ""
+                                        let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
+                                        var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
+                                        // Support both old and new field names for backward compatibility
+                                    user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? (data["profileImageURL"] as? String)
+                                    user.providerProfileImageURL = data["providerProfileImageURL"] as? String
+                                        completion(.success(user))
+                                        return
+                                    }
+
+                                    completion(.failure(NSError(domain: "AdminToolsViewModel", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                                }
+                            }
+                            return
+                        }
+
+                        if let doc = snap?.documents.first, let data = doc.data() as [String: Any]? {
+                            let id = doc.documentID
+                            let firstName = (data["firstName"] as? String) ?? ""
+                            let lastName = (data["lastName"] as? String) ?? ""
+                            let username = (data["username"] as? String) ?? (data["displayName"] as? String) ?? identifier
+                            let email = (data["email"] as? String) ?? ""
+                            let phone = (data["phoneNumber"] as? String) ?? ""
+                            let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
+                            var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
+                            // Support both old and new field names for backward compatibility
+                            let legacy = data["profileImageURL"] as? String
+                            user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                            user.providerProfileImageURL = data["providerProfileImageURL"] as? String
+                            completion(.success(user))
+                            return
+                        }
+
+                        // If for some reason nothing matched, try email/displayName as above
+                        self.db.collection("users").whereField("email", isEqualTo: identifier).limit(to: 1).getDocuments { s2, e2 in
+                            if let e2 = e2 {
+                                completion(.failure(e2)); return
+                            }
+                            if let doc = s2?.documents.first, let data = doc.data() as [String: Any]? {
+                                let id = doc.documentID
+                                let firstName = (data["firstName"] as? String) ?? ""
+                                let lastName = (data["lastName"] as? String) ?? ""
+                                let username = (data["username"] as? String) ?? (data["displayName"] as? String) ?? identifier
+                                let email = (data["email"] as? String) ?? ""
+                                let phone = (data["phoneNumber"] as? String) ?? ""
+                                let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
+                                var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
+                                // Support both old and new field names for backward compatibility
+                                let legacy = data["profileImageURL"] as? String
+                                user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? legacy
+                                user.providerProfileImageURL = data["providerProfileImageURL"] as? String
+                                completion(.success(user))
+                                return
+                            }
+
+                            self.db.collection("users").whereField("displayName", isEqualTo: identifier).limit(to: 1).getDocuments { s3, e3 in
+                                if let e3 = e3 { completion(.failure(e3)); return }
+                                if let doc = s3?.documents.first, let data = doc.data() as [String: Any]? {
+                                    let id = doc.documentID
+                                    let firstName = (data["firstName"] as? String) ?? ""
+                                    let lastName = (data["lastName"] as? String) ?? ""
+                                    let username = (data["username"] as? String) ?? (data["displayName"] as? String) ?? identifier
+                                    let email = (data["email"] as? String) ?? ""
+                                    let phone = (data["phoneNumber"] as? String) ?? ""
+                                    let role = UserRole(rawValue: (data["role"] as? String) ?? "Seeker") ?? .seeker
+                                    var user = User(id: id, firstName: firstName, lastName: lastName, username: username, email: email, phoneNumber: phone, role: role)
+                                    // Support both old and new field names for backward compatibility
+                                    user.seekerProfileImageURL = (data["seekerProfileImageURL"] as? String) ?? (data["profileImageURL"] as? String)
+                                    user.providerProfileImageURL = data["providerProfileImageURL"] as? String
+                                    completion(.success(user))
+                                    return
+                                }
+
+                                completion(.failure(NSError(domain: "AdminToolsViewModel", code: 404, userInfo: [NSLocalizedDescriptionKey: "User not found"])))
+                            }
+                        }
+                    }
+            }
+        }
+    }
+
     // MARK: - Update user flags (suspend/ban/verify)
     func updateUserFlags(userID: String, isSuspended: Bool? = nil, isBanned: Bool? = nil, isVerified: Bool? = nil, completion: ((Error?) -> Void)? = nil) {
         var data: [String: Any] = [:]
@@ -338,8 +490,19 @@ class AdminToolsViewModel {
 
         guard !data.isEmpty else { completion?(nil); return }
 
-        db.collection("users").document(userID).updateData(data) { error in
+        db.collection("users").document(userID).updateData(data) { [weak self] error in
             completion?(error)
+            guard error == nil else { return }
+            // notify the user about account flag changes
+            if let self = self {
+                var parts: [String] = []
+                if let s = isSuspended { parts.append(s ? "suspended" : "unsuspended") }
+                if let b = isBanned { parts.append(b ? "banned" : "unbanned") }
+                if let v = isVerified { parts.append(v ? "verified" : "unverified") }
+                let message = parts.joined(separator: ", ")
+                let title = "Account update"
+                self.createActivityNotification(title: title, message: message, toUserId: userID)
+            }
         }
     }
 
@@ -537,8 +700,15 @@ class AdminToolsViewModel {
 
     // MARK: - Update Report Status
     func updateReportStatus(reportID: String, status: String, completion: ((Error?) -> Void)? = nil) {
-        db.collection("reports").document(reportID).updateData(["status": status]) { error in
+        db.collection("reports").document(reportID).updateData(["status": status]) { [weak self] error in
             completion?(error)
+            guard error == nil else { return }
+            // create an activity notification for the report update
+            if let self = self {
+                let title = "Report updated"
+                let message = "Status set to \(status)"
+                self.createActivityNotification(title: title, message: message, toUserId: "")
+            }
         }
     }
 
@@ -552,8 +722,14 @@ class AdminToolsViewModel {
 
         guard !data.isEmpty else { completion?(nil); return }
 
-        db.collection("reports").document(reportID).updateData(data) { error in
+        db.collection("reports").document(reportID).updateData(data) { [weak self] error in
             completion?(error)
+            guard error == nil else { return }
+            if let self = self {
+                let title = "Report modified"
+                let message = (reason ?? "Report updated")
+                self.createActivityNotification(title: title, message: message, toUserId: "")
+            }
         }
     }
 
@@ -567,8 +743,10 @@ class AdminToolsViewModel {
         )
 
         do {
-            _ = try db.collection("serviceCategories").addDocument(from: category)
+            let docRef = try db.collection("serviceCategories").addDocument(from: category)
             completion?(nil)
+            // notify about new category
+            self.createActivityNotification(title: "Category added", message: name, toUserId: "all")
         } catch {
             completion?(error)
         }
@@ -585,7 +763,41 @@ class AdminToolsViewModel {
     func renameCategory(categoryID: String, newName: String) {
         db.collection("serviceCategories")
             .document(categoryID)
-            .updateData(["name": newName])
+            .updateData(["name": newName]) { [weak self] error in
+                guard error == nil else { return }
+                self?.createActivityNotification(title: "Category renamed", message: newName, toUserId: "all")
+            }
+    }
+
+    // MARK: - Delete Category
+    func deleteCategory(categoryID: String, completion: ((Error?) -> Void)? = nil) {
+        db.collection("serviceCategories")
+            .document(categoryID)
+            .delete { [weak self] error in
+                completion?(error)
+                guard error == nil else { return }
+                self?.createActivityNotification(title: "Category deleted", message: categoryID, toUserId: "all")
+            }
+    }
+
+    // MARK: - Activity notification helper
+    private func createActivityNotification(title: String, message: String, toUserId: String) {
+        guard let admin = Auth.auth().currentUser else { return }
+        let fromId = admin.uid
+        let fromName = admin.displayName ?? "Admin"
+
+        let payload: [String: Any] = [
+            "title": title,
+            "message": message,
+            "type": NotificationType.activity.rawValue,
+            "fromUserId": fromId,
+            "fromName": fromName,
+            "toUserId": toUserId.isEmpty ? "all" : toUserId,
+            "createdAt": FieldValue.serverTimestamp(),
+            "isRead": false
+        ]
+
+        db.collection("notifications").addDocument(data: payload)
     }
 
     

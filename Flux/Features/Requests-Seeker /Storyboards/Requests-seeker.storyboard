@@ -119,7 +119,7 @@
                     <connections>
                         <outlet property="searchBar" destination="uOu-U4-hnx" id="mSG-AF-FOd"/>
                         <outlet property="tableView" destination="H3r-qT-Wuu" id="QEC-y3-gp0"/>
-                        <segue destination="MFy-Aw-JYm" kind="show" id="oMR-y6-ffo"/>
+                        <segue destination="MFy-Aw-JYm" kind="show" identifier="goToReview" id="oMR-y6-ffo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RA6-ao-1eo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -129,7 +129,7 @@
         <!--Review -->
         <scene sceneID="n7R-jF-Yp0">
             <objects>
-                <viewController id="MFy-Aw-JYm" customClass="ReviewViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="MFy-Aw-JYm" customClass="ReviewViewController" customModule="Flux" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hQ8-8P-4xm">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,16 +186,13 @@
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="star" catalog="system"/>
-                                                <connections>
-                                                    <action selector="favoriteButton:" destination="OXj-Qh-ne2" eventType="touchUpInside" id="TNz-Yl-qRi"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yaz-un-1PP">
-                                <rect key="frame" x="20" y="443" width="353" height="200"/>
+                                <rect key="frame" x="20" y="443" width="353" height="185"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="squ-JW-mC8">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="50"/>
@@ -225,7 +222,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T0I-Fp-bpW">
-                                        <rect key="frame" x="0.0" y="65" width="353" height="135"/>
+                                        <rect key="frame" x="0.0" y="65" width="353" height="120"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22m-4q-1yi">
                                                 <rect key="frame" x="15.000000000000004" y="14.999999999999998" width="54.333333333333343" height="20.333333333333329"/>
@@ -234,7 +231,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eip-q8-xTX">
-                                                <rect key="frame" x="79.333333333333343" y="10" width="263.66666666666663" height="120"/>
+                                                <rect key="frame" x="79.333333333333343" y="-5" width="263.66666666666663" height="120"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="120" id="dVi-Kb-SIt"/>
                                                 </constraints>
@@ -253,9 +250,6 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="oVN-VF-VuR"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gqJ-Sd-nAG"/>
@@ -271,13 +265,20 @@
                         <barButtonItem key="rightBarButtonItem" title="Send" style="done" id="uYf-8O-WhX"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="reviewContainerView" destination="T0I-Fp-bpW" id="bwI-yn-DXp"/>
-                        <outlet property="titleContainerView" destination="squ-JW-mC8" id="cbS-Ma-PS2"/>
+                        <outlet property="providerImageView" destination="QnJ-Xs-PbE" id="b3U-Ep-o0B"/>
+                        <outlet property="reviewContainerView" destination="T0I-Fp-bpW" id="nle-JO-7yT"/>
+                        <outlet property="reviewTextView" destination="g6t-Qn-5jY" id="rTp-HJ-o9a"/>
+                        <outlet property="titleContainerView" destination="squ-JW-mC8" id="OKr-ha-g9x"/>
+                        <outlet property="titleTextField" destination="g6t-Qn-5jY" id="9S8-IS-hK5"/>
+                        <outletCollection property="starButtons" destination="J2k-fb-Te3" collectionClass="NSMutableArray" id="1Cw-Qf-eu1"/>
+                        <outletCollection property="starButtons" destination="M78-kF-PHV" collectionClass="NSMutableArray" id="3S8-r5-Hcq"/>
+                        <outletCollection property="starButtons" destination="RpV-0z-xwC" collectionClass="NSMutableArray" id="J9b-a0-ivH"/>
+                        <outletCollection property="starButtons" destination="y0B-lC-rNI" collectionClass="NSMutableArray" id="AbQ-el-zCB"/>
+                        <outletCollection property="starButtons" destination="aeI-WQ-sAb" collectionClass="NSMutableArray" id="8oN-6A-ri5"/>
                         <segue destination="eH6-DH-sJc" kind="presentation" id="MbV-js-5o0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CjB-SJ-aTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="OXj-Qh-ne2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1816" y="784"/>
         </scene>

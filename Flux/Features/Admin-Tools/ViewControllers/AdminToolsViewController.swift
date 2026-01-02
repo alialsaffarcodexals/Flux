@@ -1,4 +1,5 @@
 import UIKit
+import FirebaseAuth
 
 class AdminToolsViewController: UIViewController {
 
@@ -14,7 +15,9 @@ class AdminToolsViewController: UIViewController {
     @IBOutlet weak var bookingRejected: UILabel!
     @IBOutlet weak var bookingPending: UILabel!
     @IBOutlet weak var bookingApproved: UILabel!
-
+    
+    
+    
     var viewModel: AdminToolsViewModel!
 
     // Prefetch caches to be passed to destination VCs
@@ -112,7 +115,64 @@ class AdminToolsViewController: UIViewController {
     private func setupUI() {
         self.title = viewModel.title
         view.backgroundColor = .systemBackground
-        print("🔧 Admin Dashboard Loaded")
+    }
+
+    @IBAction private func notificationTapped(_ sender: Any) {
+        // Open the Activity storyboard's initial view controller (NotificationCenter)
+        let sb = UIStoryboard(name: "Activity", bundle: nil)
+        guard let vc = sb.instantiateInitialViewController() else { return }
+
+        if let nav = navigationController {
+            if let incomingNav = vc as? UINavigationController {
+                    if let root = incomingNav.viewControllers.first {
+                    nav.pushViewController(root, animated: true)
+                } else {
+                    incomingNav.modalPresentationStyle = .fullScreen
+                    present(incomingNav, animated: true, completion: nil)
+                }
+            } else {
+                nav.pushViewController(vc, animated: true)
+            }
+        } else {
+            if let incomingNav = vc as? UINavigationController {
+                incomingNav.modalPresentationStyle = .fullScreen
+                present(incomingNav, animated: true, completion: nil)
+            } else {
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+            }
+        }
+    }
+
+    @IBAction func logoutTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive) { [weak self] _ in
+            do {
+                try AuthManager.shared.signOut()
+                // Log current auth state for debugging
+                let current = FirebaseAuth.Auth.auth().currentUser?.uid ?? "<nil>"
+                print("🔔 Signed out. currentUser after signOut: \(current)")
+
+                // Dismiss any presented view controllers first, then switch root on main thread
+                DispatchQueue.main.async {
+                    if let presented = self?.presentedViewController {
+                        presented.dismiss(animated: false) {
+                            AppNavigator.shared.navigateToAuth()
+                        }
+                    } else {
+                        AppNavigator.shared.navigateToAuth()
+                    }
+                }
+            } catch {
+                print("🔴 Error signing out: \(error)")
+                let e = UIAlertController(title: "Error", message: "Failed to sign out: \(error.localizedDescription)", preferredStyle: .alert)
+                e.addAction(UIAlertAction(title: "OK", style: .default))
+                self?.present(e, animated: true)
+            }
+        })
+
+        present(alert, animated: true, completion: nil)
     }
 
     // Intercept show segues to prefetch data before presenting screens.

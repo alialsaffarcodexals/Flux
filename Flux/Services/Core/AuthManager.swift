@@ -34,18 +34,18 @@ class AuthManager {
                     switch result {
                     case .success(let downloadURL):
                         // Pass new user data for saving.
-                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: downloadURL) { success in
+                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, seekerProfileImageURL: downloadURL) { success in
                             self?.handleFinalCompletion(success: success, completion: completion)
                         }
                     case .failure(let error):
                         print("Warning image upload: \(error)")
-                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: nil) { success in
+                        self?.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, seekerProfileImageURL: nil) { success in
                             self?.handleFinalCompletion(success: success, completion: completion)
                         }
                     }
                 }
             } else {
-                self.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, profileImageURL: nil) { success in
+                self.saveUserToFirestore(uid: resultUser.uid, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, seekerProfileImageURL: nil) { success in
                     self.handleFinalCompletion(success: success, completion: completion)
                 }
             }
@@ -54,7 +54,7 @@ class AuthManager {
 
     /// Internal save method.
 
-    private func saveUserToFirestore(uid: String, firstName: String, lastName: String, username: String, email: String, phone: String, profileImageURL: String?, completion: @escaping (Bool) -> Void) {
+    private func saveUserToFirestore(uid: String, firstName: String, lastName: String, username: String, email: String, phone: String, seekerProfileImageURL: String?, completion: @escaping (Bool) -> Void) {
         
         // Store new fields in the dictionary.
         var userData: [String: Any] = [
@@ -71,8 +71,8 @@ class AuthManager {
             "joinedDate": Timestamp(date: Date())
         ]
         
-        if let imageURL = profileImageURL {
-            userData["profileImageURL"] = imageURL
+        if let imageURL = seekerProfileImageURL {
+            userData["seekerProfileImageURL"] = imageURL
         }
         
         db.collection("users").document(uid).setData(userData) { error in

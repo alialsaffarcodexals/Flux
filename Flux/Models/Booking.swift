@@ -20,7 +20,7 @@ struct Booking: Identifiable, Codable {
     var seekerId: String
     var providerId: String
     var serviceId: String
-
+    var providerName: String
     // Snapshot of service details at booking time
     var serviceTitle: String
     var priceAtBooking: Double
@@ -37,4 +37,5 @@ struct Booking: Identifiable, Codable {
     var completedAt: Date?
     var rejectedAt: Date?
     var createdAt: Date
+    var isReviewed: Bool? = false
 }
