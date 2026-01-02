@@ -176,6 +176,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="View Booking" cornerStyle="medium">
                                     <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="17"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="viewBookingTapped:" destination="jaY-g9-A3o" eventType="touchUpInside" id="zXy-9q-Lp1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PDj-R7-4lD"/>
