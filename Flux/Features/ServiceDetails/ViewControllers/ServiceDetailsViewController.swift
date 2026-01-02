@@ -61,7 +61,25 @@ class ServiceDetailsViewController: UIViewController {
     @IBAction func bookAppointmentTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Booking", bundle: nil)
         if let bookingVC = storyboard.instantiateViewController(withIdentifier: "BookingVC") as? RequestBookingViewController {
-            // If data passing is needed: bookingVC.service = viewModel?.company
+            if let company = viewModel?.company {
+                let service = Service(
+                    id: company.id,
+                    providerId: company.providerId,
+                    providerName: "Unknown Provider",
+                    title: company.name,
+                    description: company.description,
+                    category: company.category,
+                    sessionPrice: company.price,
+                    currencyCode: "BHD",
+                    coverImageURL: company.imageURL,
+                    rating: company.rating,
+                    reviewCount: 0,
+                    isActive: true,
+                    createdAt: Date(),
+                    updatedAt: nil
+                )
+                bookingVC.service = service
+            }
             navigationController?.pushViewController(bookingVC, animated: true)
         }
     }

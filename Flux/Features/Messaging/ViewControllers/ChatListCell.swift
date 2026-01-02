@@ -2,7 +2,6 @@ import UIKit
 
 class ChatListCell: UITableViewCell {
     
-    // Connect these in Storyboard
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
@@ -10,7 +9,6 @@ class ChatListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Make image round
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         profileImageView.clipsToBounds = true
     }
