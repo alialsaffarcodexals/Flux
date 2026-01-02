@@ -134,9 +134,13 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
         // Remove existing views to avoid duplicates if cell is reused
         cell.contentView.subviews.forEach { $0.removeFromSuperview() }
         
+        // Get time and format it
+        let rawTime = availableTimesForSelectedDate[indexPath.row]
+        let displayTime = formatTo12Hour(time: rawTime)
+        
         // Add Label
         let label = UILabel(frame: cell.contentView.bounds)
-        label.text = availableTimesForSelectedDate[indexPath.row]
+        label.text = displayTime
         label.textAlignment = .center
         label.textColor = .systemBlue
         label.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
@@ -144,12 +148,23 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
         cell.contentView.addSubview(label)
         
         // Highlight if selected
-        if selectedTime == availableTimesForSelectedDate[indexPath.row] {
+        if selectedTime == rawTime {
             cell.backgroundColor = .systemBlue
             label.textColor = .white
         }
         
         return cell
+    }
+    
+    // Helper to convert "14:30" -> "2:30 PM"
+    private func formatTo12Hour(time: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        if let date = dateFormatter.date(from: time) {
+            dateFormatter.dateFormat = "h:mm a"
+            return dateFormatter.string(from: date)
+        }
+        return time
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

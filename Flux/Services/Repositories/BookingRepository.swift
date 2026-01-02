@@ -15,7 +15,10 @@ final class BookingRepository {
         _ booking: Booking,
         completion: @escaping (Result<Booking, Error>) -> Void
     ) {
-        let document = bookingsCollection.document()
+        // Generate a random numeric string (10 digits)
+        let numericID = String((0..<10).map { _ in "0123456789".randomElement()! })
+        let document = bookingsCollection.document(numericID)
+        
         do {
             try document.setData(from: booking) { error in
                 if let error = error {
