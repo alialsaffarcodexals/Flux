@@ -115,7 +115,7 @@
         <!--Reset Password-->
         <scene sceneID="Lsb-Ba-4U7">
             <objects>
-                <viewController id="m6Q-vq-ggU" sceneMemberID="viewController">
+                <viewController id="m6Q-vq-ggU" customClass="ForgotPasswordViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EVz-WO-fh0">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -149,9 +149,6 @@
                                             <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="baseBackgroundColor" name="BlueButtons"/>
                                         </buttonConfiguration>
-                                        <connections>
-                                            <segue destination="VkX-QZ-qGf" kind="show" id="zIh-1L-sP4"/>
-                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -172,6 +169,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Reset Password" id="58h-FD-03M"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="UHI-DT-UjX" id="FP-OT-01"/>
+                        <outlet property="sendCodeButton" destination="yqZ-Md-E8Q" id="FP-OT-02"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDN-7U-jIp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -180,7 +181,7 @@
         <!--Verfication Code-->
         <scene sceneID="EZc-Lf-nbg">
             <objects>
-                <viewController id="VkX-QZ-qGf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="VerificationCodeViewController" id="VkX-QZ-qGf" customClass="VerificationCodeViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dgh-VQ-sRT">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,7 +228,7 @@
                                                     <constraint firstAttribute="height" constant="45" id="9kk-Wt-WsG"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Send Code">
+                                                <buttonConfiguration key="configuration" style="filled" title="Send Code Again">
                                                     <backgroundConfiguration key="background">
                                                         <color key="backgroundColor" name="BlueButtons"/>
                                                     </backgroundConfiguration>
@@ -278,6 +279,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Verfication Code" id="GUp-Rx-2ss"/>
+                    <connections>
+                        <outlet property="codeTextField" destination="4Ob-nn-oVA" id="VC-OT-01"/>
+                        <outlet property="resendButton" destination="svH-M8-ums" id="VC-OT-02"/>
+                        <outlet property="verifyButton" destination="ZMi-Bj-iqK" id="VC-OT-03"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSd-wq-Yok" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -509,7 +515,7 @@
         <!--View Controller-->
         <scene sceneID="xRJ-C6-S3G">
             <objects>
-                <viewController id="hWT-xi-A5O" sceneMemberID="viewController">
+                <viewController id="hWT-xi-A5O" customClass="NewPasswordViewController" customModule="Flux" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="F9E-xs-h1S">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -537,13 +543,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Code" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nJ1-Cb-CIu">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter new password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nJ1-Cb-CIu">
                                         <rect key="frame" x="0.0" y="290.33333333333331" width="353" height="34"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Code" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8pd-hl-nwo">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm your new password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8pd-hl-nwo">
                                         <rect key="frame" x="0.0" y="334.33333333333337" width="353" height="34"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -562,7 +568,7 @@
                                             <constraint firstAttribute="height" constant="45" id="JPH-8x-iSD"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Send Code">
+                                        <buttonConfiguration key="configuration" style="filled" title="Confirm">
                                             <backgroundConfiguration key="background">
                                                 <color key="backgroundColor" name="BlueButtons"/>
                                             </backgroundConfiguration>
@@ -582,6 +588,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vTf-T8-jam"/>
+                    <connections>
+                        <outlet property="confirmButton" destination="PJz-cq-BqB" id="NP-OT-01"/>
+                        <outlet property="confirmPasswordTextField" destination="8pd-hl-nwo" id="NP-OT-02"/>
+                        <outlet property="passwordTextField" destination="nJ1-Cb-CIu" id="NP-OT-03"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B64-oO-nBZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
