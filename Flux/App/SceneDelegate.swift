@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window.makeKeyAndVisible()
 
                 AppNavigator.shared.startApp()
+
     }
 
     /// Handles the sceneDidDisconnect lifecycle event.
