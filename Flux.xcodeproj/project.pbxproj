@@ -17,7 +17,6 @@
 		10F207DA2F044C2700834613 /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207D92F044C2700834613 /* HistoryVC.swift */; };
 		10F207DC2F044C3800834613 /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10F207DB2F044C3800834613 /* FavoritesVC.swift */; };
 		3ACBF5D42F04D96500F26BB3 /* ChatListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */; };
-		3ACBF5D62F06469600F26BB3 /* ServiceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */; };
 		3AE4B17C2EFC86A900BE4A01 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */; };
 		3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */; };
 		3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */; };
@@ -185,7 +184,6 @@
 		10F207D92F044C2700834613 /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		10F207DB2F044C3800834613 /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		3ACBF5D32F04D96500F26BB3 /* ChatListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListCell.swift; sourceTree = "<group>"; };
-		3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDetailsViewController.swift; sourceTree = "<group>"; };
 		3AE4B17B2EFC86A900BE4A01 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		3AE4B17D2EFC86F200BE4A01 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		3AE4B17F2EFC873500BE4A01 /* BookingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingViewModel.swift; sourceTree = "<group>"; };
@@ -1436,7 +1434,6 @@
 				AC9616D22F0444A1003B7C7D /* MyRequestsViewController.swift in Sources */,
 				7FAB33002EE456AD008AC600 /* ProviderMainProfileVC.swift in Sources */,
 				7FAB33122EE4587B008AC600 /* PortfolioViewModel.swift in Sources */,
-				3ACBF5D62F06469600F26BB3 /* ServiceDetailsViewController.swift in Sources */,
 				7F5A0D102EFDDC56001135C2 /* PortfolioRepository.swift in Sources */,
 				7F5A0D112EFDDC56001135C2 /* ReportRepository.swift in Sources */,
 				7F5A0D122EFDDC56001135C2 /* ReviewRepository.swift in Sources */,
