@@ -186,16 +186,10 @@ extension ReportsViewController: UITableViewDataSource {
             }
         }
 
-        // Allow selection when report is Open or Reviewed
-        if statusLower == "open" || statusLower == "reviewed" {
-            cell.accessoryType = .disclosureIndicator
-            cell.selectionStyle = .default
-            cell.isUserInteractionEnabled = true
-        } else {
-            cell.accessoryType = .none
-            cell.selectionStyle = .none
-            cell.isUserInteractionEnabled = false
-        }
+        // Always allow navigation to report details so admins can view any report.
+        cell.accessoryType = .disclosureIndicator
+        cell.selectionStyle = .default
+        cell.isUserInteractionEnabled = true
 
         return cell
     }
@@ -210,8 +204,6 @@ extension ReportsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let selected = reports[indexPath.row]
-        let statusLower = selected.status.lowercased()
-        guard statusLower == "open" || statusLower == "reviewed" else { return }
 
         if let vc = storyboard?.instantiateViewController(withIdentifier: "ReportViewController") as? ReportViewController {
             vc.reportID = selected.id

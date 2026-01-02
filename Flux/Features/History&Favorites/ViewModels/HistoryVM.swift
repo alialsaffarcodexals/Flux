@@ -1,27 +1,24 @@
 /*
  File: HistoryVM.swift
- Purpose: ViewModel for Service History screen.
+ Purpose: ViewModel for Service History screen
  Location: Features/History/ViewModels/HistoryVM.swift
- Description: Fetches completed bookings for the current seeker, retrieves provider details, and manages favorites/deletion.
 */
 
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-// MARK: - Display Item
+/// Represents a history item with provider details for display
 struct HistoryDisplayItem {
     let booking: Booking
     let providerName: String
     let profileImageURL: String?
     var isFavorite: Bool
     
-    // Helpers for UI binding
-    var serviceName: String { booking.serviceTitle }
     var providerId: String { booking.providerId }
+    var serviceName: String { booking.serviceTitle }
 }
 
-// MARK: - ViewModel
 final class HistoryVM {
     
     // MARK: - Properties
@@ -33,7 +30,6 @@ final class HistoryVM {
     // MARK: - Callbacks
     var onDataChanged: (() -> Void)?
     var onError: ((Error) -> Void)?
-    var onLoading: ((Bool) -> Void)?
     
     // MARK: - Dependencies
     private let bookingRepo = BookingRepository.shared
@@ -49,157 +45,46 @@ final class HistoryVM {
         return displayItems.count
     }
     
-    // MARK: - Public API
-    
-    /// Loads the history data from Firebase.
+    // MARK: - Public Methods
     func loadHistory() {
+        print("🔥 HistoryVM: loadHistory() called")
+        
         guard let userId = Auth.auth().currentUser?.uid else {
-            // No user logged in, clear data
-            self.historyItems = []
-            self.onDataChanged?()
+            print("🔥 HistoryVM: No current user - userId is nil")
+            onDataChanged?()
             return
         }
         
-        onLoading?(true)
+        print("🔥 HistoryVM: Current user ID = \(userId)")
         
-        // 1. Fetch current user to get latest favorites
+        // First fetch user's favorite provider IDs
         userRepo.getUser(uid: userId) { [weak self] result in
-            guard let self = self else { return }
-            
             switch result {
             case .success(let user):
-                self.favoriteProviderIds = user.favoriteProviderIds ?? []
-                // 2. Fetch bookings after getting favorites
-                self.fetchBookings(for: userId)
-                
+                self?.favoriteProviderIds = user.favoriteProviderIds ?? []
+                print("🔥 HistoryVM: User loaded, favoriteProviderIds count = \(self?.favoriteProviderIds.count ?? 0)")
+                self?.fetchBookings(for: userId)
             case .failure(let error):
-                // Even if user fetch fails, try to fetch bookings (favorites will default to empty)
-                print("⚠️ Failed to fetch user profile for favorites: \(error.localizedDescription)")
-                self.favoriteProviderIds = []
-                self.fetchBookings(for: userId)
+                print("🔥 HistoryVM: Failed to load user - \(error.localizedDescription)")
+                self?.favoriteProviderIds = []
+                self?.fetchBookings(for: userId)
             }
         }
     }
-    
-    /// Returns the item at the specified index safe-guarded.
-    func item(at index: Int) -> HistoryDisplayItem? {
-        guard displayItems.indices.contains(index) else { return nil }
-        return displayItems[index]
-    }
-    
-    /// Toggles the favorite status of the provider associated with the history item.
-    func toggleFavorite(at index: Int) {
-        guard displayItems.indices.contains(index),
-              let userId = Auth.auth().currentUser?.uid else { return }
-        
-        let item = displayItems[index]
-        let providerId = item.providerId
-        let newIsFavorite = !item.isFavorite
-        
-        // Optimistic UI Update
-        updateLocalFavoriteState(providerId: providerId, isFavorite: newIsFavorite)
-        onDataChanged?()
-        
-        // Firebase Update
-        let updateOperation = newIsFavorite ? FieldValue.arrayUnion([providerId]) : FieldValue.arrayRemove([providerId])
-        
-        // Using direct Firestore update for array operations as UserRepository might not cover arrayUnion/Remove specifically for single fields elegantly
-        db.collection("users").document(userId).updateData([
-            "favoriteProviderIds": updateOperation
-        ]) { [weak self] error in
-            if let error = error {
-                // Revert on failure
-                self?.updateLocalFavoriteState(providerId: providerId, isFavorite: !newIsFavorite)
-                self?.onDataChanged?()
-                self?.onError?(error)
-            } else {
-                // Success: Update local favoriteProviderIds list to keep it in sync
-                if newIsFavorite {
-                    self?.favoriteProviderIds.append(providerId)
-                } else {
-                    self?.favoriteProviderIds.removeAll { $0 == providerId }
-                }
-            }
-        }
-    }
-    
-    /// Deletes the history item (booking) from the database.
-    func deleteItem(at index: Int) {
-        guard displayItems.indices.contains(index) else { return }
-        
-        let item = displayItems[index]
-        // Booking ID is optional in model, guard it
-        guard let bookingId = item.booking.id else {
-            onError?(NSError(domain: "HistoryVM", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid Booking ID"]))
-            return
-        }
-        
-        onLoading?(true)
-        
-        bookingRepo.deleteBooking(id: bookingId) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.onLoading?(false)
-                switch result {
-                case .success:
-                    // Remove from local array
-                    self?.historyItems.removeAll { $0.booking.id == bookingId }
-                    self?.filteredItems.removeAll { $0.booking.id == bookingId }
-                    self?.onDataChanged?()
-                    
-                case .failure(let error):
-                    self?.onError?(error)
-                }
-            }
-        }
-    }
-    
-    /// Filters the list based on query (Service Name or Provider Name).
-    func search(query: String) {
-        if query.isEmpty {
-            isSearching = false
-            filteredItems = []
-        } else {
-            isSearching = true
-            filteredItems = historyItems.filter { item in
-                let providerMatch = item.providerName.lowercased().contains(query.lowercased())
-                let serviceMatch = item.serviceName.lowercased().contains(query.lowercased())
-                return providerMatch || serviceMatch
-            }
-        }
-        onDataChanged?()
-    }
-    
-    /// Clears the current search filter.
-    func clearSearch() {
-        isSearching = false
-        filteredItems = []
-        onDataChanged?()
-    }
-    
-    // MARK: - Private Methods
     
     private func fetchBookings(for userId: String) {
-        // Fetch only 'completed' bookings for history
-        // Note: You can add other statuses if needed (e.g. cancelled/rejected)
+        print("🔥 HistoryVM: Fetching bookings for user \(userId)")
+        
+        // Fetch completed bookings for the seeker
         bookingRepo.fetchBookingsForSeeker(seekerId: userId, status: .completed) { [weak self] result in
-            guard let self = self else { return }
-            
             switch result {
             case .success(let bookings):
-                if bookings.isEmpty {
-                    DispatchQueue.main.async {
-                        self.historyItems = []
-                        self.onLoading?(false)
-                        self.onDataChanged?()
-                    }
-                } else {
-                    self.fetchProviderDetails(for: bookings)
-                }
-                
+                print("🔥 HistoryVM: Found \(bookings.count) completed bookings")
+                self?.fetchProviderDetails(for: bookings)
             case .failure(let error):
+                print("🔥 HistoryVM: Failed to fetch bookings - \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    self.onLoading?(false)
-                    self.onError?(error)
+                    self?.onError?(error)
                 }
             }
         }
@@ -207,69 +92,144 @@ final class HistoryVM {
     
     private func fetchProviderDetails(for bookings: [Booking]) {
         let group = DispatchGroup()
-        var loadedItems: [HistoryDisplayItem] = []
-        
-        // Thread-safe access to results array
-        let lock = NSLock()
+        var items: [HistoryDisplayItem] = []
         
         for booking in bookings {
             group.enter()
+            print("🔥 HistoryVM: Fetching provider \(booking.providerId) for booking")
+            
             userRepo.getUser(uid: booking.providerId) { [weak self] result in
                 defer { group.leave() }
                 
-                guard let self = self else { return }
-                
-                var providerName = "Unknown Provider"
-                var profileImageURL: String? = nil
-                
                 switch result {
-                case .success(let user):
-                    providerName = user.name
-                    // Use provider profile image (seller mode)
-                    profileImageURL = user.profileImageURL(for: .sellerMode)
-                case .failure:
-                    // Provider fetch failed, fallback to defaults but keep booking
-                    break
+                case .success(let provider):
+                    let isFavorite = self?.favoriteProviderIds.contains(booking.providerId) ?? false
+                    let item = HistoryDisplayItem(
+                        booking: booking,
+                        providerName: provider.name,
+                        profileImageURL: provider.providerProfileImageURL,
+                        isFavorite: isFavorite
+                    )
+                    items.append(item)
+                    print("🔥 HistoryVM: Successfully loaded provider \(provider.name)")
+                case .failure(let error):
+                    print("🔥 HistoryVM: Failed to load provider \(booking.providerId) - \(error.localizedDescription)")
+                    // Still show the booking even if we can't fetch provider details
+                    let isFavorite = self?.favoriteProviderIds.contains(booking.providerId) ?? false
+                    let item = HistoryDisplayItem(
+                        booking: booking,
+                        providerName: "Unknown Provider",
+                        profileImageURL: nil,
+                        isFavorite: isFavorite
+                    )
+                    items.append(item)
                 }
-                
-                let isFav = self.favoriteProviderIds.contains(booking.providerId)
-                
-                let item = HistoryDisplayItem(
-                    booking: booking,
-                    providerName: providerName,
-                    profileImageURL: profileImageURL,
-                    isFavorite: isFav
-                )
-                
-                lock.lock()
-                loadedItems.append(item)
-                lock.unlock()
             }
         }
         
         group.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
-            
-            // Sort by CreatedAt descending (newest first)
-            self.historyItems = loadedItems.sorted(by: { $0.booking.createdAt > $1.booking.createdAt })
-            self.onLoading?(false)
-            self.onDataChanged?()
+            // Sort by date, most recent first
+            self?.historyItems = items.sorted { $0.booking.createdAt > $1.booking.createdAt }
+            print("🔥 HistoryVM: All providers fetched - total items = \(self?.historyItems.count ?? 0)")
+            self?.onDataChanged?()
         }
     }
     
-    private func updateLocalFavoriteState(providerId: String, isFavorite: Bool) {
-        // Update historyItems
-        for i in 0..<historyItems.count {
-            if historyItems[i].providerId == providerId {
-                historyItems[i].isFavorite = isFavorite
-            }
-        }
+    func item(at index: Int) -> HistoryDisplayItem? {
+        guard displayItems.indices.contains(index) else { return nil }
+        return displayItems[index]
+    }
+    
+    func toggleFavorite(at index: Int) {
+        guard displayItems.indices.contains(index),
+              let userId = Auth.auth().currentUser?.uid else { return }
         
-        // Update filteredItems
-        for i in 0..<filteredItems.count {
-            if filteredItems[i].providerId == providerId {
-                filteredItems[i].isFavorite = isFavorite
+        let item = displayItems[index]
+        let providerId = item.providerId
+        let newFavoriteStatus = !item.isFavorite
+        
+        print("🔥 HistoryVM: Toggling favorite for provider \(providerId) to \(newFavoriteStatus)")
+        
+        // Update Firebase
+        let updateData: [String: Any] = newFavoriteStatus
+            ? ["favoriteProviderIds": FieldValue.arrayUnion([providerId])]
+            : ["favoriteProviderIds": FieldValue.arrayRemove([providerId])]
+        
+        db.collection("users").document(userId).updateData(updateData) { [weak self] error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("🔥 HistoryVM: Error toggling favorite - \(error.localizedDescription)")
+                    self?.onError?(error)
+                    return
+                }
+                
+                print("🔥 HistoryVM: Successfully toggled favorite")
+                
+                // Update local data
+                if newFavoriteStatus {
+                    self?.favoriteProviderIds.append(providerId)
+                } else {
+                    self?.favoriteProviderIds.removeAll { $0 == providerId }
+                }
+                
+                // Update all items with this provider
+                for i in 0..<(self?.historyItems.count ?? 0) {
+                    if self?.historyItems[i].providerId == providerId {
+                        self?.historyItems[i].isFavorite = newFavoriteStatus
+                    }
+                }
+                for i in 0..<(self?.filteredItems.count ?? 0) {
+                    if self?.filteredItems[i].providerId == providerId {
+                        self?.filteredItems[i].isFavorite = newFavoriteStatus
+                    }
+                }
+                
+                self?.onDataChanged?()
             }
         }
+    }
+    
+    func deleteItem(at index: Int) {
+        guard displayItems.indices.contains(index) else { return }
+        
+        let item = displayItems[index]
+        guard let bookingId = item.booking.id else { return }
+        
+        print("🔥 HistoryVM: Deleting booking \(bookingId)")
+        
+        bookingRepo.deleteBooking(id: bookingId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    print("🔥 HistoryVM: Successfully deleted booking")
+                    self?.historyItems.removeAll { $0.booking.id == bookingId }
+                    self?.filteredItems.removeAll { $0.booking.id == bookingId }
+                    self?.onDataChanged?()
+                case .failure(let error):
+                    print("🔥 HistoryVM: Failed to delete booking - \(error.localizedDescription)")
+                    self?.onError?(error)
+                }
+            }
+        }
+    }
+    
+    func search(query: String) {
+        if query.isEmpty {
+            isSearching = false
+            filteredItems = []
+        } else {
+            isSearching = true
+            filteredItems = historyItems.filter { item in
+                item.providerName.lowercased().contains(query.lowercased()) ||
+                item.serviceName.lowercased().contains(query.lowercased())
+            }
+        }
+        onDataChanged?()
+    }
+    
+    func clearSearch() {
+        isSearching = false
+        filteredItems = []
+        onDataChanged?()
     }
 }
