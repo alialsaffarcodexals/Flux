@@ -3,6 +3,7 @@ import UIKit
 class HomeFeedViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var emptyStateLabel: UILabel!
     
     // Use the new ViewModel we created
     let viewModel = HomeViewModel()
@@ -19,6 +20,7 @@ class HomeFeedViewController: UIViewController {
         viewModel.fetchHomeData { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
+                self?.updateEmptyState()
             }
         }
     }
@@ -29,6 +31,18 @@ class HomeFeedViewController: UIViewController {
             if section == 0 { return self.createRecommendedSection() }
             if section == 1 { return self.createCategoriesSection() }
             return self.createServicesSection()
+        }
+    }
+    
+    func updateEmptyState() {
+        // If we have services, hide the label. If 0, show it.
+        let hasData = !viewModel.displayedServices.isEmpty
+        
+        self.emptyStateLabel.isHidden = hasData
+        self.collectionView.isHidden = false // Keep collection view visible so we see headers
+        
+        if !hasData {
+            self.emptyStateLabel.text = "No services found for this category."
         }
     }
 
@@ -144,17 +158,24 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
             // 1. Get the Service (Service struct)
             let service = viewModel.displayedServices[indexPath.item]
             
+            print(service)
+            
             // 2. Set Data
             cell.titleLabel.text = service.title
-            cell.providerLabel.text = service.category // Or service.providerId if you want
+            let name = viewModel.providerNames[service.providerId] ?? "Unknown Provider"
+
+            cell.providerLabel.text = name
             
             if let rating = service.rating {
                 cell.ratingLabel.text = String(format: "★ %.1f", rating)
             } else {
                 cell.ratingLabel.text = "New"
             }
-            
+                        
             // 3. Load Image
+            
+            cell.serviceImageView.image = nil
+            cell.serviceImageView.backgroundColor = .systemGray6
             if let url = URL(string: service.coverImageURL) {
                 DispatchQueue.global().async {
                     if let data = try? Data(contentsOf: url) {
@@ -188,22 +209,35 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             
-            // Only care about clicks in Section 1 (Categories)
-            if indexPath.section == 1 {
-                
-                // 1. Update the selected index in ViewModel
-                viewModel.selectedCategoryIndex = indexPath.item
-                
-                // 2. Get the category name
-                let selectedCategory = viewModel.categories[indexPath.item]
-                
-                // 3. Trigger the Filter Logic
-                viewModel.filterBy(category: selectedCategory.name)
-                
-                // 4. Reload Section 1 (to update Blue/Gray colors) AND Section 2 (to show filtered results)
-                // Using reloadSections is smoother than reloadData()
-                collectionView.reloadSections(IndexSet(integersIn: 1...2))
+        // Handle Category Selection
+        if indexPath.section == 1 {
+            
+            // 1. Update the Model
+            viewModel.selectedCategoryIndex = indexPath.item
+            let selectedCategory = viewModel.categories[indexPath.item]
+            viewModel.filterBy(category: selectedCategory.name)
+            
+            // 2. Visually update the pills WITHOUT reloading the section (Prevents Jump)
+            for visibleIndexPath in collectionView.indexPathsForVisibleItems {
+                if visibleIndexPath.section == 1 {
+                    if let cell = collectionView.cellForItem(at: visibleIndexPath) as? CategoryCell {
+                        let category = viewModel.categories[visibleIndexPath.item]
+                        // Check if this specific cell should be selected
+                        let isSelected = (visibleIndexPath.item == viewModel.selectedCategoryIndex)
+                        cell.configure(with: category, isSelected: isSelected)
+                    }
+                }
             }
+            
+            // 3. Reload ONLY the Services grid (Section 2) to show new results
+            // Use performBatchUpdates for a smoother transition, or just reloadSection
+            UIView.performWithoutAnimation {
+                self.collectionView.reloadSections(IndexSet(integer: 2))
+            }
+            
+            // 4. Handle Empty State
+            updateEmptyState()
         }
+    }
     
 }

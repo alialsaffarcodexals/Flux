@@ -10,6 +10,7 @@ class HomeViewModel {
     var recommendedProviders: [User] = []
     var displayedServices: [Service] = []
     var categories: [ServiceCategory] = []
+    var providerNames: [String: String] = [:]
     
     // Data Cache (To store all services for local filtering)
     private var allServices: [Service] = []
@@ -25,57 +26,61 @@ class HomeViewModel {
 
     // MARK: - Fetching Data
     func fetchHomeData(completion: @escaping () -> Void) {
-        let group = DispatchGroup()
-        
-        // 1. Fetch Providers (Recommended)
-        group.enter()
-        userRepo.fetchRecommendedProviders { [weak self] result in
-            defer { group.leave() }
-            switch result {
-            case .success(let providers):
-                self?.recommendedProviders = providers
-            case .failure(let error):
-                print("❌ Error fetching providers: \(error.localizedDescription)")
+            let group = DispatchGroup()
+            
+            // 1. Fetch Recommended Providers (Top Section)
+            group.enter()
+            userRepo.fetchRecommendedProviders { [weak self] result in
+                defer { group.leave() }
+                if case .success(let providers) = result {
+                    self?.recommendedProviders = providers
+                }
+            }
+            
+            // 2. Fetch Services AND THEN Fetch their Provider Names
+            group.enter()
+            serviceRepo.fetchActiveServices { [weak self] result in
+                switch result {
+                case .success(let services):
+                    self?.allServices = services
+                    self?.displayedServices = services
+                    
+                    // ✅ EXTRACT IDs
+                    let providerIds = services.map { $0.providerId }
+                    
+                    // ✅ FETCH PROVIDER NAMES
+                    self?.userRepo.fetchUsers(byIds: providerIds) { userResult in
+                        if case .success(let users) = userResult {
+                            // Create the lookup dictionary
+                            for user in users {
+                                // Map ID to Business Name (or Name)
+                                self?.providerNames[user.id ?? ""] = user.businessName ?? user.name
+                            }
+                        }
+                        // Leave group ONLY after getting names
+                        group.leave()
+                    }
+                    
+                case .failure(let error):
+                    print("Error: \(error)")
+                    group.leave()
+                }
+            }
+            
+            // 3. Fetch Categories
+            group.enter()
+            serviceRepo.fetchCategories(activeOnly: true) { [weak self] result in
+                defer { group.leave() }
+                if case .success(let fetchedCategories) = result {
+                    let allCategory = ServiceCategory(id: "ALL", name: "All", isActive: true)
+                    self?.categories = [allCategory] + fetchedCategories
+                }
+            }
+            
+            group.notify(queue: .main) {
+                completion()
             }
         }
-        
-        // 2. Fetch Services (Grid)
-        group.enter()
-        serviceRepo.fetchActiveServices { [weak self] result in
-            defer { group.leave() }
-            switch result {
-            case .success(let services):
-                self?.allServices = services
-                self?.displayedServices = services // Show all initially
-            case .failure(let error):
-                print("❌ Error fetching services: \(error.localizedDescription)")
-            }
-        }
-        
-        // 3. Fetch Categories
-        group.enter()
-        serviceRepo.fetchCategories(activeOnly: true) { [weak self] result in
-            defer { group.leave() }
-            switch result {
-            case .success(let fetchedCategories):
-                guard let self = self else { return }
-                
-                // Create the manual "All" category
-                let allCategory = ServiceCategory(id: "ALL", name: "All", isActive: true)
-                
-                // Combine "All" + Fetched Categories
-                self.categories = [allCategory] + fetchedCategories
-                
-            case .failure(let error):
-                print("❌ Error fetching categories: \(error.localizedDescription)")
-            }
-        }
-        
-        // 4. Notify when ALL 3 requests are done
-        group.notify(queue: .main) {
-            completion()
-        }
-    }
     
     // MARK: - Logic
     

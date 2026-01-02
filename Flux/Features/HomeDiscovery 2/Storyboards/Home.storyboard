@@ -159,7 +159,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="180" height="240"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fxr-8X-vKs">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fxr-8X-vKs">
                                                     <rect key="frame" x="0.0" y="0.0" width="180" height="160"/>
                                                     <color key="backgroundColor" systemColor="systemGrayColor"/>
                                                     <constraints>
@@ -224,7 +224,7 @@
                                         <size key="customSize" width="180" height="240"/>
                                         <connections>
                                             <outlet property="favoriteButton" destination="7oh-Fb-Ys7" id="lZy-oM-VoU"/>
-                                            <outlet property="providerLabel" destination="GpW-sB-BQN" id="azY-st-HJY"/>
+                                            <outlet property="providerLabel" destination="ktG-ev-P5L" id="I4o-hi-m1K"/>
                                             <outlet property="ratingLabel" destination="Kan-aC-Bot" id="wQQ-7Q-m5W"/>
                                             <outlet property="serviceImageView" destination="fxr-8X-vKs" id="pTu-uo-cWe"/>
                                             <outlet property="titleLabel" destination="GpW-sB-BQN" id="zkF-ow-NfF"/>
@@ -251,13 +251,21 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No services found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DoJ-5e-zKN">
+                                <rect key="frame" x="127.66666666666669" y="566" width="138" height="20.333333333333371"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="HYr-97-UGO"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HYr-97-UGO" firstAttribute="trailing" secondItem="70w-tu-o5Q" secondAttribute="trailing" id="BRB-We-rSJ"/>
+                            <constraint firstItem="DoJ-5e-zKN" firstAttribute="centerX" secondItem="9cr-lZ-5Hg" secondAttribute="centerX" id="DAb-c8-CcE"/>
                             <constraint firstItem="70w-tu-o5Q" firstAttribute="leading" secondItem="HYr-97-UGO" secondAttribute="leading" id="DXP-s5-ExZ"/>
                             <constraint firstItem="HYr-97-UGO" firstAttribute="bottom" secondItem="70w-tu-o5Q" secondAttribute="bottom" id="TAq-pG-P6U"/>
+                            <constraint firstItem="DoJ-5e-zKN" firstAttribute="centerY" secondItem="9cr-lZ-5Hg" secondAttribute="centerY" constant="150" id="goX-JS-Xks"/>
                             <constraint firstItem="mFP-r1-sJP" firstAttribute="trailing" secondItem="HYr-97-UGO" secondAttribute="trailing" id="hRb-Rp-2Af"/>
                             <constraint firstItem="mFP-r1-sJP" firstAttribute="top" secondItem="9cr-lZ-5Hg" secondAttribute="topMargin" id="hh2-ng-EJU"/>
                             <constraint firstItem="70w-tu-o5Q" firstAttribute="top" secondItem="mFP-r1-sJP" secondAttribute="bottom" id="k2L-S7-aFn"/>
@@ -269,6 +277,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="70w-tu-o5Q" id="Ct9-mF-Wjc"/>
+                        <outlet property="emptyStateLabel" destination="DoJ-5e-zKN" id="wWm-W2-5vX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="47V-Zg-evR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
