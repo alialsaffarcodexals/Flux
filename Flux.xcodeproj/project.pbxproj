@@ -101,6 +101,9 @@
 		7F745EBE2F08267400181F7E /* ProviderDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745EBD2F08267400181F7E /* ProviderDetailsViewModel.swift */; };
 		7F745EBF2F0834A000181F7E /* DisputeCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA993E92EFDA20C00CE5748 /* DisputeCenterVC.swift */; };
 		7F745EC02F0834A800181F7E /* DisputeCenterVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D2EDFA2F0039110030B2B9 /* DisputeCenterVM.swift */; };
+		7F745ED42F08545400181F7E /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745ED32F08545400181F7E /* ForgotPasswordViewController.swift */; };
+		7F745ED62F08545A00181F7E /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745ED52F08545A00181F7E /* NewPasswordViewController.swift */; };
+		7F745ED82F08546000181F7E /* VerificationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745ED72F08546000181F7E /* VerificationCodeViewController.swift */; };
 		7FA8DA7C2F033ADD0012A48F /* UIViewController+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */; };
 		7FA8DA802F043BC00012A48F /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */; };
 		7FA8DA812F043BC00012A48F /* ChangePhoneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA8DA7F2F043BC00012A48F /* ChangePhoneViewModel.swift */; };
@@ -274,6 +277,9 @@
 		7F745EB92F08225F00181F7E /* ProviderDetails.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ProviderDetails.storyboard; sourceTree = "<group>"; };
 		7F745EBB2F08266A00181F7E /* ProviderDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDetailsViewController.swift; sourceTree = "<group>"; };
 		7F745EBD2F08267400181F7E /* ProviderDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDetailsViewModel.swift; sourceTree = "<group>"; };
+		7F745ED32F08545400181F7E /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		7F745ED52F08545A00181F7E /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
+		7F745ED72F08546000181F7E /* VerificationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationCodeViewController.swift; sourceTree = "<group>"; };
 		7FA8DA7B2F033ADD0012A48F /* UIViewController+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utilities.swift"; sourceTree = "<group>"; };
 		7FA8DA7D2F043BC00012A48F /* ChangeEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeEmailViewModel.swift; sourceTree = "<group>"; };
 		7FA8DA7E2F043BC00012A48F /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
@@ -603,6 +609,9 @@
 			children = (
 				7F6081652EFCF0A500FA5639 /* LoginViewController.swift */,
 				7F6081672EFCF0A500FA5639 /* SignUpViewController.swift */,
+				7F745ED32F08545400181F7E /* ForgotPasswordViewController.swift */,
+				7F745ED52F08545A00181F7E /* NewPasswordViewController.swift */,
+				7F745ED72F08546000181F7E /* VerificationCodeViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -897,7 +906,6 @@
 			children = (
 				7FAB332B2EE45B8B008AC600 /* RequestBookingViewController.swift */,
 				7FAB332D2EE45BCF008AC600 /* BookingConfirmationVC.swift */,
-				3ACBF5D52F06469600F26BB3 /* ServiceDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1453,6 +1461,7 @@
 				7F60D5B12F06A42B0034FE1F /* HistoryVM.swift in Sources */,
 				7F745E902F075A8400181F7E /* ServicePackagesRepository.swift in Sources */,
 				7FA8DA872F045DC00012A48F /* NotificationCenterViewController.swift in Sources */,
+				7F745ED82F08546000181F7E /* VerificationCodeViewController.swift in Sources */,
 				7FA8DA8E2F04AB690012A48F /* DummyDataSeeder.swift in Sources */,
 				7F60D5DD2F07395B0034FE1F /* ProviderBookingCell.swift in Sources */,
 				7FA8DA882F045DC00012A48F /* ViewNotificationViewController.swift in Sources */,
@@ -1546,6 +1555,7 @@
 				7FAB336E2EE4633E008AC600 /* AdminViewModel.swift in Sources */,
 				7F60812A2EF99E2C00FA5639 /* Report.swift in Sources */,
 				7F60812B2EF99E2C00FA5639 /* Review.swift in Sources */,
+				7F745ED42F08545400181F7E /* ForgotPasswordViewController.swift in Sources */,
 				7F60812C2EF99E2C00FA5639 /* PortfolioProject.swift in Sources */,
 				7F60D5BB2F06B30E0034FE1F /* UIViewController+FontScaling.swift in Sources */,
 				7F745EBC2F08266A00181F7E /* ProviderDetailsViewController.swift in Sources */,
@@ -1575,6 +1585,7 @@
 				7F60D5D22F0725070034FE1F /* BlockedSlot.swift in Sources */,
 				3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */,
 				AC7DF5B52F06A35500B5EB09 /* PortfolioTableCell.swift in Sources */,
+				7F745ED62F08545A00181F7E /* NewPasswordViewController.swift in Sources */,
 				7F5A0D242EFEB141001135C2 /* ChatMessage.swift in Sources */,
 				7F60813A2EFAD16A00FA5639 /* ProviderSetupViewController.swift in Sources */,
 				7FAB333E2EE45DA3008AC600 /* RequestListViewModel.swift in Sources */,
