@@ -3,30 +3,30 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var iconImageView: UIImageView! // Add an ImageView to your cell in Storyboard if you can!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 18
+        // Default styling
+        self.layer.cornerRadius = 19
         self.clipsToBounds = true
     }
     
-    func configure(with category: CategoryData, isSelected: Bool) {
+    func configure(with category: ServiceCategory, isSelected: Bool) {
         categoryLabel.text = category.name
         
-        // Makes it a perfect pill shape
-        self.layer.cornerRadius = 19 // Half of the 38pt height
-        self.clipsToBounds = true
-        
         if isSelected {
-            // --- SELECTED STATE: Solid Blue Background ---
-            self.backgroundColor = UIColor.blueButtons
-            categoryLabel.textColor = .black
+            // --- SELECTED STATE ---
+            // Assuming 'UIColor.blueButtons' is a custom extension you have.
+            // If not, use .systemBlue or a specific color literal.
+            self.backgroundColor = .systemBlue
+            categoryLabel.textColor = .white
             self.layer.borderWidth = 0
         } else {
-            // --- DEFAULT STATE: Light Background ---
-            self.backgroundColor = category.color // Your pastel color
-            categoryLabel.textColor = .black
+            // --- UNSELECTED STATE ---
+            // ServiceCategory doesn't have a .color property from the DB yet.
+            // So we use a default gray for now.
+            self.backgroundColor = .systemGray6
+            categoryLabel.textColor = .label
             self.layer.borderWidth = 1
             self.layer.borderColor = UIColor.systemGray5.cgColor
         }

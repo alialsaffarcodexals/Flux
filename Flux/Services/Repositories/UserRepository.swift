@@ -46,4 +46,36 @@ final class UserRepository {
             }
         }
     }
+    
+    // Fetch Providers (For Recommendations)
+    func fetchRecommendedProviders(limit: Int = 10, completion: @escaping (Result<[User], Error>) -> Void) {
+        // Query: Find users where role is "Provider" AND setup is complete
+        usersCollection
+            .whereField("role", isEqualTo: "Provider")
+            .whereField("hasCompletedProviderSetup", isEqualTo: true)
+            .limit(to: limit) // Don't fetch everyone, just a few for recommendation
+            .getDocuments { snapshot, error in
+                self.manager.decodeDocuments(snapshot, error: error, completion: completion)
+            }
+    }
+    
+    // Fetch multiple users at once by their IDs
+    func fetchUsers(byIds ids: [String], completion: @escaping (Result<[User], Error>) -> Void) {
+        // Firestore limits 'in' queries to 10-30 items.
+        // If ids is empty, return empty immediately.
+        guard !ids.isEmpty else {
+            completion(.success([]))
+            return
+        }
+        
+        // chunking is recommended for prod, but for now we pass the array directly
+        // Make sure 'ids' doesn't exceed 30 items or Firestore will error.
+        let uniqueIds = Array(Set(ids)) // Remove duplicates
+        
+        usersCollection
+            .whereField(FieldPath.documentID(), in: uniqueIds)
+            .getDocuments { snapshot, error in
+                self.manager.decodeDocuments(snapshot, error: error, completion: completion)
+            }
+    }
 }
