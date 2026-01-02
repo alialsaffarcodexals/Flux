@@ -79,15 +79,20 @@ class HomeViewModel {
     
     // MARK: - Logic
     
+
     func filterBy(category: String) {
         if category == "All" {
+            // Reset to show everything
             displayedServices = allServices
         } else {
-            // Case-insensitive filtering
-            displayedServices = allServices.filter {
-                $0.category.lowercased() == category.lowercased()
+            // Filter by matching category name (Case Insensitive is safer)
+            displayedServices = allServices.filter { service in
+                return service.category.localizedCaseInsensitiveContains(category) ||
+                       category.localizedCaseInsensitiveContains(service.category)
             }
         }
+        
+        print("🔍 Filtered by \(category): Found \(displayedServices.count) services")
     }
     
     func getRandomColor() -> UIColor {

@@ -57,17 +57,27 @@ class HomeFeedViewController: UIViewController {
     
     // SECTION 1: Categories (Pills)
     private func createCategoriesSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(50),
+            heightDimension: .fractionalHeight(1.0)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(100), heightDimension: .absolute(40))
+        // 2. The Group must ALSO use .estimated
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(50),
+            heightDimension: .absolute(40) // Fixed height for pills
+        )
+        
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.interGroupSpacing = 10
+        section.interGroupSpacing = 10 // Space between pills
+        
         section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 20, trailing: 16)
         section.boundarySupplementaryItems = [self.createHeader()]
+        
         return section
     }
     
@@ -175,4 +185,25 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
         
         return header
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            
+            // Only care about clicks in Section 1 (Categories)
+            if indexPath.section == 1 {
+                
+                // 1. Update the selected index in ViewModel
+                viewModel.selectedCategoryIndex = indexPath.item
+                
+                // 2. Get the category name
+                let selectedCategory = viewModel.categories[indexPath.item]
+                
+                // 3. Trigger the Filter Logic
+                viewModel.filterBy(category: selectedCategory.name)
+                
+                // 4. Reload Section 1 (to update Blue/Gray colors) AND Section 2 (to show filtered results)
+                // Using reloadSections is smoother than reloadData()
+                collectionView.reloadSections(IndexSet(integersIn: 1...2))
+            }
+        }
+    
 }

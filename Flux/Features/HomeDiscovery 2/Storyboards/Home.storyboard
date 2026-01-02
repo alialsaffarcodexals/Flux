@@ -120,14 +120,16 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PSd-FY-y6m">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💼 Services" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xx-tK-G8E">
-                                                            <rect key="frame" x="10.333333333333336" y="11.666666666666664" width="79.333333333333314" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Services" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xx-tK-G8E">
+                                                            <rect key="frame" x="15" y="11.666666666666664" width="70" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="9xx-tK-G8E" firstAttribute="leading" secondItem="PSd-FY-y6m" secondAttribute="leading" constant="15" id="bdf-a5-2lW"/>
+                                                        <constraint firstAttribute="trailing" secondItem="9xx-tK-G8E" secondAttribute="trailing" constant="15" id="jA5-gO-nPf"/>
                                                         <constraint firstItem="9xx-tK-G8E" firstAttribute="centerY" secondItem="PSd-FY-y6m" secondAttribute="centerY" id="jPX-PQ-Kxm"/>
                                                         <constraint firstItem="9xx-tK-G8E" firstAttribute="centerX" secondItem="PSd-FY-y6m" secondAttribute="centerX" id="pRR-T2-epP"/>
                                                     </constraints>
