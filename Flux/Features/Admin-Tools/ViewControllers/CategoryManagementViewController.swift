@@ -40,19 +40,19 @@ class CategoryManagementViewController: UIViewController {
     private func setupUI() {
         title = viewModel.title
 
-        addTextField.isHidden = true
-        addTextField.delegate = self
+        addTextField?.isHidden = true
+        addTextField?.delegate = self
 
-        addTextFieldHeight.constant = 4
-        addTextFieldTop.constant = 0
-        addTextFieldBottom.constant = 0
+        addTextFieldHeight?.constant = 4
+        addTextFieldTop?.constant = 0
+        addTextFieldBottom?.constant = 0
     }
 
     private func setupTable() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.tableFooterView = UIView()
-        tableView.isHidden = true
+        tableView?.dataSource = self
+        tableView?.delegate = self
+        tableView?.tableFooterView = UIView()
+        tableView?.isHidden = true
     }
 
     private func setupGesture() {
@@ -60,7 +60,7 @@ class CategoryManagementViewController: UIViewController {
             target: self,
             action: #selector(handleLongPress(_:))
         )
-        tableView.addGestureRecognizer(longPress)
+        tableView?.addGestureRecognizer(longPress)
     }
 
     private func setupLoader() {
@@ -76,7 +76,7 @@ class CategoryManagementViewController: UIViewController {
 
     // MARK: - Fetch Categories FIRST
     private func fetchCategories() {
-        tableView.isHidden = true
+        tableView?.isHidden = true
         loader.startAnimating()
 
         viewModel.fetchCategories { [weak self] result in
@@ -88,8 +88,8 @@ class CategoryManagementViewController: UIViewController {
                 switch result {
                 case .success(let data):
                     self.categories = self.deduplicatedCategories(from: data)
-                    self.tableView.reloadData()
-                    self.tableView.isHidden = false
+                    self.tableView?.reloadData()
+                    self.tableView?.isHidden = false
 
                 case .failure(let error):
                     print("❌ Fetch categories error:", error.localizedDescription)
@@ -122,10 +122,16 @@ class CategoryManagementViewController: UIViewController {
     private func enterAddMode() {
         currentMode = .add
 
+        // Safely unwrap IBOutlets — avoid crashes if outlets aren't connected
+        guard let addTextField = addTextField else {
+            // If the text field isn't connected, just switch mode and return
+            return
+        }
+
         addTextField.isHidden = false
-        addTextFieldHeight.constant = 34
-        addTextFieldTop.constant = 16
-        addTextFieldBottom.constant = 16
+        addTextFieldHeight?.constant = 34
+        addTextFieldTop?.constant = 16
+        addTextFieldBottom?.constant = 12
 
         addTextField.text = ""
         addTextField.becomeFirstResponder()
@@ -138,10 +144,11 @@ class CategoryManagementViewController: UIViewController {
     private func exitAddMode() {
         currentMode = .view
 
-        addTextFieldHeight.constant = 4
-        addTextFieldTop.constant = 0
-        addTextFieldBottom.constant = 0
-        addTextField.isHidden = true
+        // If outlets are missing, make a best-effort state reset
+        addTextFieldHeight?.constant = 0
+        addTextFieldTop?.constant = 0
+        addTextFieldBottom?.constant = 0
+        addTextField?.isHidden = true
 
         view.endEditing(true)
 
@@ -230,9 +237,9 @@ extension CategoryManagementViewController {
 
     @objc private func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         guard gesture.state == .began else { return }
-
-        let point = gesture.location(in: tableView)
-        guard let indexPath = tableView.indexPathForRow(at: point) else { return }
+        guard let table = tableView else { return }
+        let point = gesture.location(in: table)
+        guard let indexPath = table.indexPathForRow(at: point) else { return }
 
         let category = categories[indexPath.row]
         guard let id = category.id else { return }

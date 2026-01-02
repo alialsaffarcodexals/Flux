@@ -24,7 +24,7 @@ class RequestTableCell: UITableViewCell {
         serviceImgView.clipsToBounds = true
         serviceImgView.backgroundColor = UIColor.systemGray5
         
-        // --- COMMENT OUT THESE LINES UNTIL YOU ADD THE BUTTON ---
+       
                 // let config = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)
                 // favoriteButton.setImage(UIImage(systemName: "star", withConfiguration: config), for: .normal)
                 // favoriteButton.setImage(UIImage(systemName: "star.fill", withConfiguration: config), for: .selected)

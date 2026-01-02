@@ -5,7 +5,7 @@ import FirebaseAuth
 class AdminToolsViewModel {
 
     var title: String {
-        return "Admin Dashboard"
+        return "Dashboard"
     }
 
     private let db = Firestore.firestore()
@@ -328,6 +328,10 @@ class AdminToolsViewModel {
             mutableUser.businessName = data["businessName"] as? String
             mutableUser.bio = data["bio"] as? String
             mutableUser.isVerified = data["isVerified"] as? Bool
+            // Account flags (suspension/ban)
+            mutableUser.isSuspended = data["isSuspended"] as? Bool
+            mutableUser.isBanned = data["isBanned"] as? Bool
+            if let ts = data["suspendedUntil"] as? Timestamp { mutableUser.suspendedUntil = ts.dateValue() }
             if let ts = data["joinedDate"] as? Timestamp { mutableUser.joinedDate = ts.dateValue() }
 
             completion(.success(mutableUser))
@@ -396,7 +400,7 @@ class AdminToolsViewModel {
                     .whereField("username", isEqualTo: identifier)
                     .limit(to: 1)
                     .getDocuments { snap, error in
-                        if let error = error {
+                        if error != nil {
                             // try email / displayName queries sequentially
                             self.db.collection("users").whereField("email", isEqualTo: identifier).limit(to: 1).getDocuments { s2, e2 in
                                 if let e2 = e2 {
@@ -514,11 +518,20 @@ class AdminToolsViewModel {
     }
 
     // MARK: - Update user flags (suspend/ban/verify)
-    func updateUserFlags(userID: String, isSuspended: Bool? = nil, isBanned: Bool? = nil, isVerified: Bool? = nil, completion: ((Error?) -> Void)? = nil) {
+    func updateUserFlags(userID: String,
+                         isSuspended: Bool? = nil,
+                         isBanned: Bool? = nil,
+                         isVerified: Bool? = nil,
+                         suspendedUntil: Date? = nil,
+                         removeSuspendedUntil: Bool = false,
+                         completion: ((Error?) -> Void)? = nil) {
+
         var data: [String: Any] = [:]
         if let s = isSuspended { data["isSuspended"] = s }
         if let b = isBanned { data["isBanned"] = b }
         if let v = isVerified { data["isVerified"] = v }
+        if let dt = suspendedUntil { data["suspendedUntil"] = Timestamp(date: dt) }
+        if removeSuspendedUntil { data["suspendedUntil"] = FieldValue.delete() }
 
         guard !data.isEmpty else { completion?(nil); return }
 

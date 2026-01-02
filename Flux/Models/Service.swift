@@ -6,6 +6,8 @@ import FirebaseFirestore
 struct Service: Identifiable, Codable {
     @DocumentID var id: String?
     var providerId: String
+    
+    var providerName: String?
 
     var title: String
     var description: String
@@ -20,7 +22,7 @@ struct Service: Identifiable, Codable {
     var rating: Double?
     var reviewCount: Int?
 
-    var isActive: Bool           // ✅ NEW
+    var isActive: Bool
     var createdAt: Date
-    var updatedAt: Date?         // ✅ NEW (optional)
+    var updatedAt: Date?         
 }

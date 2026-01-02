@@ -59,6 +59,8 @@ class DisputeCenterVC: UIViewController,
     private func setupTextField() {
         descriptionTextField.delegate = self
         descriptionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
+
     }
 
     private func setupInitialState() {

@@ -20,7 +20,7 @@ struct Review: Identifiable, Codable {
 
     var timestamp: Date
 
-    // Custom Initializer (Fixes the "Extra Argument" error)
+    
     init(bookingId: String, serviceId: String, providerId: String, seekerId: String, rating: Int, comment: String) {
         self.bookingId = bookingId
         self.serviceId = serviceId

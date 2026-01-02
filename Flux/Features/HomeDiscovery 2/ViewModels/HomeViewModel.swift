@@ -1,21 +1,8 @@
 import UIKit
 
 // MARK: - Models
-struct Company {
-    var name: String
-    var description: String
-    var backgroundColor: UIColor
-    var category: String
-    var price: Double
-    var rating: Double
-    var dateAdded: Date
-    var imageURL: String
-}
+// Defined in Models/Company.swift
 
-struct CategoryData {
-    let name: String
-    let color: UIColor
-}
 
 // 🔥 ADD THIS BACK: This fixes the "Cannot find FilterOptions" error
 struct FilterOptions {
@@ -35,58 +22,105 @@ struct FilterOptions {
 // MARK: - View Model
 class HomeViewModel {
     
-    // Hardcoded Categories - Simple text, No icons
-    let categories: [CategoryData] = [
-        CategoryData(name: "All", color: .systemGray6),
-        CategoryData(name: "Cleaning", color: UIColor(red: 0.92, green: 0.98, blue: 0.92, alpha: 1.0)),
-        CategoryData(name: "Lessons", color: UIColor(red: 0.90, green: 0.95, blue: 1.00, alpha: 1.0)),
-        CategoryData(name: "Media", color: UIColor(red: 1.00, green: 0.95, blue: 0.90, alpha: 1.0)),
-        CategoryData(name: "Courses", color: UIColor(red: 0.95, green: 0.92, blue: 1.00, alpha: 1.0))
-    ]
+    // Dependencies
+    private let serviceRepo = ServiceRepository.shared
+    private let userRepo = UserRepository.shared
     
-    private var allCompanies: [Company] = []
-    var recommendedCompanies: [Company] = []
+    // Data Sources
+    var recommendedProviders: [User] = []
+    var displayedServices: [Service] = []
+    var categories: [ServiceCategory] = []
+    var providerNames: [String: String] = [:]
+    
+    // Data Cache (To store all services for local filtering)
+    private var allServices: [Service] = []
+    
+    // UI Helpers
     var selectedCategoryIndex: Int = 0
-    let repo = HomeRepository()
+    private let fluxPastelColors: [UIColor] = [
+        UIColor(red: 0.90, green: 0.95, blue: 1.00, alpha: 1.0),
+        UIColor(red: 0.92, green: 0.98, blue: 0.92, alpha: 1.0),
+        UIColor(red: 1.00, green: 0.95, blue: 0.90, alpha: 1.0),
+        UIColor(red: 0.95, green: 0.92, blue: 1.00, alpha: 1.0)
+    ]
 
-    func fetchLiveServices(completion: @escaping () -> Void) {
-        repo.fetchServices { result in
-            switch result {
-            case .success(let services):
-                self.allCompanies = services
-                self.recommendedCompanies = services
-                completion()
-            case .failure(let error):
-                print("❌ Home Error: \(error.localizedDescription)")
+    // MARK: - Fetching Data
+    func fetchHomeData(completion: @escaping () -> Void) {
+            let group = DispatchGroup()
+            
+            // 1. Fetch Recommended Providers (Top Section)
+            group.enter()
+            userRepo.fetchRecommendedProviders { [weak self] result in
+                defer { group.leave() }
+                if case .success(let providers) = result {
+                    self?.recommendedProviders = providers
+                }
+            }
+            
+            // 2. Fetch Services AND THEN Fetch their Provider Names
+            group.enter()
+            serviceRepo.fetchActiveServices { [weak self] result in
+                switch result {
+                case .success(let services):
+                    self?.allServices = services
+                    self?.displayedServices = services
+                    
+                    // ✅ EXTRACT IDs
+                    let providerIds = services.map { $0.providerId }
+                    
+                    // ✅ FETCH PROVIDER NAMES
+                    self?.userRepo.fetchUsers(byIds: providerIds) { userResult in
+                        if case .success(let users) = userResult {
+                            // Create the lookup dictionary
+                            for user in users {
+                                // Map ID to Business Name (or Name)
+                                self?.providerNames[user.id ?? ""] = user.businessName ?? user.name
+                            }
+                        }
+                        // Leave group ONLY after getting names
+                        group.leave()
+                    }
+                    
+                case .failure(let error):
+                    print("Error: \(error)")
+                    group.leave()
+                }
+            }
+            
+            // 3. Fetch Categories
+            group.enter()
+            serviceRepo.fetchCategories(activeOnly: true) { [weak self] result in
+                defer { group.leave() }
+                if case .success(let fetchedCategories) = result {
+                    let allCategory = ServiceCategory(id: "ALL", name: "All", isActive: true)
+                    self?.categories = [allCategory] + fetchedCategories
+                }
+            }
+            
+            group.notify(queue: .main) {
                 completion()
             }
         }
-    }
+    
+    // MARK: - Logic
+    
 
     func filterBy(category: String) {
         if category == "All" {
-            recommendedCompanies = allCompanies
+            // Reset to show everything
+            displayedServices = allServices
         } else {
-            recommendedCompanies = allCompanies.filter { $0.category == category }
+            // Filter by matching category name (Case Insensitive is safer)
+            displayedServices = allServices.filter { service in
+                return service.category.localizedCaseInsensitiveContains(category) ||
+                       category.localizedCaseInsensitiveContains(service.category)
+            }
         }
+        
+        print("🔍 Filtered by \(category): Found \(displayedServices.count) services")
     }
     
-    // 🔥 ADD THIS BACK: So the filter screen functions correctly
-    func applyFilters(_ filters: FilterOptions) {
-        var filtered = allCompanies
-        filtered = filtered.filter { $0.price <= filters.maxPrice }
-        if filters.minRating > 0 {
-            filtered = filtered.filter { $0.rating >= filters.minRating }
-        }
-        
-        switch filters.sortBy {
-        case .relevance: break
-        case .priceLowToHigh: filtered.sort { $0.price < $1.price }
-        case .priceHighToLow: filtered.sort { $0.price > $1.price }
-        case .rating: filtered.sort { $0.rating > $1.rating }
-        case .newest: filtered.sort { $0.dateAdded > $1.dateAdded }
-        }
-        
-        recommendedCompanies = filtered
+    func getRandomColor() -> UIColor {
+        return fluxPastelColors.randomElement() ?? .systemGray6
     }
 }
