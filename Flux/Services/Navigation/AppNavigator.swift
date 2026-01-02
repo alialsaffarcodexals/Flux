@@ -55,8 +55,8 @@ class AppNavigator {
             let storyboard = UIStoryboard(name: "AdminTools", bundle: nil) // Must match file name "AdminTools.storyboard"
             
             // Use the Storyboard ID we set in Step 3
-            guard let adminNav = storyboard.instantiateViewController(withIdentifier: "AdminNavigationController") as? UINavigationController else {
-                print("🔴 Error: Could not find 'AdminNavigationController' in AdminTools.storyboard")
+            guard let adminNav = storyboard.instantiateViewController(withIdentifier: "AdminTabBarController") as? UITabBarController else {
+                print("🔴 Error: Could not find 'AdminTabBarController' in AdminTools.storyboard")
                 return
             }
             
