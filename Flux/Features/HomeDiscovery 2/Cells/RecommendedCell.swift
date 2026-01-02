@@ -1,7 +1,7 @@
 import UIKit
 
 class RecommendedCell: UICollectionViewCell {
-    @IBOutlet weak var containerView: UIView! // The Green/Blue box
-    @IBOutlet weak var providerLabel: UILabel! // "CleanMax"
-    @IBOutlet weak var serviceLabel: UILabel!  // "Home Cleaning"
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
 }
