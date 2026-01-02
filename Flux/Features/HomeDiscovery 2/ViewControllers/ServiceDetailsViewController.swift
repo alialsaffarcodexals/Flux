@@ -69,12 +69,10 @@ class ServiceDetailsViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func bookButtonTapped(_ sender: UIButton) {
-        // TODO: Navigate to Booking Management / Calendar selection
-        print("Navigate to Booking Flow for service: \(service?.id ?? "")")
-        
-        // Example:
-        // let bookingVC = storyboard?.instantiateViewController(withIdentifier: "BookingVC") as! BookingViewController
-        // bookingVC.service = service
-        // navigationController?.pushViewController(bookingVC, animated: true)
+        let storyboard = UIStoryboard(name: "Booking", bundle: nil)
+        if let bookingVC = storyboard.instantiateViewController(withIdentifier: "BookingVC") as? RequestBookingViewController {
+            bookingVC.service = service
+            navigationController?.pushViewController(bookingVC, animated: true)
+        }
     }
 }
