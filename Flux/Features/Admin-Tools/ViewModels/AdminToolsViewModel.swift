@@ -5,7 +5,7 @@ import FirebaseAuth
 class AdminToolsViewModel {
 
     var title: String {
-        return "Admin Dashboard"
+        return "Dashboard"
     }
 
     private let db = Firestore.firestore()
@@ -396,7 +396,7 @@ class AdminToolsViewModel {
                     .whereField("username", isEqualTo: identifier)
                     .limit(to: 1)
                     .getDocuments { snap, error in
-                        if let error = error {
+                        if error != nil {
                             // try email / displayName queries sequentially
                             self.db.collection("users").whereField("email", isEqualTo: identifier).limit(to: 1).getDocuments { s2, e2 in
                                 if let e2 = e2 {
