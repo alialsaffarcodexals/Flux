@@ -149,4 +149,21 @@ class AppNavigator {
         return storyboard.instantiateViewController(withIdentifier: "ProviderAvailabilityCalendarViewController")
     }
 
+    // MARK: - Service Packages Navigation
+    
+    func getServicePackagesListViewController() -> UIViewController? {
+        let storyboard = UIStoryboard(name: "ServicePackages", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "ServicePackagesListViewController")
+    }
+    
+    func getServicePackageEditorViewController(package: ServicePackage?) -> UIViewController? {
+        let storyboard = UIStoryboard(name: "ServicePackages", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "ServicePackageEditorViewController") as? ServicePackageEditorViewController else {
+            return nil
+        }
+        // Initialize VM with package
+        vc.viewModel = ServicePackageEditorViewModel(package: package)
+        return vc
+    }
+
 }

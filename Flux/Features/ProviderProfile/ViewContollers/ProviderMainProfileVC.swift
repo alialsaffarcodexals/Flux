@@ -170,6 +170,15 @@ class ProviderMainProfileVC: UIViewController {
         navigationController?.pushViewController(portfolioVC, animated: true)
     }
     
+    // MARK: - Service Packages
+    @IBAction func viewServicePackagesTapped(_ sender: Any) {
+        if let vc = AppNavigator.shared.getServicePackagesListViewController() {
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            print("🔴 Error: Could not instantiate ServicePackagesListViewController via AppNavigator")
+        }
+    }
+    
     // ✅ Edit Provider Profile Picture Action
     @IBAction func editProviderProfilePictureTapped(_ sender: UIButton) {
         let imagePicker = UIImagePickerController()
