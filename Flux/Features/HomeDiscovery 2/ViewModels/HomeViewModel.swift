@@ -1,21 +1,8 @@
 import UIKit
 
 // MARK: - Models
-struct Company {
-    var name: String
-    var description: String
-    var backgroundColor: UIColor
-    var category: String
-    var price: Double
-    var rating: Double
-    var dateAdded: Date
-    var imageURL: String
-}
+// Defined in Models/Company.swift
 
-struct CategoryData {
-    let name: String
-    let color: UIColor
-}
 
 // 🔥 ADD THIS BACK: This fixes the "Cannot find FilterOptions" error
 struct FilterOptions {

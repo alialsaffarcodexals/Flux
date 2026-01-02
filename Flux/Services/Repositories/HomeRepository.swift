@@ -29,6 +29,8 @@ class HomeRepository {
                 let randomColor = self.fluxPastelColors.randomElement() ?? .systemGray6
 
                 return Company(
+                    id: doc.documentID,
+                    providerId: data["providerId"] as? String ?? "",
                     name: data["title"] as? String ?? "No Title",
                     description: data["description"] as? String ?? "",
                     backgroundColor: randomColor,

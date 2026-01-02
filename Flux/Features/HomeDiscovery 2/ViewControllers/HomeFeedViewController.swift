@@ -165,6 +165,26 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
             viewModel.selectedCategoryIndex = indexPath.item
             viewModel.filterBy(category: viewModel.categories[indexPath.item].name)
             DispatchQueue.main.async { self.collectionView.reloadData() }
+        } else if indexPath.section == 0 {
+            let selectedCompany = viewModel.recommendedCompanies[indexPath.item]
+            
+            // Navigate to Provider Details
+            let storyboard = UIStoryboard(name: "ProviderDetails", bundle: nil)
+            if let providerVC = storyboard.instantiateViewController(withIdentifier: "ProviderDetailsVC") as? ProviderDetailsViewController {
+                let providerViewModel = ProviderDetailsViewModel(company: selectedCompany)
+                providerVC.viewModel = providerViewModel
+                navigationController?.pushViewController(providerVC, animated: true)
+            }
+        } else if indexPath.section == 2 {
+            let selectedCompany = viewModel.recommendedCompanies[indexPath.item]
+            
+            // Navigate to Service Details
+            let storyboard = UIStoryboard(name: "ServiceDetails", bundle: nil)
+            if let detailsVC = storyboard.instantiateViewController(withIdentifier: "ServiceDetailsVC") as? ServiceDetailsViewController {
+                let detailsViewModel = ServiceDetailsViewModel(company: selectedCompany)
+                detailsVC.viewModel = detailsViewModel
+                navigationController?.pushViewController(detailsVC, animated: true)
+            }
         }
     }
 }
