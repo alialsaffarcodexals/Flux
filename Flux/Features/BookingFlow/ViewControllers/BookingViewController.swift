@@ -4,8 +4,8 @@ class BookingViewController: UIViewController {
 
     // MARK: - Outlets
     @IBOutlet weak var calendarContainerView: UIView!
-    @IBOutlet var timeButtons: [UIButton]! // Connect all 3 buttons here
-    @IBOutlet weak var noteTextView: UITextView! // Connect your text view
+    @IBOutlet var timeButtons: [UIButton]!
+    @IBOutlet weak var noteTextView: UITextView!
     
     // MARK: - Properties
     let calendarView = UICalendarView()
@@ -17,12 +17,9 @@ class BookingViewController: UIViewController {
         setupCalendar()
         setupTimeButtons()
         setupNoteView()
-        
-        // Fix: Ensure the main stack view doesn't get crushed
-        // (Assuming you pinned the Stack View to the edges of the View)
     }
 
-    // MARK: - 1. Calendar Setup
+    // MARK: - Calendar Setup
     func setupCalendar() {
         calendarContainerView.addSubview(calendarView)
         
@@ -38,12 +35,11 @@ class BookingViewController: UIViewController {
         calendarView.locale = .current
         calendarView.fontDesign = .rounded
         
-        // Single Date Selection
         let selection = UICalendarSelectionSingleDate(delegate: self)
         calendarView.selectionBehavior = selection
     }
     
-    // MARK: - 2. Time Buttons Setup
+    // MARK: - Time Buttons Setup
     func setupTimeButtons() {
         for button in timeButtons {
             button.layer.cornerRadius = 8
@@ -53,22 +49,19 @@ class BookingViewController: UIViewController {
     }
     
     @IBAction func timeSlotTapped(_ sender: UIButton) {
-        // 1. Reset all buttons to Gray
         for button in timeButtons {
             button.backgroundColor = .systemGray6
             button.setTitleColor(.label, for: .normal)
         }
         
-        // 2. Make selected button Blue
         sender.backgroundColor = .systemBlue
         sender.setTitleColor(.white, for: .normal)
         
-        // 3. Save the time
         selectedTime = sender.title(for: .normal)
         print("Selected Time: \(selectedTime ?? "")")
     }
     
-    // MARK: - 3. Note View Setup
+    // MARK: - Note View Setup
     func setupNoteView() {
         noteTextView.layer.cornerRadius = 8
         noteTextView.backgroundColor = .systemGray6
@@ -77,7 +70,7 @@ class BookingViewController: UIViewController {
         noteTextView.delegate = self
     }
     
-    // MARK: - 4. Send Booking
+    // MARK: - Send Booking
     @IBAction func sendButtonTapped(_ sender: Any) {
         guard let date = selectedDate, let time = selectedTime else {
             print("❌ Please select a date and time")
@@ -86,9 +79,6 @@ class BookingViewController: UIViewController {
         
         print("✅ Booking: \(date) at \(time)")
         print("📝 Note: \(noteTextView.text ?? "")")
-        
-        // Perform segue to Success Screen
-        // performSegue(withIdentifier: "goToConfirmation", sender: self)
     }
 }
 

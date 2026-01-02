@@ -1,15 +1,13 @@
 import UIKit
 import FirebaseAuth
 
-class ChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate { // <--- Added Search Delegate
+class ChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    // 1. The Master List (All loaded chats)
     var conversations: [Conversation] = []
     
-    // 2. The Filtered List (What is actually shown on screen)
     var filteredConversations: [Conversation] = []
     
     override func viewDidLoad() {
@@ -21,20 +19,18 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
         
         // Connect the Search Bar
-        searchBar.delegate = self // <--- This enables the typing listener
+        searchBar.delegate = self
         
         // Start Loading Data
         startListeningForChats()
     }
     
     func startListeningForChats() {
-        // Call the separate Repository file
         ChatRepository.shared.fetchConversations { [weak self] result in
             switch result {
             case .success(let chats):
                 self?.conversations = chats
                 
-                // By default, show ALL chats (unless user is already typing)
                 if let searchText = self?.searchBar.text, !searchText.isEmpty {
                     self?.filterChats(searchText: searchText)
                 } else {
@@ -49,17 +45,15 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
-    // MARK: - Search Logic 🔍
+    // MARK: - Search Logic
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filterChats(searchText: searchText)
     }
     
     func filterChats(searchText: String) {
         if searchText.isEmpty {
-            // If empty, show everything
             filteredConversations = conversations
         } else {
-            // Filter by name (Case Insensitive)
             filteredConversations = conversations.filter { chat in
                 return chat.otherUserName.lowercased().contains(searchText.lowercased())
             }
@@ -69,13 +63,13 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
 
     // MARK: - TableView Data Source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredConversations.count // <--- Use Filtered List
+        return filteredConversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ChatListCell", for: indexPath) as! ChatListCell
         
-        let chat = filteredConversations[indexPath.row] // <--- Use Filtered List
+        let chat = filteredConversations[indexPath.row]
         
         cell.nameLabel.text = chat.otherUserName
         cell.messageLabel.text = chat.lastMessage
@@ -93,7 +87,7 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - Navigation
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let selectedChat = filteredConversations[indexPath.row] // <--- Use Filtered List
+        let selectedChat = filteredConversations[indexPath.row]
         performSegue(withIdentifier: "goToChat", sender: selectedChat)
     }
     
@@ -104,7 +98,6 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
             
             destinationVC.title = chatData.otherUserName
             
-            // Uncomment this when your ChatRoom is ready for real IDs
              destinationVC.conversationId = chatData.id
         }
     }
