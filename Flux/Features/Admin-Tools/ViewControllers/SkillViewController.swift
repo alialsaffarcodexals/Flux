@@ -26,10 +26,11 @@ class SkillViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Setup default placeholders and styling early so IBOutlets render correctly
-        let placeholderProvider = UIImage(systemName: "person.crop.circle.fill")
         ProviderPhoto.contentMode = .scaleAspectFill
         ProviderPhoto.clipsToBounds = true
-        ProviderPhoto.image = placeholderProvider
+        if let placeholder = placeholderAvatar() {
+            ProviderPhoto.image = placeholder
+        }
 
         loadData()
     }
@@ -65,7 +66,9 @@ class SkillViewController: UIViewController {
                                 if let strong = self {
                                     strong.providerName.text = user.name
                                     strong.providerUserName.text = "@\(user.username)"
-                                    strong.setImage(from: user.providerProfileImageURL, into: strong.ProviderPhoto, size: strong.imageDisplaySize)
+                                    if let urlString = strong.preferredProfileImageURL(for: user) {
+                                        strong.setImage(from: urlString, into: strong.ProviderPhoto, size: strong.imageDisplaySize)
+                                    }
                                 }
                             case .failure:
                                 self?.providerName.text = s.providerId
@@ -106,29 +109,54 @@ class SkillViewController: UIViewController {
     private func setImage(from urlString: String?, into imageView: UIImageView, size: CGSize) {
         guard let s = urlString, let url = URL(string: s) else {
             DispatchQueue.main.async {
-                // keep existing image (placeholder) and log missing URL
                 print("⚠️ SkillViewController: no URL for imageView \(imageView) — leaving placeholder")
             }
             return
         }
 
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
                 print("⚠️ SkillViewController: image download error for \(url): \(error.localizedDescription)")
                 return
             }
-            guard let data = data, let img = UIImage(data: data) else {
+            guard let data = data, let downloaded = UIImage(data: data) else {
                 print("⚠️ SkillViewController: image data invalid for \(url)")
                 return
             }
+            let thumb = self?.resizedImage(downloaded, to: size) ?? downloaded
             DispatchQueue.main.async {
-                imageView.image = img
+                imageView.image = thumb
+                imageView.layer.cornerRadius = min(size.width, size.height) / 2
+                imageView.clipsToBounds = true
                 print("✅ SkillViewController: loaded image for \(url)")
             }
         }.resume()
+    }
+
+    // Downscale avatar assets so they stay sharp without stretching.
+    private func resizedImage(_ image: UIImage, to size: CGSize) -> UIImage {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        return renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+
+    private func placeholderAvatar() -> UIImage? {
+        guard let symbol = UIImage(systemName: "person.crop.circle.fill") else { return nil }
+        let tinted = symbol.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        return resizedImage(tinted, to: imageDisplaySize)
+    }
+
+    private func preferredProfileImageURL(for user: User) -> String? {
+        if let mode = user.activeProfileMode, let url = user.profileImageURL(for: mode), !url.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return url
+        }
+
+        if user.role == .provider {
+            return user.providerProfileImageURL ?? user.seekerProfileImageURL
+        }
+
+        return user.seekerProfileImageURL ?? user.providerProfileImageURL
     }
 
     // Ensure the provider photo is circular after layout
