@@ -90,6 +90,31 @@ class PortfolioListViewController: UIViewController, UITableViewDelegate, UITabl
          
          return cell
      }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let projectToEdit = projects[indexPath.row]
+        self.performSegue(withIdentifier: "toAddProject", sender: projectToEdit)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAddProject",
+           let destination = segue.destination as? AddProjectViewController,
+           let project = sender as? PortfolioProject {
+            
+            // Pass the WHOLE object. The ID is inside it.
+            destination.editingProject = project
+            
+            // Fill the UI
+            destination.loadViewIfNeeded()
+            destination.projectNameTextField.text = project.title
+            destination.descriptionTextView.text = project.description
+            destination.descriptionTextView.textColor = .black
+            destination.datePicker.date = project.timestamp
+            
+            // This 'fake' selectedImage ensures the validation passes during an edit
+            // In a real app, you'd load the image from the URL here
+            destination.selectedImage = UIImage(systemName: "photo")
+        }
+    }
     
     // This is the "Exit Door" that other screens use to come back here
     @IBAction func unwindToPortfolio(segue: UIStoryboardSegue) {
