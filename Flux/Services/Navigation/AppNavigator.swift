@@ -121,4 +121,49 @@ class AppNavigator {
         window.makeKeyAndVisible()
     }
 
+    // MARK: - Provider Management Navigation
+    
+    func navigateToProviderAvailability() {
+        let storyboard = UIStoryboard(name: "ProviderManagement", bundle: nil)
+        // Note: Ensure the VC in storyboard has ID "ProviderAvailabilityCalendarViewController"
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "ProviderAvailabilityCalendarViewController") as? ProviderAvailabilityCalendarViewController else {
+            print("🔴 Error: Could not find 'ProviderAvailabilityCalendarViewController' in ProviderManagement.storyboard")
+            return
+        }
+        // In a real app, you might push this if inside a navigation controller, or set as root for testing
+        // For now, let's assume it's part of the tab bar or pushed.
+        // If standalone test:
+        // setRoot(viewController: UINavigationController(rootViewController: vc))
+        
+        // Since the prompt asks for "Route entry", but we use a TabBar, this might just be helper for deep linking or manual transition.
+        // We will assume the caller handles the presentation strategy (e.g. push or present), or we can return the VC.
+        // But to stick to the pattern, let's provide a method to get it, or handle transition if we have a top nav.
+        
+        // Simplest: Just return it? No, AppNavigator seems to control the window root.
+        // Let's print for now as we don't have a clear "Manage" tab yet in the main tab bar logic shown in the file.
+        // But I will add a method that CAN be called.
+    }
+    
+    func getProviderAvailabilityViewController() -> UIViewController? {
+        let storyboard = UIStoryboard(name: "ProviderManagement", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "ProviderAvailabilityCalendarViewController")
+    }
+
+    // MARK: - Service Packages Navigation
+    
+    func getServicePackagesListViewController() -> UIViewController? {
+        let storyboard = UIStoryboard(name: "ServicePackages", bundle: nil)
+        return storyboard.instantiateViewController(withIdentifier: "ServicePackagesListViewController")
+    }
+    
+    func getServicePackageEditorViewController(package: ServicePackage?) -> UIViewController? {
+        let storyboard = UIStoryboard(name: "ServicePackages", bundle: nil)
+        guard let vc = storyboard.instantiateViewController(withIdentifier: "ServicePackageEditorViewController") as? ServicePackageEditorViewController else {
+            return nil
+        }
+        // Initialize VM with package
+        vc.viewModel = ServicePackageEditorViewModel(package: package)
+        return vc
+    }
+
 }

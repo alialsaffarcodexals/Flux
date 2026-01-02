@@ -13,6 +13,9 @@ class PortfolioTableCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var editButton: UIButton!
+    
+    var onDeleteTap: (() -> Void)?
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,4 +32,7 @@ class PortfolioTableCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func deleteTapped(_ sender: UIButton) {
+        onDeleteTap?()
+    }
 }
