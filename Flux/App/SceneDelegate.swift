@@ -27,7 +27,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        
         // Launch Logic: Let AppNavigator decide based on Auth state
         // This will eventually replace the rootViewController once ready
-        AppNavigator.shared.startApp()
+        // AppNavigator.shared.startApp()
+
+        // TEMPORARY: Go directly to Home for testing
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        if let homeNav = storyboard.instantiateInitialViewController() {
+            window.rootViewController = homeNav
+        }
     }
 
     /// Handles the sceneDidDisconnect lifecycle event.
