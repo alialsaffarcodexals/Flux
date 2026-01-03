@@ -36,9 +36,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="70w-tu-o5Q">
-                                <rect key="frame" x="0.0" y="270" width="393" height="465"/>
+                                <rect key="frame" x="0.0" y="162" width="393" height="573"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="36L-em-Ul6">
                                     <size key="itemSize" width="128" height="128"/>
@@ -263,11 +262,6 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Flux" largeTitleDisplayMode="always" id="eIE-Ke-Nvy">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="bell" catalog="system" id="WRk-S9-QSN">
-                            <connections>
-                                <action selector="activityTapped:" destination="i15-ya-tcA" id="3EF-yB-OON"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="line.3.horizontal.decrease.circle" catalog="system" id="Bi3-Or-fnX"/>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
@@ -368,7 +362,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bell" catalog="system" width="125" height="128"/>
         <image name="line.3.horizontal.decrease.circle" catalog="system" width="128" height="123"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <namedColor name="DarkGreen">
