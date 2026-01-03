@@ -1246,6 +1246,9 @@
                                                         <buttonConfiguration key="configuration" style="plain" title="Proof File" subtitle="Tap to download if available">
                                                             <color key="baseForegroundColor" systemColor="labelColor"/>
                                                         </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="downloadFileTapped:" destination="ckZ-nG-VIG" eventType="touchUpInside" id="LZr-Ue-50O"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
