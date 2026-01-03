@@ -160,7 +160,6 @@ The following design and feature changes were applied after the initial project 
   Added functionality to **edit or delete categories** directly from the admin interface.
 
 - **Reports Module Updates:**  
-  - Added an additional segment to the segmented control in reports.  
   - Changed the **Alert button** functionality to better match the updated report workflow.
 
 - **User Account Management Adjustments:**  
