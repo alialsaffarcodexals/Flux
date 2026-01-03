@@ -135,4 +135,38 @@ class FirestoreServicePackagesRepository: ServicePackagesRepositoryProtocol {
             completion(.success(packages))
         }
     }
+    
+    // Fetch packages matching a list of categories
+    func fetchPackagesByCategories(categories: [String], limit: Int = 10, completion: @escaping (Result<[ServicePackage], Error>) -> Void) {
+        guard !categories.isEmpty else {
+            completion(.success([]))
+            return
+        }
+        
+        // Firestore 'in' query supports up to 10 items. If more, we might need to take first 10 or do multiple queries.
+        // For simplicity, we take up to 10 interests.
+        let safeCategories = Array(categories.prefix(10))
+        
+        db.collection(collection)
+            .whereField("isActive", isEqualTo: true)
+            .whereField("category", in: safeCategories)
+            .limit(to: limit)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let documents = snapshot?.documents else {
+                    completion(.success([]))
+                    return
+                }
+                
+                let packages = documents.compactMap { document -> ServicePackage? in
+                    return ServicePackage(id: document.documentID, data: document.data())
+                }
+                
+                completion(.success(packages))
+            }
+    }
 }

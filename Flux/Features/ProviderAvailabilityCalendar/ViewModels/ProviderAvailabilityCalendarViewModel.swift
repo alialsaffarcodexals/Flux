@@ -134,12 +134,13 @@ class ProviderAvailabilityCalendarViewModel: ObservableObject {
                         // MVVM Approach: Let's emit all. 
                         // Implementation choice: Emit Availability Event.
                         
-                         let event = CalendarEventWrapper(
+                        let isBlockedSlot = (slot.type == .blocked)
+                        let event = CalendarEventWrapper(
                             id: UUID().uuidString,
-                            title: "Available",
+                            title: isBlockedSlot ? "Blocked" : "Available",
                             startDate: start,
                             endDate: end,
-                            type: (slot.type == .blocked) ? .blocked(reason: "Repeating Block") : .availability,
+                            type: isBlockedSlot ? .blocked(reason: "Repeating Block") : .availability,
                             originalBookingId: nil,
                             originalSlotId: slot.id,
                             originalBlockedSlotId: nil
@@ -386,6 +387,20 @@ class ProviderAvailabilityCalendarViewModel: ObservableObject {
                         self?.errorMessage = error.localizedDescription
                     }
                 }
+            } else if let slotId = event.originalSlotId {
+                repository.deleteAvailabilitySlot(providerId: providerId, slotId: slotId) { [weak self] result in
+                    self?.isLoading = false
+                    switch result {
+                    case .success:
+                        if let range = self?.currentRange {
+                            self?.loadData(for: range)
+                        }
+                    case .failure(let error):
+                        self?.errorMessage = error.localizedDescription
+                    }
+                }
+            } else {
+                self.isLoading = false
             }
         case .availability:
             // Check if it's one-off or recurring

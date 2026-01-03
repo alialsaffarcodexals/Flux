@@ -83,6 +83,9 @@
 		7F68C3D42EDD93C5005B29E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3C72EDD93C5005B29E6 /* GoogleService-Info.plist */; };
 		7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3CA2EDD93C5005B29E6 /* LaunchScreen.storyboard */; };
 		7F68C3DE2EDD945E005B29E6 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */; };
+		7F6AE8202F0889B70043D30C /* Intersets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6AE81F2F0889B70043D30C /* Intersets.storyboard */; };
+		7F6AE8232F088D2D0043D30C /* InterestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6AE8212F088D2D0043D30C /* InterestsViewController.swift */; };
+		7F6AE8262F088D370043D30C /* InterestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6AE8242F088D370043D30C /* InterestsViewModel.swift */; };
 		7F745E8E2F075A3200181F7E /* ServicePackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E8D2F075A3200181F7E /* ServicePackage.swift */; };
 		7F745E902F075A8400181F7E /* ServicePackagesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E8F2F075A8400181F7E /* ServicePackagesRepository.swift */; };
 		7F745E942F075ABB00181F7E /* ServicePackageEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F745E912F075ABB00181F7E /* ServicePackageEditorViewController.swift */; };
@@ -261,6 +264,9 @@
 		7F68C3C92EDD93C5005B29E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F68C3CD2EDD93C5005B29E6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7F68C3DD2EDD945E005B29E6 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
+		7F6AE81F2F0889B70043D30C /* Intersets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Intersets.storyboard; sourceTree = "<group>"; };
+		7F6AE8212F088D2D0043D30C /* InterestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsViewController.swift; sourceTree = "<group>"; };
+		7F6AE8242F088D370043D30C /* InterestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestsViewModel.swift; sourceTree = "<group>"; };
 		7F745E8D2F075A3200181F7E /* ServicePackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackage.swift; sourceTree = "<group>"; };
 		7F745E8F2F075A8400181F7E /* ServicePackagesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackagesRepository.swift; sourceTree = "<group>"; };
 		7F745E912F075ABB00181F7E /* ServicePackageEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicePackageEditorViewController.swift; sourceTree = "<group>"; };
@@ -569,6 +575,7 @@
 		7F68C3D82EDD93D0005B29E6 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				7F6AE81D2F0889480043D30C /* Intersets */,
 				7F745EB52F0821DC00181F7E /* ProviderDetails */,
 				7F745EA92F0814D500181F7E /* ServiceDetails */,
 				7FB814CE2F0752E500B81D9B /* ServicePackages */,
@@ -628,6 +635,40 @@
 			isa = PBXGroup;
 			children = (
 				7F60816D2EFCF0BD00FA5639 /* AuthViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7F6AE81D2F0889480043D30C /* Intersets */ = {
+			isa = PBXGroup;
+			children = (
+				7F6AE81E2F0889730043D30C /* Storyboards */,
+				7F6AE8222F088D2D0043D30C /* ViewControllers */,
+				7F6AE8252F088D370043D30C /* ViewModels */,
+			);
+			path = Intersets;
+			sourceTree = "<group>";
+		};
+		7F6AE81E2F0889730043D30C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7F6AE81F2F0889B70043D30C /* Intersets.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		7F6AE8222F088D2D0043D30C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7F6AE8212F088D2D0043D30C /* InterestsViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7F6AE8252F088D370043D30C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7F6AE8242F088D370043D30C /* InterestsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1431,6 +1472,7 @@
 				1025928A2F043B5E003F6C5F /* History.storyboard in Resources */,
 				7F68C3D62EDD93C5005B29E6 /* LaunchScreen.storyboard in Resources */,
 				7FAB332A2EE45B55008AC600 /* Booking.storyboard in Resources */,
+				7F6AE8202F0889B70043D30C /* Intersets.storyboard in Resources */,
 				7FB368932F01D36C005AEB44 /* Main.storyboard in Resources */,
 				7FAB32EE2EE454C9008AC600 /* Settings.storyboard in Resources */,
 				7FAB33362EE45CA5008AC600 /* Requests.storyboard in Resources */,
@@ -1524,6 +1566,7 @@
 				7FAB33102EE45856008AC600 /* AddProjectViewController.swift in Sources */,
 				7FAB33022EE456D4008AC600 /* ManageSkillsViewController.swift in Sources */,
 				10E6FCEA2F0582AA00156591 /* HomeViewModel.swift in Sources */,
+				7F6AE8232F088D2D0043D30C /* InterestsViewController.swift in Sources */,
 				3AE4B17E2EFC86F200BE4A01 /* ChatViewModel.swift in Sources */,
 				7FAB33382EE45CF7008AC600 /* SeekerRequestListVC.swift in Sources */,
 				7F6081642EFCF01800FA5639 /* ProviderAvailability.swift in Sources */,
@@ -1584,6 +1627,7 @@
 				7F68C3D12EDD93C5005B29E6 /* SceneDelegate.swift in Sources */,
 				7F60D5D22F0725070034FE1F /* BlockedSlot.swift in Sources */,
 				3AE4B1802EFC873500BE4A01 /* BookingViewModel.swift in Sources */,
+				7F6AE8262F088D370043D30C /* InterestsViewModel.swift in Sources */,
 				AC7DF5B52F06A35500B5EB09 /* PortfolioTableCell.swift in Sources */,
 				7F745ED62F08545A00181F7E /* NewPasswordViewController.swift in Sources */,
 				7F5A0D242EFEB141001135C2 /* ChatMessage.swift in Sources */,

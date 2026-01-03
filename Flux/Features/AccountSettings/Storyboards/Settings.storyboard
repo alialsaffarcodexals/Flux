@@ -650,6 +650,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="lp5-rj-hrY"/>
+                    <connections>
+                        <outlet property="profileImageView" destination="flq-PU-Xsy" id="con-img-001"/>
+                        <outlet property="usernameLabel" destination="KYJ-Iu-UGS" id="con-lbl-001"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ZU-Hh-C9B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

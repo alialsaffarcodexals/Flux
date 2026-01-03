@@ -9,9 +9,13 @@ import Foundation
 
 class ServiceDetailsViewModel {
     let company: Company
+    private let providerName: String?
+    private let currencyCode: String?
     
-    init(company: Company) {
+    init(company: Company, providerName: String? = nil, currencyCode: String? = nil) {
         self.company = company
+        self.providerName = providerName
+        self.currencyCode = currencyCode
     }
     
     var name: String {
@@ -26,8 +30,17 @@ class ServiceDetailsViewModel {
         return company.description
     }
     
+    var providerDisplayName: String {
+        let trimmed = providerName?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        return trimmed.isEmpty ? "Unknown Provider" : trimmed
+    }
+
+    var resolvedCurrencyCode: String {
+        return (currencyCode?.isEmpty == false) ? currencyCode! : "BHD"
+    }
+
     var priceText: String {
-        return String(format: "$%.2f", company.price)
+        return String(format: "%.2f %@", company.price, resolvedCurrencyCode)
     }
     
     var ratingText: String {

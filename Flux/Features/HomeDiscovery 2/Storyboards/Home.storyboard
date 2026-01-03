@@ -36,16 +36,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mFP-r1-sJP">
-                                <rect key="frame" x="0.0" y="214" width="393" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="lgT-vW-m7X"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="i15-ya-tcA" id="6i1-kP-MPX"/>
-                                </connections>
-                            </searchBar>
+
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="70w-tu-o5Q">
                                 <rect key="frame" x="0.0" y="270" width="393" height="465"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -267,10 +258,7 @@
                             <constraint firstItem="70w-tu-o5Q" firstAttribute="leading" secondItem="HYr-97-UGO" secondAttribute="leading" id="DXP-s5-ExZ"/>
                             <constraint firstItem="HYr-97-UGO" firstAttribute="bottom" secondItem="70w-tu-o5Q" secondAttribute="bottom" id="TAq-pG-P6U"/>
                             <constraint firstItem="DoJ-5e-zKN" firstAttribute="centerY" secondItem="9cr-lZ-5Hg" secondAttribute="centerY" constant="150" id="goX-JS-Xks"/>
-                            <constraint firstItem="mFP-r1-sJP" firstAttribute="trailing" secondItem="HYr-97-UGO" secondAttribute="trailing" id="hRb-Rp-2Af"/>
-                            <constraint firstItem="mFP-r1-sJP" firstAttribute="top" secondItem="9cr-lZ-5Hg" secondAttribute="topMargin" id="hh2-ng-EJU"/>
-                            <constraint firstItem="70w-tu-o5Q" firstAttribute="top" secondItem="mFP-r1-sJP" secondAttribute="bottom" id="k2L-S7-aFn"/>
-                            <constraint firstItem="mFP-r1-sJP" firstAttribute="leading" secondItem="HYr-97-UGO" secondAttribute="leading" id="ptc-8a-6We"/>
+                            <constraint firstItem="70w-tu-o5Q" firstAttribute="top" secondItem="HYr-97-UGO" secondAttribute="top" id="k2L-S7-aFn"/>
                         </constraints>
                     </view>
                     <toolbarItems/>

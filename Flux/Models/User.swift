@@ -28,15 +28,15 @@ struct User: Identifiable, Codable {
     var joinedDate: Date
     var activeProfileMode: ProfileMode?
 
-    // ✅ New Field: Tracks if the user has finished the Provider onboarding
+    //  New Field: Tracks if the user has finished the Provider onboarding
     var hasCompletedProviderSetup: Bool?
 
     var interests: [String]?
 
-    /// ✅ Favorite PROVIDERS (Provider user IDs)
+    ///  Favorite PROVIDERS (Provider user IDs)
         var favoriteProviderIds: [String]?
 
-    /// ✅ Favorite SERVICES (Service IDs)
+    ///  Favorite SERVICES (Service IDs)
     var favoriteServiceIds: [String]?
 
     var businessName: String?

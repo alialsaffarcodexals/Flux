@@ -22,7 +22,7 @@ class LoginViewContoller: UIViewController {
         
         loginButton.isEnabled = false
             
-            // نلاحظ أن الـ completion صار يستقبل 3 متغيرات
+            //    completion   3 
             viewModel.performLogin(email: emailTextField.text, password: passwordTextField.text) { [weak self] success, errorMessage, user in
                 
                 guard let self = self else { return }
@@ -31,7 +31,7 @@ class LoginViewContoller: UIViewController {
                     self.loginButton.isEnabled = true
                     
                     if success, let user = user {
-                        // هنا يتم التحقق من الـ Role
+                        //      Role
                         
                         AppNavigator.shared.navigateToRoleBasedHome(role: user.role)
                         

@@ -77,7 +77,7 @@ class SkillViewController: UIViewController {
                         }
                     }
                 case .failure(let error):
-                    print("❌ Fetch skill error:", error.localizedDescription)
+                    print("Fetch skill error:", error.localizedDescription)
                 }
             }
         }
@@ -109,18 +109,18 @@ class SkillViewController: UIViewController {
     private func setImage(from urlString: String?, into imageView: UIImageView, size: CGSize) {
         guard let s = urlString, let url = URL(string: s) else {
             DispatchQueue.main.async {
-                print("⚠️ SkillViewController: no URL for imageView \(imageView) — leaving placeholder")
+                print("SkillViewController: no URL for imageView \(imageView) - leaving placeholder")
             }
             return
         }
 
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             if let error = error {
-                print("⚠️ SkillViewController: image download error for \(url): \(error.localizedDescription)")
+                print("SkillViewController: image download error for \(url): \(error.localizedDescription)")
                 return
             }
             guard let data = data, let downloaded = UIImage(data: data) else {
-                print("⚠️ SkillViewController: image data invalid for \(url)")
+                print("SkillViewController: image data invalid for \(url)")
                 return
             }
             let thumb = self?.resizedImage(downloaded, to: size) ?? downloaded
@@ -128,7 +128,7 @@ class SkillViewController: UIViewController {
                 imageView.image = thumb
                 imageView.layer.cornerRadius = min(size.width, size.height) / 2
                 imageView.clipsToBounds = true
-                print("✅ SkillViewController: loaded image for \(url)")
+                print("SkillViewController: loaded image for \(url)")
             }
         }.resume()
     }

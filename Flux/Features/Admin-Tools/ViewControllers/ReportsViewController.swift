@@ -17,7 +17,7 @@ class ReportsViewController: UIViewController {
         super.viewDidLoad()
 
         guard tableView != nil else {
-            print("⚠️ ReportsViewController: tableView outlet is not connected.")
+            print("ReportsViewController: tableView outlet is not connected.")
             return
         }
 
@@ -58,7 +58,7 @@ class ReportsViewController: UIViewController {
     }
     private func fetchReports() {
         guard let vm = viewModel else {
-            print("⚠️ ReportsViewController: viewModel is nil, cannot fetch reports")
+            print("ReportsViewController: viewModel is nil, cannot fetch reports")
             return
         }
 
@@ -70,7 +70,7 @@ class ReportsViewController: UIViewController {
                     // Apply the currently selected segment + search filter
                     self?.updateDisplayedReports()
                 case .failure(let error):
-                    print("❌ Fetch reports error:", error.localizedDescription)
+                    print("Fetch reports error:", error.localizedDescription)
                 }
             }
         }
@@ -179,7 +179,7 @@ extension ReportsViewController: UITableViewDataSource {
                             current.detailTextLabel?.attributedText = updatedAttr
                         }
                     case .failure:
-                        // unable to resolve user — leave reporter id as-is
+                        // unable to resolve user - leave reporter id as-is
                         break
                     }
                 }

@@ -13,14 +13,18 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
     let db = Firestore.firestore()
     var providerID: String = ""
     var selectedDate: Date = Date()
-    var selectedTime: String?
+    var selectedTime: String? // e.g. "09:00"
+    private let availabilityRepo = ProviderAvailabilityFirestoreRepository.shared
     
     // Data passed from previous screen
     var service: Service?
     
     // Availability Data
-    var providerAvailability: ProviderAvailability?
     var availableTimesForSelectedDate: [String] = []
+    private var recurringSlots: [AvailabilitySlot] = []
+    private var oneOffSlots: [OneOffAvailabilitySlot] = []
+    private var blockedSlots: [BlockedSlot] = []
+    private var bookings: [Booking] = []
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -37,49 +41,83 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
         
         if let service = service {
             self.providerID = service.providerId
-            print("📝 Booking for Service: \(service.title), Provider: \(providerID)")
+            print("Booking for Service: \(service.title), Provider: \(providerID)")
             
             // Set the service name label
             serviceNameLabel?.text = "Service: \(service.title)"
             
             // Fetch Availability from Database
-            fetchAvailability(providerId: service.providerId, serviceId: service.id ?? "")
+            loadAvailabilityData(for: datePicker.date)
         } else {
-            print("⚠️ No Service passed to RequestBookingViewController")
+            print("No Service passed to RequestBookingViewController")
             serviceNameLabel?.text = "Unknown Service"
         }
     }
 
     @objc func dateChanged(_ sender: UIDatePicker) {
         self.selectedDate = sender.date
-        print("📅 Date changed to: \(selectedDate)")
+        print("Date changed to: \(selectedDate)")
         
         // When date changes, update the available times list
-        updateAvailableTimes(for: selectedDate)
+        loadAvailabilityData(for: selectedDate)
     }
     
     
-    // Store recurring slots locally after fetching
-    var recurringSlots: [AvailabilitySlot] = []
-
-    func fetchAvailability(providerId: String, serviceId: String) {
-        // Use ProviderAvailabilityFirestoreRepository which stores actual slot data
-        ProviderAvailabilityFirestoreRepository.shared.fetchAvailabilitySlots(providerId: providerId) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let slots):
-                    print("✅ Found \(slots.count) availability slots in total")
-                    self?.recurringSlots = slots
-                    
-                    // Filter and Update for the current selected date
-                    self?.updateAvailableTimes(for: self?.datePicker.date ?? Date())
-                    
-                case .failure(let error):
-                    print("❌ Error fetching availability slots: \(error.localizedDescription)")
-                    self?.availableTimesForSelectedDate = []
-                    self?.availableHoursCollectionView.reloadData()
-                }
+    private func loadAvailabilityData(for date: Date) {
+        guard !providerID.isEmpty else { return }
+        let dateRange = dayRange(for: date)
+        let group = DispatchGroup()
+        
+        group.enter()
+        availabilityRepo.fetchAvailabilitySlots(providerId: providerID) { [weak self] result in
+            defer { group.leave() }
+            switch result {
+            case .success(let slots):
+                self?.recurringSlots = slots
+            case .failure(let error):
+                print("Error fetching availability slots: \(error.localizedDescription)")
+                self?.recurringSlots = []
             }
+        }
+        
+        group.enter()
+        availabilityRepo.fetchOneOffAvailabilitySlots(providerId: providerID, dateRange: dateRange) { [weak self] result in
+            defer { group.leave() }
+            switch result {
+            case .success(let slots):
+                self?.oneOffSlots = slots
+            case .failure(let error):
+                print("Error fetching one-off slots: \(error.localizedDescription)")
+                self?.oneOffSlots = []
+            }
+        }
+        
+        group.enter()
+        availabilityRepo.fetchBlockedSlots(providerId: providerID, dateRange: dateRange) { [weak self] result in
+            defer { group.leave() }
+            switch result {
+            case .success(let slots):
+                self?.blockedSlots = slots
+            case .failure(let error):
+                print("Error fetching blocked slots: \(error.localizedDescription)")
+                self?.blockedSlots = []
+            }
+        }
+        
+        group.enter()
+        availabilityRepo.fetchProviderBookings(providerId: providerID, dateRange: dateRange) { [weak self] result in
+            defer { group.leave() }
+            switch result {
+            case .success(let bookings):
+                self?.bookings = bookings
+            case .failure(let error):
+                print("Error fetching bookings: \(error.localizedDescription)")
+                self?.bookings = []
+            }
+        }
+        
+        group.notify(queue: .main) { [weak self] in
+            self?.updateAvailableTimes(for: date)
         }
     }
     
@@ -87,7 +125,9 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
         let calendar = Calendar.current
         let weekday = calendar.component(.weekday, from: date) // 1 = Sunday, etc.
         
-        // Filter slots active for this weekday
+        var availabilityIntervals: [DateInterval] = []
+        
+        // Recurring availability (only available)
         let activeSlots = recurringSlots.filter { slot in
             // Check if active and day matches
             guard slot.isActive && slot.dayOfWeek == weekday else { return false }
@@ -99,17 +139,61 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
             return true
         }
         
+        for slot in activeSlots {
+            if let interval = intervalFromSlot(slot, on: date) {
+                availabilityIntervals.append(interval)
+            }
+        }
+        
+        // One-off availability for this date
+        for slot in oneOffSlots where calendar.isDate(slot.startTime, inSameDayAs: date) {
+            availabilityIntervals.append(DateInterval(start: slot.startTime, end: slot.endTime))
+        }
+        
+        // Blocked intervals (one-off + recurring blocked)
+        var blockedIntervals: [DateInterval] = blockedSlots.map {
+            DateInterval(start: $0.startTime, end: $0.endTime)
+        }
+        
+        let recurringBlocked = recurringSlots.filter { slot in
+            guard slot.isActive && slot.dayOfWeek == weekday else { return false }
+            if let validUntil = slot.validUntil, date > validUntil { return false }
+            return slot.type == .blocked
+        }
+        
+        for slot in recurringBlocked {
+            if let interval = intervalFromSlot(slot, on: date) {
+                blockedIntervals.append(interval)
+            }
+        }
+        
+        // Booking intervals (assume 1 hour duration)
+        let bookingIntervals: [DateInterval] = bookings.map {
+            DateInterval(start: $0.scheduledAt, end: $0.scheduledAt.addingTimeInterval(3600))
+        }
+        
+        let slotDuration: TimeInterval = 3600
         var generatedTimes: [String] = []
         
-        for slot in activeSlots {
-            // User requested to use database values directly without hardcoded generation
-            generatedTimes.append(slot.startTime)
+        for interval in availabilityIntervals {
+            var current = interval.start
+            while current.addingTimeInterval(slotDuration) <= interval.end {
+                let candidateInterval = DateInterval(start: current, end: current.addingTimeInterval(slotDuration))
+                let conflictsBlocked = blockedIntervals.contains { $0.intersects(candidateInterval) }
+                let conflictsBooking = bookingIntervals.contains { $0.intersects(candidateInterval) }
+                
+                if !conflictsBlocked && !conflictsBooking {
+                    generatedTimes.append(timeString(from: current))
+                }
+                
+                current = current.addingTimeInterval(slotDuration)
+            }
         }
         
         // Remove duplicates and sort
         self.availableTimesForSelectedDate = Array(Set(generatedTimes)).sorted()
         
-        print("🕒 Available times for \(date) (Weekday \(weekday)): \(availableTimesForSelectedDate)")
+        print("Available times for \(date) (Weekday \(weekday)): \(availableTimesForSelectedDate)")
         selectedTime = nil // Reset selection
         availableHoursCollectionView.reloadData()
     }
@@ -163,11 +247,44 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
         }
         return time
     }
+
+    private func timeString(from date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: date)
+    }
+
+    private func intervalFromSlot(_ slot: AvailabilitySlot, on date: Date) -> DateInterval? {
+        let calendar = Calendar.current
+        let startParts = slot.startTime.split(separator: ":").compactMap { Int($0) }
+        let endParts = slot.endTime.split(separator: ":").compactMap { Int($0) }
+        guard startParts.count == 2, endParts.count == 2 else { return nil }
+        
+        var startComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        startComponents.hour = startParts[0]
+        startComponents.minute = startParts[1]
+        
+        var endComponents = calendar.dateComponents([.year, .month, .day], from: date)
+        endComponents.hour = endParts[0]
+        endComponents.minute = endParts[1]
+        
+        guard let startDate = calendar.date(from: startComponents),
+              let endDate = calendar.date(from: endComponents) else { return nil }
+        
+        return DateInterval(start: startDate, end: endDate)
+    }
+
+    private func dayRange(for date: Date) -> ClosedRange<Date> {
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: date) ?? date
+        return startOfDay...endOfDay
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedTime = availableTimesForSelectedDate[indexPath.row]
         collectionView.reloadData() // Refresh to show selection
-        print("✅ Selected Time: \(selectedTime ?? "")")
+        print("Selected Time: \(selectedTime ?? "")")
     }
     
     // Cell Size
@@ -178,13 +295,13 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
     // MARK: - Send Booking Logic
     @IBAction func sendButtonTapped(_ sender: Any) {
         guard let currentUser = Auth.auth().currentUser else {
-            print("❌ Error: User is not logged in.")
+            print("Error: User is not logged in.")
             showAlert(message: "You must be logged in to book.")
             return
         }
         
         guard let service = service else {
-            print("❌ Error: Service data is missing.")
+            print("Error: Service data is missing.")
             showAlert(message: "Service data is missing. Please try again.")
             return
         }
@@ -224,11 +341,11 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
             
             switch result {
             case .success(let createdBooking):
-                print("✅ Request sent successfully with ID: \(createdBooking.id ?? "Unknown")")
+                print("Request sent successfully with ID: \(createdBooking.id ?? "Unknown")")
                 self.navigateToConfirmationPage(bookingID: createdBooking.id ?? "Unknown")
                 
             case .failure(let error):
-                print("❌ Error sending request: \(error.localizedDescription)")
+                print("Error sending request: \(error.localizedDescription)")
                 self.showAlert(message: "Failed to send request.")
             }
         }
@@ -254,7 +371,7 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
             navigationController?.pushViewController(confirmationVC, animated: true)
             
         } else {
-            print("❌ Error: Could not find BookingConfirmationVC. Check Storyboard ID and Class Name.")
+            print("Error: Could not find BookingConfirmationVC. Check Storyboard ID and Class Name.")
         }
     }
     

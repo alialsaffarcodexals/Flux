@@ -17,7 +17,7 @@ class ProviderIntroViewController: UIViewController {
             self.navigationController?.pushViewController(setupVC, animated: true)
             
         } else {
-            print("🔴 Error: Could not find 'ProviderSetupViewController' in ProviderProfile.storyboard")
+            print("Error: Could not find 'ProviderSetupViewController' in ProviderProfile.storyboard")
         }
     }
 }

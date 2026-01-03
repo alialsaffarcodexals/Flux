@@ -101,13 +101,13 @@ class StorageManager {
         uploader.upload(data: data, uploadPreset: uploadPreset, params: params, progress: nil) { result, error in
             
             if let error = error {
-                print("❌ Cloudinary Upload Error: \(error.localizedDescription)")
+                print("Cloudinary Upload Error: \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
             
             if let result = result, let url = result.secureUrl {
-                print("✅ Image Uploaded to Cloudinary: \(url)")
+                print("Image Uploaded to Cloudinary: \(url)")
                 completion(.success(url))
             } else {
                 let unknownError = NSError(domain: "CloudinaryError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Upload successful but URL is missing"])

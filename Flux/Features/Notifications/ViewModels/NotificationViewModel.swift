@@ -23,7 +23,7 @@ final class NotificationViewModel {
                 guard let self = self else { return }
 
                 if let error = error {
-                    print("❌ Fetch notifications error:", error.localizedDescription)
+                    print("Fetch notifications error:", error.localizedDescription)
                     return
                 }
 
@@ -146,7 +146,7 @@ final class NotificationViewModel {
                 }
             }
 
-        // Recent skill submissions by other users (pending) — present them as notifications to the admin
+        // Recent skill submissions by other users (pending) - present them as notifications to the admin
         group.enter()
         db.collection("skills")
             .whereField("status", isEqualTo: SkillStatus.pending.rawValue)
@@ -188,7 +188,7 @@ final class NotificationViewModel {
                 }
             }
 
-        // Recent reports created by others — surface as notifications to admin
+        // Recent reports created by others - surface as notifications to admin
         group.enter()
         db.collection("reports")
             .order(by: "timestamp", descending: true)
@@ -282,7 +282,7 @@ final class NotificationViewModel {
                 if let _ = error { return }
                 if let snap = snap, !snap.documents.isEmpty { return }
 
-                // No notifications found — create a welcome notification
+                // No notifications found - create a welcome notification
                     let docRef = self.db.collection("notifications").document()
                     let payload: [String: Any] = [
                         "title": "Welcome to Flux",
@@ -296,7 +296,7 @@ final class NotificationViewModel {
 
                     docRef.setData(payload) { err in
                         if let err = err {
-                            print("❌ Create welcome notification error:", err.localizedDescription)
+                            print("Create welcome notification error:", err.localizedDescription)
                         }
                     }
             }

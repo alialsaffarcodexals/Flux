@@ -26,23 +26,23 @@ final class DummyDataSeeder {
     
     func seedIfNeeded() {
         guard let uid = Auth.auth().currentUser?.uid else {
-            print("⚠️ [Seeder] No user logged in. Skipping seed.")
+            print("[Seeder] No user logged in. Skipping seed.")
             return
         }
         
         let key = "didSeedDummyData_Volume_\(uid)" // Changed key to force re-seed if user had old key
         if UserDefaults.standard.bool(forKey: key) {
-            print("✅ [Seeder] Data already seeded for user \(uid). Skipping.")
+            print("[Seeder] Data already seeded for user \(uid). Skipping.")
             return
         }
         
-        print("🌱 [Seeder] Starting HIGH VOLUME dummy data seed for user \(uid)...")
+        print("[Seeder] Starting HIGH VOLUME dummy data seed for user \(uid)...")
         seedAll(for: uid) { success in
             if success {
                 UserDefaults.standard.set(true, forKey: key)
-                print("🏁 [Seeder] Seeding complete! 🚀")
+                print("[Seeder] Seeding complete! ")
             } else {
-                print("❌ [Seeder] Seeding failed partially.")
+                print("[Seeder] Seeding failed partially.")
             }
         }
     }
@@ -51,7 +51,7 @@ final class DummyDataSeeder {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let key = "didSeedDummyData_Volume_\(uid)"
         UserDefaults.standard.set(false, forKey: key)
-        print("🔄 [Seeder] Reset seed flag for \(uid).")
+        print("[Seeder] Reset seed flag for \(uid).")
     }
     
     // MARK: - Master Seed Method
@@ -120,7 +120,7 @@ final class DummyDataSeeder {
         }
         
         group.notify(queue: .main) {
-            print("   - [20 Services + Categories] seeded.")
+            print("- [20 Services + Categories] seeded.")
             completion()
         }
     }
@@ -150,7 +150,7 @@ final class DummyDataSeeder {
         }
         
         group.notify(queue: .main) {
-            print("   - [20 Skills] seeded.")
+            print("- [20 Skills] seeded.")
             completion()
         }
     }
@@ -172,7 +172,7 @@ final class DummyDataSeeder {
         }
         
         group.notify(queue: .main) {
-            print("   - [20 Portfolio Projects] seeded.")
+            print("- [20 Portfolio Projects] seeded.")
             completion()
         }
     }
@@ -215,7 +215,7 @@ final class DummyDataSeeder {
         }
         
         group.notify(queue: .main) {
-            print("   - [20 Bookings] seeded.")
+            print("- [20 Bookings] seeded.")
             completion()
         }
     }
@@ -243,7 +243,7 @@ final class DummyDataSeeder {
         }
         
         group.notify(queue: .main) {
-            print("   - [20 Reviews] seeded.")
+            print("- [20 Reviews] seeded.")
             completion()
         }
     }

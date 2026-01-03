@@ -47,25 +47,25 @@ final class HistoryVM {
     
     // MARK: - Public Methods
     func loadHistory() {
-        print("🔥 HistoryVM: loadHistory() called")
+        print("HistoryVM: loadHistory() called")
         
         guard let userId = Auth.auth().currentUser?.uid else {
-            print("🔥 HistoryVM: No current user - userId is nil")
+            print("HistoryVM: No current user - userId is nil")
             onDataChanged?()
             return
         }
         
-        print("🔥 HistoryVM: Current user ID = \(userId)")
+        print("HistoryVM: Current user ID = \(userId)")
         
         // First fetch user's favorite provider IDs
         userRepo.getUser(uid: userId) { [weak self] result in
             switch result {
             case .success(let user):
                 self?.favoriteProviderIds = user.favoriteProviderIds ?? []
-                print("🔥 HistoryVM: User loaded, favoriteProviderIds count = \(self?.favoriteProviderIds.count ?? 0)")
+                print("HistoryVM: User loaded, favoriteProviderIds count = \(self?.favoriteProviderIds.count ?? 0)")
                 self?.fetchBookings(for: userId)
             case .failure(let error):
-                print("🔥 HistoryVM: Failed to load user - \(error.localizedDescription)")
+                print("HistoryVM: Failed to load user - \(error.localizedDescription)")
                 self?.favoriteProviderIds = []
                 self?.fetchBookings(for: userId)
             }
@@ -73,16 +73,16 @@ final class HistoryVM {
     }
     
     private func fetchBookings(for userId: String) {
-        print("🔥 HistoryVM: Fetching bookings for user \(userId)")
+        print("HistoryVM: Fetching bookings for user \(userId)")
         
         // Fetch completed bookings for the seeker
         bookingRepo.fetchBookingsForSeeker(seekerId: userId, status: .completed) { [weak self] result in
             switch result {
             case .success(let bookings):
-                print("🔥 HistoryVM: Found \(bookings.count) completed bookings")
+                print("HistoryVM: Found \(bookings.count) completed bookings")
                 self?.fetchProviderDetails(for: bookings)
             case .failure(let error):
-                print("🔥 HistoryVM: Failed to fetch bookings - \(error.localizedDescription)")
+                print("HistoryVM: Failed to fetch bookings - \(error.localizedDescription)")
                 DispatchQueue.main.async {
                     self?.onError?(error)
                 }
@@ -96,7 +96,7 @@ final class HistoryVM {
         
         for booking in bookings {
             group.enter()
-            print("🔥 HistoryVM: Fetching provider \(booking.providerId) for booking")
+            print("HistoryVM: Fetching provider \(booking.providerId) for booking")
             
             userRepo.getUser(uid: booking.providerId) { [weak self] result in
                 defer { group.leave() }
@@ -111,9 +111,9 @@ final class HistoryVM {
                         isFavorite: isFavorite
                     )
                     items.append(item)
-                    print("🔥 HistoryVM: Successfully loaded provider \(provider.name)")
+                    print("HistoryVM: Successfully loaded provider \(provider.name)")
                 case .failure(let error):
-                    print("🔥 HistoryVM: Failed to load provider \(booking.providerId) - \(error.localizedDescription)")
+                    print("HistoryVM: Failed to load provider \(booking.providerId) - \(error.localizedDescription)")
                     // Still show the booking even if we can't fetch provider details
                     let isFavorite = self?.favoriteProviderIds.contains(booking.providerId) ?? false
                     let item = HistoryDisplayItem(
@@ -130,7 +130,7 @@ final class HistoryVM {
         group.notify(queue: .main) { [weak self] in
             // Sort by date, most recent first
             self?.historyItems = items.sorted { $0.booking.createdAt > $1.booking.createdAt }
-            print("🔥 HistoryVM: All providers fetched - total items = \(self?.historyItems.count ?? 0)")
+            print("HistoryVM: All providers fetched - total items = \(self?.historyItems.count ?? 0)")
             self?.onDataChanged?()
         }
     }
@@ -148,7 +148,7 @@ final class HistoryVM {
         let providerId = item.providerId
         let newFavoriteStatus = !item.isFavorite
         
-        print("🔥 HistoryVM: Toggling favorite for provider \(providerId) to \(newFavoriteStatus)")
+        print("HistoryVM: Toggling favorite for provider \(providerId) to \(newFavoriteStatus)")
         
         // Update Firebase
         let updateData: [String: Any] = newFavoriteStatus
@@ -158,12 +158,12 @@ final class HistoryVM {
         db.collection("users").document(userId).updateData(updateData) { [weak self] error in
             DispatchQueue.main.async {
                 if let error = error {
-                    print("🔥 HistoryVM: Error toggling favorite - \(error.localizedDescription)")
+                    print("HistoryVM: Error toggling favorite - \(error.localizedDescription)")
                     self?.onError?(error)
                     return
                 }
                 
-                print("🔥 HistoryVM: Successfully toggled favorite")
+                print("HistoryVM: Successfully toggled favorite")
                 
                 // Update local data
                 if newFavoriteStatus {
@@ -195,18 +195,18 @@ final class HistoryVM {
         let item = displayItems[index]
         guard let bookingId = item.booking.id else { return }
         
-        print("🔥 HistoryVM: Deleting booking \(bookingId)")
+        print("HistoryVM: Deleting booking \(bookingId)")
         
         bookingRepo.deleteBooking(id: bookingId) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success:
-                    print("🔥 HistoryVM: Successfully deleted booking")
+                    print("HistoryVM: Successfully deleted booking")
                     self?.historyItems.removeAll { $0.booking.id == bookingId }
                     self?.filteredItems.removeAll { $0.booking.id == bookingId }
                     self?.onDataChanged?()
                 case .failure(let error):
-                    print("🔥 HistoryVM: Failed to delete booking - \(error.localizedDescription)")
+                    print("HistoryVM: Failed to delete booking - \(error.localizedDescription)")
                     self?.onError?(error)
                 }
             }

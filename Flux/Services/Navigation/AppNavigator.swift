@@ -11,7 +11,7 @@ class AppNavigator {
     /// Called by SceneDelegate to decide where to start.
     func startApp() {
         if let user = FirebaseAuth.Auth.auth().currentUser {
-            print("🚀 Found active session for UID: \(user.uid). Fetching profile...")
+            print("Found active session for UID: \(user.uid). Fetching profile...")
             
             // Fetch detailed user profile from Firestore
             UserRepository.shared.getUser(uid: user.uid) { [weak self] result in
@@ -19,24 +19,24 @@ class AppNavigator {
                 
                 switch result {
                 case .success(let userData):
-                    print("✅ Profile fetched. Navigating to App.")
+                    print("Profile fetched. Navigating to App.")
                     DispatchQueue.main.async {
                         self.navigate(user: userData)
                     }
                 case .failure(let error):
-                    print("⚠️ Failed to fetch profile: \(error). Falling back to Auth.")
+                    print("Failed to fetch profile: \(error). Falling back to Auth.")
                     DispatchQueue.main.async {
                         self.navigateToAuth()
                     }
                 }
             }
         } else {
-            print("ℹ️ No active session. Navigate to Auth.")
+            print("No active session. Navigate to Auth.")
             navigateToAuth()
         }
     }
     
-    // ✅ UPDATE 1: Add 'destinationTab' parameter (default is nil)
+    //  UPDATE 1: Add 'destinationTab' parameter (default is nil)
     func navigate(user: User, destinationTab: Int? = nil) {
         if user.role == .admin {
             // Route to Admin Flow
@@ -56,22 +56,29 @@ class AppNavigator {
             
             // Use the Storyboard ID we set in Step 3
             guard let adminNav = storyboard.instantiateViewController(withIdentifier: "AdminTabBarController") as? UITabBarController else {
-                print("🔴 Error: Could not find 'AdminTabBarController' in AdminTools.storyboard")
+                print("Error: Could not find 'AdminTabBarController' in AdminTools.storyboard")
                 return
             }
             
             setRoot(viewController: adminNav)
         }
     
-    // ✅ UPDATE 2: Handle the index in loadMainTabBar
+    //  UPDATE 2: Handle the index in loadMainTabBar
     private func loadMainTabBar(for user: User, initialIndex: Int?) {
-        print("🔄 Switching to MainTabBarController for user: \(user.firstName). Target Index: \(String(describing: initialIndex))")
+        print("Switching to MainTabBarController for user: \(user.firstName). Target Index: \(String(describing: initialIndex))")
         
         // 1. Instantiate MainTabBarController programmatically
         let mainTabBarController = MainTabBarController()
         
-        // 2. Configure Tabs based on User Role
-        mainTabBarController.setupTabs(for: user.role)
+        // 2. Configure Tabs based on active profile mode when available
+        let resolvedMode = user.activeProfileMode ?? (user.role == .provider ? .sellerMode : .buyerMode)
+        let effectiveRole: UserRole
+        if user.role == .provider {
+            effectiveRole = resolvedMode == .sellerMode ? .provider : .seeker
+        } else {
+            effectiveRole = .seeker
+        }
+        mainTabBarController.setupTabs(for: effectiveRole)
         
         // 3. Apply target index if provided (e.g., 4 for Provider Profile)
         if let index = initialIndex {
@@ -85,7 +92,7 @@ class AppNavigator {
     // MARK: - Auth Navigation
     
     func navigateToAuth() {
-        print("🔙 Navigating to Authentication Flow")
+        print("Navigating to Authentication Flow")
         let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
         guard let authNav = storyboard.instantiateViewController(withIdentifier: "AuthenticationNC") as? UINavigationController else {
             return
@@ -127,7 +134,7 @@ class AppNavigator {
         let storyboard = UIStoryboard(name: "ProviderManagement", bundle: nil)
         // Note: Ensure the VC in storyboard has ID "ProviderAvailabilityCalendarViewController"
         guard let vc = storyboard.instantiateViewController(withIdentifier: "ProviderAvailabilityCalendarViewController") as? ProviderAvailabilityCalendarViewController else {
-            print("🔴 Error: Could not find 'ProviderAvailabilityCalendarViewController' in ProviderManagement.storyboard")
+            print("Error: Could not find 'ProviderAvailabilityCalendarViewController' in ProviderManagement.storyboard")
             return
         }
         // In a real app, you might push this if inside a navigation controller, or set as root for testing

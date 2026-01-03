@@ -104,7 +104,7 @@ class ReviewViewController: UIViewController, UITextViewDelegate {
     
     // MARK: - Navigation
     @IBAction func sendButtonTapped(_ sender: Any) {
-        print(" Send Button Tapped!")
+        print("Send Button Tapped!")
         guard currentRating > 0 else {
             print("Please select a rating")
             return

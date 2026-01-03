@@ -32,15 +32,15 @@ class AppSettingsManager {
         get {
             if let saved = UserDefaults.standard.string(forKey: themeKey),
                let theme = AppTheme(rawValue: saved) {
-                print("🎨 Loaded saved theme: \(theme.rawValue)")
+                print("Loaded saved theme: \(theme.rawValue)")
                 return theme
             }
-            print("🎨 Using default theme: Light")
+            print("Using default theme: Light")
             return .light // Default
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: themeKey)
-            print("🎨 Theme changed to: \(newValue.rawValue)")
+            print("Theme changed to: \(newValue.rawValue)")
             applyTheme()
         }
     }
@@ -56,13 +56,13 @@ class AppSettingsManager {
         }
         
         guard let window = targetWindow else {
-            print("⚠️ Could not find window to apply theme")
+            print("Could not find window to apply theme")
             return
         }
         
         let style = currentTheme.userInterfaceStyle
         window.overrideUserInterfaceStyle = style
-        print("🎨 Applied theme style: \(style == .dark ? "Dark" : "Light")")
+        print("Applied theme style: \(style == .dark ? "Dark" : "Light")")
     }
     
     // MARK: - Font Size Management
@@ -88,10 +88,8 @@ class AppSettingsManager {
         get {
             if let saved = UserDefaults.standard.string(forKey: fontSizeKey),
                let size = FontSize(rawValue: saved) {
-                print("📝 Loaded saved font size: \(size.rawValue)")
                 return size
             }
-            print("📝 Using default font size: Medium")
             return .medium // Default
         }
         set {
@@ -99,7 +97,7 @@ class AppSettingsManager {
             
             // Prevent re-applying the same size
             if newValue == oldValue {
-                print("📝 Font size unchanged: \(newValue.rawValue) (already selected)")
+                print("Font size unchanged: \(newValue.rawValue) (already selected)")
                 return
             }
             
@@ -107,13 +105,13 @@ class AppSettingsManager {
             
             // Verify it was saved
             let savedValue = UserDefaults.standard.string(forKey: fontSizeKey) ?? "nil"
-            print("✅ Selected font size: \(newValue.rawValue)")
-            print("✅ UserDefaults fontSizeKey saved: \(savedValue)")
-            print("✅ currentFontSize now: \(newValue.rawValue) (was: \(oldValue.rawValue))")
+            print("Selected font size: \(newValue.rawValue)")
+            print("UserDefaults fontSizeKey saved: \(savedValue)")
+            print("currentFontSize now: \(newValue.rawValue) (was: \(oldValue.rawValue))")
             
             // Post notification
             NotificationCenter.default.post(name: AppNotifications.fontSizeDidChange, object: nil)
-            print("✅ Posted AppNotifications.fontSizeDidChange notification")
+            print("Posted AppNotifications.fontSizeDidChange notification")
             
             // Apply fonts app-wide immediately
             applyFontsAppWide()
@@ -142,7 +140,7 @@ class AppSettingsManager {
                 }
             }
             
-            print("✅ Applied fonts app-wide to \(allControllers.count) controllers")
+            print("Applied fonts app-wide to \(allControllers.count) controllers")
         }
     }
     
@@ -266,4 +264,3 @@ class AppSettingsManager {
 enum AppNotifications {
     static let fontSizeDidChange = Foundation.Notification.Name("fontSizeDidChange")
 }
-

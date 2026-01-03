@@ -13,7 +13,7 @@ class HomeRepository {
     ]
 
     func fetchServices(completion: @escaping (Result<[Company], Error>) -> Void) {
-        print("📡 DEBUG: Fetching services from Firebase...")
+        print("DEBUG: Fetching services from Firebase...")
         db.collection("services").getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
@@ -24,7 +24,7 @@ class HomeRepository {
                 let data = doc.data()
                 
                 // TRACKING: This prints the Title of every document in your database
-                print("📦 DATABASE ITEM FOUND: \(data["title"] ?? "No Title Found")")
+                print("DATABASE ITEM FOUND: \(data["title"] ?? "No Title Found")")
 
                 let randomColor = self.fluxPastelColors.randomElement() ?? .systemGray6
 

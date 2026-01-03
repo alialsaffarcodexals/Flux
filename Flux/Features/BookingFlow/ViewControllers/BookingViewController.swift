@@ -73,12 +73,12 @@ class BookingViewController: UIViewController {
     // MARK: - Send Booking
     @IBAction func sendButtonTapped(_ sender: Any) {
         guard let date = selectedDate, let time = selectedTime else {
-            print("❌ Please select a date and time")
+            print("Please select a date and time")
             return
         }
         
-        print("✅ Booking: \(date) at \(time)")
-        print("📝 Note: \(noteTextView.text ?? "")")
+        print("Booking: \(date) at \(time)")
+        print("Note: \(noteTextView.text ?? "")")
     }
 }
 
