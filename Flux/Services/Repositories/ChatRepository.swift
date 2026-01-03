@@ -2,7 +2,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
-// MARK: - 1. MODELS
+//MODELS
 struct Conversation {
     let id: String
     let otherUserEmail: String
@@ -27,7 +27,7 @@ struct ChatMessage {
     }
 }
 
-// MARK: - 2. REPOSITORY
+//REPOSITORY
 final class ChatRepository {
     
     static let shared = ChatRepository()
@@ -73,7 +73,7 @@ final class ChatRepository {
             }
     }
 
-    // --- MESSAGES (The missing part!) ---
+    // --- MESSAGES
 
     func fetchMessages(conversationId: String, completion: @escaping (Result<[ChatMessage], Error>) -> Void) {
         db.collection("conversations").document(conversationId).collection("messages")
@@ -109,7 +109,7 @@ final class ChatRepository {
         }
     }
 
-    // --- HELPER ---
+    // HELPER
     private func fetchUserName(email: String, completion: @escaping (String) -> Void) {
         db.collection("users").whereField("email", isEqualTo: email).getDocuments { snapshot, _ in
             if let doc = snapshot?.documents.first {
@@ -121,7 +121,7 @@ final class ChatRepository {
             }
         }
     }
-    // --- 1. Helper to find Email from UID ---
+    // Helper to find Email from UID
         func fetchEmail(for userId: String, completion: @escaping (String?) -> Void) {
             db.collection("users").document(userId).getDocument { snapshot, error in
                 if let data = snapshot?.data(), let email = data["email"] as? String {
@@ -133,11 +133,11 @@ final class ChatRepository {
             }
         }
 
-        // --- 2. Find or Create a Conversation ---
+        //Find or Create a Conversation
         func getOrCreateConversation(otherUserEmail: String, completion: @escaping (String?) -> Void) {
             guard let myEmail = Auth.auth().currentUser?.email else { return }
 
-            // A. Search for existing chat
+            // Search for existing chat
             db.collection("conversations")
                 .whereField("participants", arrayContains: myEmail)
                 .getDocuments { snapshot, error in

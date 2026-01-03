@@ -9,9 +9,7 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var serviceNameLabel: UILabel!
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var availableHoursCollectionView: UICollectionView! // Connect this in Storyboard
-
-    // MARK: - Properties
+    @IBOutlet weak var availableHoursCollectionView: UICollectionView!
     let db = Firestore.firestore()
     var providerID: String = ""
     var selectedDate: Date = Date()
@@ -64,7 +62,6 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
         loadAvailabilityData(for: selectedDate)
     }
     
-    // MARK: - Fetching Data
     
     private func loadAvailabilityData(for date: Date) {
         guard !providerID.isEmpty else { return }

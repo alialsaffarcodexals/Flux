@@ -75,13 +75,27 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
         cell.messageLabel.text = chat.lastMessage
         
         // Format Date
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        cell.timeLabel.text = formatter.string(from: chat.date)
+        cell.timeLabel.text = formatChatDate(chat.date)
         
         cell.profileImageView.image = UIImage(systemName: "person.circle.fill")
         
         return cell
+    }
+    
+    private func formatChatDate(_ date: Date) -> String {
+        let calendar = Calendar.current
+        
+        if calendar.isDateInToday(date) {
+            let formatter = DateFormatter()
+            formatter.timeStyle = .short // e.g. "1:40 AM"
+            return formatter.string(from: date)
+        } else if calendar.isDateInYesterday(date) {
+            return "Yesterday"
+        } else {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yy" // e.g. "12/30/25"
+            return formatter.string(from: date)
+        }
     }
     
     // MARK: - Navigation

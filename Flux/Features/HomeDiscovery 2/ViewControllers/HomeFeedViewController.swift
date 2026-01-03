@@ -320,6 +320,35 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
         }
     }
     
+    // MARK: - Navigation Actions
+    
+    @IBAction func activityTapped(_ sender: Any) {
+        // Open the Activity storyboard's initial view controller (NotificationCenter)
+        let sb = UIStoryboard(name: "Activity", bundle: nil)
+        guard let vc = sb.instantiateInitialViewController() else { return }
+
+        if let nav = navigationController {
+            if let incomingNav = vc as? UINavigationController {
+                if let root = incomingNav.viewControllers.first {
+                    nav.pushViewController(root, animated: true)
+                } else {
+                    incomingNav.modalPresentationStyle = .fullScreen
+                    present(incomingNav, animated: true, completion: nil)
+                }
+            } else {
+                nav.pushViewController(vc, animated: true)
+            }
+        } else {
+            if let incomingNav = vc as? UINavigationController {
+                incomingNav.modalPresentationStyle = .fullScreen
+                present(incomingNav, animated: true, completion: nil)
+            } else {
+                vc.modalPresentationStyle = .fullScreen
+                present(vc, animated: true, completion: nil)
+            }
+        }
+    }
+    
 }
 
 // MARK: - Search Results Updating
