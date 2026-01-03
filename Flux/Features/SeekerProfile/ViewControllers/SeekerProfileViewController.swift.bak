@@ -1,0 +1,55 @@
+import UIKit
+
+
+class SeekerProfileViewController: UIViewController {
+
+    // MARK: - IBOutlets
+    //        Storyboard
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel! // Location label
+    
+    // 2.   ViewModel
+        var viewModel = SeekerProfileViewModel()
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            setupBindings() // Bindings
+            viewModel.fetchUserProfile() // Fetch profile on load
+            
+            //     
+            locationLabel.text = "Bahrain 🇧🇭"
+        }
+
+        // 3.   (Binding) -   ViewModel
+        func setupBindings() {
+            
+            //    
+            viewModel.onUserDataUpdated = { [weak self] user in
+                DispatchQueue.main.async {
+                    self?.nameLabel.text = user.name
+                    self?.usernameLabel.text = "@\(user.username ?? "user")" // Fallback if username is missing
+                    
+                    //        (SDWebImage    )
+                    //   :
+                    if let imageURL = user.profileImageURL, let url = URL(string: imageURL) {
+                        //          
+                        DispatchQueue.global().async {
+                            if let data = try? Data(contentsOf: url) {
+                                DispatchQueue.main.async {
+                                    self?.profileImageView.image = UIImage(data: data)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            viewModel.onError = { errorMessage in
+                print("Error fetching profile: \(errorMessage)")
+            }
+        }
+    }
+   

@@ -1,0 +1,11 @@
+import UIKit
+
+class ProviderMainProfileVC: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //         
+        self.view.backgroundColor = .systemBackground
+        print("Provider Profile Loaded")
+    }
+}

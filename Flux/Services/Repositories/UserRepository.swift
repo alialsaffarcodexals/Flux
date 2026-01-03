@@ -1,0 +1,148 @@
+import Foundation
+import FirebaseFirestore
+
+final class UserRepository {
+    static let shared = UserRepository()
+    private let manager = FirestoreManager.shared
+
+    private init() {}
+
+    private var usersCollection: CollectionReference {
+        manager.db.collection("users")
+    }
+
+    func getUser(uid: String, completion: @escaping (Result<User, Error>) -> Void) {
+        usersCollection.document(uid).getDocument { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let snapshot = snapshot else {
+                completion(.failure(self.manager.missingSnapshotError()))
+                return
+            }
+
+            guard snapshot.exists else {
+                completion(.failure(self.manager.documentNotFoundError("User")))
+                return
+            }
+
+            do {
+                let user = try snapshot.data(as: User.self)
+                completion(.success(user))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func updateUserField(uid: String, field: String, value: Any, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(uid).updateData([field: value]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
+    // Fetch Providers (For Recommendations)
+    func fetchRecommendedProviders(limit: Int = 10, completion: @escaping (Result<[User], Error>) -> Void) {
+        // Query: Find users where role is "Provider" AND setup is complete
+        usersCollection
+            .whereField("role", isEqualTo: "Provider")
+            .whereField("hasCompletedProviderSetup", isEqualTo: true)
+            .limit(to: limit) // Don't fetch everyone, just a few for recommendation
+            .getDocuments { snapshot, error in
+                self.manager.decodeDocuments(snapshot, error: error, completion: completion)
+            }
+    }
+    
+    // Fetch multiple users at once by their IDs
+    func fetchUsers(byIds ids: [String], completion: @escaping (Result<[User], Error>) -> Void) {
+        // Firestore limits 'in' queries to 10-30 items.
+        // If ids is empty, return empty immediately.
+        guard !ids.isEmpty else {
+            completion(.success([]))
+            return
+        }
+        
+        // chunking is recommended for prod, but for now we pass the array directly
+        // Make sure 'ids' doesn't exceed 30 items or Firestore will error.
+        let uniqueIds = Array(Set(ids)) // Remove duplicates
+        
+        usersCollection
+            .whereField(FieldPath.documentID(), in: uniqueIds)
+            .getDocuments { snapshot, error in
+                self.manager.decodeDocuments(snapshot, error: error, completion: completion)
+            }
+    }
+    // Check if email exists
+    func checkEmailExists(email: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        usersCollection
+            .whereField("email", isEqualTo: email)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let snapshot = snapshot else {
+                    completion(.failure(self.manager.missingSnapshotError()))
+                    return
+                }
+                
+                completion(.success(!snapshot.isEmpty))
+            }
+    }
+    // MARK: - Favorites Management
+    
+    func addFavoriteProvider(userId: String, providerId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteProviderIds": FieldValue.arrayUnion([providerId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
+    func removeFavoriteProvider(userId: String, providerId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteProviderIds": FieldValue.arrayRemove([providerId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+
+    func addFavoriteService(userId: String, serviceId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteServiceIds": FieldValue.arrayUnion([serviceId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
+    func removeFavoriteService(userId: String, serviceId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteServiceIds": FieldValue.arrayRemove([serviceId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+}

@@ -1,0 +1,27 @@
+import Foundation
+import FirebaseFirestore
+
+class FirestoreManager {
+    static let shared = FirestoreManager() // The Singleton instance
+    private let db = Firestore.firestore()
+    
+    private init() {} // Private init to ensure singleton usage
+    
+    func getUser(uid: String, completion: @escaping (Result<User, Error>) -> Void) {
+        db.collection("users").document(uid).getDocument { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            // Assuming you add an initializer to your User model to map from Firestore data
+            // Or use Codable if you have swift-codable-firestore extensions
+            if let data = snapshot?.data(),
+               let user = User(dictionary: data) { // You need to create this init
+                completion(.success(user))
+            } else {
+                // Handle parsing error
+            }
+        }
+    }
+}
