@@ -50,13 +50,9 @@ class ReportViewController: UIViewController, UITextViewDelegate {
             right: 8
         )
 
-        // Placeholder text
-        if let tv = reportAnswer, tv.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            tv.text = "Write your response..."
-            tv.textColor = .placeholderText
-        } else {
-            reportAnswer?.textColor = .black
-        }
+        // Set placeholder text
+        reportAnswer?.text = "Write your response..."
+        reportAnswer?.textColor = .systemGray2
     }
 
     // MARK: - Answer helpers
@@ -116,7 +112,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         let trimmed = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmed.isEmpty {
             textView.text = "Write your response..."
-            textView.textColor = .placeholderText
+            textView.textColor = .systemGray2
         } else {
             textView.textColor = .black
         }
