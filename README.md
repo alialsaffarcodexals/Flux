@@ -196,7 +196,7 @@ These design changes reflect an iterative development approach where the UI, scr
 - **Firebase Firestore** – NoSQL database for users, services, bookings, and chats  
 - **Firebase Authentication** – Secure login and registration  
 - **CalendarKit** – Provider availability calendar UI  
-- **IQKeyboardManager** – Automatic keyboard handling  
+- **Cloudinary** – Cloud-based media management service used for uploading, storing, optimizing, and delivering images and media files efficiently via secure URLs.
 - **UIKit** – Core UI framework (Storyboard & Programmatic)
 
 ---
