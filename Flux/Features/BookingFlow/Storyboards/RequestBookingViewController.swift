@@ -9,13 +9,11 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
     @IBOutlet weak var serviceNameLabel: UILabel!
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var availableHoursCollectionView: UICollectionView! // Connect this in Storyboard
-
-    // MARK: - Properties
+    @IBOutlet weak var availableHoursCollectionView: UICollectionView!
     let db = Firestore.firestore()
     var providerID: String = ""
     var selectedDate: Date = Date()
-    var selectedTime: String? // e.g. "09:00"
+    var selectedTime: String?
     
     // Data passed from previous screen
     var service: Service?
@@ -60,7 +58,6 @@ class RequestBookingViewController: UIViewController, UICollectionViewDelegate, 
         updateAvailableTimes(for: selectedDate)
     }
     
-    // MARK: - Fetching Data
     
     // Store recurring slots locally after fetching
     var recurringSlots: [AvailabilitySlot] = []
