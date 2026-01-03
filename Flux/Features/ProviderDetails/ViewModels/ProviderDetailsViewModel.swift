@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import FirebaseAuth
+import FirebaseFirestore
 import UIKit
 
 class ProviderDetailsViewModel {
@@ -13,16 +15,13 @@ class ProviderDetailsViewModel {
     var services: [ServicePackage] = []
     var skills: [Skill] = []
     
-    var isFavorite: Bool {
-        // MVP: Check UserDefaults
-        let favorites = UserDefaults.standard.stringArray(forKey: "FavoriteProviders") ?? []
-        return favorites.contains(company.providerId)
-    }
+    var isFavorite: Bool = false
     
     var onDataUpdated: (() -> Void)?
     
     init(company: Company) {
         self.company = company
+        checkIfFavorite()
     }
     
     // MARK: - Data Accessors
@@ -57,7 +56,7 @@ class ProviderDetailsViewModel {
             case .success(let packages):
                 self?.services = packages
             case .failure(let error):
-                print("❌ Failed to fetch services: \(error.localizedDescription)")
+                print("Failed to fetch services: \(error.localizedDescription)")
             }
         }
         
@@ -67,14 +66,9 @@ class ProviderDetailsViewModel {
             defer { group.leave() }
             switch result {
             case .success(let skills):
-                // Filter only approved skills if needed, or show all. 
-                // Typically users see only approved skills, but let's show all for now or approved ones.
-                // The requirement didn't specify, but usually public profiles show Approved.
-                // Result<[Skill], Error> doesn't imply filtering in Repo for this method signature, 
-                // but let's just assign them.
                 self?.skills = skills.filter { $0.status == .approved }
             case .failure(let error):
-                print("❌ Failed to fetch skills: \(error.localizedDescription)")
+                print("Failed to fetch skills: \(error.localizedDescription)")
             }
         }
         
@@ -83,14 +77,50 @@ class ProviderDetailsViewModel {
         }
     }
     
-    func toggleFavorite() {
-        var favorites = UserDefaults.standard.stringArray(forKey: "FavoriteProviders") ?? []
-        if favorites.contains(company.providerId) {
-            favorites.removeAll { $0 == company.providerId }
-        } else {
-            favorites.append(company.providerId)
+    private func checkIfFavorite() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        
+        UserRepository.shared.getUser(uid: currentUserID) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let user):
+                if let favorites = user.favoriteProviderIds {
+                    self.isFavorite = favorites.contains(self.company.providerId)
+                    DispatchQueue.main.async {
+                        self.onDataUpdated?()
+                    }
+                }
+            case .failure(let error):
+                print("Failed to fetch user for favorite check: \(error)")
+            }
         }
-        UserDefaults.standard.set(favorites, forKey: "FavoriteProviders")
+    }
+    
+    func toggleFavorite() {
+        guard let currentUserID = Auth.auth().currentUser?.uid else { return }
+        
+        // Optimistic update
+        isFavorite.toggle()
         onDataUpdated?()
+        
+        if isFavorite {
+            UserRepository.shared.addFavoriteProvider(userId: currentUserID, providerId: company.providerId) { error in
+                if case .failure(let error) = error {
+                    print("Failed to add favorite: \(error)")
+                    // Revert on failure
+                    self.isFavorite.toggle()
+                    self.onDataUpdated?()
+                }
+            }
+        } else {
+            UserRepository.shared.removeFavoriteProvider(userId: currentUserID, providerId: company.providerId) { error in
+                if case .failure(let error) = error {
+                    print("Failed to remove favorite: \(error)")
+                    // Revert on failure
+                    self.isFavorite.toggle()
+                    self.onDataUpdated?()
+                }
+            }
+        }
     }
 }

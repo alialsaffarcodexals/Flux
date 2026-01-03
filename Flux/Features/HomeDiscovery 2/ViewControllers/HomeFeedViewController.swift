@@ -8,6 +8,9 @@ class HomeFeedViewController: UIViewController {
     // Use the new ViewModel we created
     let viewModel = HomeViewModel()
     
+    // MARK: - Search Controller
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,13 +19,58 @@ class HomeFeedViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        // 2. Fetch Data (Using the NEW function name)
+        // 2. Setup Search & Filter
+        setupSearchController()
+        setupFilterButton()
+        
+        // 3. Fetch Data (Using the NEW function name)
         viewModel.fetchHomeData { [weak self] in
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
                 self?.updateEmptyState()
             }
         }
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search services..."
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    private func setupFilterButton() {
+        let filterButton = UIBarButtonItem(
+            image: UIImage(systemName: "line.3.horizontal.decrease.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(filterTapped)
+        )
+        navigationItem.rightBarButtonItem = filterButton
+    }
+    
+    @objc private func filterTapped() {
+        // Instantiate and Present Filter VC
+        let vc = FilterViewController()
+        
+        // Pass current filters
+        vc.currentFilters = viewModel.currentFilterOptions
+        
+        // Handle callback
+        vc.onFiltersApplied = { [weak self] newFilters in
+            self?.viewModel.applyFilters(newFilters)
+            self?.collectionView.reloadData()
+            self?.updateEmptyState()
+        }
+        
+        // Present Modally (Sheet)
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium(), .large()]
+            sheet.prefersGrabberVisible = true
+        }
+        
+        present(vc, animated: true)
     }
     
     // MARK: - Compositional Layout
@@ -242,6 +290,7 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
             }
         } else if indexPath.section == 2 {
             let service = viewModel.displayedServices[indexPath.item]
+            let providerName = viewModel.providerNames[service.providerId]
             
             // Map Service -> Company (Legacy Adapter)
             let company = Company(
@@ -260,11 +309,30 @@ extension HomeFeedViewController: UICollectionViewDelegate, UICollectionViewData
             // Navigate to Service Details
             let storyboard = UIStoryboard(name: "ServiceDetails", bundle: nil)
             if let detailsVC = storyboard.instantiateViewController(withIdentifier: "ServiceDetailsVC") as? ServiceDetailsViewController {
-                let detailsViewModel = ServiceDetailsViewModel(company: company)
+                let detailsViewModel = ServiceDetailsViewModel(
+                    company: company,
+                    providerName: providerName,
+                    currencyCode: service.currencyCode
+                )
                 detailsVC.viewModel = detailsViewModel
                 navigationController?.pushViewController(detailsVC, animated: true)
             }
         }
     }
     
+}
+
+// MARK: - Search Results Updating
+extension HomeFeedViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        
+        // MVP: Search directly
+        viewModel.search(query: text)
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+            self.updateEmptyState()
+        }
+    }
 }

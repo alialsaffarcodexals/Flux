@@ -58,12 +58,12 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        print("🟢 1. Button Tapped")
+        print("1. Button Tapped")
                     
         let imageData = selectedImage?.jpegData(compressionQuality: 0.5)
                     
         signUpButton.isEnabled = false
-        print("🟢 2. Button Disabled, Calling ViewModel...")
+        print("2. Button Disabled, Calling ViewModel...")
                     
         // Note: Added the user variable in the closure.
         viewModel.performSignUp(
@@ -77,7 +77,7 @@ class SignUpViewController: UIViewController {
             profileImage: imageData
         ) { [weak self] success, errorMessage, user in // Here we received the user
                 
-            print("🟢 3. ViewModel Returned. Success: \(success)")
+            print("3. ViewModel Returned. Success: \(success)")
                 
             guard let self = self else { return }
                 
@@ -85,7 +85,7 @@ class SignUpViewController: UIViewController {
                 self.signUpButton.isEnabled = true
                         
                 if success, let user = user { // Ensure that the user exists.
-                    print("✅ User Created Successfully: \(user.name)")
+                    print("User Created Successfully: \(user.name)")
                     
                     // Now the user variable is defined and can be passed.
                     AppNavigator.shared.navigate(user: user)

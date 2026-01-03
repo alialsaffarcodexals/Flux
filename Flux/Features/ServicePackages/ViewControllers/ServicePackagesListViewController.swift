@@ -92,7 +92,7 @@ class ServicePackagesListViewController: UIViewController {
         var displayMessage = message
         // Sanitize Firestore Index Error
         if message.contains("The query requires an index") {
-            print("🔴 Firestore Index Error: \(message)") // Log the real error for debugging
+            print("Firestore Index Error: \(message)") // Log the real error for debugging
             displayMessage = "Unable to load service packages. Please try again later."
         }
         
@@ -103,14 +103,14 @@ class ServicePackagesListViewController: UIViewController {
     
     // MARK: - Actions
     @objc @IBAction func addPackageTapped(_ sender: Any) {
-        print("➕ Add Package Tapped")
+        print("Add Package Tapped")
         guard let editorVC = AppNavigator.shared.getServicePackageEditorViewController(package: nil) else {
-            print("🔴 Failed to instantiate ServicePackageEditorViewController")
+            print("Failed to instantiate ServicePackageEditorViewController")
             return
         }
         
         DispatchQueue.main.async { [weak self] in
-            print("🚀 Pushing ServicePackageEditorViewController")
+            print("Pushing ServicePackageEditorViewController")
             self?.navigationController?.pushViewController(editorVC, animated: true)
         }
     }

@@ -13,7 +13,7 @@ class SkillVerificationViewController: UIViewController {
     var initialSkills: [Skill]?
     var viewModel: AdminToolsViewModel? = AdminToolsViewModel()
 
-    // ✅ Cache to avoid refetching users on scroll
+    //  Cache to avoid refetching users on scroll
     private var userNameCache: [String: String] = [:]
 
     override func viewDidLoad() {
@@ -66,7 +66,7 @@ class SkillVerificationViewController: UIViewController {
                     self?.allSkills = data
                     self?.updateDisplayedSkills()
                 case .failure(let error):
-                    print("❌ Fetch skills error:", error.localizedDescription)
+                    print("Fetch skills error:", error.localizedDescription)
                 }
             }
         }
@@ -140,7 +140,7 @@ extension SkillVerificationViewController: UITableViewDataSource {
 
         let providerId = skill.providerId
 
-        // ✅ Use cached username if available
+        //  Use cached username if available
         if let cachedName = userNameCache[providerId] {
             cell.detailTextLabel?.text = "Submitted by: \(cachedName)"
         } else {

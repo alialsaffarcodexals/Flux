@@ -183,10 +183,10 @@ final class BookingRepository {
             // It must match your Firestore exactly (lowercase 'b').
             manager.db.collection("bookings").document(bookingId).updateData(["isReviewed": true]) { error in
                 if let error = error {
-                    print("❌ Error updating booking: \(error)")
+                    print("Error updating booking: \(error)")
                     completion(.failure(error))
                 } else {
-                    print("✅ Successfully marked booking as reviewed in database")
+                    print("Successfully marked booking as reviewed in database")
                     completion(.success(()))
                 }
             }

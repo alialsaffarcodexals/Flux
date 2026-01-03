@@ -7,6 +7,7 @@ class ProviderRequestsViewModel: ObservableObject {
     // MARK: - Published Properties
     @Published var requests: [Booking] = []
     @Published var upcoming: [Booking] = []
+    @Published var completed: [Booking] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
@@ -29,24 +30,41 @@ class ProviderRequestsViewModel: ObservableObject {
         self.errorMessage = nil
         
         let group = DispatchGroup()
+        var fetchedRequests: [Booking] = []
+        let lock = NSLock()
         
         // 1. Fetch Requests (Status: Requested)
         group.enter()
-        // Note: fetchBookingsForProvider filters by equality on status.
-        // We might need "Requested" specifically.
         repository.fetchBookingsForProvider(providerId: providerId, status: .requested) { [weak self] result in
             defer { group.leave() }
             switch result {
             case .success(let bookings):
-                self?.requests = bookings.sorted(by: { $0.createdAt > $1.createdAt }) // Newest first
+                lock.lock()
+                fetchedRequests.append(contentsOf: bookings)
+                lock.unlock()
             case .failure(let error):
-                print("Error fetching requests: \(error)")
-                self?.errorMessage = error.localizedDescription
+                print("Error fetching requested bookings: \(error)")
+                DispatchQueue.main.async {
+                    self?.errorMessage = error.localizedDescription
+                }
             }
         }
         
-        // 2. Fetch Upcoming (Status: Accepted)
-        // Optionally could include InProgress if needed.
+        // 2. Fetch Pending Requests (Status: Pending) - e.g. Seeker requests
+        group.enter()
+        repository.fetchBookingsForProvider(providerId: providerId, status: .pending) { [weak self] result in
+             defer { group.leave() }
+             switch result {
+             case .success(let bookings):
+                 lock.lock()
+                 fetchedRequests.append(contentsOf: bookings)
+                 lock.unlock()
+             case .failure(let error):
+                 print("Error fetching pending bookings: \(error)")
+             }
+         }
+        
+        // 3. Fetch Upcoming (Status: Accepted)
         group.enter()
         repository.fetchBookingsForProvider(providerId: providerId, status: .accepted) { [weak self] result in
             defer { group.leave() }
@@ -57,8 +75,22 @@ class ProviderRequestsViewModel: ObservableObject {
                 print("Error fetching upcoming: \(error)")
             }
         }
+
+        // 4. Fetch Completed (Status: Completed)
+        group.enter()
+        repository.fetchBookingsForProvider(providerId: providerId, status: .completed) { [weak self] result in
+            defer { group.leave() }
+            switch result {
+            case .success(let bookings):
+                self?.completed = bookings.sorted(by: { $0.scheduledAt > $1.scheduledAt }) // Newest completed first
+            case .failure(let error):
+                print("Error fetching completed: \(error)")
+            }
+        }
         
         group.notify(queue: .main) { [weak self] in
+            // Sort requests by newest first
+            self?.requests = fetchedRequests.sorted(by: { $0.createdAt > $1.createdAt })
             self?.isLoading = false
         }
     }
@@ -101,5 +133,25 @@ class ProviderRequestsViewModel: ObservableObject {
         }
     }
     
-    // Future: Complete booking, etc.
+    func completeBooking(_ booking: Booking) {
+        guard let id = booking.id else { return }
+        self.isLoading = true
+        
+        repository.updateBookingStatus(bookingId: id, newStatus: .completed) { [weak self] result in
+            self?.isLoading = false
+            switch result {
+            case .success:
+                // Move from upcoming to completed locally
+                self?.upcoming.removeAll { $0.id == id }
+                var completedBooking = booking
+                completedBooking.status = .completed
+                // Optionally set completedAt
+                self?.completed.append(completedBooking)
+                self?.completed.sort(by: { $0.scheduledAt > $1.scheduledAt })
+                
+            case .failure(let error):
+                self?.errorMessage = error.localizedDescription
+            }
+        }
+    }
 }

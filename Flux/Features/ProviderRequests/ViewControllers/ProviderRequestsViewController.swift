@@ -9,14 +9,18 @@ class ProviderRequestsViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     
     // UI Components
-    // UI Components
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     
     private var displayedBookings: [Booking] {
-        return segmentedControl.selectedSegmentIndex == 0 ? viewModel.requests : viewModel.upcoming
+        switch segmentedControl.selectedSegmentIndex {
+        case 0: return viewModel.requests
+        case 1: return viewModel.upcoming
+        case 2: return viewModel.completed
+        default: return []
+        }
     }
 
     // MARK: - Lifecycle
@@ -26,11 +30,19 @@ class ProviderRequestsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = "Requests"
         
-        
+        setupSegmentedControl()
         setupTableView()
         bindViewModel()
         
         viewModel.loadData()
+    }
+    
+    private func setupSegmentedControl() {
+        segmentedControl.removeAllSegments()
+        segmentedControl.insertSegment(withTitle: "Requests", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "Upcoming", at: 1, animated: false)
+        segmentedControl.insertSegment(withTitle: "Completed", at: 2, animated: false)
+        segmentedControl.selectedSegmentIndex = 0
     }
     
     private func setupTableView() {
@@ -43,9 +55,6 @@ class ProviderRequestsViewController: UIViewController {
 
     
     // MARK: - Setup
-    
-    // MARK: - Setup
-
     
     private func bindViewModel() {
         // Reload table when data changes
@@ -63,6 +72,16 @@ class ProviderRequestsViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 if self?.segmentedControl.selectedSegmentIndex == 1 {
+                    self?.tableView.reloadData()
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            }
+            .store(in: &cancellables)
+            
+        viewModel.$completed
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                if self?.segmentedControl.selectedSegmentIndex == 2 {
                     self?.tableView.reloadData()
                     self?.tableView.refreshControl?.endRefreshing()
                 }
@@ -106,15 +125,31 @@ extension ProviderRequestsViewController: UITableViewDataSource, UITableViewDele
         }
         
         let booking = displayedBookings[indexPath.row]
-        let isRequest = segmentedControl.selectedSegmentIndex == 0
+        let index = segmentedControl.selectedSegmentIndex
         
-        cell.configure(with: booking, showActions: isRequest)
+        // Determine mode
+        let mode: ProviderBookingCell.CellMode
+        switch index {
+        case 0: mode = .request
+        case 1: mode = .upcoming
+        case 2: mode = .completed
+        default: mode = .completed
+        }
         
+        cell.configure(with: booking, mode: mode)
+        
+        // Handle actions
         cell.onAccept = { [weak self] in
-            self?.viewModel.acceptBooking(booking)
+            if mode == .request {
+                self?.viewModel.acceptBooking(booking)
+            } else if mode == .upcoming {
+                // In upcoming mode, primary action is COMPLETE
+                self?.viewModel.completeBooking(booking)
+            }
         }
         
         cell.onReject = { [weak self] in
+            // Reject is only visible in request mode
             self?.viewModel.rejectBooking(booking)
         }
         

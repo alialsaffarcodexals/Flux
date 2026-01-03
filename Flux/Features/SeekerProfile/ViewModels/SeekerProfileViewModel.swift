@@ -12,6 +12,10 @@ class SeekerProfileViewModel {
     
     private var currentUser: User?
 
+    // Data
+    var favoriteProviders: [User] = []
+    var onFavoritesUpdated: (([User]) -> Void)?
+
     func fetchUserProfile() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
@@ -26,8 +30,31 @@ class SeekerProfileViewModel {
             case .success(let user):
                 self?.currentUser = user
                 self?.onUserDataUpdated?(user)
+                self?.fetchFavorites(for: user)
             case .failure(let error):
                 self?.onError?(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func fetchFavorites(for user: User) {
+        guard let favoriteIds = user.favoriteProviderIds, !favoriteIds.isEmpty else {
+            self.favoriteProviders = []
+            self.onFavoritesUpdated?([])
+            return
+        }
+        
+        UserRepository.shared.fetchUsers(byIds: favoriteIds) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let users):
+                self.favoriteProviders = users
+                DispatchQueue.main.async {
+                    self.onFavoritesUpdated?(users)
+                }
+            case .failure(let error):
+                print("Failed to fetch favorites: \(error)")
+                // Don't show error to user as this is secondary content
             }
         }
     }
@@ -67,7 +94,7 @@ class SeekerProfileViewModel {
                     switch result {
                     case .success(let updatedUser):
                         DispatchQueue.main.async {
-                            // ✅ UPDATE: Navigate to Tab 4 (Provider Profile)
+                            //  UPDATE: Navigate to Tab 4 (Provider Profile)
                             // Provider Tabs: [Home, Requests, Manage, Chat, Profile] -> Index 4
                             AppNavigator.shared.navigate(user: updatedUser, destinationTab: 4)
                         }
@@ -86,7 +113,7 @@ class SeekerProfileViewModel {
             return
         }
         
-        print("📸 Image selected for Seeker profile")
+        print("Image selected for Seeker profile")
         onLoading?(true)
         
         // Convert image to data
@@ -97,7 +124,7 @@ class SeekerProfileViewModel {
         }
         
         let fileName = "\(uid)_seeker_profile.jpg"
-        print("📤 Upload started for Seeker profile image")
+        print("Upload started for Seeker profile image")
         
         // Upload to Cloudinary
         StorageManager.shared.uploadProfilePicture(with: imageData, fileName: fileName) { [weak self] result in
@@ -105,7 +132,7 @@ class SeekerProfileViewModel {
             
             switch result {
             case .success(let imageURL):
-                print("✅ Upload success URL: \(imageURL)")
+                print("Upload success URL: \(imageURL)")
                 
                 // Update Firestore
                 UserRepository.shared.updateUserField(
@@ -118,11 +145,11 @@ class SeekerProfileViewModel {
                         
                         switch updateResult {
                         case .success:
-                            print("✅ Firestore write success for seekerProfileImageURL")
+                            print("Firestore write success for seekerProfileImageURL")
                             // Refresh user profile to get updated data
                             self.fetchUserProfile()
                         case .failure(let error):
-                            print("❌ Firestore write error: \(error.localizedDescription)")
+                            print("Firestore write error: \(error.localizedDescription)")
                             self.onError?("Failed to save image: \(error.localizedDescription)")
                         }
                     }
@@ -131,7 +158,7 @@ class SeekerProfileViewModel {
             case .failure(let error):
                 DispatchQueue.main.async {
                     self.onLoading?(false)
-                    print("❌ Upload error: \(error.localizedDescription)")
+                    print("Upload error: \(error.localizedDescription)")
                     self.onError?("Failed to upload image: \(error.localizedDescription)")
                 }
             }

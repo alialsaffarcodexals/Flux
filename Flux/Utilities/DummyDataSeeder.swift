@@ -28,23 +28,23 @@
 //    
 //    func seedIfNeeded() {
 //        guard let uid = Auth.auth().currentUser?.uid else {
-//            print("⚠️ [Seeder] No user logged in. Skipping seed.")
+//            print("[Seeder] No user logged in. Skipping seed.")
 //            return
 //        }
 //        
 //        let key = "didSeedDummyData_\(uid)"
 //        if UserDefaults.standard.bool(forKey: key) {
-//            print("✅ [Seeder] Data already seeded for user \(uid). Skipping.")
+//            print("[Seeder] Data already seeded for user \(uid). Skipping.")
 //            return
 //        }
 //        
-//        print("🌱 [Seeder] Starting dummy data seed for user \(uid)...")
+//        print("[Seeder] Starting dummy data seed for user \(uid)...")
 //        seedAll(for: uid) { success in
 //            if success {
 //                UserDefaults.standard.set(true, forKey: key)
-//                print("🏁 [Seeder] Seeding complete! 🚀")
+//                print("[Seeder] Seeding complete! ")
 //            } else {
-//                print("❌ [Seeder] Seeding failed partially.")
+//                print("[Seeder] Seeding failed partially.")
 //            }
 //        }
 //    }
@@ -53,7 +53,7 @@
 //        guard let uid = Auth.auth().currentUser?.uid else { return }
 //        let key = "didSeedDummyData_\(uid)"
 //        UserDefaults.standard.set(false, forKey: key)
-//        print("🔄 [Seeder] Reset seed flag for \(uid).")
+//        print("[Seeder] Reset seed flag for \(uid).")
 //    }
 //    
 //    // MARK: - Master Seed Method
@@ -145,7 +145,7 @@
 //        serviceRepo.createServiceCategory(c2) { _ in group.leave() }
 //        
 //        group.notify(queue: .main) {
-//            print("   - Services & Categories seeded.")
+//            print("- Services & Categories seeded.")
 //            completion()
 //        }
 //    }
@@ -180,7 +180,7 @@
 //        skillRepo.createSkill(sk2) { _ in group.leave() }
 //        
 //        group.notify(queue: .main) {
-//            print("   - Skills seeded.")
+//            print("- Skills seeded.")
 //            completion()
 //        }
 //    }
@@ -203,7 +203,7 @@
 //        // I will use `PortfolioRepository.shared.createPortfolioProject(...)` pattern.
 //        
 //        portfolioRepo.createPortfolioProject(p1) { _ in
-//            print("   - Portfolio seeded.")
+//            print("- Portfolio seeded.")
 //            completion()
 //        }
 //    }
@@ -256,7 +256,7 @@
 //        bookingRepo.createBooking(b2) { _ in group.leave() }
 //        
 //        group.notify(queue: .main) {
-//            print("   - Bookings seeded.")
+//            print("- Bookings seeded.")
 //            completion()
 //        }
 //    }
@@ -293,7 +293,7 @@
 //        reviewRepo.createReview(r2) { _ in group.leave() }
 //        
 //        group.notify(queue: .main) {
-//            print("   - Reviews seeded.")
+//            print("- Reviews seeded.")
 //            completion()
 //        }
 //    }

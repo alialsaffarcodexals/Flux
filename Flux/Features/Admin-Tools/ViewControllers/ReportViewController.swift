@@ -153,7 +153,7 @@ class ReportViewController: UIViewController, UITextViewDelegate {
                     }
 
                 case .failure(let error):
-                    print("❌ Fetch report error:", error.localizedDescription)
+                    print("Fetch report error:", error.localizedDescription)
                 }
             }
         }
@@ -180,9 +180,9 @@ class ReportViewController: UIViewController, UITextViewDelegate {
         viewModel?.updateReportStatus(reportID: id, status: "Resolved") { error in
             DispatchQueue.main.async {
                 if let error = error {
-                    print("❌ Update report error:", error.localizedDescription)
+                    print("Update report error:", error.localizedDescription)
                 } else {
-                    print("✅ Report marked resolved")
+                    print("Report marked resolved")
                 }
             }
         }

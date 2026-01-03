@@ -6,7 +6,6 @@
 
 import Foundation
 import FirebaseAuth
-import FirebaseFirestore
 
 /// Represents a favorite provider for display
 struct FavoriteDisplayItem {
@@ -29,7 +28,7 @@ final class FavoritesVM {
     
     // MARK: - Dependencies
     private let userRepo = UserRepository.shared
-    private let db = Firestore.firestore()
+
     
     // MARK: - Computed Properties
     var displayItems: [FavoriteDisplayItem] {
@@ -41,77 +40,68 @@ final class FavoritesVM {
     }
     
     // MARK: - Public Methods
+    // MARK: - Public Methods
     func loadFavorites() {
-        print("🔥 FavoritesVM: loadFavorites() called")
-        
         guard let userId = Auth.auth().currentUser?.uid else {
-            print("🔥 FavoritesVM: No current user - userId is nil")
             onDataChanged?()
             return
         }
         
-        print("🔥 FavoritesVM: Current user ID = \(userId)")
-        
         // Get current user's favorite provider IDs
         userRepo.getUser(uid: userId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let user):
                 let favoriteIds = user.favoriteProviderIds ?? []
-                print("🔥 FavoritesVM: User loaded successfully")
-                print("🔥 FavoritesVM: favoriteProviderIds = \(favoriteIds)")
-                print("🔥 FavoritesVM: favoriteProviderIds count = \(favoriteIds.count)")
                 
                 if favoriteIds.isEmpty {
-                    print("🔥 FavoritesVM: No favorites found - list is empty")
                     DispatchQueue.main.async {
-                        self?.favoriteItems = []
-                        self?.onDataChanged?()
+                        self.favoriteItems = []
+                        self.onDataChanged?()
                     }
                 } else {
-                    print("🔥 FavoritesVM: Fetching provider details for \(favoriteIds.count) providers")
-                    self?.fetchProviderDetails(for: favoriteIds)
+                    self.fetchProviderDetails(for: favoriteIds)
                 }
             case .failure(let error):
-                print("🔥 FavoritesVM: Error loading user - \(error.localizedDescription)")
                 DispatchQueue.main.async {
-                    self?.onError?(error)
+                    self.onError?(error)
+                    // If fetching user fails, we might still want to show empty or handle it gracefullly
+                    self.favoriteItems = []
+                    self.onDataChanged?()
                 }
             }
         }
     }
     
     private func fetchProviderDetails(for providerIds: [String]) {
-        let group = DispatchGroup()
-        var items: [FavoriteDisplayItem] = []
-        
-        for providerId in providerIds {
-            group.enter()
-            print("🔥 FavoritesVM: Fetching provider \(providerId)")
-            
-            userRepo.getUser(uid: providerId) { result in
-                defer { group.leave() }
-                
-                switch result {
-                case .success(let provider):
+        // Use batch fetch from Repository
+        userRepo.fetchUsers(byIds: providerIds) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let providers):
+                let items = providers.compactMap { provider -> FavoriteDisplayItem? in
+                    guard let providerId = provider.id else { return nil }
                     let serviceName = provider.businessName ?? "Service Provider"
-                    let item = FavoriteDisplayItem(
+                    return FavoriteDisplayItem(
                         providerId: providerId,
                         providerName: provider.name,
                         serviceName: serviceName,
                         profileImageURL: provider.providerProfileImageURL
                     )
-                    items.append(item)
-                    print("🔥 FavoritesVM: Successfully loaded provider \(provider.name)")
-                case .failure(let error):
-                    print("🔥 FavoritesVM: Failed to load provider \(providerId) - \(error.localizedDescription)")
+                }
+                
+                DispatchQueue.main.async {
+                    self.favoriteItems = items
+                    self.onDataChanged?()
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    print("Failed to fetch favorite providers: \(error)")
+                    // On error, show empty or keep previous
+                    self.favoriteItems = []
+                    self.onDataChanged?()
                 }
             }
-        }
-        
-        group.notify(queue: .main) { [weak self] in
-            print("🔥 FavoritesVM: All providers fetched - total items = \(items.count)")
-            self?.favoriteItems = items
-            self?.onDataChanged?()
         }
     }
     
@@ -127,24 +117,24 @@ final class FavoritesVM {
         let item = displayItems[index]
         let providerId = item.providerId
         
-        print("🔥 FavoritesVM: Removing provider \(providerId) from favorites")
+        // Optimistic remove from UI
+        if isSearching {
+           filteredItems.remove(at: index)
+           favoriteItems.removeAll { $0.providerId == providerId }
+        } else {
+           favoriteItems.remove(at: index)
+        }
+        onDataChanged?()
         
-        // Remove from Firebase
-        db.collection("users").document(userId).updateData([
-            "favoriteProviderIds": FieldValue.arrayRemove([providerId])
-        ]) { [weak self] error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("🔥 FavoritesVM: Error removing favorite - \(error.localizedDescription)")
-                    self?.onError?(error)
-                    return
+        // Remove from Backend via Repository
+        userRepo.removeFavoriteProvider(userId: userId, providerId: providerId) { [weak self] result in
+            if case .failure(let error) = result {
+                DispatchQueue.main.async {
+                     // Revert if failed (complex to insert back at same index, just reload)
+                     print("Failed to remove favorite: \(error)")
+                     self?.onError?(error)
+                     self?.loadFavorites() // Reload to restore state
                 }
-                
-                print("🔥 FavoritesVM: Successfully removed from favorites")
-                // Remove from local data
-                self?.favoriteItems.removeAll { $0.providerId == providerId }
-                self?.filteredItems.removeAll { $0.providerId == providerId }
-                self?.onDataChanged?()
             }
         }
     }

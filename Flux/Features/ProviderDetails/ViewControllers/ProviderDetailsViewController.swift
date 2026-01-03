@@ -110,7 +110,8 @@ class ProviderDetailsViewController: UIViewController {
     private func setupTableView() {
         servicesTableView.delegate = self
         servicesTableView.dataSource = self
-        servicesTableView.register(UITableViewCell.self, forCellReuseIdentifier: "ServiceCell")
+        servicesTableView.rowHeight = UITableView.automaticDimension
+        servicesTableView.estimatedRowHeight = 80
     }
     
     private func updateFavoriteIcon() {
@@ -139,7 +140,10 @@ class ProviderDetailsViewController: UIViewController {
     
     private func navigateToReport() {
         let storyboard = UIStoryboard(name: "DisputeCenter", bundle: nil)
-        if let disputeVC = storyboard.instantiateViewController(withIdentifier: "DisputeCenterVC") as? UIViewController {
+        if let disputeVC = storyboard.instantiateViewController(withIdentifier: "DisputeCenterVC") as? DisputeCenterVC {
+            if let company = viewModel?.company {
+                disputeVC.providerToReport = (id: company.providerId, name: company.name)
+            }
             navigationController?.pushViewController(disputeVC, animated: true)
         }
     }
@@ -199,10 +203,38 @@ extension ProviderDetailsViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ServiceCell")
+            ?? UITableViewCell(style: .subtitle, reuseIdentifier: "ServiceCell")
+
         if let service = viewModel?.services[indexPath.row] {
             cell.textLabel?.text = service.title
-            cell.detailTextLabel?.text = "$\(service.price)"
+            let priceText = String(format: "%.2f BHD", service.price)
+            let descriptionText = service.description.trimmingCharacters(in: .whitespacesAndNewlines)
+            if descriptionText.isEmpty {
+                cell.detailTextLabel?.text = priceText
+            } else {
+                cell.detailTextLabel?.text = "\(priceText) • \(descriptionText)"
+            }
+            cell.detailTextLabel?.numberOfLines = 2
+            cell.selectionStyle = .none
+            cell.imageView?.image = UIImage(systemName: "photo")
+            cell.imageView?.tintColor = .systemGray3
+            cell.imageView?.contentMode = .scaleAspectFill
+            cell.imageView?.clipsToBounds = true
+
+            cell.tag = indexPath.row
+            if let urlString = service.coverImageUrl,
+               let url = URL(string: urlString) {
+                URLSession.shared.dataTask(with: url) { data, _, _ in
+                    guard let data = data, let image = UIImage(data: data) else { return }
+                    DispatchQueue.main.async {
+                        if cell.tag == indexPath.row {
+                            cell.imageView?.image = image
+                            cell.setNeedsLayout()
+                        }
+                    }
+                }.resume()
+            }
         }
         return cell
     }

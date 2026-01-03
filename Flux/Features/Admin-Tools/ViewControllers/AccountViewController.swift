@@ -57,7 +57,7 @@ class AccountViewController: UIViewController {
                     self?.populate(with: u)
                     self?.loadReportsForUser()
                 case .failure(let error):
-                    print("❌ Fetch user error:", error.localizedDescription)
+                    print("Fetch user error:", error.localizedDescription)
                 }
             }
         }
@@ -81,7 +81,7 @@ class AccountViewController: UIViewController {
                         // Prefer the report `reason` field; fall back to `description`.
                         let reasonText = (first.reason.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? first.description : first.reason)
                         if reasonText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                            // No reason/description provided — show placeholder
+                            // No reason/description provided - show placeholder
                             self?.suspendOrBanReason?.text = self?.reasonPlaceholder
                             self?.suspendOrBanReason?.textColor = .secondaryLabel
                         } else {
@@ -95,7 +95,7 @@ class AccountViewController: UIViewController {
                         }
                     }
                 case .failure(let error):
-                    print("❌ Fetch reports for user error:", error.localizedDescription)
+                    print("Fetch reports for user error:", error.localizedDescription)
                     if let tv = self?.suspendOrBanReason {
                         tv.text = self?.reasonPlaceholder
                         tv.textColor = .secondaryLabel
@@ -109,7 +109,7 @@ class AccountViewController: UIViewController {
         // Prefer computed `name`, fall back to first/last or displayName, then a placeholder.
         // Warn if outlets are not connected to help debugging nil unwrap crashes.
         if nameLabel == nil || usernameLabel == nil || suspendOrBanReason == nil {
-            print("⚠️ AccountViewController: one or more IBOutlets are not connected.")
+            print("AccountViewController: one or more IBOutlets are not connected.")
         }
 
         let fullName = user.name.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -209,7 +209,7 @@ class AccountViewController: UIViewController {
                         sender.isEnabled = true
                         sender.setTitle("Suspend", for: .normal)
                         if let error = error {
-                            print("❌ Unsuspend user error:", error.localizedDescription)
+                            print("Unsuspend user error:", error.localizedDescription)
                             self?.showAlert(title: "Error", message: "Failed to unsuspend user.")
                         } else {
                             print("User unsuspended")
@@ -223,7 +223,7 @@ class AccountViewController: UIViewController {
             return
         }
 
-        // Normal suspend flow — suspend for 7 days and ensure ban is cleared
+        // Normal suspend flow - suspend for 7 days and ensure ban is cleared
         showConfirmation(
             title: "Suspend User",
             message: "Are you sure you want to suspend this user?\n\nReason:\n\(reason)"
@@ -239,7 +239,7 @@ class AccountViewController: UIViewController {
                     sender.isEnabled = true
                     sender.setTitle("Suspend", for: .normal)
                     if let error = error {
-                        print("❌ Suspend user error:", error.localizedDescription)
+                        print("Suspend user error:", error.localizedDescription)
                         self?.showAlert(title: "Error", message: "Failed to suspend user.")
                     } else {
                         print("User suspended for 7 days")
@@ -270,7 +270,7 @@ class AccountViewController: UIViewController {
                         sender.isEnabled = true
                         sender.setTitle("Ban", for: .normal)
                         if let error = error {
-                            print("❌ Unban user error:", error.localizedDescription)
+                            print("Unban user error:", error.localizedDescription)
                             self?.showAlert(title: "Error", message: "Failed to unban user.")
                         } else {
                             print("User unbanned")
@@ -284,7 +284,7 @@ class AccountViewController: UIViewController {
             return
         }
 
-        // Normal ban flow — make ban exclusive and clear suspension
+        // Normal ban flow - make ban exclusive and clear suspension
         showConfirmation(
             title: "Ban User",
             message: "This action is permanent. Continue?\n\nReason:\n\(reason)"
@@ -299,7 +299,7 @@ class AccountViewController: UIViewController {
                     sender.isEnabled = true
                     sender.setTitle("Ban", for: .normal)
                     if let error = error {
-                        print("❌ Ban user error:", error.localizedDescription)
+                        print("Ban user error:", error.localizedDescription)
                         self?.showAlert(title: "Error", message: "Failed to ban user.")
                     } else {
                         print("User banned")

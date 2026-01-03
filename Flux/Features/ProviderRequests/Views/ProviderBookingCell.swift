@@ -1,6 +1,13 @@
 import UIKit
+import CoreLocation
 
 class ProviderBookingCell: UITableViewCell {
+    
+    enum CellMode {
+        case request
+        case upcoming
+        case completed
+    }
     
     // MARK: - Outlets
     
@@ -32,9 +39,10 @@ class ProviderBookingCell: UITableViewCell {
 
     // MARK: - Configuration
     
-    func configure(with booking: Booking, showActions: Bool) {
+    func configure(with booking: Booking, mode: CellMode) {
         titleLabel.text = "\(booking.serviceTitle)"
         
+        // Handle date formatting carefully to avoid crashes if date is missing (though model says non-optional)
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .short
@@ -42,7 +50,25 @@ class ProviderBookingCell: UITableViewCell {
         
         statusLabel.text = booking.status.rawValue.capitalized
         
-        actionStackView.isHidden = !showActions
+        switch mode {
+        case .request:
+            actionStackView.isHidden = false
+            acceptButton.isHidden = false
+            rejectButton.isHidden = false
+            acceptButton.setTitle("Accept", for: .normal)
+            acceptButton.backgroundColor = .systemGreen
+            rejectButton.setTitle("Reject", for: .normal)
+            
+        case .upcoming:
+            actionStackView.isHidden = false
+            acceptButton.isHidden = false
+            rejectButton.isHidden = true
+            acceptButton.setTitle("Completed", for: .normal)
+            acceptButton.backgroundColor = .systemBlue
+            
+        case .completed:
+            actionStackView.isHidden = true
+        }
     }
     
     // MARK: - Actions

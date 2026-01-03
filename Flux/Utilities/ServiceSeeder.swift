@@ -164,14 +164,14 @@ class ServiceSeeder {
             ]
         ]
         
-        print("🚀 Starting Upload of 10 Services...")
+        print("Starting Upload of 10 Services...")
         
         for (index, serviceData) in services.enumerated() {
             collection.addDocument(data: serviceData) { error in
                 if let error = error {
-                    print("❌ Error uploading item \(index + 1): \(error.localizedDescription)")
+                    print("Error uploading item \(index + 1): \(error.localizedDescription)")
                 } else {
-                    print("✅ Successfully uploaded item \(index + 1): \(serviceData["title"] ?? "")")
+                    print("Successfully uploaded item \(index + 1): \(serviceData["title"] ?? "")")
                 }
             }
         }

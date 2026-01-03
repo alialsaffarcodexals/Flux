@@ -2,15 +2,15 @@ import UIKit
 
 class AppNavigator {
     
-    // النسخة الموحدة (Singleton) لاستخدامها في التطبيق
+    //   (Singleton)   
     static let shared = AppNavigator()
     
     private init() {}
     
     // MARK: - Main Navigation Function
-    /// هذه الدالة تقرر أين يذهب المستخدم بناءً على دوره
+    ///         
     func navigateToRoleBasedHome(role: String) {
-        print("🧭 Navigating based on role: \(role)")
+        print("Navigating based on role: \(role)")
         
         switch role {
         case "Seeker":
@@ -18,7 +18,7 @@ class AppNavigator {
         case "Provider":
             navigateToProviderProfile()
         case "Admin":
-            // إذا كان لديك لوحة تحكم للأدمن
+            //      
              navigateToHome()
         default:
             navigateToHome()
@@ -27,41 +27,41 @@ class AppNavigator {
     
     // MARK: - Private Navigations
     
-    // 1. الانتقال إلى بروفايل الباحث
+    // 1.    
     private func navigateToSeekerProfile() {
         let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
-        // تأكد أن Storyboard ID هو "SeekerProfileViewController"
+        //   Storyboard ID  "SeekerProfileViewController"
         if let vc = storyboard.instantiateViewController(withIdentifier: "SeekerProfileViewController") as? SeekerProfileViewController {
             setRoot(viewController: vc)
         } else {
-            print("🔴 Error: SeekerProfileViewController ID not found.")
+            print("Error: SeekerProfileViewController ID not found.")
         }
     }
     
-    // 2. الانتقال إلى بروفايل المزود
+    // 2.    
     private func navigateToProviderProfile() {
         let storyboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
-        // تأكد أن Storyboard ID هو "ProviderMainProfileVC"
+        //   Storyboard ID  "ProviderMainProfileVC"
         if let vc = storyboard.instantiateViewController(withIdentifier: "ProviderMainProfileVC") as? ProviderMainProfileVC {
             setRoot(viewController: vc)
         } else {
-            print("🔴 Error: ProviderMainProfileVC ID not found.")
+            print("Error: ProviderMainProfileVC ID not found.")
         }
     }
     
-    // 3. الانتقال إلى الرئيسية العامة (الافتراضي)
+    // 3.     ()
     private func navigateToHome() {
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
-        // تأكد أن Storyboard ID هو "HomeFeedViewController"
+        //   Storyboard ID  "HomeFeedViewController"
         if let vc = storyboard.instantiateViewController(withIdentifier: "HomeFeedViewController") as? HomeFeedViewController {
             setRoot(viewController: vc)
         } else {
-            print("🔴 Error: HomeFeedViewController ID not found.")
+            print("Error: HomeFeedViewController ID not found.")
         }
     }
     
     // MARK: - Helper Function to Change Root
-    // هذه الدالة تقوم باستبدال الشاشة الحالية بالكامل (بدون زر رجوع)
+    //        (  )
     private func setRoot(viewController: UIViewController) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else {
@@ -71,7 +71,7 @@ class AppNavigator {
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         
-        // تأثير حركي جميل عند الانتقال
+        //     
         UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromRight, animations: nil, completion: nil)
     }
 }

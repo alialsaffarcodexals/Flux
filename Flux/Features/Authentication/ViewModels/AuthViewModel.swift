@@ -28,24 +28,65 @@ class AuthViewModel {
         
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success, error in
             
-            // Ensure loading is hidden on return
-            defer { self?.onLoading?(false) }
-            
             if let error = error {
+                self?.onLoading?(false)
                 let friendlyMessage = self?.getErrorMessage(from: error) ?? "An unknown error occurred."
                 completion(false, friendlyMessage, nil)
             } else {
                 guard let uid = Auth.auth().currentUser?.uid else {
+                    self?.onLoading?(false)
                     completion(false, "User ID not found.", nil)
                     return
                 }
                 
                 UserRepository.shared.getUser(uid: uid) { result in
+                    // Ensure loading is hidden regardless of outcome
+                    defer { self?.onLoading?(false) }
+                    
                     switch result {
                     case .success(let user):
+                        // Check for Ban
+                        if let isBanned = user.isBanned, isBanned {
+                            do { try Auth.auth().signOut() } catch {}
+                            let reason = user.moderationReason ?? "Violation of terms."
+                            completion(false, "Your account has been permanently banned.\nReason: \(reason)", nil)
+                            return
+                        }
+                        
+                        // Check for Suspension
+                        if let isSuspended = user.isSuspended, isSuspended {
+                            if let suspendedUntil = user.suspendedUntil {
+                                if Date() < suspendedUntil {
+                                    do { try Auth.auth().signOut() } catch {}
+                                    let formatter = DateFormatter()
+                                    formatter.dateStyle = .medium
+                                    formatter.timeStyle = .short
+                                    let dateString = formatter.string(from: suspendedUntil)
+                                    let reason = user.moderationReason ?? "Violation of terms."
+                                    completion(false, "Your account is temporarily suspended until \(dateString).\nReason: \(reason)", nil)
+                                    return
+                                } else {
+                                    // Suspension expired, strictly speaking we should probably update the DB here to clear flags,
+                                    // but for login obstruction purposes, we can let them in (or strictly block until admin clears it).
+                                    // The prompt says "prevent him for login until the suppned is gone". Auto-expiry implies we can let them in.
+                                    // Optionally we could fire a background task to clear the flag.
+                                }
+                            } else {
+                                // Suspended indefinitely or no date set
+                                do { try Auth.auth().signOut() } catch {}
+                                let reason = user.moderationReason ?? "Violation of terms."
+                                completion(false, "Your account is suspended.\nReason: \(reason)", nil)
+                                return
+                            }
+                        }
+                        
                         completion(true, nil, user)
+                        
                     case .failure(let error):
                         print("Error fetching user data: \(error.localizedDescription)")
+                        // Sign out if we can't get the profile to verify status, to be safe?
+                        // Or just fail login.
+                        do { try Auth.auth().signOut() } catch {}
                         completion(false, "Failed to retrieve user profile.", nil)
                     }
                 }
@@ -103,7 +144,7 @@ class AuthViewModel {
                     case .success(let user):
                         completion(true, nil, user)
                     case .failure(let error):
-                        print("⚠️ User created but fetch failed: \(error)")
+                        print("User created but fetch failed: \(error)")
                         completion(false, "Failed to load user profile.", nil)
                     }
                 }
@@ -118,7 +159,7 @@ class AuthViewModel {
     /// - Returns: A string describing the error in a friendly manner.
     private func getErrorMessage(from error: Error) -> String {
         let nsError = error as NSError
-        print("🔴 Firebase Error Code: \(nsError.code)")
+        print("Firebase Error Code: \(nsError.code)")
         
         guard let errorCode = AuthErrorCode(rawValue: nsError.code) else {
             return error.localizedDescription

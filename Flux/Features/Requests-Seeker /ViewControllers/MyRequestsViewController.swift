@@ -301,17 +301,17 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     func fetchBookings() {
         guard let currentUser = Auth.auth().currentUser else {
-            print("🕵️ ERROR: No user is logged in!")
+            print("ERROR: No user is logged in!")
             return
         }
         
         let seekerId = currentUser.uid
-        print("🕵️ I am searching for bookings with Seeker ID: \(seekerId)")
+        print("I am searching for bookings with Seeker ID: \(seekerId)")
         
         BookingRepository.shared.fetchBookingsForSeeker(seekerId: seekerId, status: nil) { result in
             switch result {
             case .success(let bookings):
-                print("🕵️ SUCCESS: Found \(bookings.count) bookings in Firestore.")
+                print("SUCCESS: Found \(bookings.count) bookings in Firestore.")
                 
                 // Clear all lists
                 self.allPendingBookings.removeAll()
@@ -320,7 +320,7 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 // Sort into Master lists
                 for booking in bookings {
-                    print("   - Found Booking: \(booking.serviceTitle) | Status: \(booking.status.rawValue)")
+                    print("- Found Booking: \(booking.serviceTitle) | Status: \(booking.status.rawValue)")
                     
                     switch booking.status {
                     case .pending, .requested:
@@ -341,14 +341,14 @@ class MyRequestsViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
                 
             case .failure(let error):
-                print("🕵️ FAILURE: Error fetching bookings: \(error)")
+                print("FAILURE: Error fetching bookings: \(error)")
             }
         }
     }
     
     // MARK: - navigation for sccesse
         @IBAction func unwindToRequests(segue: UIStoryboardSegue) {
-            print("✅ Success! Returned to Request List.")
+            print("Success! Returned to Request List.")
             
             // Refresh data so the button turns Blue
             fetchBookings()

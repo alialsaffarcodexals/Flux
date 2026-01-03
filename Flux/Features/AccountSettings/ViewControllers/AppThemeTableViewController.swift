@@ -8,7 +8,7 @@ class AppThemeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "App Theme"
-        print("🎨 AppThemeTableViewController loaded")
+        print("AppThemeTableViewController loaded")
         
         // Apply initial fonts
         settingsManager.applyFonts(to: self.view)
@@ -27,7 +27,7 @@ class AppThemeTableViewController: UITableViewController {
     }
     
     @objc private func fontSizeDidChange() {
-        print("✅ AppThemeTableViewController received fontSizeDidChange notification")
+        print("AppThemeTableViewController received fontSizeDidChange notification")
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.settingsManager.applyFonts(to: self.view)
@@ -58,7 +58,7 @@ class AppThemeTableViewController: UITableViewController {
         // Update checkmarks
         updateCheckmarks()
         
-        print("🎨 User selected theme: \(selectedTheme.rawValue)")
+        print("User selected theme: \(selectedTheme.rawValue)")
     }
     
     private func updateCheckmarks() {

@@ -23,10 +23,18 @@ class ProviderMainProfileVC: UIViewController {
     @IBOutlet weak var skillTagMoreButton: UIButton?
     
     @IBOutlet weak var editPortfolioButton: UIButton!
+    @IBOutlet weak var portfolioCollectionView: UICollectionView!
+    @IBOutlet weak var emptyPortfolioLabel: UILabel!
+    
+    @IBOutlet weak var servicePackagesCollectionView: UICollectionView!
+    @IBOutlet weak var emptyServicesLabel: UILabel!
     
     // Properties
     private var viewModel = ProviderProfileViewModel()
     private var skills: [Skill] = []
+    private var portfolioProjects: [PortfolioProject] = []
+    private var servicePackages: [ServicePackage] = []
+    
     private var emptySkillsLabel: UILabel?
     // Keep original full titles for truncation/restore
     private var originalTagTitles: [ObjectIdentifier: String] = [:]
@@ -38,7 +46,7 @@ class ProviderMainProfileVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 🧹 Clear labels to prevent dummy text
+        //  Clear labels to prevent dummy text
         nameLabel.text = ""
         bioLabel.text = ""
         locationLabel.text = ""
@@ -47,6 +55,17 @@ class ProviderMainProfileVC: UIViewController {
         setupBindings()
         resetSkillTagUI()
         removeWidthConstraints()
+        
+        // Setup Portfolio Collection View
+        portfolioCollectionView.delegate = self
+        portfolioCollectionView.dataSource = self
+        portfolioCollectionView.allowsSelection = false
+        
+        // Setup Service Packages Collection View
+        servicePackagesCollectionView.delegate = self
+        servicePackagesCollectionView.dataSource = self
+        servicePackagesCollectionView.allowsSelection = false
+        
         // Fetch fresh data on load
         viewModel.fetchUserProfile()
     }
@@ -80,19 +99,19 @@ class ProviderMainProfileVC: UIViewController {
     func setupBindings() {
         viewModel.onUserDataUpdated = { [weak self] user in
             DispatchQueue.main.async {
-                // 🏢 Logic: Show Business Name. Fallback to full name if empty.
+                //  Logic: Show Business Name. Fallback to full name if empty.
                 self?.nameLabel.text = user.businessName?.isEmpty == false ? user.businessName : user.name
                 
-                // 📝 Show Bio
+                //  Show Bio
                 self?.bioLabel.text = user.bio ?? "No bio available."
                 
-                // 📍 Show Location (Shared Source)
+                //  Show Location (Shared Source)
                 self?.locationLabel.text = user.location
                 
                 // Safety: Optional chain phoneLabel in case it's not connected
                 self?.phoneLabel?.text = user.phoneNumber ?? "Not set"
                 
-                // ✅ Display Provider profile image
+                //  Display Provider profile image
                 // Only load image if URL exists and is not empty - otherwise keep storyboard placeholder
                 if let imageURL = user.providerProfileImageURL,
                    !imageURL.isEmpty,
@@ -118,6 +137,20 @@ class ProviderMainProfileVC: UIViewController {
             }
         }
         
+        viewModel.onPortfolioUpdated = { [weak self] projects in
+            DispatchQueue.main.async {
+                self?.portfolioProjects = projects
+                self?.updatePortfolioUI()
+            }
+        }
+        
+        viewModel.onServicePackagesUpdated = { [weak self] packages in
+            DispatchQueue.main.async {
+                self?.servicePackages = packages
+                self?.updateServicePackagesUI()
+            }
+        }
+        
         viewModel.onError = {  error in
             print("Error: \(error)")
         }
@@ -132,26 +165,25 @@ class ProviderMainProfileVC: UIViewController {
             }
         }
         
-//        viewModel.onSwitchToBuyer = { [weak self] updatedUser in
-//            DispatchQueue.main.async {
-//                self?.navigateToSeekerProfile()
-//            }
-//        }
+        viewModel.onSwitchToBuyer = { updatedUser in
+            DispatchQueue.main.async {
+                AppNavigator.shared.navigate(user: updatedUser, destinationTab: 3)
+            }
+        }
     }
     
     // MARK: - Actions
     @IBAction func seekerProfileTapped(_ sender: UIButton) {
-        // viewModel.didTapServiceSeekerProfile()
-        navigateToSeekerProfile()
+        viewModel.didTapServiceSeekerProfile()
     }
     
     @IBAction func settingsTapped(_ sender: Any) {
-        print("⚙️ Settings Tapped in Provider Profile")
+        print("Settings Tapped in Provider Profile")
         
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         
         guard let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController else {
-            print("🔴 Error: Could not find 'SettingsViewController' in Settings.storyboard")
+            print("Error: Could not find 'SettingsViewController' in Settings.storyboard")
             return
         }
         
@@ -161,12 +193,12 @@ class ProviderMainProfileVC: UIViewController {
     
     @IBAction func editPortfolioTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Portfolio", bundle: nil)
-
+        
         guard let portfolioVC = storyboard.instantiateViewController(withIdentifier: "PortfolioVC") as? PortfolioListViewController else {
             assertionFailure("PortfolioVC in Portfolio.storyboard is not PortfolioListViewController. Check storyboard Class/Module.")
             return
         }
-
+        
         navigationController?.pushViewController(portfolioVC, animated: true)
     }
     
@@ -175,11 +207,11 @@ class ProviderMainProfileVC: UIViewController {
         if let vc = AppNavigator.shared.getServicePackagesListViewController() {
             navigationController?.pushViewController(vc, animated: true)
         } else {
-            print("🔴 Error: Could not instantiate ServicePackagesListViewController via AppNavigator")
+            print("Error: Could not instantiate ServicePackagesListViewController via AppNavigator")
         }
     }
     
-    // ✅ Edit Provider Profile Picture Action
+    //  Edit Provider Profile Picture Action
     @IBAction func editProviderProfilePictureTapped(_ sender: UIButton) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -187,18 +219,20 @@ class ProviderMainProfileVC: UIViewController {
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true)
     }
-
+    
     
     // MARK: - Navigation Logic
     private func navigateToSeekerProfile() {
         if let tabBarController = self.tabBarController as? MainTabBarController {
-             tabBarController.switchRole(to: .seeker)
+            tabBarController.switchRole(to: .seeker)
         }
     }
     
     private func refreshSkills() {
         guard let providerId = Auth.auth().currentUser?.uid else { return }
         viewModel.fetchSkills(providerId: providerId)
+        viewModel.fetchPortfolio(providerId: providerId)
+        viewModel.fetchServicePackages(providerId: providerId)
     }
     
     private func updateSkillTags() {
@@ -207,6 +241,30 @@ class ProviderMainProfileVC: UIViewController {
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         
         applySkillTags(skillNames: verifiedSkills.map { $0.name })
+    }
+    
+    private func updatePortfolioUI() {
+        if portfolioProjects.isEmpty {
+            portfolioCollectionView.isHidden = true
+            emptyPortfolioLabel.isHidden = false
+            emptyPortfolioLabel.text = "No projects available" 
+        } else {
+            portfolioCollectionView.isHidden = false
+            emptyPortfolioLabel.isHidden = true
+            portfolioCollectionView.reloadData()
+        }
+    }
+    
+    private func updateServicePackagesUI() {
+        if servicePackages.isEmpty {
+            servicePackagesCollectionView.isHidden = true
+            emptyServicesLabel.isHidden = false
+            emptyServicesLabel.text = "No services available"
+        } else {
+            servicePackagesCollectionView.isHidden = false
+            emptyServicesLabel.isHidden = true
+            servicePackagesCollectionView.reloadData()
+        }
     }
     
     private func resetSkillTagUI() {
@@ -451,13 +509,13 @@ extension ProviderMainProfileVC: UIImagePickerControllerDelegate, UINavigationCo
         picker.dismiss(animated: true)
         
         if let editedImage = info[.editedImage] as? UIImage {
-            print("📸 Image selected for Provider profile")
+            print("Image selected for Provider profile")
             // Optimistic UI update
             profileImageView.image = editedImage
             // Upload and save
             viewModel.updateProviderProfileImage(image: editedImage)
         } else if let originalImage = info[.originalImage] as? UIImage {
-            print("📸 Image selected for Provider profile")
+            print("Image selected for Provider profile")
             // Optimistic UI update
             profileImageView.image = originalImage
             // Upload and save
@@ -467,5 +525,84 @@ extension ProviderMainProfileVC: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
+    }
+}
+
+// MARK: - UICollectionViewDataSource & Delegate
+extension ProviderMainProfileVC: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == portfolioCollectionView {
+            return portfolioProjects.count
+        } else if collectionView == servicePackagesCollectionView {
+            return servicePackages.count
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if collectionView == portfolioCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ServiceCell", for: indexPath) as? ServiceCardCell else {
+                return UICollectionViewCell()
+            }
+            
+            let project = portfolioProjects[indexPath.item]
+            
+            // Configure for Portfolio (Image only)
+            cell.titleLabel.text = ""
+            cell.titleLabel.isHidden = true
+            cell.mainImageView.image = UIImage(systemName: "photo") // Placeholder
+            cell.mainImageView.tintColor = .systemGray4
+            cell.mainImageView.contentMode = .scaleAspectFill
+            cell.mainImageView.clipsToBounds = true
+            
+            if let firstURL = project.imageURLs.first, let url = URL(string: firstURL) {
+                // Async Load
+                DispatchQueue.global().async {
+                    if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            cell.mainImageView.image = image
+                        }
+                    }
+                }
+            }
+            
+            return cell
+            
+        } else if collectionView == servicePackagesCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ServiceCell", for: indexPath) as? ServiceCardCell else {
+                return UICollectionViewCell()
+            }
+            
+            let package = servicePackages[indexPath.item]
+            
+            // Configure for Service Package
+            cell.titleLabel.text = package.title
+            cell.titleLabel.isHidden = false
+            
+            // Placeholder Image
+            cell.mainImageView.image = UIImage(systemName: "doc.text.image")
+            cell.mainImageView.tintColor = .systemBlue
+            cell.mainImageView.contentMode = .scaleAspectFill
+            cell.mainImageView.clipsToBounds = true
+            
+            if let coverUrl = package.coverImageUrl, let url = URL(string: coverUrl) {
+                // Async Load
+                DispatchQueue.global().async {
+                    if let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            cell.mainImageView.image = image
+                        }
+                    }
+                }
+            } else {
+                 // Try to use category icon as fallback if no cover image
+                 // For now just keep placeholder
+            }
+            
+            return cell
+        }
+        
+        return UICollectionViewCell()
     }
 }

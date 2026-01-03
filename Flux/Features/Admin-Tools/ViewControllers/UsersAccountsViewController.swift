@@ -16,7 +16,7 @@ class UsersAccountsViewController: UIViewController {
         super.viewDidLoad()
 
         guard tableView != nil else {
-            print("⚠️ UsersAccountsViewController: tableView outlet is not connected.")
+            print("UsersAccountsViewController: tableView outlet is not connected.")
             return
         }
 
@@ -40,7 +40,7 @@ class UsersAccountsViewController: UIViewController {
 
     private func fetchUsers() {
         guard let vm = viewModel else {
-            print("⚠️ UsersAccountsViewController: viewModel is nil, cannot fetch users")
+            print("UsersAccountsViewController: viewModel is nil, cannot fetch users")
             return
         }
 
@@ -52,7 +52,7 @@ class UsersAccountsViewController: UIViewController {
                     self?.users = data
                     self?.tableView.reloadData()
                 case .failure(let error):
-                    print("❌ Fetch users error:", error.localizedDescription)
+                    print("Fetch users error:", error.localizedDescription)
                 }
             }
         }
