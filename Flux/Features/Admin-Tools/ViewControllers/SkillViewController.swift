@@ -17,6 +17,9 @@ class SkillViewController: UIViewController {
     
     @IBOutlet var SkillDescription: UILabel!
     
+    @IBOutlet weak var ProofPhoto: UIImageView!
+    @IBOutlet weak var DownloadProof: UIButton!
+    
     var skillID: String?
     var skill: Skill?
     var viewModel: AdminToolsViewModel?
@@ -101,6 +104,18 @@ class SkillViewController: UIViewController {
 
         // Show the skill description if available
         SkillDescription.text = skill.description ?? "No description provided."
+        
+        // Load and display proof image
+        if let urlString = skill.proofImageURL, !urlString.isEmpty, let url = URL(string: urlString) {
+            DownloadProof?.isEnabled = true
+            DownloadProof?.setTitle("Download Proof", for: .normal)
+            setImage(from: urlString, into: ProofPhoto, size: imageDisplaySize)
+        } else {
+            DownloadProof?.isEnabled = false
+            DownloadProof?.setTitle("No Proof", for: .normal)
+            ProofPhoto?.image = UIImage(named: "defaultPhoto") ?? UIImage(named: "placeholder")
+            ProofPhoto?.contentMode = .scaleAspectFit
+        }
 
         view.layoutIfNeeded()
     }
@@ -258,9 +273,112 @@ class SkillViewController: UIViewController {
     }
 
     @IBAction func downloadFileTapped(_ sender: UIButton) {
-        // Proof files have been removed from the skill UI.
-        let a = UIAlertController(title: "Removed", message: "Proof files are no longer attached to skills.", preferredStyle: .alert)
-        a.addAction(UIAlertAction(title: "OK", style: .default))
-        present(a, animated: true)
+        guard let skillId = skill?.id else {
+            let a = UIAlertController(title: "Error", message: "Skill ID not available", preferredStyle: .alert)
+            a.addAction(UIAlertAction(title: "OK", style: .default))
+            present(a, animated: true)
+            return
+        }
+        
+        sender.isEnabled = false
+        let loading = UIAlertController(title: nil, message: "Preparing download...", preferredStyle: .alert)
+        present(loading, animated: true)
+        
+        // Fetch latest skill data from Firebase
+        viewModel?.fetchSkill(by: skillId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let freshSkill):
+                    guard let urlString = freshSkill.proofImageURL, !urlString.isEmpty else {
+                        loading.dismiss(animated: true) {
+                            sender.isEnabled = true
+                            let a = UIAlertController(title: "No file", message: "No proof file available for this skill.", preferredStyle: .alert)
+                            a.addAction(UIAlertAction(title: "OK", style: .default))
+                            self?.present(a, animated: true)
+                        }
+                        return
+                    }
+                    
+                    print("🔍 Debug: Fetched URL from Firebase: \(urlString)")
+                    
+                    guard let validURL = URL(string: urlString) else {
+                        loading.dismiss(animated: true) {
+                            sender.isEnabled = true
+                            print("❌ Failed to create URL from: \(urlString)")
+                            let a = UIAlertController(title: "Error", message: "Invalid file URL", preferredStyle: .alert)
+                            a.addAction(UIAlertAction(title: "OK", style: .default))
+                            self?.present(a, animated: true)
+                        }
+                        return
+                    }
+                    
+                    print("✅ Valid URL created: \(validURL.absoluteString)")
+                    
+                    loading.message = "Downloading…"
+                    
+                    print("🚀 Starting download task...")
+                    let task = URLSession.shared.downloadTask(with: validURL) { localURL, response, error in
+                        print("📥 Download callback triggered")
+                        print("   - localURL: \(String(describing: localURL))")
+                        print("   - response: \(String(describing: response))")
+                        print("   - error: \(String(describing: error))")
+                        
+                        DispatchQueue.main.async {
+                            loading.dismiss(animated: true) {
+                                sender.isEnabled = true
+                                if let error = error {
+                                    print("❌ Download error: \(error.localizedDescription)")
+                                    let a = UIAlertController(title: "Download failed", message: error.localizedDescription, preferredStyle: .alert)
+                                    a.addAction(UIAlertAction(title: "OK", style: .default))
+                                    self?.present(a, animated: true)
+                                    return
+                                }
+
+                                guard let localURL = localURL else {
+                                    print("❌ No local URL returned")
+                                    let a = UIAlertController(title: "Download failed", message: "No file returned.", preferredStyle: .alert)
+                                    a.addAction(UIAlertAction(title: "OK", style: .default))
+                                    self?.present(a, animated: true)
+                                    return
+                                }
+                                
+                                print("✅ File downloaded to: \(localURL.path)")
+
+                                // Move to a temporary file with the original filename if possible
+                                let fileName = validURL.lastPathComponent.isEmpty ? "prooffile" : validURL.lastPathComponent
+                                let tmpDir = FileManager.default.temporaryDirectory
+                                let destURL = tmpDir.appendingPathComponent(fileName)
+                                
+                                print("📂 Moving file to: \(destURL.path)")
+                                
+                                try? FileManager.default.removeItem(at: destURL)
+                                do {
+                                    try FileManager.default.moveItem(at: localURL, to: destURL)
+                                    print("✅ File moved successfully")
+                                } catch {
+                                    print("⚠️ moveItem failed:", error.localizedDescription)
+                                }
+
+                                // Present share sheet so user can save or open the file
+                                print("📤 Presenting share sheet")
+                                let activity = UIActivityViewController(activityItems: [destURL], applicationActivities: nil)
+                                activity.popoverPresentationController?.sourceView = sender
+                                self?.present(activity, animated: true)
+                            }
+                        }
+                    }
+                    task.resume()
+                    
+                case .failure(let error):
+                    loading.dismiss(animated: true) {
+                        sender.isEnabled = true
+                        print("❌ Failed to fetch skill: \(error.localizedDescription)")
+                        let a = UIAlertController(title: "Error", message: "Failed to fetch skill data", preferredStyle: .alert)
+                        a.addAction(UIAlertAction(title: "OK", style: .default))
+                        self?.present(a, animated: true)
+                    }
+                }
+            }
+        }
     }
 }

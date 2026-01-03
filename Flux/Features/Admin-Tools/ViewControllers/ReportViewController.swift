@@ -12,6 +12,9 @@ class ReportViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var reviewedButtonHeight: NSLayoutConstraint!
     @IBOutlet weak var alterButtonHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var EvidencePhoto: UIImageView!
+    @IBOutlet weak var DownloadEvidence: UIButton!
+    
     var reportID: String?
     var report: Report?
     var viewModel: AdminToolsViewModel?
@@ -165,6 +168,18 @@ class ReportViewController: UIViewController, UITextViewDelegate {
             reportAnswer?.textColor = .black
         }
 
+        // Load and display evidence image
+        if let urlString = report.evidenceImageURL, !urlString.isEmpty, let url = URL(string: urlString) {
+            DownloadEvidence?.isEnabled = true
+            DownloadEvidence?.setTitle("Download Evidence", for: .normal)
+            loadImage(from: url, into: EvidencePhoto)
+        } else {
+            DownloadEvidence?.isEnabled = false
+            DownloadEvidence?.setTitle("No Evidence", for: .normal)
+            EvidencePhoto?.image = UIImage(named: "defaultPhoto") ?? UIImage(named: "placeholder")
+            EvidencePhoto?.contentMode = .scaleAspectFit
+        }
+
         // Make text view editable only when report is open
         let status = report.status.lowercased()
         reportAnswer?.isEditable = (status == "open")
@@ -258,5 +273,113 @@ class ReportViewController: UIViewController, UITextViewDelegate {
 
     private func populateIfNeeded() {
         if let r = report { populate(with: r) }
+    }
+    
+    private func loadImage(from url: URL, into imageView: UIImageView?) {
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil, let image = UIImage(data: data) else {
+                DispatchQueue.main.async {
+                    imageView?.image = UIImage(named: "defaultPhoto") ?? UIImage(named: "placeholder")
+                    imageView?.contentMode = .scaleAspectFit
+                }
+                return
+            }
+            DispatchQueue.main.async {
+                imageView?.image = image
+                imageView?.contentMode = .scaleAspectFill
+            }
+        }.resume()
+    }
+    
+    @IBAction func downloadEvidenceTapped(_ sender: Any) {
+        guard let reportId = report?.id else {
+            presentError(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Report ID not available"]))
+            return
+        }
+        
+        DownloadEvidence?.isEnabled = false
+        let loading = UIAlertController(title: nil, message: "Preparing download...", preferredStyle: .alert)
+        present(loading, animated: true)
+        
+        // Fetch latest report data from Firebase
+        viewModel?.fetchReport(by: reportId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let freshReport):
+                    guard let urlString = freshReport.evidenceImageURL, !urlString.isEmpty else {
+                        loading.dismiss(animated: true) {
+                            self?.DownloadEvidence?.isEnabled = true
+                            self?.presentError(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No evidence file available"]))
+                        }
+                        return
+                    }
+                    
+                    print("🔍 Debug: Fetched URL from Firebase: \(urlString)")
+                    
+                    let cleanedString = urlString.trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    guard let validURL = URL(string: cleanedString) else {
+                        loading.dismiss(animated: true) {
+                            self?.DownloadEvidence?.isEnabled = true
+                            print("❌ Failed to create URL from: \(cleanedString)")
+                            self?.presentError(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Invalid file URL"]))
+                        }
+                        return
+                    }
+                    
+                    print("✅ Valid URL created: \(validURL.absoluteString)")
+                    
+                    loading.message = "Downloading…"
+                    
+                    self?.downloadEvidenceFile(from: validURL, sender: sender, loading: loading)
+                    
+                case .failure(let error):
+                    loading.dismiss(animated: true) {
+                        self?.DownloadEvidence?.isEnabled = true
+                        print("❌ Failed to fetch report: \(error.localizedDescription)")
+                        self?.presentError(error)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func downloadEvidenceFile(from validURL: URL, sender: Any, loading: UIAlertController) {
+        print("🚀 Starting download task...")
+        let task = URLSession.shared.downloadTask(with: validURL) { localURL, response, error in
+            DispatchQueue.main.async {
+                loading.dismiss(animated: true) {
+                    self.DownloadEvidence?.isEnabled = true
+                    if let error = error {
+                        self.presentError(error)
+                        return
+                    }
+
+                    guard let localURL = localURL else {
+                        self.presentError(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Download failed: No file returned"]))
+                        return
+                    }
+
+                    // Move to a temporary file with the original filename if possible
+                    let fileName = validURL.lastPathComponent.isEmpty ? "evidencefile" : validURL.lastPathComponent
+                    let tmpDir = FileManager.default.temporaryDirectory
+                    let destURL = tmpDir.appendingPathComponent(fileName)
+                    try? FileManager.default.removeItem(at: destURL)
+                    do {
+                        try FileManager.default.moveItem(at: localURL, to: destURL)
+                    } catch {
+                        print("⚠️ moveItem failed:", error.localizedDescription)
+                    }
+
+                    // Present share sheet so user can save or open the file
+                    let activity = UIActivityViewController(activityItems: [destURL], applicationActivities: nil)
+                    if let button = sender as? UIButton {
+                        activity.popoverPresentationController?.sourceView = button
+                    }
+                    self.present(activity, animated: true)
+                }
+            }
+        }
+        task.resume()
     }
 }
