@@ -1,272 +1,149 @@
-Markdown
+# Flux
 
-# Flux - Local Skills Exchange Platform (iOS)
+## 📱 App Name
+**Flux**
 
-Welcome to the official repository for **Flux**. This document outlines our project structure, architecture, and team responsibilities. Please read this carefully to ensure we all code in the same direction.
+## 🧩 Description
+Flux is a mobile-first marketplace designed to connect skilled local service providers with clients in need.  
+The app bridges the gap between freelancers and seekers by providing a secure platform for browsing portfolios, booking services, and handling payments, while empowering providers with professional profile management tools.
 
----
-
-## 🏗 Project Architecture: MVVM (Model-View-ViewModel)
-
-To keep our code clean and scalable, we are moving away from standard MVC to **MVVM**. This prevents "Massive View Controllers" and makes testing easier.
-
-### 1. Model (The Data)
-* **Location:** `Flux/Models`
-* **What is it?** Simple Swift `structs` that define our data (e.g., `User`, `Service`).
-* **Rule:** No logic, no UI code. Just data.
-
-### 2. View (The UI)
-* **Location:** `Storyboards` and `ViewControllers` inside `Features`.
-* **What is it?** The visual elements.
-* **Rule:** The ViewController should be "dumb". It only handles UI events (button taps, updating labels). It **never** talks to Firebase directly. It asks the ViewModel to do the work.
-
-### 3. ViewModel (The Brains)
-* **Location:** `ViewModels` inside `Features`.
-* **What is it?** The logic layer.
-* **Rule:** This is where you write functions like `performLogin()`, `fetchServices()`, or `calculateTotal()`. It talks to the **Services** (Backend) and updates the View.
+## 🔗 GitHub Repository
+https://github.com/alialsaffarcodexals/Flux.git
 
 ---
 
-## 📂 Project Directory Structure
+## 👥 Group Members
+- **Ali Alsaffar** (202301152) – Group Leader  
+- **Faisal Alasfoor** (202304774)  
+- **Ali Abdulla** (202300917)  
+- **Ali Najaf** (202304083)  
+- **Mohammed Taher** (202305225)  
+- **Mohamed Alnooh** (202303672)  
 
-We have organized the app by **Feature**, not by file type. This allows every member to work in their own folder without causing conflicts.
+---
 
-```text
-Flux
-├── 📂 App (System Files)
-│   ├── AppDelegate.swift          // App launch lifecycle
-│   ├── SceneDelegate.swift        // Window & Scene management
-│
-├── 📂 Resources (Assets & Config)
-│   ├── Assets.xcassets            // All Images, Colors, and Icons
-│   ├── LaunchScreen.storyboard    // The Splash Screen
-│   ├── Info.plist                 // App Permissions (Camera, Location)
-│   └── GoogleService-Info.plist   // Firebase Configuration File
-│
-├── 📂 Models (Data Layer - Shared by Everyone)
-│   ├── User.swift                 // [All] ID, Role, Name, Bio struct
-│   ├── Service.swift              // [Mohammed Taher] Title, Price, Category
-│   ├── Booking.swift              // [Faisal Alasfoor] Date, Status, IDs
-│   ├── Project.swift              // [Mohamed Alnooh] Portfolio Item struct
-│   ├── Review.swift               // [Mohamed Alnooh] Rating & Comment
-│   ├── Report.swift               // [Ali Abdulla] Dispute details
-│   └── Notification.swift         // [Ali Abdulla] Alert details
-│
-├── 📂 Services (Backend Managers - The "Heavy Lifters")
-│   ├── AuthManager.swift          // Handles Login, Sign Up, Sign Out
-│   ├── FirestoreManager.swift     // General Database Reading/Writing
-│   ├── StorageManager.swift       // Handles Image Uploading to Storage
-│   └── AdminService.swift         // Special Admin-only database functions
-│
-├── 📂 Features (The Main Application Screens)
-│   │
-│   │   // ─── GROUP 1: Identity & Access ───
-│   ├── 📂 Authentication (Feature 1)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Auth.storyboard           // Welcome, Login, Sign Up UI
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── WelcomeViewController.swift
-│   │   │   ├── LoginViewController.swift
-│   │   │   ├── RoleSelectionViewController.swift
-│   │   │   └── SignUpViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── AuthViewModel.swift       // Logic: Calls AuthManager
-│   │
-│   ├── 📂 AccountSettings (Feature 1 Extended)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Settings.storyboard       // Change Email/Pass/Phone UI
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── SettingsMainViewController.swift
-│   │   │   ├── ChangeEmailViewController.swift
-│   │   │   └── ChangePhoneViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── SettingsViewModel.swift
-│   │
-│   │   // ─── GROUP 2: Provider Specifics ───
-│   ├── 📂 ProviderProfile (Feature 2)
-│   │   ├── 📂 Storyboards
-│   │   │   └── ProviderProfile.storyboard // Bio, Stats, Verification Status
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── ProviderMainProfileVC.swift
-│   │   │   ├── ManageSkillsViewController.swift
-│   │   │   └── AddSkillViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── ProviderProfileViewModel.swift
-│   │
-│   ├── 📂 Portfolio (Feature 3)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Portfolio.storyboard      // Grid of previous work
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── PortfolioListViewController.swift
-│   │   │   └── AddProjectViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── PortfolioViewModel.swift
-│   │
-│   │   // ─── GROUP 3: Discovery (Seeker Side) ───
-│   ├── 📂 HomeDiscovery (Feature 9 & 10)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Home.storyboard           // Search, Filters, Smart Recs
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── HomeFeedViewController.swift
-│   │   │   ├── FilterModalViewController.swift
-│   │   │   └── ServiceDetailsViewController.swift // The "Gig" Page
-│   │   └── 📂 ViewModels
-│   │       ├── HomeViewModel.swift
-│   │       └── ServiceDetailsViewModel.swift
-│   │
-│   │   // ─── GROUP 4: Actions & Operations ───
-│   ├── 📂 BookingFlow (Feature 7)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Booking.storyboard        // Calendar & Confirmation
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── RequestBookingViewController.swift
-│   │   │   └── BookingConfirmationVC.swift
-│   │   └── 📂 ViewModels
-│   │       └── BookingViewModel.swift
-│   │
-│   ├── 📂 MyRequests (Feature 4)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Requests.storyboard       // Tabs: Pending, Progress, Done
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── SeekerRequestListVC.swift
-│   │   │   ├── LeaveReviewViewController.swift
-│   │   │   └── ReviewSubmittedViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── RequestListViewModel.swift
-│   │
-│   ├── 📂 Messaging (Feature 8)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Chat.storyboard           // Chat List & Chat Room
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── ChatListViewController.swift
-│   │   │   └── ChatRoomViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── ChatViewModel.swift
-│   │
-│   │   // ─── GROUP 5: User Records & Safety ───
-│   ├── 📂 HistoryAndFavorites (Feature 11)
-│   │   ├── 📂 Storyboards
-│   │   │   └── History.storyboard        // Past bookings list
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── ServiceHistoryViewController.swift
-│   │   │   └── FavoritesViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── HistoryViewModel.swift
-│   │
-│   ├── 📂 SupportCenter (Feature 12)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Dispute.storyboard        // Reporting forms
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── ReportUserViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── ReportViewModel.swift
-│   │
-│   │   // ─── GROUP 6: Administration ───
-│   ├── 📂 AdminDashboard (Feature 5)
-│   │   ├── 📂 Storyboards
-│   │   │   └── Admin.storyboard          // Ban users, Manage Categories
-│   │   ├── 📂 ViewControllers
-│   │   │   ├── AdminHomeViewController.swift
-│   │   │   ├── UserManagementViewController.swift
-│   │   │   └── CategoryManagerViewController.swift
-│   │   └── 📂 ViewModels
-│   │       └── AdminViewModel.swift
-│   │
-│   └── 📂 Notifications (Feature 6)
-│       ├── 📂 Storyboards
-│       │   └── Activity.storyboard       // Notification List
-│       ├── 📂 ViewControllers
-│       │   └── NotificationCenterViewController.swift
-│       └── 📂 ViewModels
-│           └── NotificationViewModel.swift
-│
-└── 📂 Utilities (Helpers - The "Tools")
-    ├── Extensions.swift           // Custom code (e.g., Round Buttons)
-    ├── Constants.swift            // Shared colors, API Keys, Strings
-    └── Validator.swift            // Email/Password validation logic
-👥 Team Assignments & Responsibilities
-Each member owns specific folders. Do not touch another member's folder without communicating first.
+## 🚀 Main Features
 
-👤 Ali Alsaffar (Team Lead)
+### **Feature 1: User Authentication & Dual-Role Management**
+- **Developer:** Ali Alsaffar (202301152)  
+- **Tester:** Faisal Alasfoor (202304774)  
+- **Description:** Secure sign-up and login system that allows users to switch seamlessly between **Seeker** and **Provider** roles within a single account.
 
-Feature 1: User Authentication. Login, Sign Up, Role Selection (Seeker/Provider).
+---
+
+### **Feature 2: Verified Provider Profile & Skills Management**
+- **Developer:** Ali Alsaffar (202301152)  
+- **Tester:** Faisal Alasfoor (202304774)  
+- **Description:** Providers can manage public profiles, add skills, and upload verification documents for admin review.
+
+---
+
+### **Feature 3: Portfolio Project Management**
+- **Developer:** Mohamed Alnooh (202303672)  
+- **Tester:** Ali Alsaffar (202301152)  
+- **Description:** Providers can showcase their work by uploading project titles, descriptions, and images in a visual portfolio.
+
+---
+
+### **Feature 4: Service Request & Review Management**
+- **Developer:** Mohamed Alnooh (202303672)  
+- **Tester:** Ali Alsaffar (202301152)  
+- **Description:** Seekers can track service requests (Pending, In Progress, Completed) and submit star ratings and reviews for completed services.
+
+---
+
+### **Feature 5: Admin Tools (Moderation & User Management)**
+- **Developer:** Ali Abdulla (202300917)  
+- **Tester:** Mohamed Alnooh (202303672)  
+- **Description:** Admin dashboard for managing users (suspend/ban), moderating content, and managing service categories.
+
+---
+
+### **Feature 6: Activity & Notification Center**
+- **Developer:** Ali Abdulla (202300917)  
+- **Tester:** Mohamed Alnooh (202303672)  
+- **Description:** Centralized hub displaying user activities, booking updates, and system notifications.
+
+---
+
+### **Feature 7: Booking & Scheduling Management**
+- **Developer:** Faisal Alasfoor (202304774)  
+- **Tester:** Ali Alsaffar (202301152)  
+- **Description:** Users can request bookings by selecting available dates and times. Providers can accept or decline requests.  
+Includes a **“My Bookings”** calendar view.
+
+---
+
+### **Feature 8: In-App Messaging**
+- **Developer:** Faisal Alasfoor (202304774)  
+- **Tester:** Ali Alsaffar (202301152)  
+- **Description:** Real-time chat functionality enabling direct communication between Seekers and Providers.
+
+---
+
+### **Feature 9: Service Discovery & Search**
+- **Developer:** Mohammed Taher (202305225)  
+- **Tester:** Ali Najaf (202304083)  
+- **Description:** Keyword search, category filtering, and sorting by **Price** or **Rating** to help users find suitable services.
+
+---
+
+### **Feature 10: Smart Recommendations**
+- **Developer:** Mohammed Taher (202305225)  
+- **Tester:** Ali Najaf (202304083)  
+- **Description:** Personalized **“Recommended for You”** section based on user behavior and booking history.
+
+---
+
+### **Feature 11: History Tracking & Favorites**
+- **Developer:** Ali Najaf (202304083)  
+- **Tester:** Mohammed Taher (202305225)  
+- **Description:** Allows users to view past services and save favorite providers for quick re-hiring.
+
+---
+
+### **Feature 12: Dispute Resolution Center**
+- **Developer:** Ali Najaf (202304083)  
+- **Tester:** Mohammed Taher (202305225)  
+- **Description:** Reporting system that enables users to flag inappropriate behavior or service disputes for admin review.
+
+---
+
+## ✨ Extra Features
+- **Availability Calendar with Conflict Management** (Ali Alsaffar)  
+  Visual provider schedule using **CalendarKit**, with automatic conflict detection to prevent double bookings.
+
+- **Service Package Builder** (Ali Alsaffar)  
+  Allows providers to create fixed-price, ready-made service packages.
+
+---
+
+## 🎨 Design Changes
+
+- **Provider Profile Enhancement:**  
+  Added a new **“My Service Packages”** section to the Provider Profile, allowing providers to clearly showcase their predefined service offerings.
+
+- **Settings Cleanup:**  
+  Removed unnecessary and unused files from the Settings module to improve maintainability and reduce project clutter.
+
+- **Profile Action Update:**  
+  Replaced the **“Edit Public Profile”** button with **“Edit Profile Picture”** to simplify the profile editing experience and focus on the most frequently updated element.
 
 
-Feature 1 (Extended): Account Management. Changing Email, Password, and Phone Number.
+---
 
+## 📦 Libraries & External Code
+- **Firebase Firestore** – NoSQL database for users, services, bookings, and chats  
+- **Firebase Authentication** – Secure login and registration  
+- **CalendarKit** – Provider availability calendar UI  
+- **IQKeyboardManager** – Automatic keyboard handling  
+- **UIKit** – Core UI framework (Storyboard & Programmatic)
 
-Feature 2: Provider Profile. Managing Skills, Verification Status, and Bio.
+---
 
+## ⚙️ Setup Instructions
 
-Folders: Authentication, AccountSettings, ProviderProfile.
-
-👤 Mohamed Alnooh
-
-Feature 3: Portfolio Management. Uploading project images, titles, and descriptions.
-
-
-
-Feature 4: Requests & Reviews. Tracking service status (Pending/In-Progress/Completed) and leaving reviews.
-
-
-Folders: Portfolio, MyRequests.
-
-👤 Mohammed Taher
-
-Feature 9: Service Discovery. Search bar, Categories, Filtering (Price/Distance).
-
-
-
-Feature 10: Smart Recommendations. The "Recommended for you" strip and featured services.
-
-
-
-Shared Responsibility: ServiceDetailsViewController (The page that shows gig details).
-
-Folders: HomeDiscovery.
-
-👤 Faisal Alasfoor
-
-Feature 7: Booking Management. The calendar picker, selecting time slots, and confirming the booking request.
-
-
-
-Feature 8: In-App Messaging. Chat interface between Seeker and Provider.
-
-
-Folders: BookingFlow, Messaging.
-
-👤 Ali Abdulla
-
-Feature 5: Admin Tools. User Management (Ban/Suspend), Category Management (Add/Edit Categories), Moderation.
-
-
-
-Feature 6: Notification Center. Activity feed and system alerts.
-
-
-Folders: AdminDashboard, Notifications.
-
-👤 Ali Najaf
-
-Feature 11: History & Favorites. Viewing past services and saving favorite providers.
-
-
-
-Feature 12: Dispute Resolution. Reporting users/providers for violations.
-
-
-Folders: HistoryAndFavorites, SupportCenter.
-
-⚠️ Important Workflow Rules
-Branching: Always create a branch for your feature.
-
-git checkout -b feature/your-feature-name
-
-No Logic in ViewControllers: If you are writing a Firebase call inside a ViewController, STOP. Move it to the ViewModel.
-
-UI Updates: All UI updates must happen on the Main Thread.
-
-Conflicts: If you touch Assets.xcassets or project.pbxproj, communicate with the team before pushing.
-
-Let's build Flux! 🚀
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/alialsaffarcodexals/Flux.git
+cd Flux
