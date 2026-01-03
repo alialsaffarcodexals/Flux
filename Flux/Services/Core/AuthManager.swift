@@ -67,7 +67,7 @@ class AuthManager {
             "phoneNumber": phone,
             "role": UserRole.seeker.rawValue,
             "activeProfileMode": ProfileMode.buyerMode.rawValue,
-            "location": "Bahrain", // 📍 Default location for all new users
+            "location": "Bahrain", // Default location for all new users
             "joinedDate": Timestamp(date: Date())
         ]
         

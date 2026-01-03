@@ -4,9 +4,9 @@ import FirebaseAuth
 
 class AuthViewModel {
     
-    // في ملف AuthViewModel.swift
+    //   AuthViewModel.swift
 
-    // 1. نعدل الـ completion ليقبل (User?)
+    // 1.   completion  (User?)
     func performLogin(email: String?, password: String?, completion: @escaping (Bool, String?, User?) -> Void) {
         
         guard let email = email, !email.isEmpty,
@@ -15,13 +15,13 @@ class AuthViewModel {
             return
         }
 
-        // 2. نقوم بتسجيل الدخول
+        // 2.   
         AuthManager.shared.signIn(email: email, password: password) { [weak self] success, error in
             if let error = error {
                 let friendlyMessage = self?.getErrorMessage(from: error) ?? "An unknown error occurred."
                 completion(false, friendlyMessage, nil)
             } else {
-                // 3. إذا نجح الدخول، نجلب بيانات المستخدم (Role) من Firestore
+                // 3.       (Role)  Firestore
                 guard let uid = Auth.auth().currentUser?.uid else {
                     completion(false, "User ID not found.", nil)
                     return
@@ -30,12 +30,12 @@ class AuthViewModel {
                 FirestoreManager.shared.getUser(uid: uid) { result in
                     switch result {
                     case .success(let user):
-                        // هنا نرجع المستخدم مع النجاح
+                        //     
                         completion(true, nil, user)
                     case .failure(let error):
                         print("Error fetching user data: \(error.localizedDescription)")
-                        // يمكننا اعتبار الدخول ناجح لكن فشل جلب البيانات، أو نعتبره فشل كامل.
-                        // هنا سنعتبره فشل لضمان توجيه صحيح
+                        //            .
+                        //      
                         completion(false, "Failed to retrieve user profile.", nil)
                     }
                 }
@@ -68,7 +68,7 @@ class AuthViewModel {
     private func getErrorMessage(from error: Error) -> String {
         let nsError = error as NSError
                 
-                print("🔴 Firebase Error Code: \(nsError.code)")
+                print("Firebase Error Code: \(nsError.code)")
                 
                 guard let errorCode = AuthErrorCode(rawValue: nsError.code) else {
                     return error.localizedDescription
@@ -97,7 +97,7 @@ class AuthViewModel {
                     return "The password is too weak."
                     
                 default:
-                    print("⚠️ Unhandled Error Code: \(nsError.code)")
+                    print("Unhandled Error Code: \(nsError.code)")
                     return "Authentication failed. (Error: \(nsError.code))"
                 }
     }

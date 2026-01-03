@@ -27,7 +27,7 @@ struct Booking: Identifiable, Codable {
     var currencyCode: String?
     var coverImageURLAtBooking: String?   // optional, useful for UI cards
     
-    // ✅ Single chosen slot only (no session duration)
+    //  Single chosen slot only (no session duration)
     var scheduledAt: Date
     var providerImageURL: String?
     var note: String?

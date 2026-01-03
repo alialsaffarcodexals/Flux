@@ -14,6 +14,15 @@ class HistoryVC: UIViewController {
     
     // MARK: - Properties
     private let viewModel = HistoryVM()
+    private let emptyStateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No services history available"
+        label.textColor = .systemGray
+        label.font = .systemFont(ofSize: 16)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -34,6 +43,7 @@ class HistoryVC: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = 80
         tableView.register(HistoryTableViewCell.self, forCellReuseIdentifier: "HistoryCell")
+        tableView.backgroundView = emptyStateLabel
     }
     
     private func setupSearchBar() {
@@ -44,6 +54,7 @@ class HistoryVC: UIViewController {
     private func bindViewModel() {
         viewModel.onDataChanged = { [weak self] in
             self?.tableView.reloadData()
+            self?.updateEmptyState()
         }
         
         viewModel.onError = { [weak self] error in
@@ -55,6 +66,12 @@ class HistoryVC: UIViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+
+    private func updateEmptyState() {
+        let isEmpty = viewModel.itemCount == 0
+        emptyStateLabel.isHidden = !isEmpty
+        tableView.separatorStyle = isEmpty ? .none : .singleLine
     }
     
     // MARK: - Actions

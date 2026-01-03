@@ -25,13 +25,20 @@ class DisputeCenterVC: UIViewController,
     // MARK: - Dropdown State
     private var isRecipientExpanded = false
     private var isReasonExpanded = false
-    
+
+    // MARK: - Properties
+    var providerToReport: (id: String, name: String)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableViews()
         setupTextField()
         setupInitialState()
         bindViewModel()
+        
+        if let provider = providerToReport {
+            viewModel.setTargetRecipient(id: provider.id, name: provider.name)
+        }
         viewModel.loadInitialData()
     }
 
@@ -59,8 +66,6 @@ class DisputeCenterVC: UIViewController,
     private func setupTextField() {
         descriptionTextField.delegate = self
         descriptionTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-
-
     }
 
     private func setupInitialState() {
@@ -78,6 +83,7 @@ class DisputeCenterVC: UIViewController,
         viewModel.onSendEnabledChanged = { [weak self] isEnabled in
             DispatchQueue.main.async {
                 self?.sendReportButton.isEnabled = isEnabled
+                self?.sendReportButton.alpha = isEnabled ? 1.0 : 0.5
             }
         }
         
@@ -93,8 +99,9 @@ class DisputeCenterVC: UIViewController,
                 if let error = error {
                     self?.showAlert(title: "Error", message: error.localizedDescription)
                 } else {
-                    // Only navigate to success page if no error
-                    self?.performSegue(withIdentifier: "showReportSuccess", sender: nil)
+                    self?.showAlert(title: "Success", message: "Your report has been submitted successfully to the admin.") {
+                         self?.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
         }
@@ -109,40 +116,48 @@ class DisputeCenterVC: UIViewController,
     }
     
     // MARK: - Header Creation
-    private func createDropdownHeader(title: String, isExpanded: Bool, action: Selector) -> UIView {
+    private func createDropdownHeader(title: String, isExpanded: Bool, action: Selector, isLocked: Bool = false) -> UIView {
         let headerView = UIView()
         headerView.backgroundColor = .systemBackground
         
         let label = UILabel()
         label.text = title
         label.font = .systemFont(ofSize: 16)
-        label.textColor = .systemBlue
+        label.textColor = isLocked ? .label : .systemBlue
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        let chevron = UIImageView(image: UIImage(systemName: isExpanded ? "chevron.up" : "chevron.down"))
-        chevron.tintColor = .systemGray
-        chevron.translatesAutoresizingMaskIntoConstraints = false
-        
         headerView.addSubview(label)
-        headerView.addSubview(chevron)
         
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
-            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            
-            chevron.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
-            chevron.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
-            chevron.widthAnchor.constraint(equalToConstant: 16),
-            chevron.heightAnchor.constraint(equalToConstant: 10)
+            label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor)
         ])
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: action)
-        headerView.addGestureRecognizer(tapGesture)
+        // Only show chevron and enable tap if NOT locked
+        if !isLocked {
+            let chevron = UIImageView(image: UIImage(systemName: isExpanded ? "chevron.up" : "chevron.down"))
+            chevron.tintColor = .systemGray
+            chevron.translatesAutoresizingMaskIntoConstraints = false
+            headerView.addSubview(chevron)
+            
+            NSLayoutConstraint.activate([
+                chevron.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -16),
+                chevron.centerYAnchor.constraint(equalTo: headerView.centerYAnchor),
+                chevron.widthAnchor.constraint(equalToConstant: 16),
+                chevron.heightAnchor.constraint(equalToConstant: 10)
+            ])
+            
+            let tapGesture = UITapGestureRecognizer(target: self, action: action)
+            headerView.addGestureRecognizer(tapGesture)
+        }
         
         return headerView
     }
     
     @objc private func recipientHeaderTapped() {
+        // If locked to a provider, do nothing (gesture logic handled in creation)
+        if providerToReport != nil { return }
+        
         isRecipientExpanded.toggle()
         recipientTableView.reloadData()
         
@@ -165,9 +180,17 @@ class DisputeCenterVC: UIViewController,
     }
     
     private func getRecipientHeaderTitle() -> String {
+        if let provider = providerToReport {
+            return "Recipient: \(provider.name)"
+        }
+        
         if let index = viewModel.selectedRecipientIndex,
            viewModel.recipients.indices.contains(index) {
-            return viewModel.recipients[index]
+            // Logic change: viewModel.recipients only stores IDs now if locked.
+            // If unlocked, it stores IDs, but we don't have Names map here for MVP simplicity.
+            // But if locked, we return the locked name.
+            // For the MVP, if not locked, we just show the ID or "Provider Selected"
+            return "Provider Selected"
         }
         return "Select Recipient"
     }
@@ -211,6 +234,8 @@ extension DisputeCenterVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView === recipientTableView {
+            // If locked, we don't show rows
+            if providerToReport != nil { return 0 }
             return isRecipientExpanded ? viewModel.recipients.count : 0
         }
         return isReasonExpanded ? viewModel.reasons.count : 0
@@ -235,7 +260,8 @@ extension DisputeCenterVC: UITableViewDataSource, UITableViewDelegate {
             return createDropdownHeader(
                 title: getRecipientHeaderTitle(),
                 isExpanded: isRecipientExpanded,
-                action: #selector(recipientHeaderTapped)
+                action: #selector(recipientHeaderTapped),
+                isLocked: providerToReport != nil
             )
         }
         return createDropdownHeader(

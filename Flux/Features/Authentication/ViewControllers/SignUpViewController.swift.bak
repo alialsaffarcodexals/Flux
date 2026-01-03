@@ -36,12 +36,12 @@ class SignUpViewController: UIViewController {
     }
     
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        print("🟢 1. Button Tapped")
+        print("1. Button Tapped")
                 
                 let imageData = selectedImage?.jpegData(compressionQuality: 0.5)
                 
                 signUpButton.isEnabled = false
-                print("🟢 2. Button Disabled, Calling ViewModel...")
+                print("2. Button Disabled, Calling ViewModel...")
                 
                 viewModel.performSignUp(
                     name: nameTextField.text,
@@ -52,7 +52,7 @@ class SignUpViewController: UIViewController {
                     profileImage: imageData
                 ) { [weak self] success, errorMessage in
                     
-                    print("🟢 3. ViewModel Returned. Success: \(success)")
+                    print("3. ViewModel Returned. Success: \(success)")
                     
                     guard let self = self else { return }
                     
@@ -60,7 +60,7 @@ class SignUpViewController: UIViewController {
                                 // self.signUpButton.isEnabled = true
                                 
                                 if success {
-                                    print("✅ User Created Successfully as \(self.userRole)")
+                                    print("User Created Successfully as \(self.userRole)")
                                     
                                     AppNavigator.shared.navigateToRoleBasedHome(role: self.userRole)
                                     

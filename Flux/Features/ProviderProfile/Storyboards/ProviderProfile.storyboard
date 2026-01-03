@@ -268,7 +268,7 @@
                                                                                         </userDefinedRuntimeAttribute>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwK-3K-H0A">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwK-3K-H0A">
                                                                                     <rect key="frame" x="4" y="110" width="120" height="18"/>
                                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -292,6 +292,12 @@
                                                                     </collectionViewCell>
                                                                 </cells>
                                                             </collectionView>
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No projects available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-no-pr-01">
+                                                                <rect key="frame" x="101.66666666666669" y="100" width="158" height="20.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -302,6 +308,8 @@
                                                             <constraint firstItem="cwd-eF-aXE" firstAttribute="top" secondItem="6x0-ee-6U3" secondAttribute="top" id="aSb-03-6Pf"/>
                                                             <constraint firstItem="fRw-Tu-iHG" firstAttribute="leading" secondItem="6x0-ee-6U3" secondAttribute="leading" id="bYR-qe-He3"/>
                                                             <constraint firstItem="fRw-Tu-iHG" firstAttribute="top" secondItem="6x0-ee-6U3" secondAttribute="top" constant="10" id="baj-bR-FE7"/>
+                                                            <constraint firstItem="lbl-no-pr-01" firstAttribute="centerX" secondItem="6x0-ee-6U3" secondAttribute="centerX" id="cst-no-pr-01"/>
+                                                            <constraint firstItem="lbl-no-pr-01" firstAttribute="centerY" secondItem="6x0-ee-6U3" secondAttribute="centerY" id="cst-no-pr-02"/>
                                                             <constraint firstAttribute="trailing" secondItem="czh-Qg-PXL" secondAttribute="trailing" id="kfo-Ao-8HR"/>
                                                             <constraint firstItem="czh-Qg-PXL" firstAttribute="top" secondItem="cwd-eF-aXE" secondAttribute="bottom" constant="8" id="vot-9V-kMY"/>
                                                         </constraints>
@@ -309,8 +317,8 @@
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sDX-d1-qC8">
                                                         <rect key="frame" x="0.0" y="546" width="361" height="220"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Services" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CP-pi-c9B">
-                                                                <rect key="frame" x="0.0" y="10.000000000000002" width="104.66666666666667" height="21.666666666666671"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Service Packages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9CP-pi-c9B">
+                                                                <rect key="frame" x="0.0" y="10.000000000000002" width="182" height="21.666666666666671"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -355,7 +363,7 @@
                                                                                         </userDefinedRuntimeAttribute>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quR-C4-RaB">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="quR-C4-RaB">
                                                                                     <rect key="frame" x="4" y="110" width="120" height="18"/>
                                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -379,6 +387,12 @@
                                                                     </collectionViewCell>
                                                                 </cells>
                                                             </collectionView>
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No services available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-no-svc-01">
+                                                                <rect key="frame" x="100.66666666666667" y="100" width="159.66666666666663" height="20.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -387,6 +401,8 @@
                                                             <constraint firstAttribute="bottom" secondItem="Fe5-ho-swA" secondAttribute="bottom" id="Il9-RA-grn"/>
                                                             <constraint firstItem="Fe5-ho-swA" firstAttribute="leading" secondItem="sDX-d1-qC8" secondAttribute="leading" id="Inj-hC-Xkj"/>
                                                             <constraint firstAttribute="trailing" secondItem="znY-G4-p4B" secondAttribute="trailing" id="aOZ-De-Lqo"/>
+                                                            <constraint firstItem="lbl-no-svc-01" firstAttribute="centerX" secondItem="sDX-d1-qC8" secondAttribute="centerX" id="cst-no-svc-01"/>
+                                                            <constraint firstItem="lbl-no-svc-01" firstAttribute="centerY" secondItem="sDX-d1-qC8" secondAttribute="centerY" id="cst-no-svc-02"/>
                                                             <constraint firstItem="9CP-pi-c9B" firstAttribute="leading" secondItem="sDX-d1-qC8" secondAttribute="leading" id="jel-Ud-Vjt"/>
                                                             <constraint firstItem="9CP-pi-c9B" firstAttribute="top" secondItem="sDX-d1-qC8" secondAttribute="top" constant="10" id="n8H-9N-EH5"/>
                                                             <constraint firstItem="znY-G4-p4B" firstAttribute="top" secondItem="sDX-d1-qC8" secondAttribute="top" id="o99-Di-jkf"/>
@@ -442,10 +458,14 @@
                     <connections>
                         <outlet property="bioLabel" destination="6mC-g8-h3w" id="Sr3-YQ-MVN"/>
                         <outlet property="editPortfolioButton" destination="cwd-eF-aXE" id="ems-hl-sHI"/>
+                        <outlet property="emptyPortfolioLabel" destination="lbl-no-pr-01" id="CXN-00-002"/>
+                        <outlet property="emptyServicesLabel" destination="lbl-no-svc-01" id="CXN-00-004"/>
                         <outlet property="locationLabel" destination="Mda-hT-rSO" id="H9F-3X-GuH"/>
                         <outlet property="nameLabel" destination="e8z-eh-Ziw" id="BT5-DV-7cQ"/>
                         <outlet property="phoneLabel" destination="bSz-hH-bmv" id="UDl-yW-Qlt"/>
+                        <outlet property="portfolioCollectionView" destination="czh-Qg-PXL" id="CXN-00-001"/>
                         <outlet property="profileImageView" destination="UCd-fD-8MC" id="yve-Je-tJ7"/>
+                        <outlet property="servicePackagesCollectionView" destination="Fe5-ho-swA" id="CXN-00-003"/>
                         <outlet property="skillTagButtonFour" destination="MpZ-D1-Ey9" id="V5l-1E-gfQ"/>
                         <outlet property="skillTagButtonOne" destination="bhf-dR-wzb" id="slx-Nj-NLv"/>
                         <outlet property="skillTagButtonThree" destination="lfE-B9-7e3" id="pts-JP-sKb"/>
@@ -1115,6 +1135,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

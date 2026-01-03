@@ -62,7 +62,7 @@ class AdminToolsViewController: UIViewController {
                     self?.serviceProviders?.text = "\(count)"
                 case .failure(let error):
                     self?.serviceProviders?.text = "—"
-                    print("❌ Fetch providers error:", error.localizedDescription)
+                    print("Fetch providers error:", error.localizedDescription)
                 }
             }
         }
@@ -84,7 +84,7 @@ class AdminToolsViewController: UIViewController {
                     self?.skillsRejected?.text = "—"
                     self?.skillsPending?.text = "—"
                     self?.skillsApproved?.text = "—"
-                    print("❌ Fetch skills error:", error.localizedDescription)
+                    print("Fetch skills error:", error.localizedDescription)
                 }
             }
         }
@@ -106,7 +106,7 @@ class AdminToolsViewController: UIViewController {
                     self?.bookingRejected?.text = "—"
                     self?.bookingPending?.text = "—"
                     self?.bookingApproved?.text = "—"
-                    print("❌ Fetch bookings error:", error.localizedDescription)
+                    print("Fetch bookings error:", error.localizedDescription)
                 }
             }
         }
@@ -186,7 +186,7 @@ class AdminToolsViewController: UIViewController {
                         self?.reportsCache = data
                         self?.performSegue(withIdentifier: identifier, sender: sender)
                     case .failure(let error):
-                        print("❌ Prefetch reports error:", error.localizedDescription)
+                        print("Prefetch reports error:", error.localizedDescription)
                     }
                 }
             }
@@ -209,7 +209,7 @@ class AdminToolsViewController: UIViewController {
                         self?.usersCache = data
                         self?.performSegue(withIdentifier: identifier, sender: sender)
                     case .failure(let error):
-                        print("❌ Prefetch users error:", error.localizedDescription)
+                        print("Prefetch users error:", error.localizedDescription)
                     }
                 }
             }
@@ -232,7 +232,7 @@ class AdminToolsViewController: UIViewController {
                         self?.skillsCache = data
                         self?.performSegue(withIdentifier: identifier, sender: sender)
                     case .failure(let error):
-                        print("❌ Prefetch skills error:", error.localizedDescription)
+                        print("Prefetch skills error:", error.localizedDescription)
                     }
                 }
             }

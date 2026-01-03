@@ -4,23 +4,23 @@ import FirebaseFirestore
 
 class SeekerProfileViewModel {
     
-    // هذه المتغيرات اللي الـ ViewController راح يراقبها
-    // نستخدم Closure عشان نخبر الـ VC لما البيانات تجهز
+    //     ViewController  
+    //  Closure    VC   
     var onUserDataUpdated: ((User) -> Void)?
     var onError: ((String) -> Void)?
     
     func fetchUserProfile() {
-        // 1. نتأكد أن فيه مستخدم مسجل دخول
+        // 1.      
         guard let uid = Auth.auth().currentUser?.uid else {
             self.onError?("No user logged in")
             return
         }
         
-        // 2. نطلب البيانات من FirestoreManager
+        // 2.    FirestoreManager
         FirestoreManager.shared.getUser(uid: uid) { [weak self] result in
             switch result {
             case .success(let user):
-                // 3. نرسل البيانات للـ View Controller
+                // 3.    View Controller
                 self?.onUserDataUpdated?(user)
                 
             case .failure(let error):

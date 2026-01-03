@@ -7,29 +7,33 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
     
+    // An empty list to hold data
     var messages: [ChatMessage] = []
     
+    // The ID of the chat room
     var conversationId: String = "test_chat_01"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //Setup the list (TableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        // Remove lines between rows
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
-        
+        //Disable the send button initially
         sendButton.isEnabled = false
         sendButton.alpha = 0.5
-        
+        //Watch for typing
         messageTextField.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
-        
+        //Download messages
         loadMessages()
     }
     
     @objc func textFieldChanged() {
+        // Check if there is text AND it's not just empty spaces
         if let text = messageTextField.text, !text.trimmingCharacters(in: .whitespaces).isEmpty {
             sendButton.isEnabled = true
             sendButton.alpha = 1.0
@@ -59,9 +63,10 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func sendButtonTapped(_ sender: Any) {
+        //Safety Checks (Guard Statements)
         guard let text = messageTextField.text, !text.isEmpty else { return }
         guard let currentUserId = Auth.auth().currentUser?.email else { return }
-        
+        //Create the Message Object
         let newMessage = ChatMessage(
             id: nil,
             senderId: currentUserId,
@@ -73,6 +78,7 @@ class ChatRoomViewController: UIViewController, UITableViewDelegate, UITableView
         sendButton.isEnabled = false
         sendButton.alpha = 0.5
         
+        //Send to Database
         ChatRepository.shared.sendMessage(conversationId: conversationId, message: newMessage) { result in
             switch result {
             case .success:

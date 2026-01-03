@@ -92,7 +92,7 @@ class CategoryManagementViewController: UIViewController {
                     self.tableView?.isHidden = false
 
                 case .failure(let error):
-                    print("❌ Fetch categories error:", error.localizedDescription)
+                    print("Fetch categories error:", error.localizedDescription)
                 }
             }
         }
@@ -122,7 +122,7 @@ class CategoryManagementViewController: UIViewController {
     private func enterAddMode() {
         currentMode = .add
 
-        // Safely unwrap IBOutlets — avoid crashes if outlets aren't connected
+        // Safely unwrap IBOutlets - avoid crashes if outlets aren't connected
         guard let addTextField = addTextField else {
             // If the text field isn't connected, just switch mode and return
             return

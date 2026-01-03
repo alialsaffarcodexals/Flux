@@ -569,7 +569,7 @@ class AdminToolsViewModel {
             }
 
             let docs = snapshot?.documents ?? []
-            print("ℹ️ fetchReports: raw document count = \(docs.count)")
+            print("fetchReports: raw document count = \(docs.count)")
             let reports: [Report] = docs.compactMap { doc in
                 let data = doc.data()
                 let id = doc.documentID
@@ -584,12 +584,12 @@ class AdminToolsViewModel {
                 guard let reporterId = stringForKeys(["reporterId", "reporterID", "reporter"]),
                       let reportedUserId = stringForKeys(["reportedUserId", "reportedUserID", "reportedId", "reported_user_id"]) 
                 else {
-                    print("⚠️ fetchReports: skipping doc id=\(id) because reporter/reported id missing")
+                    print("fetchReports: skipping doc id=\(id) because reporter/reported id missing")
                     return nil
                 }
 
                 guard let reason = stringForKeys(["reason", "type", "title"]), !reason.isEmpty else {
-                    print("⚠️ fetchReports: skipping doc id=\(id) because reason is missing")
+                    print("fetchReports: skipping doc id=\(id) because reason is missing")
                     return nil
                 }
 
@@ -653,12 +653,12 @@ class AdminToolsViewModel {
                     guard let reporterId = stringForKeys(["reporterId", "reporterID", "reporter"]),
                           let reportedUserId = stringForKeys(["reportedUserId", "reportedUserID", "reportedId", "reported_user_id"]) 
                     else {
-                        print("⚠️ fetchReports: skipping doc id=\(id) because reporter/reported id missing")
+                        print("fetchReports: skipping doc id=\(id) because reporter/reported id missing")
                         return nil
                     }
 
                     guard let reason = stringForKeys(["reason", "type", "title"]), !reason.isEmpty else {
-                        print("⚠️ fetchReports: skipping doc id=\(id) because reason is missing")
+                        print("fetchReports: skipping doc id=\(id) because reason is missing")
                         return nil
                     }
                     let description = stringForKeys(["description", "details", "body"]) ?? ""

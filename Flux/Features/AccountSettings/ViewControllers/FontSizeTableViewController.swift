@@ -8,7 +8,7 @@ class FontSizeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Font Size"
-        print("📝 FontSizeTableViewController loaded")
+        print("FontSizeTableViewController loaded")
         
         // Apply initial fonts
         settingsManager.applyFonts(to: self.view)
@@ -34,7 +34,7 @@ class FontSizeTableViewController: UITableViewController {
     }
     
     @objc private func fontSizeDidChange() {
-        print("✅ FontSizeTableViewController received fontSizeDidChange notification")
+        print("FontSizeTableViewController received fontSizeDidChange notification")
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             // Apply fonts to entire view hierarchy
@@ -42,7 +42,7 @@ class FontSizeTableViewController: UITableViewController {
             // Reload table to update all cells
             self.tableView.reloadData()
             self.updateCheckmarks()
-            print("✅ FontSizeTableViewController fonts updated")
+            print("FontSizeTableViewController fonts updated")
         }
     }
     
@@ -52,19 +52,19 @@ class FontSizeTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard indexPath.section == 0 && indexPath.row < fontSizes.count else {
-            print("⚠️ Invalid indexPath: section=\(indexPath.section), row=\(indexPath.row)")
+            print("Invalid indexPath: section=\(indexPath.section), row=\(indexPath.row)")
             return
         }
         
         let selectedSize = fontSizes[indexPath.row]
-        print("📝 Selected index: \(indexPath.row), enum value: \(selectedSize.rawValue)")
+        print("Selected index: \(indexPath.row), enum value: \(selectedSize.rawValue)")
         
         // Update settings (this will post notification for font size change)
         settingsManager.currentFontSize = selectedSize
         
         // Verify the value was saved
         let savedValue = UserDefaults.standard.string(forKey: "AppFontSize") ?? "nil"
-        print("📝 UserDefaults fontSizeKey after setting: \(savedValue)")
+        print("UserDefaults fontSizeKey after setting: \(savedValue)")
         
         // Update checkmarks and reload table
         updateCheckmarks()
@@ -78,7 +78,7 @@ class FontSizeTableViewController: UITableViewController {
             settingsManager.applyFonts(to: navController.view)
         }
         
-        print("📝 User selected font size: \(selectedSize.rawValue) - fonts applied")
+        print("User selected font size: \(selectedSize.rawValue) - fonts applied")
     }
     
     private func updateCheckmarks() {

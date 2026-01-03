@@ -11,12 +11,12 @@ public extension UIViewController {
         
         guard let originalMethod = class_getInstanceMethod(UIViewController.self, originalSelector),
               let swizzledMethod = class_getInstanceMethod(UIViewController.self, swizzledSelector) else {
-            print("❌ Failed to swizzle viewWillAppear")
+            print("Failed to swizzle viewWillAppear")
             return
         }
         
         method_exchangeImplementations(originalMethod, swizzledMethod)
-        print("✅ UIViewController.viewWillAppear swizzled for font scaling")
+        print("UIViewController.viewWillAppear swizzled for font scaling")
     }
     
     @objc private func fontScaling_viewWillAppear(_ animated: Bool) {

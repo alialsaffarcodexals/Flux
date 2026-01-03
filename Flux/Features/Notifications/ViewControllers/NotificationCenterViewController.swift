@@ -45,7 +45,7 @@ class NotificationCenterViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         // Ensure a cell is registered so dequeue doesn't fail. Use a basic registration
-        // — we will create a `.subtitle` style cell as a fallback in `cellForRow`.
+        // - we will create a `.subtitle` style cell as a fallback in `cellForRow`.
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "NotificationCell")
     }
 

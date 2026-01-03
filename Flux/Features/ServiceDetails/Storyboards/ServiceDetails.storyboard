@@ -37,8 +37,22 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
 
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00 BHD" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="1" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-price">
+                                                <rect key="frame" x="16" y="277" width="361" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Provided by" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="1" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-provider">
+                                                <rect key="frame" x="16" y="305" width="361" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description of the service goes here. It can be multiple lines." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbl-desc">
-                                                <rect key="frame" x="16" y="285" width="361" height="20.333333333333314"/>
+                                                <rect key="frame" x="16" y="339" width="361" height="20.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                                 <nil key="highlightedColor"/>
@@ -88,7 +102,15 @@
                                             <constraint firstItem="lbl-name" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="16" id="c5"/>
                                             <constraint firstAttribute="trailing" secondItem="lbl-name" secondAttribute="trailing" constant="16" id="c6"/>
                                             
-                                            <constraint firstItem="lbl-desc" firstAttribute="top" secondItem="lbl-name" secondAttribute="bottom" constant="16" id="c7"/>
+                                            <constraint firstItem="lbl-price" firstAttribute="top" secondItem="lbl-name" secondAttribute="bottom" constant="8" id="c7-price-top"/>
+                                            <constraint firstItem="lbl-price" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="16" id="c7-price-leading"/>
+                                            <constraint firstAttribute="trailing" secondItem="lbl-price" secondAttribute="trailing" constant="16" id="c7-price-trailing"/>
+
+                                            <constraint firstItem="lbl-provider" firstAttribute="top" secondItem="lbl-price" secondAttribute="bottom" constant="8" id="c7-provider-top"/>
+                                            <constraint firstItem="lbl-provider" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="16" id="c7-provider-leading"/>
+                                            <constraint firstAttribute="trailing" secondItem="lbl-provider" secondAttribute="trailing" constant="16" id="c7-provider-trailing"/>
+
+                                            <constraint firstItem="lbl-desc" firstAttribute="top" secondItem="lbl-provider" secondAttribute="bottom" constant="16" id="c7-desc-top"/>
                                             <constraint firstItem="lbl-desc" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="16" id="c8"/>
                                             <constraint firstAttribute="trailing" secondItem="lbl-desc" secondAttribute="trailing" constant="16" id="c9"/>
                                             
@@ -124,6 +146,8 @@
                         <outlet property="descriptionLabel" destination="lbl-desc" id="out-desc"/>
                         <outlet property="messageButton" destination="btn-message" id="out-msg"/>
                         <outlet property="nameLabel" destination="lbl-name" id="out-name"/>
+                        <outlet property="priceLabel" destination="lbl-price" id="out-price"/>
+                        <outlet property="providerNameLabel" destination="lbl-provider" id="out-provider"/>
                         <outlet property="serviceImageView" destination="img-service" id="out-img"/>
                     </connections>
                 </viewController>
@@ -133,6 +157,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

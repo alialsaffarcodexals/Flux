@@ -141,6 +141,9 @@
                                                                     <fontDescription key="titleFontDescription" type="system" pointSize="17"/>
                                                                     <color key="baseForegroundColor" systemColor="systemGrayColor"/>
                                                                 </buttonConfiguration>
+                                                                <connections>
+                                                                    <action selector="editInterestsTapped:" destination="kcP-1c-UGo" eventType="touchUpInside" id="edt-int-tap"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                     </stackView>
@@ -279,7 +282,7 @@
                                                                                         </userDefinedRuntimeAttribute>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zo6-CO-mw4">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zo6-CO-mw4">
                                                                                     <rect key="frame" x="4" y="110" width="120" height="18"/>
                                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -306,6 +309,12 @@
                                                                     </collectionViewCell>
                                                                 </cells>
                                                             </collectionView>
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No services history available" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7h-1H-6Tj">
+                                                                <rect key="frame" x="77.666666666666686" y="121.66666666666661" width="206" height="19.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <color key="textColor" systemColor="systemGrayColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -315,9 +324,13 @@
                                                             <constraint firstItem="2XG-PV-wvC" firstAttribute="top" secondItem="1vI-Ex-N8b" secondAttribute="bottom" constant="8" id="A6I-rP-V1I"/>
                                                             <constraint firstItem="2XG-PV-wvC" firstAttribute="top" secondItem="1vI-Ex-N8b" secondAttribute="bottom" constant="8" id="TgU-Co-sdB"/>
                                                             <constraint firstItem="IPZ-uK-hUf" firstAttribute="leading" secondItem="oa2-Bi-ixX" secondAttribute="leading" id="Wlk-1G-gyC"/>
+                                                            <constraint firstItem="K7h-1H-6Tj" firstAttribute="centerX" secondItem="oa2-Bi-ixX" secondAttribute="centerX" id="XHh-PL-f2D"/>
+                                                            <constraint firstItem="K7h-1H-6Tj" firstAttribute="centerY" secondItem="2XG-PV-wvC" secondAttribute="centerY" id="Xrp-uq-JAe"/>
                                                             <constraint firstAttribute="height" constant="220" id="Zrz-39-Hwp"/>
                                                             <constraint firstItem="IPZ-uK-hUf" firstAttribute="top" secondItem="oa2-Bi-ixX" secondAttribute="top" id="avb-ch-zf9"/>
+                                                            <constraint firstItem="K7h-1H-6Tj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oa2-Bi-ixX" secondAttribute="leading" constant="16" id="bW2-Qb-bIc"/>
                                                             <constraint firstItem="2XG-PV-wvC" firstAttribute="leading" secondItem="oa2-Bi-ixX" secondAttribute="leading" id="l6R-uN-Ztt"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="K7h-1H-6Tj" secondAttribute="trailing" constant="16" id="uGv-91-zfo"/>
                                                             <constraint firstAttribute="bottom" secondItem="2XG-PV-wvC" secondAttribute="bottom" id="yKK-Qu-3iD"/>
                                                         </constraints>
                                                     </view>
@@ -382,7 +395,7 @@
                                                                                         </userDefinedRuntimeAttribute>
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </imageView>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-MK-oBk">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LS1-MK-oBk">
                                                                                     <rect key="frame" x="4" y="110" width="120" height="18"/>
                                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                                     <nil key="textColor"/>
@@ -409,17 +422,27 @@
                                                                     </collectionViewCell>
                                                                 </cells>
                                                             </collectionView>
+                                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No favorite providers" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qG-7o-MnD">
+                                                                <rect key="frame" x="105.00000000000001" y="121.66666666666661" width="151.33333333333337" height="19.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                <color key="textColor" systemColor="systemGrayColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="220" id="Ckm-Zg-jne"/>
                                                             <constraint firstItem="rVq-8Y-dmo" firstAttribute="top" secondItem="BKs-eU-5Nd" secondAttribute="bottom" constant="8" id="PUt-Ip-xeG"/>
+                                                            <constraint firstItem="4qG-7o-MnD" firstAttribute="centerY" secondItem="rVq-8Y-dmo" secondAttribute="centerY" id="T4S-fR-RFP"/>
                                                             <constraint firstAttribute="trailing" secondItem="rVq-8Y-dmo" secondAttribute="trailing" id="XNf-l5-9FY"/>
                                                             <constraint firstItem="rVq-8Y-dmo" firstAttribute="top" secondItem="HFs-nm-VTu" secondAttribute="bottom" constant="10.666666666666586" id="XWT-CF-1Wq"/>
+                                                            <constraint firstItem="4qG-7o-MnD" firstAttribute="centerX" secondItem="0Lu-sr-bWp" secondAttribute="centerX" id="Yuk-jx-J0q"/>
                                                             <constraint firstItem="HFs-nm-VTu" firstAttribute="top" secondItem="0Lu-sr-bWp" secondAttribute="top" constant="10" id="cty-sD-hg9"/>
                                                             <constraint firstItem="rVq-8Y-dmo" firstAttribute="leading" secondItem="0Lu-sr-bWp" secondAttribute="leading" id="e1D-4z-KJx"/>
+                                                            <constraint firstItem="4qG-7o-MnD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0Lu-sr-bWp" secondAttribute="leading" constant="16" id="gU7-P8-iQO"/>
                                                             <constraint firstItem="HFs-nm-VTu" firstAttribute="leading" secondItem="0Lu-sr-bWp" secondAttribute="leading" id="goO-sj-375"/>
                                                             <constraint firstAttribute="trailing" secondItem="BKs-eU-5Nd" secondAttribute="trailing" id="rBU-L9-ThG"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4qG-7o-MnD" secondAttribute="trailing" constant="16" id="sxP-cq-9S9"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -470,7 +493,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="favoritesButton" destination="BKs-eU-5Nd" id="wM0-cf-ujp"/>
+                        <outlet property="favoritesCollectionView" destination="rVq-8Y-dmo" id="FAV-COL-001"/>
+                        <outlet property="favoritesEmptyLabel" destination="4qG-7o-MnD" id="CAw-3p-1ge"/>
                         <outlet property="historyButton" destination="1vI-Ex-N8b" id="zeL-ia-FgD"/>
+                        <outlet property="historyCollectionView" destination="2XG-PV-wvC" id="39o-dJ-ljr"/>
+                        <outlet property="historyEmptyLabel" destination="K7h-1H-6Tj" id="gId-2m-1VP"/>
                         <outlet property="interestsStackView" destination="EY2-TG-zlW" id="NJJ-hZ-ExD"/>
                         <outlet property="locationLabel" destination="X6X-pN-kZ4" id="bwt-Ia-ZJG"/>
                         <outlet property="nameLabel" destination="CKP-vS-Pe5" id="Hcs-QP-Yb6"/>

@@ -45,9 +45,9 @@ class ProviderSetupViewController: UIViewController {
         }
 
         viewModel.onSuccess = { user in
-            print("✅ Provider Setup Complete. Routing to Provider Profile...")
+            print("Provider Setup Complete. Routing to Provider Profile...")
             
-            // ✅ UPDATE: Navigate to Tab 4 (Provider Profile)
+            //  UPDATE: Navigate to Tab 4 (Provider Profile)
             AppNavigator.shared.navigate(user: user, destinationTab: 4)
         }
     }

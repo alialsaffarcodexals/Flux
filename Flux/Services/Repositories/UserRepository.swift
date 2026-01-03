@@ -96,4 +96,53 @@ final class UserRepository {
                 completion(.success(!snapshot.isEmpty))
             }
     }
+    // MARK: - Favorites Management
+    
+    func addFavoriteProvider(userId: String, providerId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteProviderIds": FieldValue.arrayUnion([providerId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
+    func removeFavoriteProvider(userId: String, providerId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteProviderIds": FieldValue.arrayRemove([providerId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+
+    func addFavoriteService(userId: String, serviceId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteServiceIds": FieldValue.arrayUnion([serviceId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
+    func removeFavoriteService(userId: String, serviceId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        usersCollection.document(userId).updateData([
+            "favoriteServiceIds": FieldValue.arrayRemove([serviceId])
+        ]) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 }

@@ -12,6 +12,8 @@ class ServiceDetailsViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var serviceImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var providerNameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var bookButton: UIButton!
     @IBOutlet weak var messageButton: UIButton!
@@ -29,6 +31,8 @@ class ServiceDetailsViewController: UIViewController {
         guard let viewModel = viewModel else { return }
         
         nameLabel.text = viewModel.name
+        priceLabel.text = viewModel.priceText
+        providerNameLabel.text = "Provided by \(viewModel.providerDisplayName)"
         descriptionLabel.text = viewModel.description
         
         // Image Loading
@@ -59,48 +63,48 @@ class ServiceDetailsViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func bookAppointmentTapped(_ sender: Any) {
+        guard let viewModel = viewModel else { return }
+        let company = viewModel.company
         let storyboard = UIStoryboard(name: "Booking", bundle: nil)
         if let bookingVC = storyboard.instantiateViewController(withIdentifier: "BookingVC") as? RequestBookingViewController {
-            if let company = viewModel?.company {
-                let service = Service(
-                    id: company.id,
-                    providerId: company.providerId,
-                    providerName: "Unknown Provider",
-                    title: company.name,
-                    description: company.description,
-                    category: company.category,
-                    sessionPrice: company.price,
-                    currencyCode: "BHD",
-                    coverImageURL: company.imageURL,
-                    rating: company.rating,
-                    reviewCount: 0,
-                    isActive: true,
-                    createdAt: Date(),
-                    updatedAt: nil
-                )
-                bookingVC.service = service
-            }
+            let service = Service(
+                id: company.id,
+                providerId: company.providerId,
+                providerName: viewModel.providerDisplayName,
+                title: company.name,
+                description: company.description,
+                category: company.category,
+                sessionPrice: company.price,
+                currencyCode: viewModel.resolvedCurrencyCode,
+                coverImageURL: company.imageURL,
+                rating: company.rating,
+                reviewCount: 0,
+                isActive: true,
+                createdAt: Date(),
+                updatedAt: nil
+            )
+            bookingVC.service = service
             navigationController?.pushViewController(bookingVC, animated: true)
         }
     }
 
     @IBAction func messageButtonTapped(_ sender: Any) {
         guard let providerId = viewModel?.providerId, !providerId.isEmpty else {
-            print("❌ No Provider ID found for this service")
+            print("No Provider ID found for this service")
             return
         }
         
         // 1. Fetch Provider's Email
         ChatRepository.shared.fetchEmail(for: providerId) { [weak self] email in
             guard let self = self, let email = email else {
-                print("❌ Could not find email for provider: \(providerId)")
+                print("Could not find email for provider: \(providerId)")
                 return
             }
             
             // 2. Get or Create Conversation
             ChatRepository.shared.getOrCreateConversation(otherUserEmail: email) { conversationId in
                 guard let conversationId = conversationId else {
-                    print("❌ Failed to get conversation ID")
+                    print("Failed to get conversation ID")
                     return
                 }
                 

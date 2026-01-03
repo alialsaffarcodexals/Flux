@@ -26,41 +26,56 @@ final class DisputeCenterVM {
     private let reportRepo = ReportRepository.shared
     
     // MARK: - Public Methods
+    func setTargetRecipient(id: String, name: String) {
+        self.recipients = [id]
+        // Since we are locking to a specific user, we don't carry a separate 'names' array in this MVP logic
+        // We will repurpose the recipients array or just store the single target state.
+        // For MVP compatibility with existing VC logic which expects an index:
+        self.selectedRecipientIndex = 0
+        self.onRecipientsLoaded?()
+        validateSubmit()
+    }
+
     func loadInitialData() {
+        // If we already have a selected recipient (passed from previous screen), don't fetch all.
+        if selectedRecipientIndex != nil && !recipients.isEmpty {
+            onRecipientsLoaded?()
+            return
+        }
+        
         // Load Provider UIDs (people who can be reported)
         Firestore.firestore()
             .collection("users")
             .whereField("role", isEqualTo: "Provider")
             .getDocuments { [weak self] snap, error in
                 if let error = error {
-                    print("🔥 Error loading providers: \(error.localizedDescription)")
+                    print("Error loading providers: \(error.localizedDescription)")
                     self?.onReportSubmitted?(error)
                     return
                 }
                 self?.recipients = snap?.documents.compactMap { $0.documentID } ?? []
-                print("🔥 Provider count = \(self?.recipients.count ?? 0)")
-                print("🔥 Provider IDs = \(self?.recipients ?? [])")
+                print("Provider count = \(self?.recipients.count ?? 0)")
                 self?.onRecipientsLoaded?()
             }
     }
     
     func selectRecipient(at index: Int) {
         guard recipients.indices.contains(index) else {
-            print("🔥 Invalid recipient index: \(index)")
+            print("Invalid recipient index: \(index)")
             return
         }
         selectedRecipientIndex = index
-        print("🔥 Selected recipient at index \(index): \(recipients[index])")
+        print("Selected recipient at index \(index): \(recipients[index])")
         validateSubmit()
     }
     
     func selectReason(at index: Int) {
         guard reasons.indices.contains(index) else {
-            print("🔥 Invalid reason index: \(index)")
+            print("Invalid reason index: \(index)")
             return
         }
         selectedReasonIndex = index
-        print("🔥 Selected reason at index \(index): \(reasons[index])")
+        print("Selected reason at index \(index): \(reasons[index])")
         validateSubmit()
     }
     
@@ -76,19 +91,11 @@ final class DisputeCenterVM {
     }
     
     func submitReport(description: String?) {
-        print("🔥 submitReport called")
-        print("🔥 selectedRecipientIndex: \(String(describing: selectedRecipientIndex))")
-        print("🔥 selectedReasonIndex: \(String(describing: selectedReasonIndex))")
-        print("🔥 recipients count: \(recipients.count)")
-        print("🔥 description: \(String(describing: description))")
-        
         let reporterID = Auth.auth().currentUser?.uid ?? ""
-        print("🔥 Reporter ID: \(reporterID)")
         
         // Validate recipient selection
         guard let recipientIndex = selectedRecipientIndex,
               recipients.indices.contains(recipientIndex) else {
-            print("🔥 Invalid recipient - index: \(String(describing: selectedRecipientIndex)), count: \(recipients.count)")
             onReportSubmitted?(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Please select a recipient"]))
             return
         }
@@ -96,7 +103,6 @@ final class DisputeCenterVM {
         // Validate reason selection
         guard let reasonIndex = selectedReasonIndex,
               reasons.indices.contains(reasonIndex) else {
-            print("🔥 Invalid reason")
             onReportSubmitted?(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Please select a reason"]))
             return
         }
@@ -104,7 +110,6 @@ final class DisputeCenterVM {
         // Validate description
         guard let desc = description?.trimmingCharacters(in: .whitespacesAndNewlines),
               !desc.isEmpty else {
-            print("🔥 Empty description")
             onReportSubmitted?(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Please enter a description"]))
             return
         }
@@ -112,21 +117,22 @@ final class DisputeCenterVM {
         let reportedID = recipients[recipientIndex]
         let reason = reasons[reasonIndex]
         
-        print("🔥 Submitting report - Reporter: \(reporterID), Reported: \(reportedID), Reason: \(reason)")
-        
         // Upload image if present, then create report (image is optional)
         if let image = selectedImage,
            let jpegData = image.jpegData(compressionQuality: 0.8) {
             
             let storageRef = Storage.storage().reference().child("reportEvidence/\(UUID().uuidString).jpg")
             
-            storageRef.putData(jpegData, metadata: nil) { [weak self] _, error in
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            storageRef.putData(jpegData, metadata: metadata) { [weak self] metadata, error in
                 if let error = error {
-                    print("🔥 Image upload error: \(error.localizedDescription)")
                     self?.onReportSubmitted?(error)
                     return
                 }
-                // Get download URL
+                
+                // Fetch URL after successful upload
                 storageRef.downloadURL { url, error in
                     if let url = url {
                         self?.createReport(
@@ -136,9 +142,17 @@ final class DisputeCenterVM {
                             description: desc,
                             evidenceURL: url.absoluteString
                         )
-                    } else if let error = error {
-                        print("🔥 Download URL error: \(error.localizedDescription)")
-                        self?.onReportSubmitted?(error)
+                    } else {
+                        // If downloadURL fails (e.g., due to write-only permissions),
+                        // we still submit the report using the storage path so admins can find it.
+                        print("Could not fetch download URL (likely permission issue): \(error?.localizedDescription ?? "Unknown")")
+                        self?.createReport(
+                            reporterID: reporterID,
+                            reportedID: reportedID,
+                            reason: reason,
+                            description: desc,
+                            evidenceURL: "gs://flux/\(storageRef.fullPath)"
+                        )
                     }
                 }
             }
@@ -165,8 +179,6 @@ final class DisputeCenterVM {
     
     // MARK: - Private Methods
     private func createReport(reporterID: String, reportedID: String, reason: String, description: String, evidenceURL: String?) {
-        print("🔥 createReport called with reporterID: \(reporterID), reportedID: \(reportedID)")
-        
         reportRepo.createReport(
             reporterId: reporterID,
             reportedUserId: reportedID,
@@ -177,10 +189,8 @@ final class DisputeCenterVM {
         ) { [weak self] result in
             switch result {
             case .success:
-                print("🔥 Report created successfully")
                 self?.onReportSubmitted?(nil)
             case .failure(let error):
-                print("🔥 Report creation failed: \(error.localizedDescription)")
                 self?.onReportSubmitted?(error)
             }
         }
@@ -192,7 +202,6 @@ final class DisputeCenterVM {
         let hasDescription = !currentDescription.isEmpty
         
         let canSend = hasValidRecipient && hasValidReason && hasDescription
-        print("🔥 validateSubmit - recipient: \(hasValidRecipient), reason: \(hasValidReason), desc: \(hasDescription), canSend: \(canSend)")
         onSendEnabledChanged?(canSend)
     }
 }
