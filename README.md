@@ -118,16 +118,77 @@ Includes a **“My Bookings”** calendar view.
 
 ---
 
-## 🎨 Design Changes
+## 🎨 Design Changes & UI Updates
+
+The following design and feature changes were applied after the initial project prototype and feature list, based on usability evaluation, implementation constraints, and time limitations.
+
+---
+
+## 🖥️ User Interface & Visual Design Changes
+
+- **Home Screen Color Update:**  
+  Adjusted the home page background colors to improve visual clarity and contrast while keeping the default black font for better readability.
 
 - **Provider Profile Enhancement:**  
-  Added a new **“My Service Packages”** section to the Provider Profile, allowing providers to clearly showcase their predefined service offerings.
+  Added a dedicated **“My Service Packages”** section to the Provider Profile to better organize and present provider offerings.
 
-- **Settings Cleanup:**  
-  Removed unnecessary and unused files from the Settings module to improve maintainability and reduce project clutter.
+- **Profile Action Change:**  
+  Replaced the **“Edit Public Profile”** button with **“Edit Profile Picture”** to better reflect the actual supported action.
 
-- **Profile Action Update:**  
-  Replaced the **“Edit Public Profile”** button with **“Edit Profile Picture”** to simplify the profile editing experience and focus on the most frequently updated element.
+- **Portfolio Button Logic Update:**  
+  Changed the **Portfolio Edit** button to a **Delete** button to better align with the actual portfolio management logic.
+
+---
+
+## 🔁 Screen Flow & Navigation Changes
+
+- **Booking Screen Flow Adjustment:**  
+  Modified the booking screen flow due to the complexity of the original design, simplifying user interaction and reducing potential user confusion.
+
+- **Services & Companies Information Page:**  
+  The services and companies information page was simplified due to limited remaining development time.
+
+---
+
+## 🛠️ Admin Tools Design Changes
+
+- **Skill Verification Enhancements:**  
+  - Added a **Segmented Control** in the skill verification screen.  
+  - Added a **description field** to provide clearer context during skill verification.
+
+- **Category Management Improvements:**  
+  Added functionality to **edit or delete categories** directly from the admin interface.
+
+- **Reports Module Updates:**  
+  - Added an additional segment to the segmented control in reports.  
+  - Changed the **Alert button** functionality to better match the updated report workflow.
+
+- **User Account Management Adjustments:**  
+  - Removed the **status field** from user accounts, as there are no corresponding screens defined in the Figma design.  
+  - Added a **Ban User** button to allow proper user moderation.
+
+---
+
+## ❓ Why These Changes Were Made
+
+### **User Experience Improvements**
+- To improve readability, simplify navigation, and reduce cognitive load.
+- To align UI elements with actual functionality and user expectations.
+- To create a clearer and more intuitive booking and profile management experience.
+
+### **Technical & Implementation Constraints**
+- Some features were adjusted due to platform limitations and implementation complexity.
+- Firebase data structure and iOS implementation constraints required UI and flow simplifications.
+
+### **Time Constraints**
+- Certain screens and flows were simplified or adjusted due to limited remaining development time while ensuring core functionality was preserved.
+
+---
+
+## 📌 Summary
+
+These design changes reflect an iterative development approach where the UI, screen flows, and admin tools were refined to balance usability, technical feasibility, and project time constraints while maintaining alignment with the project goals.
+
 
 
 ---
