@@ -40,7 +40,7 @@ jobs:
         run: |
           curl --http1.1 \
             -X POST \
-            -H "Authorization: Token ${{ secrets.APPETIZE_API_TOKEN }}" \
+            -u "${{ secrets.APPETIZE_API_TOKEN }}:" \
             -F "file=@DerivedData/Build/Products/Debug-iphonesimulator/Flux.zip" \
             -F "platform=ios" \
             https://api.appetize.io/v1/apps \
