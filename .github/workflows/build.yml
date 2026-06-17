@@ -43,6 +43,6 @@ jobs:
             -u "${{ secrets.APPETIZE_API_TOKEN }}:" \
             -F "file=@DerivedData/Build/Products/Debug-iphonesimulator/Flux.zip" \
             -F "platform=ios" \
-            https://api.appetize.io/v1/apps \
+            https://api.appetize.io/v1/apps/zayzw34rww4hu3nwl5q2hld2ki \
             | tee appetize_response.json
           echo "Appetize URL: $(cat appetize_response.json | python3 -c 'import sys,json; print(json.load(sys.stdin).get("publicURL",""))')"
