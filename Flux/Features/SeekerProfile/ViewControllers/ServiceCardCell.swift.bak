@@ -1,0 +1,19 @@
+//
+//  ServiceCardCell.swift
+//  Flux
+//
+//  Created by Ali Hussain Ali Alsaffar on 17/12/2025.
+//
+
+import UIKit
+
+class ServiceCardCell: UICollectionViewCell {
+    
+    @IBOutlet weak var mainImageView: UIImageView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    
+    @IBOutlet weak var actionButton: UIButton!
+    
+}

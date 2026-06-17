@@ -1,0 +1,77 @@
+import UIKit
+
+class AppNavigator {
+    
+    //   (Singleton)   
+    static let shared = AppNavigator()
+    
+    private init() {}
+    
+    // MARK: - Main Navigation Function
+    ///         
+    func navigateToRoleBasedHome(role: String) {
+        print("Navigating based on role: \(role)")
+        
+        switch role {
+        case "Seeker":
+            navigateToSeekerProfile()
+        case "Provider":
+            navigateToProviderProfile()
+        case "Admin":
+            //      
+             navigateToHome()
+        default:
+            navigateToHome()
+        }
+    }
+    
+    // MARK: - Private Navigations
+    
+    // 1.    
+    private func navigateToSeekerProfile() {
+        let storyboard = UIStoryboard(name: "SeekerProfile", bundle: nil)
+        //   Storyboard ID  "SeekerProfileViewController"
+        if let vc = storyboard.instantiateViewController(withIdentifier: "SeekerProfileViewController") as? SeekerProfileViewController {
+            setRoot(viewController: vc)
+        } else {
+            print("Error: SeekerProfileViewController ID not found.")
+        }
+    }
+    
+    // 2.    
+    private func navigateToProviderProfile() {
+        let storyboard = UIStoryboard(name: "ProviderProfile", bundle: nil)
+        //   Storyboard ID  "ProviderMainProfileVC"
+        if let vc = storyboard.instantiateViewController(withIdentifier: "ProviderMainProfileVC") as? ProviderMainProfileVC {
+            setRoot(viewController: vc)
+        } else {
+            print("Error: ProviderMainProfileVC ID not found.")
+        }
+    }
+    
+    // 3.     ()
+    private func navigateToHome() {
+        let storyboard = UIStoryboard(name: "Home", bundle: nil)
+        //   Storyboard ID  "HomeFeedViewController"
+        if let vc = storyboard.instantiateViewController(withIdentifier: "HomeFeedViewController") as? HomeFeedViewController {
+            setRoot(viewController: vc)
+        } else {
+            print("Error: HomeFeedViewController ID not found.")
+        }
+    }
+    
+    // MARK: - Helper Function to Change Root
+    //        (  )
+    private func setRoot(viewController: UIViewController) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+        
+        //     
+        UIView.transition(with: window, duration: 0.5, options: .transitionFlipFromRight, animations: nil, completion: nil)
+    }
+}

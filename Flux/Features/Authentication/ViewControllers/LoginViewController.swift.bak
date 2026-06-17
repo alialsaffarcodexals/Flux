@@ -1,0 +1,65 @@
+//
+//  LoginViewContoller.swift
+//  Flux
+//
+//  Created by Ali Hussain Ali Alsaffar on 06/12/2025.
+//
+
+
+import UIKit
+import FirebaseAuth
+
+class LoginViewContoller: UIViewController {
+
+    private let viewModel = AuthViewModel()
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    
+
+    @IBAction func loginButtonTapped(_ sender: UIButton) {
+        
+        loginButton.isEnabled = false
+            
+            //    completion   3 
+            viewModel.performLogin(email: emailTextField.text, password: passwordTextField.text) { [weak self] success, errorMessage, user in
+                
+                guard let self = self else { return }
+                
+                DispatchQueue.main.async {
+                    self.loginButton.isEnabled = true
+                    
+                    if success, let user = user {
+                        //      Role
+                        
+                        AppNavigator.shared.navigateToRoleBasedHome(role: user.role)
+                        
+                        
+                    } else {
+                        self.showAlert(title: "Login Failed", message: errorMessage ?? "An unknown error occurred.")
+                    }
+                }
+            }
+    }
+    
+    
+    
+}
+
+
+extension LoginViewContoller {
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+
+    
+   
+    
+    
+
+}

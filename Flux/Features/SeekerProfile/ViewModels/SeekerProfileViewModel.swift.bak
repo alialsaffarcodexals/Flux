@@ -1,0 +1,31 @@
+import Foundation
+import FirebaseAuth
+import FirebaseFirestore
+
+class SeekerProfileViewModel {
+    
+    //     ViewController  
+    //  Closure    VC   
+    var onUserDataUpdated: ((User) -> Void)?
+    var onError: ((String) -> Void)?
+    
+    func fetchUserProfile() {
+        // 1.      
+        guard let uid = Auth.auth().currentUser?.uid else {
+            self.onError?("No user logged in")
+            return
+        }
+        
+        // 2.    FirestoreManager
+        FirestoreManager.shared.getUser(uid: uid) { [weak self] result in
+            switch result {
+            case .success(let user):
+                // 3.    View Controller
+                self?.onUserDataUpdated?(user)
+                
+            case .failure(let error):
+                self?.onError?(error.localizedDescription)
+            }
+        }
+    }
+}
