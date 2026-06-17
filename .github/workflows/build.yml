@@ -13,6 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Resolve Swift Packages
+        run: |
+          xcodebuild \
+            -project Flux.xcodeproj \
+            -scheme Flux \
+            -resolvePackageDependencies
+
       - name: Build for Simulator
         run: |
           xcodebuild \
@@ -21,6 +28,7 @@ jobs:
             -sdk iphonesimulator \
             -configuration Debug \
             -derivedDataPath DerivedData \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
             build
 
       - name: Zip .app
