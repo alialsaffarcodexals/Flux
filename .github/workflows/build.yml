@@ -1,0 +1,40 @@
+name: Build and Upload to Appetize
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build for Simulator
+        run: |
+          xcodebuild \
+            -project Flux.xcodeproj \
+            -scheme Flux \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            -derivedDataPath DerivedData \
+            build
+
+      - name: Zip .app
+        run: |
+          cd DerivedData/Build/Products/Debug-iphonesimulator
+          zip -r Flux.zip Flux.app
+
+      - name: Upload to Appetize
+        run: |
+          curl --http1.1 \
+            -X POST \
+            -H "Authorization: Token ${{ secrets.APPETIZE_API_TOKEN }}" \
+            -F "file=@DerivedData/Build/Products/Debug-iphonesimulator/Flux.zip" \
+            -F "platform=ios" \
+            https://api.appetize.io/v1/apps \
+            | tee appetize_response.json
+          echo "Appetize URL: $(cat appetize_response.json | python3 -c 'import sys,json; print(json.load(sys.stdin).get("publicURL",""))')"
