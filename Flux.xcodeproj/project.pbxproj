@@ -1371,7 +1371,7 @@
 				AC9616CE2F04446B003B7C7D /* ViewControllers */,
 				ACDA75E02EDDD5BE00665266 /* Storyboards */,
 			);
-			path = "Requests-Seeker ";
+			path = "Requests-Seeker";
 			sourceTree = "<group>";
 		};
 		ACDA75E02EDDD5BE00665266 /* Storyboards */ = {
